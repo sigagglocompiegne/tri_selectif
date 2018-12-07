@@ -3,7 +3,7 @@
 # Tri sélection (gestion des déchets)
 
 Ensemble des éléments constituant la mise en oeuvre de la base de données sur le tri sélectif ainsi que l'exploitation des données dans l'application dédiée :
- Script d'initialisation de la base de données
+- Script d'initialisation de la base de données
   * [Suivi et exécution des scripts sql](sql/tri_00_trace.sql)
   * [Création du schéma](sql/tri_10_schema.sql)
   * [Création des séquences](sql/tri_20_seq.sql)
