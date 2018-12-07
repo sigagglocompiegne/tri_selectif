@@ -70,7 +70,7 @@ INSERT INTO m_dechet.lt_pav_envsitu(
     ('10','Terrain privé'),
     ('20','Terrain public');
     
--- ################################################################# Domaine valeur - lt_pav_envsitu  ###############################################
+-- ################################################################# Domaine valeur - lt_pav_envtype  ###############################################
 
 
 INSERT INTO m_dechet.lt_pav_envtype(
@@ -81,7 +81,7 @@ INSERT INTO m_dechet.lt_pav_envtype(
     ('20','Rural'); 
 
 
--- ################################################################# Domaine valeur - lt_pav_envsitu  ###############################################
+-- ################################################################# Domaine valeur - lt_pav_etatsign  ###############################################
 
 
 INSERT INTO m_dechet.lt_pav_etatsign(
@@ -92,3 +92,45 @@ INSERT INTO m_dechet.lt_pav_etatsign(
     ('20','Moyen'), 
     ('30','Mauvais'),
     ('40','Incomplet'); 
+    
+    
+-- ################################################################# Domaine valeur - lt_pav_gest  ###############################################
+
+
+INSERT INTO m_dechet.lt_pav_gest(
+            nom_entrep, nom_entrep_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Le Relais'),
+    ('20','Eco Textile'), 
+    ('99','Autre'); 
+    
+-- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
+
+
+INSERT INTO m_dechet.lt_pav_modepreh(
+            mode_preh, mode_preh_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Crochet'),
+    ('20','Kinshofer');
+    
+        
+-- ################################################################# Domaine valeur - lt_pav_natpb  ###############################################
+
+
+INSERT INTO m_dechet.lt_pav_natpb(
+            nat_pb, nat_pb_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('01','Accès restreint'),
+    ('02','Arbres'),
+    ('03','Lignes aériennes'),
+    ('04','Danger'),
+    ('05','Excentré'),
+    ('06','Marche arrière'),
+    ('07','Pas de stationnement'),
+    ('08','Sousauvent'),
+    ('09','Stationnement gênant'),
+    ('10','Virage'),
+    ('99','Autre');
