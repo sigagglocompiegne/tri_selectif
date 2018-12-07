@@ -69,3 +69,26 @@ INSERT INTO m_dechet.lt_pav_envsitu(
     ('00','Non renseigné'),
     ('10','Terrain privé'),
     ('20','Terrain public');
+    
+-- ################################################################# Domaine valeur - lt_pav_envsitu  ###############################################
+
+
+INSERT INTO m_dechet.lt_pav_envtype(
+            env_type, env_type_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Urbain'),
+    ('20','Rural'); 
+
+
+-- ################################################################# Domaine valeur - lt_pav_envsitu  ###############################################
+
+
+INSERT INTO m_dechet.lt_pav_etatsign(
+            etat_sign, etat_sign_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Correct'),
+    ('20','Moyen'), 
+    ('30','Mauvais'),
+    ('40','Incomplet'); 
