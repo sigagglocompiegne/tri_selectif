@@ -3,10 +3,10 @@
 # Documentation d'administration de la base #
 
 ## Principes
-  * **généralité** :
+ **Généralité** :
 (en cours)
  
- * **résumé fonctionnel** :
+ **Résumé fonctionnel** :
 Pour rappel des grands principes :
 
 * les données des différentes secteurs de ramassage ou de collecte sont gérés par le Sercvice SIG qui met à jour sur demande du servide des déchets
