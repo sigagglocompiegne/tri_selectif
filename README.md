@@ -13,3 +13,4 @@ Ensemble des éléments constituant la mise en oeuvre de la base de données sur
   * [Création des privilèges](sql/tri_99_grant.sql)
 - [Documentation d'administration de la base](doc/doc_admin_bd_tri.md)
 - [Documentation d'administration de l'application TRI SELECTIF](doc/doc_admin_app_tri.md)
+- [Documentation utilisateur de l'application](doc/doc_user_app_tri.md)
