@@ -1,6 +1,6 @@
 /*TRI SELECTIF V1.0*/
 /* Creation des vues applicatives publiques */
-/* tri_21_vues_xapps_public.sql */
+/* tri_22_vues_xapps_public.sql */
 /*PostGIS*/
 
 /* Propriétaire : GeoCompiegnois - http://geo.compiegnois.fr/ */
