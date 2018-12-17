@@ -17,4 +17,4 @@
 /*
 #################################################################### SUIVI CODE SQL ####################################################################
 2018-12-07 : GB / initialisation du code SQL sur GitHub
-
+2018-12-17 : GB / ventilation du code SQL dans les fichiers d'initialisations SQL
