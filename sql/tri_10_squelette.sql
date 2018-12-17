@@ -844,6 +844,117 @@ COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.v_tampon IS 'Valeur du tampon corre
 COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.geom2 IS 'Champ contenant la géométrie du tampon d''emprise définit par v_tampon où modifier selon l''influence';
 COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.date_effet IS 'Date de prise en compte des données dans le plan interactif Grand Public';
 
+-- Table: m_dechet.geo_dec_pav_tlc
+
+-- DROP TABLE m_dechet.geo_dec_pav_tlc;
+
+CREATE TABLE m_dechet.geo_dec_pav_tlc
+(
+  id_cont_tl integer NOT NULL DEFAULT nextval('m_dechet.geo_dec_pav_idconv_seq'::regclass), -- identifiant géographique unique
+  commune character varying(50), -- libellé de la commune
+  insee character(5), -- code insee de la commune
+  quartier character varying(50), -- libellé du quartier
+  adresse character varying(80), -- adresse
+  x_l93 double precision, -- coordonnée x en lambert 93
+  y_l93 double precision, -- coordonnée y en lambert 93
+  cont_nbr integer, -- nombre de conteneurs
+  cont_mat character varying(2) DEFAULT '10'::character varying, -- code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)
+  cont_pos character varying(2) DEFAULT '10'::character varying, -- code du type de position du conteneur (liste de choix lt_pav_contpos)
+  date_sai timestamp without time zone, -- date de la saisie des informations
+  date_pose timestamp without time zone, -- date de pose
+  date_netoy timestamp without time zone, -- date de nettoyage
+  date_maj timestamp without time zone, -- date de mise à jour des informations
+  nom_entrep character varying(2), -- code de l'entreprise gestionnaire du pav (liste de choix lt_pav_gest)
+  nom_entrep_99 character varying(30), -- autre gestionnaire si 99 saisie dans le champ nom_entrep
+  photo character varying(254), -- libellé du fichier de la photo
+  url_photo character varying(254), -- lien url de la photo
+  src_geom character(2) DEFAULT '00'::bpchar, -- code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_scr_geom)
+  env_type character varying(2) DEFAULT '00'::character varying, -- code du type d'espace géographique (liste de choix lt_pav_envtype)
+  env_implan character varying(2) DEFAULT '00'::character varying, -- code du type d'espace urbain d'implantation (liste de choix lt_pav_envimplan)
+  env_situ character varying(2) DEFAULT '00'::character varying, -- code de la situation domaniale (liste de choix lt_pav_envsitu)
+  tags boolean DEFAULT false, -- présence de tags
+  peinture character varying(2) DEFAULT '00'::character varying, -- code de l'état de la peinture (liste de choix lt_pav_peinture)
+  prox_corb boolean DEFAULT false, -- présence d'une corbeille à proximité
+  type_sol character varying(2) DEFAULT '00'::character varying, -- code du type de sol (liste de choix (lt_pav_typesol)
+  type_sol_99 character varying(30), -- autre type de sol si 99 saisie dans le champ type_sol
+  geom geometry(Point,2154), -- champ contenant la géométrie de l'objet
+  op_sai character varying(80), -- Opérateur de saisie de la donnée
+  observ character varying(500), -- Observations diverses
+  v_tampon integer, -- Valeur du tampon d'emprise du PAV TLC
+  geom2 geometry(Polygon,2154), -- Champ contenant la géométrie du tampon d'emprise définit par v_tampon où modifier selon l'influence
+  date_effet timestamp without time zone DEFAULT now(), -- Date de prise en compte des données dans le plan interactif Grand Public
+  CONSTRAINT geo_dec_pav_tlc_prkey PRIMARY KEY (id_cont_tl),
+  CONSTRAINT geo_dec_pav_tlc_contmat_fkey FOREIGN KEY (cont_mat)
+      REFERENCES m_dechet.lt_pav_contmat (cont_mat) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_contpos_fkey FOREIGN KEY (cont_pos)
+      REFERENCES m_dechet.lt_pav_contpos (cont_pos) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_envimplan_fkey FOREIGN KEY (env_implan)
+      REFERENCES m_dechet.lt_pav_envimplan (env_implan) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_envsitu_fkey FOREIGN KEY (env_situ)
+      REFERENCES m_dechet.lt_pav_envsitu (env_situ) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_envtype_fkey FOREIGN KEY (env_type)
+      REFERENCES m_dechet.lt_pav_envtype (env_type) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_gest_fkey FOREIGN KEY (nom_entrep)
+      REFERENCES m_dechet.lt_pav_gest (nom_entrep) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_peinture_fkey FOREIGN KEY (peinture)
+      REFERENCES m_dechet.lt_pav_peinture (peinture) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_srcgeom_fkey FOREIGN KEY (src_geom)
+      REFERENCES r_objet.lt_src_geom (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_tlc_typesol_fkey FOREIGN KEY (type_sol)
+      REFERENCES m_dechet.lt_pav_typesol (type_sol) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+
+COMMENT ON TABLE m_dechet.geo_dec_pav_tlc
+  IS 'Localisation des points d''apport volontaire textile - version 2 : nouveau modèle suite à la mise à jour de juillet 2016 - cette table remplacera la table "geo_dec_pav_tlc" à la fin de la mise à jour (modifier la structure de la table dans Geo et intégrer les listes de choix)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.id_cont_tl IS 'identifiant géographique unique';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.commune IS 'libellé de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.insee IS 'code insee de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.quartier IS 'libellé du quartier';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.adresse IS 'adresse';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.x_l93 IS 'coordonnée x en lambert 93';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.y_l93 IS 'coordonnée y en lambert 93';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.cont_nbr IS 'nombre de conteneurs';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.cont_mat IS 'code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.cont_pos IS 'code du type de position du conteneur (liste de choix lt_pav_contpos)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.date_sai IS 'date de la saisie des informations';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.date_pose IS 'date de pose';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.date_netoy IS 'date de nettoyage';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.date_maj IS 'date de mise à jour des informations';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.nom_entrep IS 'code de l''entreprise gestionnaire du pav (liste de choix lt_pav_gest)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.nom_entrep_99 IS 'autre gestionnaire si 99 saisie dans le champ nom_entrep';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.photo IS 'libellé du fichier de la photo';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.url_photo IS 'lien url de la photo';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.src_geom IS 'code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_scr_geom)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.env_type IS 'code du type d''espace géographique (liste de choix lt_pav_envtype)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.env_implan IS 'code du type d''espace urbain d''implantation (liste de choix lt_pav_envimplan)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.env_situ IS 'code de la situation domaniale (liste de choix lt_pav_envsitu)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.tags IS 'présence de tags';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.peinture IS 'code de l''état de la peinture (liste de choix lt_pav_peinture)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.prox_corb IS 'présence d''une corbeille à proximité';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.type_sol IS 'code du type de sol (liste de choix (lt_pav_typesol)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.type_sol_99 IS 'autre type de sol si 99 saisie dans le champ type_sol';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.geom IS 'champ contenant la géométrie de l''objet';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.op_sai IS 'Opérateur de saisie de la donnée';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.observ IS 'Observations diverses';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.v_tampon IS 'Valeur du tampon d''emprise du PAV TLC';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.geom2 IS 'Champ contenant la géométrie du tampon d''emprise définit par v_tampon où modifier selon l''influence';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.date_effet IS 'Date de prise en compte des données dans le plan interactif Grand Public';
+
+
+
+
 
   
 -- ####################################################################################################################################################
@@ -1099,5 +1210,192 @@ $BODY$
 CREATE TRIGGER t_t7_geo_dec_pav_verre_log
   AFTER INSERT OR UPDATE OR DELETE
   ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
+  
+  
+  -- Index: m_dechet.geo_dec_pav_tlc_geom_idx
+
+-- DROP INDEX m_dechet.geo_dec_pav_tlc_geom_idx;
+
+CREATE INDEX geo_dec_pav_tlc_geom_idx
+  ON m_dechet.geo_dec_pav_tlc
+  USING gist
+  (geom);
+
+
+-- Trigger: t_t1_geo_dec_pav_tlc_datemaj on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t1_geo_dec_pav_tlc_datemaj ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t1_geo_dec_pav_tlc_datemaj
+  BEFORE INSERT
+  ON m_dechet.geo_dec_pav_tlc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_maj();
+
+-- Trigger: t_t2_geo_dec_pav_tlc_datesai on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t2_geo_dec_pav_tlc_datesai ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t2_geo_dec_pav_tlc_datesai
+  BEFORE INSERT
+  ON m_dechet.geo_dec_pav_tlc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_sai();
+
+-- Trigger: t_t3_geo_dec_pav_tlc_insee on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t3_geo_dec_pav_tlc_insee ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t3_geo_dec_pav_tlc_insee
+  BEFORE INSERT OR UPDATE OF geom
+  ON m_dechet.geo_dec_pav_tlc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_commune_pl();
+
+-- Trigger: t_t4_geo_dec_pav_tlc_quartier on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t4_geo_dec_pav_tlc_quartier ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t4_geo_dec_pav_tlc_quartier
+  BEFORE INSERT OR UPDATE OF geom
+  ON m_dechet.geo_dec_pav_tlc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_quartier();
+
+-- Trigger: t_t5_geo_dec_pav_tlc_xy on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t5_geo_dec_pav_tlc_xy ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t5_geo_dec_pav_tlc_xy
+  BEFORE INSERT OR UPDATE OF geom
+  ON m_dechet.geo_dec_pav_tlc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_xy_l93();
+
+-- Function: m_dechet.m_log_dec_pav()
+
+-- DROP FUNCTION m_dechet.m_log_dec_pav();
+
+CREATE OR REPLACE FUNCTION m_dechet.m_log_dec_pav()
+  RETURNS trigger AS
+$BODY$
+begin
+		--ajoute une ligne dans la table suivi des modifications pour refléter l'operation réalisée sur les tables
+		--utilise la variable spéciale TG_OP pour cette opération
+		--
+		      
+		IF (TG_OP='INSERT') then			
+			if (TG_TABLE_NAME='geo_dec_pav_verre') then
+				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass), 'INSERT',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,new.id_contver;
+			end if;
+
+			if (TG_TABLE_NAME='geo_dec_pav_tlc') then
+				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass), 'INSERT',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,new.id_cont_tl;
+			end if;
+                 elsif (TG_OP='UPDATE') then
+			if (TG_TABLE_NAME='geo_dec_pav_verre') then
+				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'UPDATE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_contver;
+ 				
+			END IF;
+			if (TG_TABLE_NAME='geo_dec_pav_tlc') then
+				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'UPDATE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_cont_tl;
+ 				
+			END IF;
+			
+                elsif (TG_OP='DELETE') then
+	      
+                        if (TG_TABLE_NAME='geo_dec_pav_verre') then
+				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'DELETE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_contver,
+				CASE WHEN old.commune is null THEN '' ELSE 'commune:' || old.commune END || ';' || 
+				CASE WHEN old.insee is null THEN '' ELSE 'insee:' || old.insee END || ';' || 
+				CASE WHEN old.quartier is null THEN '' ELSE 'quartier:' || old.quartier END || ';' || 
+				CASE WHEN old.adresse is null THEN '' ELSE 'adresse:' || old.adresse END || ';' || 
+				CASE WHEN old.cont_nbr is null THEN '' ELSE 'cont_nbr:' || old.cont_nbr END || ';' ||
+				CASE WHEN old.cont_mat is null THEN '' ELSE 'cont_mat:' || old.cont_mat END || ';' || 
+				CASE WHEN old.cont_pos is null THEN '' ELSE 'cont_pos:' || old.cont_pos END || ';' || 
+				CASE WHEN old.date_pos is null THEN '' ELSE 'date_pos:' || old.date_pos END || ';' || 
+				CASE WHEN old.date_net is null THEN '' ELSE 'date_net:' || old.date_net END || ';' || 
+				CASE WHEN old.photo is null THEN '' ELSE 'photo:' || old.photo END || ';' ||
+				CASE WHEN old.url_photo is null THEN '' ELSE 'url_photo:' || old.url_photo END|| ';' || 
+				CASE WHEN old.volume is null THEN '' ELSE 'volume:' || old.volume END || ';' || 
+				CASE WHEN old.env_type is null THEN '' ELSE 'env_type:' || old.env_type END || ';' || 
+				CASE WHEN old.env_implan is null THEN '' ELSE 'env_implan:' || old.env_implan END || ';' || 
+				CASE WHEN old.env_situ is null THEN '' ELSE 'env_situ:' || old.env_situ END || ';' ||
+				CASE WHEN old.mode_preh is null THEN '' ELSE 'mode_preh:' || old.mode_preh END || ';' || 
+				CASE WHEN old.crochet is null THEN '' ELSE 'crochet:' || old.crochet END || ';' || 
+				CASE WHEN old.opercules is null THEN '' ELSE 'opercules:' || old.opercules END || ';' || 
+				CASE WHEN old.tags is null THEN '' ELSE 'tags:' || old.tags END || ';' || 
+				CASE WHEN old.peinture is null THEN '' ELSE 'peinture:' || old.peinture END || ';' ||
+				CASE WHEN old.prox_corb is null THEN '' ELSE 'prox_corb:' || old.prox_corb END || ';' || 
+				CASE WHEN old.type_sol is null THEN '' ELSE 'type_sol:' || old.type_sol END || ';' || 
+				CASE WHEN old.trp_rest is null THEN '' ELSE 'trp_rest:' || old.trp_rest END || ';' || 
+				CASE WHEN old.etat_sign is null THEN '' ELSE 'etat_sign:' || old.etat_sign END || ';' || 
+				CASE WHEN old.type_sign is null THEN '' ELSE 'type_sign:' || old.type_sign END || ';' ||
+				CASE WHEN old.proprete is null THEN '' ELSE 'proprete:' || old.proprete END || ';' || 
+				CASE WHEN old.prop_abor is null THEN '' ELSE 'prop_abor:' || old.prop_abor END || ';' || 
+				CASE WHEN old.def_struc is null THEN '' ELSE 'def_struc:' || old.def_struc END || ';' || 
+				CASE WHEN old.hab_pav is null THEN '' ELSE 'hab_pav:' || old.hab_pav END || ';' || 
+				CASE WHEN old.opt_pav is null THEN '' ELSE 'opt_pav:' || old.opt_pav END || ';' ||
+				CASE WHEN old.ame_acces is null THEN '' ELSE 'ame_acces:' || old.ame_acces END || ';' || 
+				CASE WHEN old.nat_pb is null THEN '' ELSE 'nat_pb:' || old.nat_pb END || ';' || 
+				CASE WHEN old.nat_pb_99 is null THEN '' ELSE 'nat_pb_99:' || old.nat_pb_99 END || ';' || 
+				CASE WHEN old.op_sai is null THEN '' ELSE 'op_sai:' || old.op_sai END || ';' || 
+				CASE WHEN old.observ is null THEN '' ELSE 'observ:' || old.observ END || ';' ||
+				CASE WHEN old.pavorient is null THEN '' ELSE 'pavorient:' || old.pavorient END || ';' || 
+				CASE WHEN old.id_parent is null THEN '' ELSE 'id_parent:' || old.id_parent END || ';' || 
+				CASE WHEN old.statut is null THEN '' ELSE 'statut:' || old.statut END || ';' || 
+				CASE WHEN old.date_effet is null THEN '' ELSE 'date_effet:' || old.date_effet END
+				;
+				return old;
+			end if;
+
+			 if (TG_TABLE_NAME='geo_dec_pav_tlc') then
+				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'DELETE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_cont_tl,
+				CASE WHEN old.commune is null THEN '' ELSE 'commune:' || old.commune END || ';' || 
+				CASE WHEN old.insee is null THEN '' ELSE 'insee:' || old.insee END || ';' || 
+				CASE WHEN old.quartier is null THEN '' ELSE 'quartier:' || old.quartier END || ';' || 
+				CASE WHEN old.adresse is null THEN '' ELSE 'adresse:' || old.adresse END || ';' || 
+ 				CASE WHEN old.cont_nbr is null THEN '' ELSE 'cont_nbr:' || old.cont_nbr END || ';' ||
+ 				CASE WHEN old.cont_mat is null THEN '' ELSE 'cont_mat:' || old.cont_mat END || ';' || 
+				CASE WHEN old.cont_pos is null THEN '' ELSE 'cont_pos:' || old.cont_pos END || ';' || 
+				CASE WHEN old.date_pose is null THEN '' ELSE 'date_pose:' || old.date_pose END || ';' || 
+				CASE WHEN old.date_netoy is null THEN '' ELSE 'date_netoy:' || old.date_netoy END || ';' || 
+				CASE WHEN old.photo is null THEN '' ELSE 'photo:' || old.photo END || ';' ||
+				CASE WHEN old.url_photo is null THEN '' ELSE 'url_photo:' || old.url_photo END || ';' || 
+				CASE WHEN old.nom_entrep is null THEN '' ELSE 'nom_entrep:' || old.nom_entrep END || ';' || 
+				CASE WHEN old.env_type is null THEN '' ELSE 'env_type:' || old.env_type END || ';' || 
+				CASE WHEN old.env_implan is null THEN '' ELSE 'env_implan:' || old.env_implan END || ';' || 
+				CASE WHEN old.env_situ is null THEN '' ELSE 'env_situ:' || old.env_situ END || ';' ||
+				CASE WHEN old.nom_entrep_99 is null THEN '' ELSE 'nom_entrep_99:' || old.nom_entrep_99 END || ';' || 
+				CASE WHEN old.tags is null THEN '' ELSE 'tags:' || old.tags END || ';' || 
+				CASE WHEN old.peinture is null THEN '' ELSE 'peinture:' || old.peinture END || ';' ||
+				CASE WHEN old.prox_corb is null THEN '' ELSE 'prox_corb:' || old.prox_corb END || ';' || 
+				CASE WHEN old.type_sol is null THEN '' ELSE 'type_sol:' || old.type_sol END || ';' || 
+				CASE WHEN old.type_sol_99 is null THEN '' ELSE 'type_sol_99:' || old.type_sol_99 END || ';' || 
+				CASE WHEN old.op_sai is null THEN '' ELSE 'op_sai:' || old.op_sai END || ';' || 
+				CASE WHEN old.observ is null THEN '' ELSE 'observ:' || old.observ END || ';' ||
+				CASE WHEN old.date_effet is null THEN '' ELSE 'date_effet:' || old.date_effet END
+				;
+				return old;
+			end if;
+		end if;
+
+		return null; -- le résultat est ignoré car il s'agit d'un déclencheur AFTER
+	end;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+
+
+-- Trigger: t_t6_geo_dec_pav_tlc_log on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t6_geo_dec_pav_tlc_log ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t6_geo_dec_pav_tlc_log
+  AFTER INSERT OR UPDATE OR DELETE
+  ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
   EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
