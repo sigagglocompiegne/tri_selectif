@@ -1,5 +1,5 @@
 /*TRI SELECTIF V1.0*/
-/*Creation du squelette de la structure des données */
+/* Creation des vues de gestion */
 /* tri_20_vues_gestion.sql */
 /*PostGIS*/
 
