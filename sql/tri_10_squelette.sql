@@ -953,6 +953,45 @@ COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.geom2 IS 'Champ contenant la géomét
 COMMENT ON COLUMN m_dechet.geo_dec_pav_tlc.date_effet IS 'Date de prise en compte des données dans le plan interactif Grand Public';
 
 
+-- Table: m_dechet.an_dec_pav_doc_media
+
+-- DROP TABLE m_dechet.an_dec_pav_doc_media;
+
+CREATE TABLE m_dechet.an_dec_pav_doc_media
+(
+  gid serial NOT NULL,
+  id integer, -- Identifiant du PAV
+  media text, -- Champ Média de GEO
+  miniature bytea, -- Champ miniature de GEO
+  n_fichier text, -- Nom du fichier
+  t_fichier text, -- Type de média dans GEO
+  op_sai character varying(100), -- Libellé de l'opérateur ayant intégrer le document
+  date_sai timestamp without time zone, -- Date d'intégration du document
+  d_photo timestamp without time zone, -- Date de la prise de vue
+  l_prec character varying(1000) -- Précision sur le document
+)
+WITH (
+  OIDS=FALSE
+);
+
+COMMENT ON TABLE m_dechet.an_dec_pav_doc_media
+  IS 'Table gérant la liste des photos des PAV (verre et tlc) avec le module média dans GEO (application Tri)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.id IS 'Identifiant du PAV';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.media IS 'Champ Média de GEO';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.miniature IS 'Champ miniature de GEO';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.n_fichier IS 'Nom du fichier';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.t_fichier IS 'Type de média dans GEO';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.op_sai IS 'Libellé de l''opérateur ayant intégrer le document';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.date_sai IS 'Date d''intégration du document';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.d_photo IS 'Date de la prise de vue';
+COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.l_prec IS 'Précision sur le document';
+
+
+
+
+
+
+
 
 
 
@@ -998,6 +1037,24 @@ CREATE INDEX geo_dec_pav_verre_statut_idx
   ON m_dechet.geo_dec_pav_verre
   USING btree
   (statut COLLATE pg_catalog."default");
+  
+  -- Index: m_dechet.geo_dec_pav_tlc_geom_idx
+
+-- DROP INDEX m_dechet.geo_dec_pav_tlc_geom_idx;
+
+CREATE INDEX geo_dec_pav_tlc_geom_idx
+  ON m_dechet.geo_dec_pav_tlc
+  USING gist
+  (geom);
+  
+-- Index: m_dechet.an_dec_pav_doc_media_id_idx
+
+-- DROP INDEX m_dechet.an_dec_pav_doc_media_id_idx;
+
+CREATE INDEX an_dec_pav_doc_media_id_idx
+  ON m_dechet.an_dec_pav_doc_media
+  USING btree
+  (id);
   
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
@@ -1213,15 +1270,6 @@ CREATE TRIGGER t_t7_geo_dec_pav_verre_log
   FOR EACH ROW
   EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
   
-  
-  -- Index: m_dechet.geo_dec_pav_tlc_geom_idx
-
--- DROP INDEX m_dechet.geo_dec_pav_tlc_geom_idx;
-
-CREATE INDEX geo_dec_pav_tlc_geom_idx
-  ON m_dechet.geo_dec_pav_tlc
-  USING gist
-  (geom);
 
 
 -- Trigger: t_t1_geo_dec_pav_tlc_datemaj on m_dechet.geo_dec_pav_tlc
@@ -1399,3 +1447,14 @@ CREATE TRIGGER t_t6_geo_dec_pav_tlc_log
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
   EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
+  
+  
+-- Trigger: t_t1_an_dec_pav_doc_media_date_sai on m_dechet.an_dec_pav_doc_media
+
+-- DROP TRIGGER t_t1_an_dec_pav_doc_media_date_sai ON m_dechet.an_dec_pav_doc_media;
+
+CREATE TRIGGER t_t1_an_dec_pav_doc_media_date_sai
+  BEFORE INSERT
+  ON m_dechet.an_dec_pav_doc_media
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_sai();
