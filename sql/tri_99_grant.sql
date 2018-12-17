@@ -195,7 +195,54 @@ GRANT ALL ON SEQUENCE m_dechet.log_dec_pav_gid_seq TO create_sig;
 
 -- #################################################################### TABLE  ####################################################################
 
+ALTER TABLE m_dechet.geo_dec_pav_verre
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_pav_verre TO postgres;
+GRANT ALL ON TABLE m_dechet.geo_dec_pav_verre TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_pav_verre TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_pav_verre TO edit_sig;
 
+ALTER TABLE m_dechet.geo_dec_pav_tlc
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_pav_tlc TO postgres;
+GRANT ALL ON TABLE m_dechet.geo_dec_pav_tlc TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_pav_tlc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_pav_tlc TO edit_sig;
+
+ALTER TABLE m_dechet.geo_dec_dechetterie
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_dechetterie TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_dechetterie TO edit_sig;
+
+ALTER TABLE m_dechet.an_dec_pav_doc_media
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_doc_media TO sig_create;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_doc_media TO create_sig;
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_doc_media TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.an_dec_pav_doc_media TO edit_sig;
+
+ALTER TABLE m_dechet.geo_dec_secteur_enc
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_enc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_enc TO edit_sig;
+
+ALTER TABLE m_dechet.geo_dec_secteur_om
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_om TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_om TO edit_sig;
+
+ALTER TABLE m_dechet.log_dec_pav
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.log_dec_pav TO sig_create;
+GRANT ALL ON TABLE m_dechet.log_dec_pav TO create_sig;
+GRANT SELECT ON TABLE m_dechet.log_dec_pav TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.log_dec_pav TO edit_sig;
 
 -- #################################################################### VUE DE GESTION  ####################################################################
 
