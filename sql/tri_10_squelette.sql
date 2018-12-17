@@ -679,5 +679,293 @@ INSERT INTO m_dechet.lt_pav_typesol(
     ('30','Terre'),
     ('99','Autre');
 
+-- ####################################################################################################################################################
+-- ###                                                                                                                                              ###
+-- ###                                                                TABLE                                                           ###
+-- ###                                                                                                                                              ###
+-- ####################################################################################################################################################
+
+-- Table: m_dechet.geo_dec_pav_verre
+
+-- DROP TABLE m_dechet.geo_dec_pav_verre;
+
+CREATE TABLE m_dechet.geo_dec_pav_verre
+(
+  id_contver integer NOT NULL DEFAULT nextval('m_dechet.geo_dec_pav_idconv_seq'::regclass), -- Identifiant unique géographique
+  commune character varying(30), -- libellé de la commune
+  insee character(5), -- numéro insee de la commune
+  quartier character varying(50), -- libellé du quartier
+  adresse character varying(80), -- adresse d'implantation
+  x_l93 double precision, -- coordonnée x en lambert 93
+  y_l93 double precision, -- coordonnée y en lambert 93
+  cont_nbr integer, -- nombre de conteneurs
+  cont_mat character varying(2) DEFAULT '10'::character varying, -- code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)
+  cont_pos character varying(2) DEFAULT '10'::character varying, -- code du type de position du conteneur (liste de choix lt_pav_contpos)
+  date_sai timestamp without time zone, -- date de saisie de l'information
+  date_pos timestamp without time zone, -- date de pose
+  date_net timestamp without time zone, -- date de nettoyage
+  date_maj timestamp without time zone, -- date de mise à jour des informations
+  photo character varying(254), -- Nom du fichier de la photo avant la mise à jour de juillet 2016 par le BE RETIF
+  url_photo character varying(254), -- Lien url vers la photo avant la mise à jour de juillet 2016 par le BE RETIF
+  src_geom character(2) DEFAULT '00'::bpchar, -- code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_src_geom)
+  volume double precision, -- volume en m3 (par défaut 4)
+  env_type character varying(2) DEFAULT '00'::character varying, -- code du type d'espace géographique (liste de choix lt_pav_envtype)
+  env_implan character varying(2) DEFAULT '00'::character varying, -- code du type d'espace urbain d'implantation (liste de choix lt_pav_envimplan)
+  env_situ character varying(2) DEFAULT '00'::character varying, -- code de la situation domaniale (liste de choix lt_pav_envsitu)
+  mode_preh character varying(2) DEFAULT '10'::character varying, -- code du mode de préhension (liste de choix lt_pav_modepreh)
+  crochet character varying(2) DEFAULT '00'::character varying, -- code de l'état du crochet (liste de choix lt_pav_crochet)
+  opercules boolean, -- Bavettes sur opercules disponibles
+  tags boolean, -- présence de tags
+  peinture character varying(2) DEFAULT '00'::character varying, -- code de l'état de la peinture (liste de choix lt_pav_peinture)
+  prox_corb boolean, -- présence d'une corbeille à proximité
+  type_sol character varying(2) DEFAULT '00'::character varying, -- code du type de sol (liste de choix (lt_pav_typesol)
+  trp_rest boolean, -- présence d'une trappe pour restaurateur
+  etat_sign character varying(30), -- état de la signalétique (création d'une liste de valeur en fonction de l'état des lieux)
+  type_sign character varying(2) DEFAULT '00'::character varying, -- code du type de signalétique (liste de choix lt_pav_typesign)
+  proprete character varying(2) DEFAULT '00'::character varying, -- code de l'état de la propreté (liste de choix lt_pav_proprete)
+  prop_abor character varying(2) DEFAULT '00'::character varying, -- code de l'état de la propreté des abords (liste de choix lt_pav_propabor)
+  def_struc character varying(30), -- défaut de structure visible
+  hab_pav integer, -- Tonnage par gisement d'habitants
+  opt_pav integer, -- nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages
+  ame_acces boolean, -- accéssibilité à revoir
+  nat_pb character varying(2) DEFAULT '00'::character varying, -- code de la nature du ou des problèmes (liste de choix lt_pav_natpb)
+  nat_pb_99 character varying(500), -- précision sur la nature du problème
+  geom geometry(Point,2154), -- champ contenant la géométrie de l'objet
+  op_sai character varying(80), -- Opérateur de saisie de la donnée
+  observ character varying(500), -- Observations diverses
+  pavorient character varying(2), -- code des préconisations pour l'amélioration dee emplacements des PAV Verre (suite à l'état des lieux de l'été 2016
+  id_parent integer, -- identifiant du PAV Verre parent selon les préconisations
+  statut character varying(2), -- code du statut du PAV (actif ou inactif)
+  v_tampon integer, -- Valeur du tampon correspondant à l'aire de captation du point de ramassage
+  geom2 geometry(Polygon,2154), -- Champ contenant la géométrie du tampon d'emprise définit par v_tampon où modifier selon l'influence
+  date_effet timestamp without time zone DEFAULT now(), -- Date de prise en compte des données dans le plan interactif Grand Public
+  CONSTRAINT geo_dec_pav_verre_prkey PRIMARY KEY (id_contver),
+  CONSTRAINT geo_dec_pav_verre_contmat_fkey FOREIGN KEY (cont_mat)
+      REFERENCES m_dechet.lt_pav_contmat (cont_mat) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_contpos_fkey FOREIGN KEY (cont_pos)
+      REFERENCES m_dechet.lt_pav_contpos (cont_pos) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_crochet_fkey FOREIGN KEY (crochet)
+      REFERENCES m_dechet.lt_pav_crochet (crochet) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_envimplan_fkey FOREIGN KEY (env_implan)
+      REFERENCES m_dechet.lt_pav_envimplan (env_implan) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_envsitu_fkey FOREIGN KEY (env_situ)
+      REFERENCES m_dechet.lt_pav_envsitu (env_situ) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_envtype_fkey FOREIGN KEY (env_type)
+      REFERENCES m_dechet.lt_pav_envtype (env_type) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_etatsign_fkey FOREIGN KEY (etat_sign)
+      REFERENCES m_dechet.lt_pav_etatsign (etat_sign) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_modepreh_fkey FOREIGN KEY (mode_preh)
+      REFERENCES m_dechet.lt_pav_modepreh (mode_preh) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_natpb_fkey FOREIGN KEY (nat_pb)
+      REFERENCES m_dechet.lt_pav_natpb (nat_pb) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_peinture_fkey FOREIGN KEY (peinture)
+      REFERENCES m_dechet.lt_pav_peinture (peinture) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_propabord_fkey FOREIGN KEY (proprete)
+      REFERENCES m_dechet.lt_pav_proprete (proprete) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_proprete_fkey FOREIGN KEY (proprete)
+      REFERENCES m_dechet.lt_pav_proprete (proprete) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_srcgeom_fkey FOREIGN KEY (src_geom)
+      REFERENCES r_objet.lt_src_geom (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_statut_fkey FOREIGN KEY (statut)
+      REFERENCES m_dechet.lt_pav_statut (statut) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_typesign_fkey FOREIGN KEY (type_sign)
+      REFERENCES m_dechet.lt_pav_typesign (type_sign) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT geo_dec_pav_verre_typesol_fkey FOREIGN KEY (type_sol)
+      REFERENCES m_dechet.lt_pav_typesol (type_sol) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+
+COMMENT ON TABLE m_dechet.geo_dec_pav_verre
+  IS 'Localisation des points d''apport volontaire verre - version 2 : nouveau modèle suite à la mise à jour de juillet 2016 - cette table remplacera la table "geo_dec_pav_verre" à la fin de la mise à jour (modifier la structure de la table dans Geo et intégrer les listes de choix)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.id_contver IS 'Identifiant unique géographique';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.commune IS 'libellé de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.insee IS 'numéro insee de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.quartier IS 'libellé du quartier';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.adresse IS 'adresse d''implantation';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.x_l93 IS 'coordonnée x en lambert 93';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.y_l93 IS 'coordonnée y en lambert 93';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.cont_nbr IS 'nombre de conteneurs';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.cont_mat IS 'code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.cont_pos IS 'code du type de position du conteneur (liste de choix lt_pav_contpos)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.date_sai IS 'date de saisie de l''information';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.date_pos IS 'date de pose';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.date_net IS 'date de nettoyage';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.date_maj IS 'date de mise à jour des informations';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.photo IS 'Nom du fichier de la photo avant la mise à jour de juillet 2016 par le BE RETIF';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.url_photo IS 'Lien url vers la photo avant la mise à jour de juillet 2016 par le BE RETIF';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.src_geom IS 'code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_src_geom)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.volume IS 'volume en m3 (par défaut 4)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.env_type IS 'code du type d''espace géographique (liste de choix lt_pav_envtype)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.env_implan IS 'code du type d''espace urbain d''implantation (liste de choix lt_pav_envimplan)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.env_situ IS 'code de la situation domaniale (liste de choix lt_pav_envsitu)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.mode_preh IS 'code du mode de préhension (liste de choix lt_pav_modepreh)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.crochet IS 'code de l''état du crochet (liste de choix lt_pav_crochet)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.opercules IS 'Bavettes sur opercules disponibles';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.tags IS 'présence de tags';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.peinture IS 'code de l''état de la peinture (liste de choix lt_pav_peinture)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.prox_corb IS 'présence d''une corbeille à proximité';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.type_sol IS 'code du type de sol (liste de choix (lt_pav_typesol)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.trp_rest IS 'présence d''une trappe pour restaurateur';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.etat_sign IS 'état de la signalétique (création d''une liste de valeur en fonction de l''état des lieux)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.type_sign IS 'code du type de signalétique (liste de choix lt_pav_typesign)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.proprete IS 'code de l''état de la propreté (liste de choix lt_pav_proprete)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.prop_abor IS 'code de l''état de la propreté des abords (liste de choix lt_pav_propabor)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.def_struc IS 'défaut de structure visible';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.hab_pav IS 'Tonnage par gisement d''habitants';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.opt_pav IS 'nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.ame_acces IS 'accéssibilité à revoir';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.nat_pb IS 'code de la nature du ou des problèmes (liste de choix lt_pav_natpb)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.nat_pb_99 IS 'précision sur la nature du problème';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.geom IS 'champ contenant la géométrie de l''objet';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.op_sai IS 'Opérateur de saisie de la donnée';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.observ IS 'Observations diverses';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.pavorient IS 'code des préconisations pour l''amélioration dee emplacements des PAV Verre (suite à l''état des lieux de l''été 2016';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.id_parent IS 'identifiant du PAV Verre parent selon les préconisations';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.statut IS 'code du statut du PAV (actif ou inactif)';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.v_tampon IS 'Valeur du tampon correspondant à l''aire de captation du point de ramassage';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.geom2 IS 'Champ contenant la géométrie du tampon d''emprise définit par v_tampon où modifier selon l''influence';
+COMMENT ON COLUMN m_dechet.geo_dec_pav_verre.date_effet IS 'Date de prise en compte des données dans le plan interactif Grand Public';
+
+
+
+
+
+
+
 
   
+-- ####################################################################################################################################################
+-- ###                                                                                                                                              ###
+-- ###                                                                INDEX                                                           ###
+-- ###                                                                                                                                              ###
+-- ####################################################################################################################################################
+
+-- Index: m_dechet.geo_dec_pav_verre_etat_sign_idx
+
+-- DROP INDEX m_dechet.geo_dec_pav_verre_etat_sign_idx;
+
+CREATE INDEX geo_dec_pav_verre_etat_sign_idx
+  ON m_dechet.geo_dec_pav_verre
+  USING btree
+  (etat_sign COLLATE pg_catalog."default");
+
+-- Index: m_dechet.geo_dec_pav_verre_geom_idx
+
+-- DROP INDEX m_dechet.geo_dec_pav_verre_geom_idx;
+
+CREATE INDEX geo_dec_pav_verre_geom_idx
+  ON m_dechet.geo_dec_pav_verre
+  USING gist
+  (geom);
+
+-- Index: m_dechet.geo_dec_pav_verre_pavorient_idx
+
+-- DROP INDEX m_dechet.geo_dec_pav_verre_pavorient_idx;
+
+CREATE INDEX geo_dec_pav_verre_pavorient_idx
+  ON m_dechet.geo_dec_pav_verre
+  USING btree
+  (pavorient COLLATE pg_catalog."default");
+
+-- Index: m_dechet.geo_dec_pav_verre_statut_idx
+
+-- DROP INDEX m_dechet.geo_dec_pav_verre_statut_idx;
+
+CREATE INDEX geo_dec_pav_verre_statut_idx
+  ON m_dechet.geo_dec_pav_verre
+  USING btree
+  (statut COLLATE pg_catalog."default");
+  
+-- ####################################################################################################################################################
+-- ###                                                                                                                                              ###
+-- ###                                                                TRIGGERS                                                           ###
+-- ###                                                                                                                                              ###
+-- ####################################################################################################################################################
+
+-- Trigger: t_t1_geo_dec_pav_verre_datemaj on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t1_geo_dec_pav_verre_datemaj ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t1_geo_dec_pav_verre_datemaj
+  BEFORE INSERT OR UPDATE
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_maj();
+
+-- Trigger: t_t2_geo_dec_pav_verre_datesai on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t2_geo_dec_pav_verre_datesai ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t2_geo_dec_pav_verre_datesai
+  BEFORE INSERT
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_sai();
+
+-- Trigger: t_t3_geo_dec_pav_verre_insee on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t3_geo_dec_pav_verre_insee ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t3_geo_dec_pav_verre_insee
+  BEFORE INSERT OR UPDATE OF geom
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_commune_pl();
+
+-- Trigger: t_t4_geo_dec_pav_verre_quartier on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t4_geo_dec_pav_verre_quartier ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t4_geo_dec_pav_verre_quartier
+  BEFORE INSERT OR UPDATE OF geom
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_quartier();
+
+-- Trigger: t_t5_geo_dec_pav_verre_xy on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t5_geo_dec_pav_verre_xy ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t5_geo_dec_pav_verre_xy
+  BEFORE INSERT OR UPDATE OF geom
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_xy_l93();
+
+-- Trigger: t_t6_geo_dec_pav_verre_tampon on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t6_geo_dec_pav_verre_tampon ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t6_geo_dec_pav_verre_tampon
+  AFTER UPDATE OF geom, v_tampon
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE m_dechet.m_tampon_nav();
+
+-- Trigger: t_t7_geo_dec_pav_verre_log on m_dechet.geo_dec_pav_verre
+
+-- DROP TRIGGER t_t7_geo_dec_pav_verre_log ON m_dechet.geo_dec_pav_verre;
+
+CREATE TRIGGER t_t7_geo_dec_pav_verre_log
+  AFTER INSERT OR UPDATE OR DELETE
+  ON m_dechet.geo_dec_pav_verre
+  FOR EACH ROW
+  EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
