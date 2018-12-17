@@ -986,13 +986,168 @@ COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.date_sai IS 'Date d''intégratio
 COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.d_photo IS 'Date de la prise de vue';
 COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.l_prec IS 'Précision sur le document';
 
+-- Table: m_dechet.geo_dec_dechetterie
+
+-- DROP TABLE m_dechet.geo_dec_dechetterie;
+
+CREATE TABLE m_dechet.geo_dec_dechetterie
+(
+  id character(10) NOT NULL,
+  nomcom_min character varying(50),
+  insee character(5),
+  nomdechet character varying(50),
+  x double precision,
+  y double precision,
+  adresse character varying(80),
+  gestionnaire character varying(20),
+  geom geometry(Point,2154),
+  gid serial NOT NULL,
+  CONSTRAINT geo_dec_dechetterie_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=TRUE
+);
+
+COMMENT ON TABLE m_dechet.geo_dec_dechetterie
+  IS 'Localisation des déchetterie sur l''ARC';
 
 
 
+-- Table: m_dechet.geo_dec_secteur_enc
+
+-- DROP TABLE m_dechet.geo_dec_secteur_enc;
+
+CREATE TABLE m_dechet.geo_dec_secteur_enc
+(
+  gid integer NOT NULL DEFAULT nextval('m_dechet.geo_dec_secteur_enc_seq'::regclass), -- Identifiant interne
+  insee character varying(5), -- Code Insee de la commune
+  commune character varying(150), -- Libellé de la commune
+  op_sai character varying(80), -- Opérateur de saisie
+  observ character varying(254), -- Observation(s)
+  src_geom character varying(2), -- Référentiel de saisie
+  date_sai timestamp without time zone, -- Date de saisie
+  date_maj timestamp without time zone, -- Date de mise à jour
+  adresse character varying(254), -- Adresse concernées par un ramassage des encombrants à jour fixe
+  l_secteur character varying(25), -- Libellé du secteur par rapport au ramssage (fixe ou sur rendez-vous)
+  l_message1 character varying(500), -- Message diffusé sur l'application Grand Public pour les encombrants à jour fixe
+  l_message2 character varying(500), -- Message diffusé sur l'application Grand Public pour les encombrants sur rendez-vous
+  geom geometry(MultiPoint,2154), -- Géométrie des points d'adresse à jour fixe
+  geom1 geometry(Polygon,2154), -- Géométrie des zones issus des adresses et par défaut les autres (1 seul polygone) sur rendez-vous. Sert dans GEO appli Gd public pour la recherche par adresse
+  CONSTRAINT geo_dec_secteur_enc_pkey1 PRIMARY KEY (gid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_dechet.geo_dec_secteur_enc
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_enc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_enc TO edit_sig;
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.gid IS 'Identifiant interne';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.insee IS 'Code Insee de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.commune IS 'Libellé de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.op_sai IS 'Opérateur de saisie';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.observ IS 'Observation(s)';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.src_geom IS 'Référentiel de saisie';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.date_sai IS 'Date de saisie';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.date_maj IS 'Date de mise à jour';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.adresse IS 'Adresse concernées par un ramassage des encombrants à jour fixe';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.l_secteur IS 'Libellé du secteur par rapport au ramssage (fixe ou sur rendez-vous)';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.l_message1 IS 'Message diffusé sur l''application Grand Public pour les encombrants à jour fixe';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.l_message2 IS 'Message diffusé sur l''application Grand Public pour les encombrants sur rendez-vous';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.geom IS 'Géométrie des points d''adresse à jour fixe';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.geom1 IS 'Géométrie des zones issus des adresses et par défaut les autres (1 seul polygone) sur rendez-vous. Sert dans GEO appli Gd public pour la recherche par adresse';
 
 
+-- Table: m_dechet.geo_dec_secteur_om
 
+-- DROP TABLE m_dechet.geo_dec_secteur_om;
 
+CREATE TABLE m_dechet.geo_dec_secteur_om
+(
+  gid integer NOT NULL DEFAULT nextval('m_dechet.geo_dec_secteur_om_seq'::regclass), -- Identifiant unique interne
+  l_zone character varying(150), -- Nom du secteur de ramassage des ordures ménagères
+  geom geometry(MultiPolygon,2154),
+  insee character varying(25), -- Code insee de la Commune
+  commune character varying(150), -- Libellé de la commune
+  op_sai character varying(80), -- Opérateur de saisie
+  observ character varying(254), -- Observations
+  src_geom character varying(2) DEFAULT '00'::character varying, -- Code de la valeur du référentiel de saisie (lien vers la liste de valeur r_objet.lt_src_geom
+  date_sai timestamp without time zone, -- Date de saisie des informations
+  date_maj timestamp without time zone, -- Date de mise à jour des informations
+  l_fichier character varying(100), -- Libellé du fichier avec son extension pour le document lié, ici le calendrier de collecte
+  l_message1 character varying(255), -- Espace pour rédiger un message qui sera intégré dans l'application grand public (plusieurs lignes possibles dans les champs l_message n
+  l_message2 character varying(255), -- 2ème ligne du message
+  l_message3 character varying(255), -- 3ème ligne du message
+  l_message4 character varying(255), -- 4ème ligne du message
+  l_message5 character varying(255), -- 5ème ligne du message
+  l_message6 character varying(255), -- 6ème ligne du message
+  l_message7 character varying(255), -- 7ème ligne du message
+  CONSTRAINT geo_dec_zonage_pkey PRIMARY KEY (gid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_dechet.geo_dec_secteur_om
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_om TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_om TO edit_sig;
+COMMENT ON TABLE m_dechet.geo_dec_secteur_om
+  IS 'Secteur de collecte des ordures ménagères.';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.gid IS 'Identifiant unique interne';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_zone IS 'Nom du secteur de ramassage des ordures ménagères';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.insee IS 'Code insee de la Commune';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.commune IS 'Libellé de la commune';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.op_sai IS 'Opérateur de saisie';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.observ IS 'Observations';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.src_geom IS 'Code de la valeur du référentiel de saisie (lien vers la liste de valeur r_objet.lt_src_geom';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.date_sai IS 'Date de saisie des informations';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.date_maj IS 'Date de mise à jour des informations';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_fichier IS 'Libellé du fichier avec son extension pour le document lié, ici le calendrier de collecte';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message1 IS 'Espace pour rédiger un message qui sera intégré dans l''application grand public (plusieurs lignes possibles dans les champs l_message n';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message2 IS '2ème ligne du message';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message3 IS '3ème ligne du message';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message4 IS '4ème ligne du message';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message5 IS '5ème ligne du message';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message6 IS '6ème ligne du message';
+COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message7 IS '7ème ligne du message';
+
+-- Table: m_dechet.log_dec_pav
+
+-- DROP TABLE m_dechet.log_dec_pav;
+
+CREATE TABLE m_dechet.log_dec_pav
+(
+  gid integer NOT NULL, -- identifiant unique
+  objet character varying(10), -- Type de modification (update, delete, insert)
+  d_maj timestamp without time zone, -- Date de l'exécution de la modification
+  "user" character varying(50), -- Utilisateur ayant exécuté l'exécution
+  relid character varying(255), -- ID d'objet de la table qui a causé le déclenchement.
+  l_schema character varying(30), -- Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée
+  l_table character varying(30), -- Libellé de la table exécutée
+  idgeo character varying(100), -- Identifiant unique de l'objet de la table correspondante
+  modif character varying(10000),
+  geom geometry(Point,2154), -- Champ contenant la géométrie des objets polygones modifiés ou supprimés
+  CONSTRAINT log_dec_pav_pkey PRIMARY KEY (gid)
+)
+WITH (
+  OIDS=FALSE
+);
+
+COMMENT ON TABLE m_dechet.log_dec_pav
+  IS 'Table permettant de suivre les modifications intervenues sur les données des contrôles de conformité. Cette table est mise à jour via des triggers intégrés au niveau des vues de gestion.';
+COMMENT ON COLUMN m_dechet.log_dec_pav.gid IS 'identifiant unique';
+COMMENT ON COLUMN m_dechet.log_dec_pav.objet IS 'Type de modification (update, delete, insert)';
+COMMENT ON COLUMN m_dechet.log_dec_pav.d_maj IS 'Date de l''exécution de la modification';
+COMMENT ON COLUMN m_dechet.log_dec_pav."user" IS 'Utilisateur ayant exécuté l''exécution';
+COMMENT ON COLUMN m_dechet.log_dec_pav.relid IS 'ID d''objet de la table qui a causé le déclenchement.';
+COMMENT ON COLUMN m_dechet.log_dec_pav.l_schema IS 'Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée';
+COMMENT ON COLUMN m_dechet.log_dec_pav.l_table IS 'Libellé de la table exécutée';
+COMMENT ON COLUMN m_dechet.log_dec_pav.idgeo IS 'Identifiant unique de l''objet de la table correspondante';
+COMMENT ON COLUMN m_dechet.log_dec_pav.geom IS 'Champ contenant la géométrie des objets polygones modifiés ou supprimés';
 
 
   
@@ -1055,6 +1210,33 @@ CREATE INDEX an_dec_pav_doc_media_id_idx
   ON m_dechet.an_dec_pav_doc_media
   USING btree
   (id);
+  
+-- Index: m_dechet.geo_dec_dechetterie_geom_idx
+
+-- DROP INDEX m_dechet.geo_dec_dechetterie_geom_idx;
+
+CREATE INDEX geo_dec_dechetterie_geom_idx
+  ON m_dechet.geo_dec_dechetterie
+  USING gist
+  (geom);
+  
+  -- Index: m_dechet.geo_dec_secteur_enc_geom_idx
+
+-- DROP INDEX m_dechet.geo_dec_secteur_enc_geom_idx;
+
+CREATE INDEX geo_dec_secteur_enc_geom_idx
+  ON m_dechet.geo_dec_secteur_enc
+  USING gist
+  (geom);
+  
+ -- Index: m_dechet.geo_dec_zonage_geom_idx
+
+-- DROP INDEX m_dechet.geo_dec_zonage_geom_idx;
+
+CREATE INDEX geo_dec_zonage_geom_idx
+  ON m_dechet.geo_dec_secteur_om
+  USING gist
+  (geom);
   
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
@@ -1456,5 +1638,66 @@ CREATE TRIGGER t_t6_geo_dec_pav_tlc_log
 CREATE TRIGGER t_t1_an_dec_pav_doc_media_date_sai
   BEFORE INSERT
   ON m_dechet.an_dec_pav_doc_media
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_sai();
+  
+  
+  -- Trigger: t_t1_geo_dec_secteur_enc_datemaj on m_dechet.geo_dec_secteur_enc
+
+-- DROP TRIGGER t_t1_geo_dec_secteur_enc_datemaj ON m_dechet.geo_dec_secteur_enc;
+
+CREATE TRIGGER t_t1_geo_dec_secteur_enc_datemaj
+  BEFORE INSERT OR UPDATE
+  ON m_dechet.geo_dec_secteur_enc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_maj();
+
+-- Trigger: t_t2_geo_dec_secteur_enc_datesai on m_dechet.geo_dec_secteur_enc
+
+-- DROP TRIGGER t_t2_geo_dec_secteur_enc_datesai ON m_dechet.geo_dec_secteur_enc;
+
+CREATE TRIGGER t_t2_geo_dec_secteur_enc_datesai
+  BEFORE INSERT
+  ON m_dechet.geo_dec_secteur_enc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_sai();
+
+-- Trigger: t_t3_geo_dec_secteur_om_datemaj on m_dechet.geo_dec_secteur_enc
+
+-- DROP TRIGGER t_t3_geo_dec_secteur_om_datemaj ON m_dechet.geo_dec_secteur_enc;
+
+CREATE TRIGGER t_t3_geo_dec_secteur_om_datemaj
+  BEFORE INSERT OR UPDATE
+  ON m_dechet.geo_dec_secteur_enc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_maj();
+
+-- Trigger: t_t4_geo_dec_secteur_om_datesai on m_dechet.geo_dec_secteur_enc
+
+-- DROP TRIGGER t_t4_geo_dec_secteur_om_datesai ON m_dechet.geo_dec_secteur_enc;
+
+CREATE TRIGGER t_t4_geo_dec_secteur_om_datesai
+  BEFORE INSERT
+  ON m_dechet.geo_dec_secteur_enc
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_sai();
+
+-- Trigger: t_t1_geo_dec_secteur_om_datemaj on m_dechet.geo_dec_secteur_om
+
+-- DROP TRIGGER t_t1_geo_dec_secteur_om_datemaj ON m_dechet.geo_dec_secteur_om;
+
+CREATE TRIGGER t_t1_geo_dec_secteur_om_datemaj
+  BEFORE INSERT OR UPDATE
+  ON m_dechet.geo_dec_secteur_om
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.r_timestamp_maj();
+
+-- Trigger: t_t2_geo_dec_secteur_om_datesai on m_dechet.geo_dec_secteur_om
+
+-- DROP TRIGGER t_t2_geo_dec_secteur_om_datesai ON m_dechet.geo_dec_secteur_om;
+
+CREATE TRIGGER t_t2_geo_dec_secteur_om_datesai
+  BEFORE INSERT
+  ON m_dechet.geo_dec_secteur_om
   FOR EACH ROW
   EXECUTE PROCEDURE public.r_timestamp_sai();
