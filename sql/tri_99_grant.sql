@@ -246,16 +246,54 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.log_dec_pav TO edit_sig;
 
 -- #################################################################### VUE DE GESTION  ####################################################################
 
-
+Sans objet
 
 
 -- #################################################################### VUE APPLICATIVE  ####################################################################
 
+ALTER TABLE x_apps.xapps_geo_v_pav_orient
+  OWNER TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_orient TO sig_create;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps.xapps_geo_v_pav_orient TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_orient TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_geo_v_pav_orient TO read_sig;
+
+ALTER TABLE x_apps.xapps_geo_v_pav_verre_inactif
+  OWNER TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO sig_create;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO read_sig;
+
+-- #################################################################### VUE GD PUBLIC  ####################################################################
+
+
+ALTER TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon
+  OWNER TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO create_sig;
+GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO edit_sig;
+
+
+ALTER TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon
+  OWNER TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO create_sig;
+GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO edit_sig;
+
+ALTER TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon
+  OWNER TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO create_sig;
+GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO edit_sig;
 
 
 -- #################################################################### VUE OPENDATA  ####################################################################
 
-
+Sans objet
 
 
 -- #################################################################### FUNCTION TRIGGER  ####################################################################
