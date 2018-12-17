@@ -260,6 +260,14 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.log_dec_pav TO edit_sig;
 
 -- #################################################################### FUNCTION TRIGGER  ####################################################################
 
+ALTER FUNCTION m_dechet.m_tampon_nav()
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.m_tampon_nav() TO public;
+GRANT EXECUTE ON FUNCTION m_dechet.m_tampon_nav() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.m_tampon_nav() TO create_sig;
 
-
-
+ALTER FUNCTION m_dechet.m_log_dec_pav()
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO public;
+GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO create_sig;
