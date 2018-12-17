@@ -271,3 +271,9 @@ ALTER FUNCTION m_dechet.m_log_dec_pav()
 GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO public;
 GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO sig_create;
 GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO create_sig;
+
+ALTER FUNCTION m_dechet.m_log_dec_pav()
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO public;
+GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO create_sig;
