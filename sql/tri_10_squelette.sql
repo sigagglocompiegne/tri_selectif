@@ -950,6 +950,27 @@ CREATE TRIGGER t_t5_geo_dec_pav_verre_xy
   FOR EACH ROW
   EXECUTE PROCEDURE public.r_xy_l93();
 
+-- Function: m_dechet.m_tampon_nav()
+
+-- DROP FUNCTION m_dechet.m_tampon_nav();
+
+CREATE OR REPLACE FUNCTION m_dechet.m_tampon_nav()
+  RETURNS trigger AS
+$BODY$
+
+BEGIN
+
+update m_dechet.geo_dec_pav_verre set geom2 = st_buffer(geom,new.v_tampon) where id_contver=new.id_contver;
+
+return new;
+
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+COMMENT ON FUNCTION m_dechet.m_tampon_nav() IS 'Fonction trigger pour mise à jour du tampon d''emprise du PAV VERRE si v_tampon est modifiée';
+
 -- Trigger: t_t6_geo_dec_pav_verre_tampon on m_dechet.geo_dec_pav_verre
 
 -- DROP TRIGGER t_t6_geo_dec_pav_verre_tampon ON m_dechet.geo_dec_pav_verre;
