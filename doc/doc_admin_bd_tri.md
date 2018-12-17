@@ -2,6 +2,14 @@
 
 # Documentation d'administration de la base #
 
+
+* Statut
+  - [ ] à rédiger
+  - [x] en cours de rédaction
+  - [ ] relecture
+  - [ ] finaliser
+  - [ ] révision
+
 ## Principes
  ### Généralité
  
