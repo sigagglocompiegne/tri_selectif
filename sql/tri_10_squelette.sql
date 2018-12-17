@@ -185,6 +185,17 @@ COMMENT ON COLUMN m_dechet.lt_pav_contmat.cont_mat_lib IS 'Libellé des matéria
 
 COMMENT ON CONSTRAINT lt_pav_contmat_pkkey ON m_dechet.lt_pav_contmat IS 'Clé primaire de la table lt_pav_contmat';
 
+INSERT INTO m_dechet.lt_pav_contmat(
+            cont_mat, cont_mat_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Métal'),
+    ('20','Plastique'),
+    ('21','Plastique + bois'), 
+    ('30','Résine'), 
+    ('40','Bois');
+    
+    
 -- ################################################################# Domaine valeur - lt_pav_contpos  ###############################################
 
 -- Table: m_dechet.lt_pav_contpos
@@ -208,6 +219,14 @@ COMMENT ON COLUMN m_dechet.lt_pav_contpos.cont_pos_lib IS 'libellé du type de p
 
 COMMENT ON CONSTRAINT lt_pav_contpos_pkkey ON m_dechet.lt_pav_contpos IS 'Clé primaire de la table lt_pav_contpos';
 
+INSERT INTO m_dechet.lt_pav_contpos(
+            cont_pos, cont_pos_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Aérien'),
+    ('20','Enterré'),
+    ('30','Semi-enterré'); 
+    
 -- ################################################################# Domaine valeur - lt_pav_crochet  ###############################################
 
 -- Table: m_dechet.lt_pav_crochet
@@ -231,6 +250,14 @@ COMMENT ON COLUMN m_dechet.lt_pav_crochet.crochet_lib IS 'libellé de l''état d
 
 COMMENT ON CONSTRAINT lt_pav_crochet_pkkey ON m_dechet.lt_pav_crochet IS 'Clé primaire de la table lt_pav_crochet';
 
+INSERT INTO m_dechet.lt_pav_crochet(
+            crochet, crochet_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','RAS'),
+    ('20','Tordu');
+    
+    
 -- ################################################################# Domaine valeur - lt_pav_envimplan  ###############################################
 
 -- Table: m_dechet.lt_pav_envimplan
@@ -254,6 +281,15 @@ COMMENT ON COLUMN m_dechet.lt_pav_envimplan.env_implan_lib IS 'libellé du type 
 
 COMMENT ON CONSTRAINT lt_pav_envimplan_pkkey ON m_dechet.lt_pav_envimplan IS 'Clé primaire de la table lt_pav_envimplan';
 
+INSERT INTO m_dechet.lt_pav_envimplan(
+            env_implan, env_implan_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Pavillonnaire'),
+    ('20','Collectif'),
+    ('30','Mixte (y compris ZI)'),
+    ('40','Professionnel');
+    
 -- ################################################################# Domaine valeur - lt_pav_envsitu  ###############################################
 
 -- Table: m_dechet.lt_pav_envsitu
@@ -277,6 +313,13 @@ COMMENT ON COLUMN m_dechet.lt_pav_envsitu.env_situ_lib IS 'libellé du type de l
 
 COMMENT ON CONSTRAINT lt_pav_envsitu_pkkey ON m_dechet.lt_pav_envsitu IS 'Clé primaire de la table lt_pav_envsitu';
 
+INSERT INTO m_dechet.lt_pav_envsitu(
+            env_situ, env_situ_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Terrain privé'),
+    ('20','Terrain public');
+    
 -- ################################################################# Domaine valeur - lt_pav_envtype  ###############################################
 
 -- Table: m_dechet.lt_pav_envtype
@@ -300,6 +343,15 @@ COMMENT ON COLUMN m_dechet.lt_pav_envtype.env_type_lib IS 'libellé du type d''e
 
 COMMENT ON CONSTRAINT lt_pav_envtype_pkkey ON m_dechet.lt_pav_envtype IS 'Clé primaire de la table lt_pav_envtype';
 
+
+INSERT INTO m_dechet.lt_pav_envtype(
+            env_type, env_type_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Urbain'),
+    ('20','Rural'); 
+    
+    
 -- ################################################################# Domaine valeur - lt_pav_etatsign  ###############################################
 
 -- Table: m_dechet.lt_pav_etatsign
@@ -323,6 +375,16 @@ COMMENT ON COLUMN m_dechet.lt_pav_etatsign.etat_sign_lib IS 'Libellé des matér
 
 COMMENT ON CONSTRAINT lt_pav_etat_sign_pkkey ON m_dechet.lt_pav_etatsign IS 'Clé primaire de la table lt_pav_etat_sign';
 
+
+INSERT INTO m_dechet.lt_pav_etatsign(
+            etat_sign, etat_sign_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Correct'),
+    ('20','Moyen'), 
+    ('30','Mauvais'),
+    ('40','Incomplet'); 
+    
 -- ################################################################# Domaine valeur - lt_pav_gest  ###############################################
 
 -- Table: m_dechet.lt_pav_gest
@@ -346,6 +408,15 @@ COMMENT ON COLUMN m_dechet.lt_pav_gest.nom_entrep_lib IS 'Libellé du code du ge
 
 COMMENT ON CONSTRAINT lt_pav_gest_pkkey ON m_dechet.lt_pav_gest IS 'Clé primaire de la table lt_pav_gest';
 
+
+INSERT INTO m_dechet.lt_pav_gest(
+            nom_entrep, nom_entrep_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Le Relais'),
+    ('20','Eco Textile'), 
+    ('99','Autre'); 
+    
 -- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
 
 -- Table: m_dechet.lt_pav_modepreh
@@ -369,6 +440,14 @@ COMMENT ON COLUMN m_dechet.lt_pav_modepreh.mode_preh_lib IS 'libellé du mode de
 
 COMMENT ON CONSTRAINT lt_pav_modepreh_pkkey ON m_dechet.lt_pav_modepreh IS 'Clé primaire de la table lt_pav_modepreh';
 
+
+INSERT INTO m_dechet.lt_pav_modepreh(
+            mode_preh, mode_preh_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Crochet'),
+    ('20','Kinshofer');
+    
 -- ################################################################# Domaine valeur - lt_pav_natpb  ###############################################
 
 
@@ -393,6 +472,23 @@ COMMENT ON COLUMN m_dechet.lt_pav_natpb.nat_pb_lib IS 'Libellé des codes de la 
 
 COMMENT ON CONSTRAINT lt_pav_natpb_pkkey ON m_dechet.lt_pav_natpb IS 'Clé primaire de la table lt_pav_natpb';
 
+
+INSERT INTO m_dechet.lt_pav_natpb(
+            nat_pb, nat_pb_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('01','Accès restreint'),
+    ('02','Arbres'),
+    ('03','Lignes aériennes'),
+    ('04','Danger'),
+    ('05','Excentré'),
+    ('06','Marche arrière'),
+    ('07','Pas de stationnement'),
+    ('08','Sousauvent'),
+    ('09','Stationnement gênant'),
+    ('10','Virage'),
+    ('99','Autre');
+    
 -- ################################################################# Domaine valeur - lt_pav_pavorient  ###############################################
 
 -- Table: m_dechet.lt_pav_pavorient
@@ -415,6 +511,16 @@ COMMENT ON COLUMN m_dechet.lt_pav_pavorient.pavorient IS 'code de l''orientation
 COMMENT ON COLUMN m_dechet.lt_pav_pavorient.pavorient_lib IS 'Libellé de l''orientation du PAV suite à l''état des lieux de l''été 2016';
 
 COMMENT ON CONSTRAINT lt_pav_pavorient_pkkey ON m_dechet.lt_pav_pavorient IS 'Clé primaire de la table lt_pav_pavorient';
+
+INSERT INTO m_dechet.lt_pav_pavorient(
+            pavorient, pavorient_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','A conserver seul'),
+    ('20','A renforcer'),
+    ('30','A supprimer'),
+    ('40','A déplacer'),
+    ('50','A créer');
 
 -- ################################################################# Domaine valeur - lt_pav_peinture  ###############################################
 
@@ -439,6 +545,14 @@ COMMENT ON COLUMN m_dechet.lt_pav_peinture.peinture_lib IS 'Libellé de l''état
 
 COMMENT ON CONSTRAINT lt_pav_peinture_pkkey ON m_dechet.lt_pav_peinture IS 'Clé primaire de la table lt_pav_peinture';
 
+INSERT INTO m_dechet.lt_pav_peinture(
+            peinture, peinture_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','RAS'),
+    ('20','Abîmée'),
+    ('30','Brûlée');
+
 -- ################################################################# Domaine valeur - lt_pav_proprete  ###############################################
 
 -- Table: m_dechet.lt_pav_proprete
@@ -461,6 +575,15 @@ COMMENT ON COLUMN m_dechet.lt_pav_proprete.proprete IS 'code de l''état de la p
 COMMENT ON COLUMN m_dechet.lt_pav_proprete.proprete_lib IS 'Libellé code de l''état de la propreté';
 
 COMMENT ON CONSTRAINT lt_pav_proprete_pkkey ON m_dechet.lt_pav_proprete IS 'Clé primaire de la table lt_pav_proprete';
+
+
+INSERT INTO m_dechet.lt_pav_proprete(
+            proprete, proprete_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Propre'),
+    ('20','Moyen'),
+    ('30','Sale');
 
 -- ################################################################# Domaine valeur - lt_pav_statut  ###############################################
 
@@ -485,7 +608,13 @@ COMMENT ON COLUMN m_dechet.lt_pav_statut.statut_lib IS 'Libellé du statut';
 
 COMMENT ON CONSTRAINT lt_pav_statut_pkkey ON m_dechet.lt_pav_statut IS 'Clé primaire de la table lt_pav_statut';
 
-
+INSERT INTO m_dechet.lt_pav_statut(
+            statut, statut_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Actif'),
+    ('20','Inactif (projet, existe plus)');
+    
 -- ################################################################# Domaine valeur - lt_pav_typesign  ###############################################
 
 -- Table: m_dechet.lt_pav_typesign
@@ -508,6 +637,15 @@ COMMENT ON COLUMN m_dechet.lt_pav_typesign.type_sign IS 'code du type de signal�
 COMMENT ON COLUMN m_dechet.lt_pav_typesign.type_sign_lib IS 'Libellé du type de signalétique';
 
 COMMENT ON CONSTRAINT lt_pav_typesign_pkkey ON m_dechet.lt_pav_typesign IS 'Clé primaire de la table lt_pav_typesign';
+
+INSERT INTO m_dechet.lt_pav_typesign(
+            type_sign, type_sign_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Adhésif'),
+    ('20','Totem'),
+    ('30','Covering'),
+    ('40','Plaque + adhésif');
 
 -- ################################################################# Domaine valeur - lt_pav_typesol  ###############################################
 
@@ -532,3 +670,14 @@ COMMENT ON COLUMN m_dechet.lt_pav_typesol.type_sol_lib IS 'Libellé du type de s
 
 COMMENT ON CONSTRAINT lt_pav_typesol_pkkey ON m_dechet.lt_pav_typesol IS 'Clé primaire de la table lt_pav_typesol';
 
+INSERT INTO m_dechet.lt_pav_typesol(
+            type_sol, type_sol_lib)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Dalle'),
+    ('20','Bitume'),
+    ('30','Terre'),
+    ('99','Autre');
+
+
+  
