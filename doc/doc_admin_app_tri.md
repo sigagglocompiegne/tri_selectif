@@ -89,59 +89,133 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |opt_pav               |||Manque de PAV||Fiche d'information Conteneur à Verre|| 
 |pavorient                ||||Liste de domaine Valeur PAV Orientation|Fiche d'information Conteneur à Verre|| 
 |peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur à Verre|| 
-|photo                  |||Nom du fichier photo||Fiche d'information Conteneur à Verre|| 
+|photo                  |||Nom du fichier photo||Inutilisé (photo dans la table des médias)|| 
 |prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Conteneur à Verre|| 
 |proprete                    |||Etat de propreté|Liste de domaine   valeur_pav_proprete|Fiche d'information Conteneur à Verre|| 
 |prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Conteneur à Verre|| 
 |src_geom                     |||Référentiel spatial||Fiche d'information Conteneur à Verre|| 
 |statut                     ||||Liste de domaine    Valeur PAV Statut |Fiche d'information Conteneur à Verre||  
+|tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur à Verre||  
+|trp_rest                      |||Présence d'une trappe pour restaurateur|Booléen oui/non |Fiche d'information Conteneur à Verre||  
+|type_sign                       |||Type de signalétique|Liste de domaine    Valeur PAV Etat signalétique
+ |Fiche d'information Conteneur à Verre||  
+|type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol
+ |Fiche d'information Conteneur à Verre||  
+|url_photo                         |||Lien vers la photo| |Inutilisé (photo dans la table des médias)||  
+|v_tampon                         |||Valeur du tampon correspondant à l'aire de captation du point de ramassage |Fiche d'information Conteneur à Verre||  
 
 
    * filtres :
 
 |Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
 |:---|:---|:-:|:---:|:---:|:---|:---|
-|PEI_SECU_PRESTA|id_contrat|x|Alphanumérique|est égale à une valeur de contaxte|id_presta|Permet de filtrer l'affichage des PEI en fonction des contrats affectés au profil de connexion du ou des prestataires|
-|DECI_SECU|insee|x|Alphanumérique|est égale à une valeur de contaxte|ccocom|Permet de filtrer l'affichage des PEI en fonction des communes autorisées pour chaque profil de connexion EPCI|
+
+Sans objet
    
    * relations :
 
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
-| xapps_geo_v_pei_ctr_erreur |id_pei| 0..1 (égal) |
+| an_dec_pav_doc_media |id| 0..n (égal) |
 
    * particularité(s) : aucune
 
-## GeoTable : `xapps_geo_v_pei_zonedefense`
+## GeoTable : `geo_dec_pav_tlc`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur textile n° {id_cont_tl}|
+|info_bulle  |x|x||Composition de l'info bulle affiché au passage sur le PAV|Cartographie|Identifiant : {id_cont_tl}|
+|cont_mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Textile||
+|cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Conteneur Textile||
+|cont_pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Textile||
+|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Textile||
+|date_maj   |||Date de mise à jour||Fiche d'information Conteneur Textile||
+|date_netoy    |||Date de nettoyage||Fiche d'information Conteneur Textile||
+|date_pose     |||Date de pose||Fiche d'information Conteneur Textile||
+|date_sai     |||Date de saisie||Fiche d'information Conteneur Textile||
+|env_implan       |||Type d'espace urbain d'implantation|Liste de domaine  valeur_pav_envimplan|Fiche d'information Conteneur Textile||
+|env_situ       |||Situation domaniale|Liste de domaine  valeur_pav_envsitu|Fiche d'information Conteneur Textile||
+|env_type       |||Type d'environnement|Liste de domaine  valeur_pav_envtype|Fiche d'information Conteneur Textile||
+|id_cont_tl         |||Identifiant||Fiche d'information Conteneur Textile||
+|insee         |||Code Insee||Fiche d'information Conteneur Textile||
+|nom_entrep          |||Entreprise gestionnaire|Liste de domaine   valeur_pav_gest|Fiche d'information Conteneur Textile||
+|nom_entrep_99            |||Autre entreprise gestionnaire||Fiche d'information Conteneur Textile||
+|nat_pb_99            |||Autre problème||Fiche d'information Conteneur à Verre||
+|observ             |||Observation(s)||Fiche d'information Conteneur Textile||
+|op_sai             |||Opérateur de saisie||Fiche d'information Conteneur Textile||
+|peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur Textile|| 
+|photo                  |||Nom du fichier photo||Inutilisé (photo dans la table des médias)|| 
+|prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Conteneur Textile|| 
+|prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Conteneur Textile|| 
+|src_geom                     |||Référentiel spatial||Fiche d'information Conteneur Textile|| 
+|tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur Textile||  
+|type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol
+ |Fiche d'information Conteneur Textile||  
+|url_photo                         |||Lien vers la photo| |Inutilisé (photo dans la table des médias)||  
+
+
+
+   * filtres :
+
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:-:|:---:|:---:|:---|:---|
+
+Sans objet
+
+   * relations : 
+ 
+==> revoir ces relations en remplacement des listes de domaines (qui posaient problème dans les 1er versions de GEO
+
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+| an_dec_pav_doc_media |id| 0..n (égal) |
+
+   * particularité(s) : aucune
+   
+  
+## GeoTable : `xapps_geo_v_pav_orient`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
 
 Sans objet
 
-   * filtres :
 
-|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
-|:---|:---|:-:|:---:|:---:|:---|:---|
-|PEI_SECU_PRESTA|id_contrat|x|Alphanumérique|est égale à une valeur de contaxte|id_presta|Permet de filtrer l'affichage des PEI en fonction des contrats affectés au profil de connexion du ou des prestataires|
-|DECI_SECU|insee|x|Alphanumérique|est égale à une valeur de contaxte|ccocom|Permet de filtrer l'affichage des PEI en fonction des communes autorisées pour chaque profil de connexion EPCI|
-
+   * filtres : aucun
    * relations : aucune
-
    * particularité(s) : aucune
-   
-  
-## Table : `xapps_geo_v_pei_ctr_erreur`
+ 
+ ## GeoTable : `xapps_geo_v_pav_verre_inactif`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_message    |x|x|null|Formate en HTML le message à afficher dans la fiche d'information en cas d'erreur selon un temps définit (évite un affichage permanent du message)|Fiche d'information PEI|`CASE WHEN extract(epoch from  now()::timestamp) - extract(epoch from {horodatage}::timestamp) <= 3 then '<table width=100%><td bgcolor="#FF000"> <font size=4 color="#ffffff"><center><b>' {erreur} '</b></center></font></td></table>' ELSE '' END`|
+
+Sans objet
 
 
    * filtres : aucun
    * relations : aucune
    * particularité(s) : aucune
    
+## Table : `an_dec_pav_doc_media`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|d_photo |||Date de la prise de vue||Fiche d'information Conteneur à verre ou textile||
+|date_sai  |||Date d'intégration du document||Fiche d'information Conteneur à verre ou textile||
+|id  |||Identifiant du PAV||Fiche d'information Conteneur à verre ou textile||
+|l_prec   |||Précision sur le document||Fiche d'information Conteneur à verre ou textile||
+|lien_photo    |x|x|Lien vers la photo||Fiche d'information Conteneur à verre ou textile|http://geo.compiegnois.fr/documents/metiers/env/dechet/photos/{media}|
+|media    |||Champ Média de GEO||||
+|miniature    |||Champ miniature de GEO||Fiche d'information Conteneur à verre ou textile||
+|n_fichier     |||Nom du fichier||Fiche d'information Conteneur à verre ou textile||
+|op_sai      |||Libellé de l'opérateur ayant intégrer le document||Fiche d'information Conteneur à verre ou textile||
+|t_fichier       |||Type de média dans GEO||Fiche d'information Conteneur à verre ou textile||
+
+   * filtres : aucun
+   * relations : aucune
+   * particularité(s) : aucune
 
 
 # Les fonctionnalités
@@ -154,16 +228,27 @@ Cette recherche permet à l'utilisateur de faire une recherche libre sur une adr
 
 Cette recherche a été créée pour l'application RVA. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
 
-## Recherche globale : `Recherche d'une voie`
+## Recherche globale : `Recherche dans la base de Voie Locale`
 
 Cette recherche permet à l'utilisateur de faire une recherche libre sur le libellé d'une voie.
 
 Cette recherche a été créée pour l'application RVA. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
  
+## Recherche globale : `Localiser une commune de l'ARC`
 
-## Recherche (clic sur la carte) : `PEI par référence`
+Cette recherche permet à l'utilisateur de faire une recherche libre sur le nom d'une commune.
 
-Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations du PEI.
+Cette recherche a été créée pour l'application Cadastre-Urbanisme. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
+
+## Recherche globale : `Localiser un équipement`
+
+Cette recherche permet à l'utilisateur de faire une recherche libre sur le nom d'un équipement.
+
+Cette recherche a été créée pour l'application Cadastre-Urbanisme. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
+
+## Recherche (clic sur la carte) : `Conteneur à verre`
+
+Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations du PAV.
 
   * Configuration :
 
@@ -171,18 +256,47 @@ Source : `xapps_geo_v_pei_ctr`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
+|Résultat(s)|x|||||
 |Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
+|Adresse|x|||||
 
 (la détection des doublons n'est pas activée ici)
 
  * Filtres :
 
-|Groupe|Jointure|Filtres liés|
+Sans objet
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Conteneur à verre, Conteneur à verre (édition)
+ 
+ 
+ ## Recherche (clic sur la carte) : `Conteneur textile`
+
+Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations du PAV.
+
+  * Configuration :
+
+Source : `geo_dec_pav_tlc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Résultat(s)|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+Sans objet
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Conteneur textile, Conteneur textile (édition)
+ 
+ 
+ |Groupe|Jointure|Filtres liés|
 |:---|:-:|:-:|
 |Groupe de filtres par défaut|`OU`||
 
@@ -190,10 +304,14 @@ Source : `xapps_geo_v_pei_ctr`
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
 |PEI identifiant||id_pei|Prédéfinis - Filtre à valeur saisie||||||Titre : Numéro de PEI|
 |PEI identifiant||id_sdis|Prédéfinis - Filtre à valeur saisie||||||Titre : Référence SDIS|
+ 
+## Recherche (clic sur la carte) : `Conteneur textile`
 
-(1) si liste de domaine
+Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations de la parcelle.
 
- * Fiches d'information active : Fiche d'information PEI
+Cette recherche a été créée pour l'application Cadastre-Urbanisme. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
+
+ 
  
 ## Recherche : `Toutes les recherches cadastrales`
 
@@ -203,132 +321,48 @@ Seul le nom des certaines recherches a été modifié par l'ARC pour plus de com
 Cette recherche est détaillée dans le répertoire GitHub `docurba`.
 
 
-## Recherche : `PEI public par disponibilité pour la DECI`
+## Recherche : `PAV par référence`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI public en fonction de sa disponibilité pour la DECI.
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après sa référence.
 
   * Configuration :
 
-Source : `xapps_geo_v_pei_ctr`
+Source : `geo_dec_pav_verre`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
+|Résultat(s)|x|||||
 |Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
+|Adresse|x|||||
+
 
 (la détection des doublons n'est pas activée ici)
 
  * Filtres :
 
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI disponible|x|disponible|Prédéfinis - Filtre à liste de choix||||||Titre : PEI disponible pour la DECI|
-|PEI public||statut|Alphanumérique la valeur est égale à une valeur par défaut|00,01||||||
+|PAV Référence|x|id_contver|Est égale à une valeur saisie||||||Titre : N° PAV|
 
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par EPCI||epci|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de l'EPCI|
-|PEI par commune||commune|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de la commune|
 
 (1) si liste de domaine
 
- * Fiches d'information active : Fiche d'information PEI
+ * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
  
-## Recherche : `PEI par date de contrôle`
+## Recherche : `PAV VERRE par localisation`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI en fonction d'une période de contrôle et d'un découpage administratif ou par rapport au gestionnaire ou d'un contrat.
-
-  * Configuration :
-
-Source : `xapps_geo_v_pei_ctr`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
-|Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par date de contrôle|x|date_ct|Alphanumérique la valeur est comprise entre une valeur 1 saisie||||||Titre invite 1 : Dernier controle effectué entre et Titre invite 2 : et|
-
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par EPCI||epci|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de l'EPCI|
-|PEI par commune||commune|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de la commune|
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI gestionnaire||gestion|Prédéfinis à liste de choix||||||Titre : Gestionnaire du PEI|
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI Contrat||id_contrat|Alphanumérique la valeur est égale à une valeur de liste de choix |lt_pei_id_contrat|valeur|code|valeur|x|Titre : N° de contrat et filtre non utilisable par le ou les prestataire(s)|
-
-(1) si liste de domaine
-
- * Fiches d'information active : Fiche d'information PEI
-
-## Recherche : `PEI par gestionnaire`
-
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI en fonciton du gestionnaire et du découpage administratif.
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après sa commune et/ou son adresse de localisation.
 
   * Configuration :
 
-Source : `xapps_geo_v_pei_ctr`
+Source : `geo_dec_pav_verre`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
+|Résultat(s)|x|||||
 |Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
+|Adresse|x|||||
+
 
 (la détection des doublons n'est pas activée ici)
 
@@ -338,43 +372,141 @@ Source : `xapps_geo_v_pei_ctr`
 |:---|:-:|:-:|
 |Groupe de filtres par défaut|`ET`|x|
 
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par EPCI|x|epci|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de l'EPCI|
-|PEI par commune||commune|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de la commune|
+|PAV Verre commune|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV Verre Commune|commune|commune|commune||Titre : Commune :|
+|PAV Verre adresse|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV Verre adresse|adresse|adresse|adresse||Titre : Adresse :|
 
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI gestionnaire|x|gestion|Prédéfinis à liste de choix||||||Titre : Gestionnaire du PEI|
 
 (1) si liste de domaine
 
- * Fiches d'information active : Fiche d'information PEI
+ * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+
+## Recherche : `PAV VERRE par lieu d'implantation`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après son lieu d'implantation.
+
+  * Configuration :
+
+Source : `geo_dec_pav_verre`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Résultat(s)|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|PAV implantation|x|id_contver|Est égale à une valeur de liste de choix |Liste de domaine valeur_pav_envimplan|env_implan_lib|env_implan|env_implan||Titre : Implantation :|
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+
+
+## Recherche : `PAV VERRE à moins de 300 mètres`
+
+==> à remplacer par la recherche sur la BAL
+
+Cette recherche permet à l'utilisateur de faire une recherche d'un PAV Verre à moins de 300 mètres d'une adresse.
+
+  * Configuration :
+
+Source : `geo_ban_arcba`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Résultat(s)|x|||||
+|Commune|x|||||
+|Adresse|x||x|||
+
+
+ * Filtres :
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Résultat PAV VERRE à moins de 300 mètres
+
+# Recherche : `PAV VERRE par nature du problème`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après la nature du problème.
+
+  * Configuration :
+
+Source : `geo_dec_pav_verre`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Résultat(s)|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|PAV nature du problème|x|nat_pb|Est égale à une valeur de liste de choix |Liste de domaine valeur_pav_natpb|nat_pb_lib|nat_pb|nat_pb||Titre : Nature|
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+
+## Recherche : `TLC par référence`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV TLC d'après sa référence.
+
+  * Configuration :
+
+Source : `geo_dec_pav_tlc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Résultat(s)|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|TLC Référence|x|id_cont_tl|Est égale à une valeur saisie||||||Titre : N° PAV|
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Conteneur textile (édition), Conteneur textile
  
- ## Recherche : `PEI par état d'actualité`
+## Recherche : `PAV TLC par localisation`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI par son état d'actualité et un découpage adminsitratif.
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV TLC d'après sa commune et/ou son adresse de localisation.
 
   * Configuration :
 
-Source : `xapps_geo_v_pei_ctr`
+Source : `geo_dec_pav_tlc`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
+|Résultat(s)|x|||||
 |Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
+|Adresse|x|||||
+
 
 (la détection des doublons n'est pas activée ici)
 
@@ -382,166 +514,49 @@ Source : `xapps_geo_v_pei_ctr`
 
 |Groupe|Jointure|Filtres liés|
 |:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
 |Groupe de filtres par défaut|`ET`|x|
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par état d'actualité|x|etat_pei|Prédéfinis à liste de choix||||||Titre : Etat d'actualité du PEI|
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par EPCI||epci|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de l'EPCI|
-|PEI par commune||commune|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de la commune|
+|PAV TLC commune|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV TLC Commune|commune|commune|commune||Titre : Commune :|
+|PAV TLC adresse|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV TLC adresse|adresse|adresse|adresse||Titre : Adresse :|
 
 
 (1) si liste de domaine
 
- * Fiches d'information active : Fiche d'information PEI
+ * Fiches d'information active : Conteneur textile (édition), Conteneur textile
+
+## Recherche : `PAV TLC à moins de 500 mètres`
+
+==> à remplacer par la recherche sur la BAL
+
+Cette recherche permet à l'utilisateur de faire une recherche d'un PAV TLC à moins de 500 mètres d'une adresse.
+
+  * Configuration :
+
+Source : `geo_ban_arcba`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Résultat(s)|x|||||
+|Commune|x|||||
+|Adresse|x||x|||
+
+
+ * Filtres :
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Résultat PAV TLC à moins de 500 mètres
  
-## Recherche : `PEI par caractéristiques techniques`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI par ses caractéristiques techniques et un découpage adminsitratif.
+## Recherche : `Toutes les recherches avancées d'une adresse ou d'une voie`
 
-  * Configuration :
+L'ensemble des recherches d'adresse ou de voies ont été formatées pour l'application de gestion des Voies et des Adresses.
 
-Source : `xapps_geo_v_pei_ctr`
+Cette recherche est détaillée dans le répertoire GitHub `RVA`.
 
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
-|Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`||
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par type||type_pei|Prédéfinis à liste de choix||||||Titre : Type de PEI|
-|PEI par diam_pei||diam_pei|Prédéfinis à liste de choix||||||Titre : Diamètre intérieur|
-|PEI par source||source|Prédéfinis à liste de choix||||||Titre : Source du point d'eau|
-|PEI par raccord||raccord|Prédéfinis à liste de choix||||||Titre : Raccords de sortie|
-|PEI par marque||marque|Prédéfinis à liste de choix||||||Titre : Marque du matériel|
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par EPCI||epci|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de l'EPCI|
-|PEI par commune||commune|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de la commune|
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI gestionnaire||gestion|Prédéfinis à liste de choix||||||Titre : Gestionnaire du PEI|
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI Contrat||id_contrat|Alphanumérique la valeur est égale à une valeur de liste de choix |lt_pei_id_contrat|valeur|code|valeur|x|Titre : N° de contrat et filtre non utilisable par le ou les prestataire(s)|
-
-(1) si liste de domaine
-
- * Fiches d'information active : Fiche d'information PEI
- 
-## Recherche : `PEI par commune`
-
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI par sa commune de positionnement.
-
-  * Configuration :
-
-Source : `xapps_geo_v_pei_ctr`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
-|Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI par EPCI||epci|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de l'EPCI|
-|PEI par commune||commune|Prédéfinis - Filtre à liste de choix||||||Titre : Nom de la commune|
-
-(1) si liste de domaine
-
- * Fiches d'information active : Fiche d'information PEI
- 
- ## Recherche : `PEI par contrat`
-
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PEI par son contrat de contrôle.
-Ce filtre n'est pas accessible au(x) prestataire(s).
-
-  * Configuration :
-
-Source : `xapps_geo_v_pei_ctr`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat|x|||||
-|Type|x|||||
-|Commune|x|||||
-|disponible_recherche|x|||||
-|geom||||x||
-|id_pei|||||x|
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI Contrat|x|id_contrat|Alphanumérique la valeur est égale à une valeur de liste de choix |lt_pei_id_contrat|valeur|code|valeur|x|Titre : N° de contrat et filtre non utilisable par le ou les prestataire(s)|
-
-(1) si liste de domaine
-
- * Fiches d'information active : Fiche d'information PEI
 
 ## Fiche d'information : `Fiche d'information PEI`
 
@@ -693,18 +708,30 @@ Aucune
 
 Aucune
 
-## Modification géométrique : `Ajouter ou déplacer un PEI`
+## Modification géométrique : `Conteneur à verre`
 
-Cette recherche permet à l'utilisateur de saisir ou modifier l'emplacement d'un PEI.
-Cette fonctionnalité n'est accessible au(x) prestataire(s).
+Cette recherche permet à l'utilisateur de saisir ou modifier l'emplacement d'un PAV Verre.
 
   * Configuration :
   
-Source : `xapps_geo_v_pei_ctr`
+Source : `geo_dec_pav_verre`
 
  * Filtres : aucun
  * Accrochage : aucun
- * Fiches d'information active : Fiche d'informationPEI
+ * Fiches d'information active : Conteneur à verre (insertion)
+ * Topologie : aucune 
+ 
+ ## Modification géométrique : `Conteneur textile`
+
+Cette recherche permet à l'utilisateur de saisir ou modifier l'emplacement d'un PAV Textile.
+
+  * Configuration :
+  
+Source : `geo_dec_pav_tlc`
+
+ * Filtres : aucun
+ * Accrochage : aucun
+ * Fiches d'information active : Conteneur textile (insertion)
  * Topologie : aucune 
  
  # La cartothèque
