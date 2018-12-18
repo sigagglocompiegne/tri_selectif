@@ -509,7 +509,7 @@ Particularité(s) à noter : Aucune
 
 Valeurs possibles :
 
-|code | valeur |csq_acces |csq_sign |csq_conf |
+|code | valeur |
 |:---|:---|    
 |10|RAS|
 |20|Abîmée|
@@ -530,7 +530,7 @@ Particularité(s) à noter : Aucune
 
 Valeurs possibles :
 
-|code | valeur |csq_acces |csq_sign |csq_conf |
+|code | valeur |
 |:---|:---|    
 |10|Propre|
 |20|Moyen|
@@ -551,7 +551,7 @@ Particularité(s) à noter : Aucune
 
 Valeurs possibles :
 
-|code | valeur |csq_acces |csq_sign |csq_conf |
+|code | valeur |
 |:---|:---|    
 |00|Non renseigné|
 |10|Actif|
@@ -571,7 +571,7 @@ Particularité(s) à noter : Aucune
 
 Valeurs possibles :
 
-|code | valeur |csq_acces |csq_sign |csq_conf |
+|code | valeur |
 |:---|:---|    
 |10|Adhésif|
 |20|Totem|
@@ -584,7 +584,7 @@ Valeurs possibles :
 `lt_pav_typesol` : Liste permettant de décrire le type de sol
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
-|:---|:---|:---|:---|    
+|:---|:---|:---|:---|
 |type_sol|code du type de sol|character varying(2)| |
 |type_sol_lib|Libellé du type de sol|character varying(30)| |
 
@@ -593,7 +593,7 @@ Particularité(s) à noter : Aucune
 
 Valeurs possibles :
 
-|code | valeur |csq_acces |csq_sign |csq_conf |
+|code | valeur |
 |:---|:---|    
 |10|Dalle|
 |20|Bitume|
