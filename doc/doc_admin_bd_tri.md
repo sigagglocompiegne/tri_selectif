@@ -659,4 +659,4 @@ Sans objet
 
 ### Modèle conceptuel simplifié
 
-![mcd](img/mcd.jpg)
+![mcd](img/mcd.png)
