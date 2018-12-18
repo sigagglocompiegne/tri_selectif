@@ -506,7 +506,7 @@ WITH (
 );
 
 COMMENT ON TABLE m_dechet.lt_pav_pavorient
-  IS 'Liste de valeurs des code de l''état de la peinture';
+  IS 'Liste de valeurs des orientations retenues';
 COMMENT ON COLUMN m_dechet.lt_pav_pavorient.pavorient IS 'code de l''orientation du PAV suite à l''état des lieux de l''été 2016';
 COMMENT ON COLUMN m_dechet.lt_pav_pavorient.pavorient_lib IS 'Libellé de l''orientation du PAV suite à l''état des lieux de l''été 2016';
 
@@ -664,7 +664,7 @@ WITH (
 );
 
 COMMENT ON TABLE m_dechet.lt_pav_typesol
-  IS 'Liste de valeurs des code de l''état de la peinture';
+  IS 'Liste de valeurs des types de sols';
 COMMENT ON COLUMN m_dechet.lt_pav_typesol.type_sol IS 'code du type de sol';
 COMMENT ON COLUMN m_dechet.lt_pav_typesol.type_sol_lib IS 'Libellé du type de sol';
 
@@ -1038,6 +1038,8 @@ CREATE TABLE m_dechet.geo_dec_secteur_enc
 WITH (
   OIDS=FALSE
 );
+COMMENT ON TABLE m_dechet.geo_dec_secteur_enc
+  IS 'Table contenant les objets sectorisant le ramassage des encombrants';
 ALTER TABLE m_dechet.geo_dec_secteur_enc
   OWNER TO sig_create;
 GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO sig_create;
