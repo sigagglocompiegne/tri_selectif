@@ -22,13 +22,13 @@
 
 |Représentation| Nom de l'application |Résumé|
 |:---|:---|:---|
-|![picto](/doc/img/tri_selectif_bleu.png)|Défense Extérieure Contre l'Incendie (DECI)|Cette application est dédiée à la gestion et la consultation des PEI (Points d'Eau Incendie) déterminant leur niveau de DECI.|
+|![picto](/doc/img/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des PAV (Points dd'apport volontaire Verre et TLC).|
 
 # Accès
 
 |Public|Métier|Accès restreint|
 |:-:|:-:|:---|
-||X|Accès réservé aux personnels gestionnaires des données des EPCI ayant les droits d'accès.|
+||X|Accès réservé aux personnels gestionnaires des données.|
 
 # Droit par profil de connexion
 
@@ -36,17 +36,17 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|Recherches|x||Uniquement recherche par adresse, voie et PEI (sauf par contrat pour ce dernier).|
-|Cartographie|x||Visibilité uniquement sur les PEI définis pouyr chaque contrat.|
-|Fiche d'information PEI|x|x|Peut modifier uniquement les données accessibles.|
+
+Sans objet
 
 * **Personnes du service métier**
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |Toutes|x||L'ensemble des fonctionnalités (recherches, cartographie, fiches d'informations, ...) sont accessibles par tous les utilisateurs connectés.|
-|Fiche d'infromation PEI|x|x|Peut modifier les données PEI.|
-|Modification géométrique - Ajouter ou déplacer un PEI|x||Cette fonctionnalité est uniquement visible par les utilisateurs inclus dans les groupes ADMIN et PEI_EDIT. Attention, un PEI déjà saisie sur une commune ne peut pas être déplacé sur une autre commune.|
+|Conteneur à verre ou tlc (édition)|x|x|Peut modifier les données des PAV.|
+|Conteneur à verre ou tlc |x||Fiche d'information tous utilisateurs en consultation.|
+|Modification géométrique - Conteneur Verre ou textile|x||Cette fonctionnalité est uniquement visible par les utilisateurs inclus dans les groupes PAV_EDIT.|
 
 * **Autres profils**
 
@@ -56,58 +56,46 @@ Sans objet
 
 Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les besoins de l'application. Les autres données servant d'habillage (pour la cartographie ou les recherches) sont listées dans les autres parties ci-après. Le tableau ci-dessous présente uniquement les changements (type de champ, formatage du résultat, ...) ou les ajouts (champs calculés, filtre, ...) non présents dans la donnée source. 
 
-## GeoTable : `xapps_geo_v_pei_ctr`
+## GeoTable : `geo_dec_pav_verre`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_info_bulle|x|x||Définit le contenu de l'info bulle affichée au survol d'un PEI|Cartographie|`CASE WHEN {id_sdis} is null or {id_sdis} ='' THEN 'N° SDIS : non renseigné' ELSE 'N° SDIS : ' {id_sdis} END`|
-|cs_sdis ||x|Centre de secours de 1er appel|Liste de domaine  lt_pei_cs_sdis liée|Fiche d'information PEI||
-|date_ct  |||Date du dernier contrôle technique||Fiche d'information PEI||
-|date_maj ||x|Date de mise à jour|Prédéfini dd/mm/aaaa|Fiche d'information PEI||
-|date_mes   ||x|Date de mise en service|Prédéfini dd/mm/aaaa|Fiche d'information PEI||
-|date_sai   ||x|Date de saisie|Prédéfini dd/mm/aaaa|Fiche d'information PEI||
-|debit   |||Débit||Fiche d'information PEI||
-|debit_max ||Débit Max|||Fiche d'information PEI||
-|debit_r_ci  ||Débit de remplissage|||Fiche d'information PEI||
-|delegat   ||x|Délégataire|Liste de domaine   lt_pei_delegat liée|Fiche d'information PEI||
-|diam_cana    |||Diamètre de canalisation||Fiche d'information PEI||
-|diam_pei     |||Diamètre intérieur||Fiche d'information PEI||
-|disponible     ||x|Disponible pour la DECI|Liste de domaine lt_pei_etat_boolean liée|Fiche d'information PEI||
-|disponible_false      |x|x||Lien http du picto NON DISPONIBLE|Champ calculé `{disponible_img}` ||
-|disponible_img       |x|x|Disponible|Champ IMAGE gérant l'affichage du picto selon la disponiblité DECI|Fiche d'information PEI|`CASE WHEN {disponible} = 't' THEN {disponible_true} WHEN {disponible} = 'f' THEN {disponible_false} END `|
-|disponible_recherche      |x|x||Format HTML gérant l'affichage des pictos selon la disponiblité DECI des résultats après recherche|résultat recherche|`CASE WHEN {disponible} = 't' THEN '<img src="http://...." width=100 alt="" >' WHEN {disponible} = 'f' THEN '<img src="http://...." width=100 alt="">' END `|
-|disponible_false      |x|x||Lien http du picto DISPONIBLE|Champ calculé `{disponible_img}` ||
-|epci     |||Nom de l'EPCI||Fiche d'information PEI||
-|etat_acces     ||x|Accès conforme|Liste de domaine lt_pei_etat_boolean liée|Fiche d'information PEI||
-|etat_anom      ||x|Absence d'anomalie|Liste de domaine lt_pei_etat_boolean liée|Fiche d'information PEI||
-|etat_conf      ||x|Conformité technique|Liste de domaine lt_pei_etat_boolean liée|Fiche d'information PEI||
-|etat_pei      ||x|Etat|Liste de domaine lt_pei_etat_pei liée|Fiche d'information PEI||
-|etat_sign      ||x|Signalisation conforme|Liste de domaine lt_pei_etat_boolean liée|Fiche d'information PEI||
-|etiquette      |x|x||Gestion affichage étiquette sur la cartographie au niveau des pictos représentant les PEI|Cartographie |`CASE WHEN {type_pei}='NR' OR {etat_pei}='03' THEN NULL ELSE {type_pei} END`|
-|gestion       ||x|Gestionnaire|Liste de domaine lt_pei_gestion liée|Fiche d'information PEI||
-|id_contrat       ||x|Référence du contrat de sous traitance|Liste de domaine lt_pei_id_contrat liée|Fiche d'information PEI||
-|id_pei       |||Identifiant||Fiche d'information PEI||
-|id_sdis        |||n° SDIS||Fiche d'information PEI||
-|lt_anom        |||Anomalie(s)||Fiche d'information PEI||
-|marque        ||x||Liste de domaine lt_pei_marque liée|Fiche d'information PEI||
-|nom_etab        |||Nom de l'établissement||Fiche d'information PEI||
-|observ        |||Observations||Fiche d'information PEI||
-|ope_ct         |||Opérateur du contrôle||Fiche d'information PEI||
-|ope_sai         |||Opérateur de saisie||Fiche d'information PEI||
-|photo_url         ||x|Photo|Lien avec texte de remplacement (Cliquez ici pour visualiser le PEI)|Fiche d'information PEI||
-|prec         |||Précision||Fiche d'information PEI||
-|press_dyn         |||Pression dynamique||Fiche d'information PEI||
-|ref_terr          |||Référence sur le terrain||Fiche d'information PEI||
-|resultat          |x|x|Résultat|Formatage du contenu informatif du résultat d'une recherche|Résultat de recherches|`CASE WHEN {id_sdis} IS NULL THEN CONCAT('PEI n°',{id_pei}) ELSE CONCAT('PEI n°',{id_pei},' - SDIS n°',{id_sdis}) END`|
-|source_pei         |||Source||Fiche d'information PEI||
-|src_date         |||Date du référentiel||Fiche d'information PEI||
-|src_pei         |||Source de la donnée||Fiche d'information PEI||
-|style          |x|x||Création d'un attribut style pour la réprésentation des PEI selon le statut, l'état ou la disponibilité du PEI |Cartographies|`CASE -- pei statut non renseigné WHEN {statut}='00' THEN 'Snr' -- pei statut privé WHEN {statut}='02' AND {etat_pei} IN ('00','01','02') THEN 'Spri_Enr-proj-exi' -- pei statut privé WHEN {statut}='02' AND {etat_pei}='03' THEN 'Spri_Esup' -- pei statut public et état projet ou non renseigné WHEN {statut}='01' AND {etat_pei} IN ('00','01') THEN 'Spub_Enr-proj' -- pei statut public supprimé WHEN {statut}='01' AND {etat_pei}='03' THEN 'Spub_Esup' -- pei statut public existant et dispo non renseignée WHEN {statut}='01' AND {etat_pei}='02' AND {disponible}='0' THEN 'Spub_Eexi_Dnr' -- pei statut public existant et conforme WHEN {statut}='01' AND {etat_pei}='02' AND {disponible}='t' THEN 'Spub_Eexi_Dt' -- pei statut public existant et non conforme WHEN {statut}='01' AND {etat_pei}='02' AND {disponible}='f' THEN 'Spub_Eexi_Df' END `|
-|type_pei         |||Type||Fiche d'information PEI||
-|type_rd         |||Type dans le règlement départemental||Fiche d'information PEI||
-|verrou         ||x||Booléen Oui pour vrai et Non pour faux|Fiche d'information PEI||
-|x_l93         |||Coordonnée X (L93)||Fiche d'information PEI||
-|y_l93         |||Coordonnée Y (L93)||Fiche d'information PEI||
+|affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur à verre n° {id_contver}|
+|info_bulle  |x|x||Composition de l'info bulle affiché au passage sur le PAV|Cartographie|{affiche_result} {adresse}|
+
+|ame_acces  |||Accessibilité à revoir|Booléen oui/non|Fiche d'information Conteneur à Verre||
+|cont_mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur à Verre||
+|cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Conteneur à Verre||
+|cont_pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur à Verre||
+|crochet      |||Etat du crochet|Liste de domaine  valeur_pav_crochet|Fiche d'information Conteneur à Verre||
+|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur à Verre||
+|date_maj   |||Date de mise à jour||Fiche d'information Conteneur à Verre||
+|date_net    |||Date de nettoyage||Fiche d'information Conteneur à Verre||
+|date_pos     |||Date de pose||Fiche d'information Conteneur à Verre||
+|date_sai     |||Date de saisie||Fiche d'information Conteneur à Verre||
+|def_struc      |||Défaut de structure visible||Fiche d'information Conteneur à Verre||
+|env_implan       |||Type d'espace urbain d'implantation|Liste de domaine  valeur_pav_envimplan|Fiche d'information Conteneur à Verre||
+|env_situ       |||Situation domaniale|Liste de domaine  valeur_pav_envsitu|Fiche d'information Conteneur à Verre||
+|env_type       |||Type d'environnement|Liste de domaine  valeur_pav_envtype|Fiche d'information Conteneur à Verre||
+|etat_sign      |||Etat de la signalétique|Liste de domaine   Valeur PAV Etat signalétique|Fiche d'information Conteneur à Verre||
+|hab_pav       |||Tonnage par gisement d'habitants||Fiche d'information Conteneur à Verre||
+|id_contver        |||Identifiant||Fiche d'information Conteneur à Verre||
+|insee         |||Code Insee||Fiche d'information Conteneur à Verre||
+|mode_preh          |||Mode de préhension|Liste de domaine   valeur_pav_modepreh|Fiche d'information Conteneur à Verre||
+|nat_pb           |||Nature du problème|Liste de domaine   valeur_pav_natpb|Fiche d'information Conteneur à Verre||
+|nat_pb_99            |||Autre problème||Fiche d'information Conteneur à Verre||
+|observ             |||Observation(s)||Fiche d'information Conteneur à Verre||
+|op_sai             |||Opérateur de saisie||Fiche d'information Conteneur à Verre||
+|opercules              |||Opercules||Fiche d'information Conteneur à Verre||
+|opt_pav               |||Manque de PAV||Fiche d'information Conteneur à Verre|| 
+|pavorient                ||||Liste de domaine Valeur PAV Orientation|Fiche d'information Conteneur à Verre|| 
+|peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur à Verre|| 
+|photo                  |||Nom du fichier photo||Fiche d'information Conteneur à Verre|| 
+|prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Conteneur à Verre|| 
+|proprete                    |||Etat de propreté|Liste de domaine   valeur_pav_proprete|Fiche d'information Conteneur à Verre|| 
+|prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Conteneur à Verre|| 
+|src_geom                     |||Référentiel spatial||Fiche d'information Conteneur à Verre|| 
+|statut                     ||||Liste de domaine    Valeur PAV Statut |Fiche d'information Conteneur à Verre||  
 
 
    * filtres :
