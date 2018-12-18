@@ -22,7 +22,7 @@ CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_v_dec_pav_tampon AS
   WHERE geo_dec_pav_verre.statut::text = '10'::text AND geo_dec_pav_verre.env_implan::text <> '40'::text;
 
 COMMENT ON VIEW x_apps_public.xappspublic_geo_v_dec_pav_tampon
-  IS 'Vue géométrique contenant les tampons d''emprise des conteneurs TLC pour EXPORT FME et recherche des adresse dans ses tampons pour remonter le PAV VERRE';
+  IS 'Vue géométrique contenant les tampons d''emprise des conteneurs Verre pour EXPORT FME et recherche des adresse dans ses tampons pour remonter le PAV VERRE';
   
   
 /* ******************************************* xappspublic_geo_v_dec_pav_tlc_tampon ******************************************** */
