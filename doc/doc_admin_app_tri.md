@@ -558,9 +558,9 @@ L'ensemble des recherches d'adresse ou de voies ont été formatées pour l'appl
 Cette recherche est détaillée dans le répertoire GitHub `RVA`.
 
 
-## Fiche d'information : `Fiche d'information PEI`
+## Fiche d'information : `Conteneur à verre (édition)`
 
-Source : `xapps_geo_v_pei_ctr`
+Source : `geo_dec_pav_verre`
 
 * Statistique : aucune
  
@@ -572,82 +572,20 @@ Source : `xapps_geo_v_pei_ctr`
 
 |Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Général|affiche_message|masqué|Vertical||||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|n° SDIS (id_sdis),Identifiant(id_pei),Verrou (verrou),Référence sur le terrain (ref_terr),Nom de l'EPCI (epci),Insee (insee),Commune (commune),Type (type_pei),Type dans le règlement départemental (type_rd),Situation (situation),Disponible (disponible_img),Etat (etat_pei)|à gauche|Vertical||||
+|Photographies|Commune,Adresse,Lien vers la photo|par défaut|Vertical||||
 
 |Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Caractéristiques techniques|affiche_message|masqué|Vertical||||
+|Fiche détaillée|Identifiant(id_contver),Prise en compte dans le plan interactif(date_effet),Commune(commune),Code Insee(insee),Quartier(quartier),Adresse(adresse),Statut(statut),X L93(x_l93),Y L93(y_l93), Nombre de conteneur(s)(cont_nb),Matériau(cont_mat),Position(cont_pos),Date de saisie(date_sai),Date de pose(date_pos),Date de nettoyage(date_net),Date de mise à jour(dat_maj),volume(volume),type d'environnement(env_type),type d'espace urbain d'implantation(env_implan),situation domaniale(env_situ),mode de préhension(mode_preh),Etat du corchet(crochet),Opercules(opercules),Présente de tags(tags),Etat de la peinture(peinture), Présence d'une corbeille à proximité(prox_corb),Type de sol(type_sol),Présence d'une trappe pour restaurateur(trp_rest),Type de signalétique(type_sign),Etat de propriété(proprete),Etat de propreté des abords(prop_abor),Défaut de structure visible(def_struc),Tonnage par gisement d'habitants(hab_pav),Manque de PAV(opt_pav),Accessibilité à revoir(ame_access),Nature du problème(nat_pb), Référentiel spatial(src_geom),Opérateur de saisie(op_sai),Observation(s)(observ)|masqué|Vertical||||
 
 |Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Diamètre intérieur (diam_int),Raccord(raccord),Marque (marque),Source (source_pei),Date de mise en service (date_mes)|à gauche|Vertical||||
-
-
-|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Mesures et contrôle|affiche_message|masqué|Vertical||||
+|Orientation retenue|Orientation retenue(pavorient),Identifiant du PAV d'origine (si PAV créé issu d'un PAV déplacé)(id_parent)|Par défaut|Vertical||||
 
 |Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Référence du contrat de sous-traitance (id_contrat)|à gauche|Vertical||||
+|Gestion des photographies|Champ de miniature de GEO(miniature)|par défaut|Vertical||||
 
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Mesure||à gauche|Vertical||||
-
-|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Press statique (press_stat),Pression dynamique (press_dyn),Débit (debit),Débit max (debit_max)|à gauche|Vertical|type_pei=='CI' et (type_pei=='PA' && source != 'CE')|||
-
-|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Volmume (press_stat),Débit de remplissage (press_dyn)|à gauche|Vertical|type_pei=='CI' et (type_pei=='PA' && source != 'CE')|||
-
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Anomalies|Absence d'anomalie|à gauche|Vertical||||
-
-
-|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Anomalie(s) (lt_anom)|à gauche|Vertical|etat_anom='f'|||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Conformité|Accès conforme (etat_access), Signalisation conforme (etat_sign),Conformité technique (etat_conf),Date du dernier contrôle technique (date_ct),disponible pour la DECI (disponible)|à gauche|Vertical||||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Opérateur|Opérateur du contrôle (ope_ct)|à gauche|Vertical||||
-
-|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Gestion|affiche_message|masqué|Vertical||||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Statut (statut), Nom de l'établissement (nom_etab),Gestionnaire (gestion),Délégataire (delegat),Centre de secours de 1er appel (cs_sdis)|à gauche|Vertical||||
-
-|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Qualité|affiche_message|masqué|Vertical||||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Observations (observ), Source de la donnée (src_pei),Photo (photo_url),Coordonnées X (L93) (x_l93),Coordonnées Y (L93) (y_l93), Référentiel géographique ()|à gauche|Vertical||||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Date du référentiel (src_date), Précision (prec)|à gauche|Vertical|src_geom != '00'|||
-
-|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|(vide)|Opérateur de saisie (ope_sai), Date de saisie (date_sai), Date de mise à jour (date_maj)|à gauche|Vertical||||
 
 * Saisie :
 
@@ -655,50 +593,75 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 
 |Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
 |:---|:---|:---|:---|:---|
-|n° SDIS|||||
-|Type|x|NR|lt_pei_type_pei|Liste de choix|
-|Diamètre intérieur||NR|lt_pei_diam_pei|Liste de choix|
-|Raccord ||00|lt_pei_raccord|Liste de choix|
-|Marque ||00|lt_pei_marque|Liste de choix|
-|Source ||NR|lt_pei_source|Liste de choix|
+|Adresse|||||
+|Nombre de conteneur(s) |||||
+|Matériau  |||valeur_pav_contmat||
+|Position  |||valeur_pav_contpos||
+|Date de pose |||||
+|Date de nettoyage  |||||
 |Volume |||||
-|Diamètre de canalisation|||||
-|Etat|x|00|lt_pei_etat_pei|Liste de choix|
-|Press statique|||||
-|Pression dynamique|||||
-|Débit |||||
-|Débit Max |||||
-|Debit de remplissage |||||
-|Absence d'anomalie ||0|lt_pei_etat_boolean|Liste de choix|
-|Signalisation conforme ||0|lt_pei_etat_boolean|Liste de choix|
-|Date de disponibilité |||||
-|Date de mise en service |||||
-|Date du dernier contrôle technique |||||
-|Opérateur du contrôle |||||
-|Date de la dernière reconnaissanve opérationnelle |||||
-|Statut  ||00|lt_pei_statut|Liste de choix|
-|Gestionnaire   ||00|lt_pei_gestion|Liste de choix|
-|Délégataire   ||00|lt_pei_delegat|Liste de choix|
-|Centre de secours de 1er appel   ||00000|lt_pei_cs_sdis|Liste de choix|
-|Situation   |||||
-|Observations    ||||Champ texte à plusieurs lignes|
-|Photo     |||||
-|Source de la donnée     |||||
-|Référentiel géographique     ||00|valeur_src_geom|Liste de choix|
-|Date du référentiel      ||0000|||
+|Type d'environnement |||valeur_pav_envtype||
+|Type d'espace urbain d'implantation |||valeur_pav_envimplan||
+|Situation domaniale|||valeur_pav_envsitu||
+|Mode de préhension |||valeur_pav_modepreh||
+|Etat du crochet  |||valeur_pav_crochet ||
+|Opercules  |||Oui / Non (char)|Bourons radios|
+|Présence de tags |||Oui / Non (char)|Bourons radios|
+|Etat de la peinture |||valeur_pav_peinture||
+|Présence d'une corbeille à proximité  |||Oui / Non (char)|Boutons radios|
+|Type de sol |||valeur_pav_typesol||
+|Présence d'une trappe pour restaurateur |||Oui / Non (char)|Boutons radios|
+|Etat de la signalétique|||Valeur PAV Etat signalétique||
+|Type de signalétique |||valeur_pav_typesign||
+|Etat de propreté  |||valeur_pav_proprete||
+|Etat de propreté des abords    |||valeur_pav_proprete_abor||
+|Défaut de structure visible    |||||
+|Tonnage par gisement d'habitants |||||
+|Manque de PAV    |||||
+|Accessibilté à revoir     |||Oui / Non (char)|Boutons radios|
+|Nature du problème     |||valeur_pav_natpb||
+|Autre problème     |||||
+|Référentiel spatial     |||valeur_src_geom||
 |Opérateur de saisie     ||%USER_LOGIN%||| 
-|Anomalie(s)      |||lt_pei_anomalie|Cases à cocher multiples| 
-|Type dans le règlement départemental   |||||
-|Précision   |||||
-|Référence sur le terrain   |||||
-|Référence du contrat de sous-traitance  |||||
-|Type dans le règlement départemental   ||00|lt_pei_id_contrat|Liste de choix|
-|Verrou    |x|false||Caser à cocher|
+|Orientation retenue      |||Valeur PAV Orientation|Cases à cocher multiples| 
+|Identifiant du PAV d'origine (si PAV créé issu d'un PAV déplacé)  |||||
+|Statut    |||Valeur PAV Statut||
+|Etat de la signalétique |||Valeur PAV Etat signalétique||
+|Observation(s)  ||||Champ texte à plusieurs lignes|
+|Prise en compte dans le plan interactif  |||||
+
 
 **IMPORTANT** : L'édition des données jointes est désactivée.
 
- * Modèle d'impression : Fiche standard + carte et fiche standard
+ * Modèle d'impression : sans objet
 
+## Fiche d'information : `Conteneur à verre`
+
+Source : `geo_dec_pav_verre`
+
+* Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|530x650|Accordéon|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Photographies|Commune,Adresse,Lien vers la photo|par défaut|Vertical||||
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Fiche détaillée|Identifiant(id_contver),Commune(commune),Code Insee(insee),Quartier(quartier),Adresse(adresse),X L93(x_l93),Y L93(y_l93), Nombre de conteneur(s)(cont_nb),Date de saisie(date_sai),Date de pose(date_pos),Date de nettoyage(date_net),Date de mise à jour(dat_maj),volume(volume),Opercules(opercules),Présente de tags(tags), Présence d'une corbeille à proximité(prox_corb),Présence d'une trappe pour restaurateur(trp_rest),Défaut de structure visible(def_struc),Tonnage par gisement d'habitants(hab_pav),Manque de PAV(opt_pav),Accessibilité à revoir(ame_access),Autre problème(nat_pb_99), Opérateur de saisie(op_sai),Observation(s)(observ)|masqué|Vertical||||
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Préconisation|Orientation retenue(pavorient),Identifiant du PAV d'origine (si PAV créé issu d'un PAV déplacé)(id_parent)|Par défaut|Vertical||||
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Gestion des photographies|Champ de miniature de GEO(miniature)|par défaut|Vertical||||
  
 ## Analyse :
 
