@@ -5,11 +5,11 @@
 # Généralité
 
 * Statut
-  - [x] à rédiger
+  - [ ] à rédiger
   - [ ] en cours de rédaction
   - [ ] relecture
   - [ ] finaliser
-  - [ ] révision
+  - [x] révision
 
 * Historique des versions
 
@@ -717,52 +717,43 @@ Source : `geo_dec_pav_tlc`
 
 |Gabarit|Thème|Modules spé|Impression|Résultats|
 |:---|:---|:---|:---|:---|
-|Pro|Thème GeoCompiegnois 1.0.7|Partage de lien, Introduction, Coordonnées au survol, StreetView, Export Géotables (générique geotable de l'apps, Export Fonctionnalités (générique de fonctions de l'apps), GeoCadastre (V3),Google Analytics,Page de connexion perso, javascript|A4 - Portrait et A4 - Paysage+légende||
+|Pro|Thème GeoCompiegnois 1.0.7|Partage de lien, Introduction, StreetView, GeoCadastre (V3),Google Analytics,Page de connexion perso, Bandeau HTML, Multimedia (Média - Déchet PAV),Javascript|A4 et A3 Paysage, A4 et A3 Portrait, A4 et A3 Portait + légende et A4 et A3 Paysage + légende||
 
 * Particularité de certains modules :
-  * Module introduction : ce menu s'ouvre automatiquement à l'ouverture de l'application grâce un code dans le module javascript. Ce module contient une introduction sur l'application, et des liens vers des fiches d'aide.
-  * Module javacript : 
+
+  * Module Javascript : ouverture par défaut du menu Introductif
   `var injector = angular.element('body').injector();
 var acfApplicationService = injector.get('acfApplicationService');
 acfApplicationService.whenLoaded(setTimeout(function(){
 $(".sidepanel-item.launcher-application").click();
 }, 100));`
   * Module Google Analytics : le n° ID est disponible sur le site de Google Analytics
-  * Module Export Fonctionnalité : ce module permet l'export des données issues des recherches
+
 
 * Recherche globale :
 
 |Noms|Tri|Nb de sugggestion|Texte d'invite|
 |:---|:---|:---|:---|
-|Recherche dans la Base Adresse Locale,Recherche d'une voie|alpha|20|Rechercher une adresse ou une une voie|
+|Recherche dans la Base Adresse Locale,Recherche dans la Base de Voie Locale,localiser une commune de l'ARC, Localiser un équipement|alpha|20|Rechercher une adresse, une voie, une commune ou un équipement|
 
-* Carte : `DECI`
+* Carte : `Le tri`
 
 Comportement au clic : (dés)active uniquement l'item cliqué
-Liste des recherches : PEI par référence
+Liste des recherches : Conteneur à verre, Conteneur textile, Parcelle(s) sélectionnée(s)
 
 * Fonds de plan :
 
 |Nom|Au démarrage|opacité|
 |:---|:---|:---|
 |Cadastre||100%|
-|Plan de ville||100%|
-|Photographie aérienne 2013|x|70%|
+|Plan de ville|x|100%|
+|Carte IGN 25000||100%|
+|Photographie aérienne 2013||70%|
 
 * Fonctionnalités
 
 |Groupe|Nom|
 |:---|:---|
-|Rechercher un PEI||
-||PEI par référence|
-||PEI public par disponibilité pour la DECI|
-||PEI par date de contrôle|
-||PEI par gestionnaire|
-||PEI par état d'actualité|
-||PEI par caractéristiques techniques|
-||PEI par commune|
-||PEI par par contrat|
-|Ajouter ou déplacer un PEI||
 |Recherche cadastrale||
 ||Parcelles par référence|
 ||Parcelles par adresse fiscale|
@@ -770,7 +761,20 @@ Liste des recherches : PEI par référence
 ||Parcelles multicritères|
 ||Parcelles par nom du propriétaire d'un local|
 ||Parcelles par surface|
-|Recherche avancée d'une adresse||
+|Recherche un conteneur VERRE||
+||PAV par référence|
+||PAV VERRE par localisation|
+||PAV VERRE par lieu d'implantation|
+||PAV VERRE par nature du problème|
+|Recherche un conteneur TEXTILE||
+||TLC par référence|
+||PAV TLC par localisation|
+||PAV TLC par gestionnaire|
+|Recherche avancée d'une voie ou d'une adresse||
 ||Recherche avancée d'une adresse|
-|Recherche avancée d'une voie||
 ||Recherche avancée d'une voie|
+|Modifier un objet||
+||Conteneur à verre|
+||Conteneur textile|
+
+
