@@ -28,9 +28,8 @@ Pour rappel des grands principes :
 
 ![schema_fonctionnel](img/schema_fonctionnel_tri.png)
 
-Dans le détail :
 
-#### Les droits
+## Les droits
 
 #####	Le service des déchets peut :
 
