@@ -28,33 +28,23 @@ Pour rappel des grands principes :
 
 ![schema_fonctionnel](img/schema_fonctionnel_tri.png)
 
-#####	Un prestataire assurant les mesures et contrôle des PEI du patrimoine ARC ou ville peut :
+Dans le détail :
 
-*	Voir les PEI qui sont affectés à son contrat 
-*	Ne voit pas les autres PEI
-*	Ne peut pas ajouter de nouveau PEI
-*	Peut modifier les informations d’un PEI seulement si le PEI est bien déverrouillé par le service (sauf les références locale et sdis des PEI)
+#### Les droits
 
-#####	Un autre service ou commune du pays compiégnois peut :
+#####	Le service des déchets peut :
 
-*	Voir, consulter et rechercher les informations d’un PEI sans pouvoir les modifier
+*	Voir, consulter et rechercher les informations des PAV sur les communes de l’ARC
+*	Peut modifier les données sur les PAV Verre et TLC
+*	Peut créer un nouveau PAV ou modifier sa localisation
 
-###	Alimentation de la base de données
+#####	Un autre service peut :
 
-*	Sur le patrimoine PEI ARC/ville, les données qui priment sont celles qui sont modifiées via l’application (les entités PEI dans la base de données sont dites « maitre »)
-*	Hors du patrimoine de PEI ARC/ville, les données du SDIS sont intégrées ponctuellement et manuellement par le service SIG (les entités PEI dans la base de données sont dites « esclave »)
+*	Voir, consulter et rechercher les informations d’un PAV sans pouvoir les modifier
 
 ###	Les contrôles de saisie
 
-De nombreux point de contrôles de la saisie des utilisateurs sont vérifiés. Sans tous les lister, il convient néanmoins de rappeler que :
-
-* Un PEI validé ne peut pas être modifiés (sauf si celui est dévérouillé)
-* Un PEI non inclus dans le patrimoine de données ne peut pas être modifié
-*	Selon le type de PEI (poteau / bouche ou citerne ou point d’aspiration), les mesures sont différentes
-*	Selon les mesures (grandeurs physiques contrôlées) et les anomalies, les conformités d’accès, de signalétique et du contrôle technique peuvent être déterminées
-*	Selon la conformité technique et l’ancienneté du contrôle, la disponibilité pour le défense incendie publique est déduite automatiquement.
-
-Toutes ces règles de vérification sont implémentées informatiquement pour éviter les erreurs de saisie (incohérences).
+Aucun contrôle de saisies n'a été mis en place. Le service gère sa donnée. Certains champs sont guidés par des listes de valeurs.
 
 ## Dépendances
 
@@ -63,10 +53,7 @@ La base de données PEI s'appuie sur des référentiels préexistants constituan
 |schéma | table | description | usage |
 |:---|:---|:---|:---|   
 |r_objet|lt_src_geom|domaine de valeur générique d'une table géographique|source du positionnement du PEI|
-|r_administratif|an_geo|donnée de référence alphanumérique du découpage administratif |jointure insee commune<>siret epci|
-|r_osm|geo_osm_commune|donnée de référence géographique du découpage communal OSM|nom de la commune|
-|r_osm|geo_v_osm_commune_apc|vue de la donnée geo_osm_commune restreinte sur le secteur du compiégnois|insee + controle de saisie PEI à l'intérieur de ce périmètre|
-|r_osm|geo_osm_epci|donnée de référence géographique du découpage epci OSM|nom de l'EPCI|
+|x_apps|geo_vmr_adresse|BAL|Assise des secteurs de ramassage des encombrants|
 
 ---
 
@@ -76,96 +63,199 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_defen
 
 ### Classe d'objet géographique et patrimoniale
 
-`geo_pei` : table géographique des attributs patrimoniaux des PEI.
+`geo_dec_pav_verre` : table géographique des attributs des PAV Verre.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
-|id_pei|Identifiant interne unique du PEI|bigint|nextval('m_defense_incendie.geo_pei_id_seq'::regclass)|
-|id_sdis|Identifiant interne unique du PEI du SDIS|character varying(254)| |
-|ref_terr|Référence du PEI sur le terrain|character varying(254)| |
-|insee|Code INSEE|character varying(5)| |
-|type_pei|Type de PEI|character varying(2)| |
-|type_rd|Type de PEI selon la nomenclature du réglement départemental|character varying(254)| |
-|diam_pei|Diamètre intérieur du PEI|character varying(3)| |
-|raccord|Descriptif des raccords de sortie du PEI (nombre et diamètres exprimés en mm)|character varying(2)| |
-|marque|Marque du fabriquant du PEI|character varying(2)| |
-|source_pei|Source du point d'eau|character varying(3)| |
-|volume|Capacité volumique utile de la source d'eau en m3/h. Si la source est inépuisable (cour d'eau ou plan d'eau pérenne), l'information est nulle|integer| |
-|diam_cana|Diamètre de la canalisation exprimé en mm pour les PI et BI|integer| |
-|etat_pei|Etat d'actualité du PEI|character varying(2)| |
-|statut|Statut juridique|character varying(2)| |
-|nom_etab|Nom de l'établissement propriétaire dans le cas d'un statut privé|character varying(254)| |
-|gestion|Gestionnaire du PEI|character varying(2)| |
-|delegat|Délégataire du réseau pour les PI et BI|character varying(2)| |
-|cs_sdis|Code INSEE du centre de secours du SDIS en charge du volet opérationnel|character varying(5)| |
-|situation|Adresse ou information permettant de faciliter la localisation du PEI sur le terrain|character varying(254)| |
+|id_contver|Identifiant unique géographique|integer|nextval('m_dechet.geo_dec_pav_idconv_seq'::regclass)|"
+|commune|libellé de la commune|character varying(30)| |
+|insee|numéro insee de la commune|character(5)| |
+|quartier|libellé du quartier|character varying(50)| |
+|adresse|adresse d'implantation|character varying(80)| |
+|x_l93|coordonnée x en lambert 93|double precision| |
+|y_l93|coordonnée y en lambert 93|double precision| |
+|cont_nbr|nombre de conteneurs|integer| |
+|cont_mat|code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)|character varying(2)|'10'::character varying|
+|cont_pos|code du type de position du conteneur (liste de choix lt_pav_contpos)|character varying(2)|'10'::character varying|
+|date_sai|date de saisie de l'information|timestamp without time zone| |
+|date_pos|date de pose|timestamp without time zone| |
+|date_net|date de nettoyage|timestamp without time zone| |
+|date_maj|date de mise à jour des informations|timestamp without time zone| |
+|photo|Nom du fichier de la photo avant la mise à jour de juillet 2016 par le BE RETIF|character varying(254)| |
+|url_photo|Lien url vers la photo avant la mise à jour de juillet 2016 par le BE RETIF|character varying(254)| |
+|src_geom|code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_src_geom)|character(2)|'00'::bpchar|
+|volume|volume en m3 (par défaut 4)|double precision| |
+|env_type|code du type d'espace géographique (liste de choix lt_pav_envtype)|character varying(2)|'00'::character varying|
+|env_implan|code du type d'espace urbain d'implantation (liste de choix lt_pav_envimplan)|character varying(2)|'00'::character varying|
+|env_situ|code de la situation domaniale (liste de choix lt_pav_envsitu)|character varying(2)|'00'::character varying|
+|mode_preh|code du mode de préhension (liste de choix lt_pav_modepreh)|character varying(2)|'10'::character varying|
+|crochet|code de l'état du crochet (liste de choix lt_pav_crochet)|character varying(2)|'00'::character varying|
+|opercules|Bavettes sur opercules disponibles|boolean| |
+|tags|présence de tags|boolean| |
+|peinture|code de l'état de la peinture (liste de choix lt_pav_peinture)|character varying(2)|'00'::character varying|
+|prox_corb|présence d'une corbeille à proximité|boolean| |
+|type_sol|code du type de sol (liste de choix (lt_pav_typesol)|character varying(2)|'00'::character varying|
+|trp_rest|présence d'une trappe pour restaurateur|boolean| |
+|etat_sign|état de la signalétique (création d'une liste de valeur en fonction de l'état des lieux)|character varying(30)| |
+|type_sign|code du type de signalétique (liste de choix lt_pav_typesign)|character varying(2)|'00'::character varying|
+|proprete|code de l'état de la propreté (liste de choix lt_pav_proprete)|character varying(2)|'00'::character varying|
+|prop_abor|code de l'état de la propreté des abords (liste de choix lt_pav_propabor)|character varying(2)|'00'::character varying|
+|def_struc|défaut de structure visible|character varying(30)| |
+|hab_pav|Tonnage par gisement d'habitants|integer| |
+|opt_pav|nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages|integer| |
+|ame_acces|accéssibilité à revoir|boolean| |
+|nat_pb|code de la nature du ou des problèmes (liste de choix lt_pav_natpb)|character varying(2)|'00'::character varying|
+|nat_pb_99|précision sur la nature du problème|character varying(500)| |
+|geom|champ contenant la géométrie de l'objet|USER-DEFINED| |
+|op_sai|Opérateur de saisie de la donnée|character varying(80)| |
+|observ|Observations diverses|character varying(500)| |
+|pavorient|code des préconisations pour l'amélioration dee emplacements des PAV Verre (suite à l'état des lieux de l'été 2016|character varying(2)| |
+|id_parent|identifiant du PAV Verre parent selon les préconisations|integer| |
+|statut|code du statut du PAV (actif ou inactif)|character varying(2)| |
+|v_tampon|Valeur du tampon correspondant à l'aire de captation du point de ramassage|integer| |
+|geom2|Champ contenant la géométrie du tampon d'emprise définit par v_tampon où modifier selon l'influence|USER-DEFINED| |
+|date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone|now()|
+
+
+  * `t_t1_geo_v_pei_ctr` :trigger gérant la saisie ou la mise à jour des données PEI, intégrant les contrôles de saisies et la génération des messages d'erreur
+  * `t_t2_log_pei` : intégration de valeurs dans la table de log 
+
+`geo_dec_pav_tlc` : table géographique des attributs des PAV TLC.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|  
+|id_cont_tl|identifiant géographique unique|integer|nextval('m_dechet.geo_dec_pav_idconv_seq'::regclass)|"
+|commune|libellé de la commune|character varying(50)| |
+|insee|code insee de la commune|character(5)| |
+|quartier|libellé du quartier|character varying(50)| |
+|adresse|adresse|character varying(80)| |
+|x_l93|coordonnée x en lambert 93|double precision| |
+|y_l93|coordonnée y en lambert 93|double precision| |
+|cont_nbr|nombre de conteneurs|integer| |
+|cont_mat|code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)|character varying(2)|'10'::character varying|
+|cont_pos|code du type de position du conteneur (liste de choix lt_pav_contpos)|character varying(2)|'10'::character varying|
+|date_sai|date de la saisie des informations|timestamp without time zone| |
+|date_pose|date de pose|timestamp without time zone| |
+|date_netoy|date de nettoyage|timestamp without time zone| |
+|date_maj|date de mise à jour des informations|timestamp without time zone| |
+|nom_entrep|code de l'entreprise gestionnaire du pav (liste de choix lt_pav_gest)|character varying(2)| |
+|nom_entrep_99|autre gestionnaire si 99 saisie dans le champ nom_entrep|character varying(30)| |
+|photo|libellé du fichier de la photo|character varying(254)| |
+|url_photo|lien url de la photo|character varying(254)| |
+|src_geom|code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_scr_geom)|character(2)|'00'::bpchar|
+|env_type|code du type d'espace géographique (liste de choix lt_pav_envtype)|character varying(2)|'00'::character varying|
+|env_implan|code du type d'espace urbain d'implantation (liste de choix lt_pav_envimplan)|character varying(2)|'00'::character varying|
+|env_situ|code de la situation domaniale (liste de choix lt_pav_envsitu)|character varying(2)|'00'::character varying|
+|tags|présence de tags|boolean|false|
+|peinture|code de l'état de la peinture (liste de choix lt_pav_peinture)|character varying(2)|'00'::character varying|
+|prox_corb|présence d'une corbeille à proximité|boolean|false|
+|type_sol|code du type de sol (liste de choix (lt_pav_typesol)|character varying(2)|'00'::character varying|
+|type_sol_99|autre type de sol si 99 saisie dans le champ type_sol|character varying(30)| |
+|geom|champ contenant la géométrie de l'objet|USER-DEFINED| |
+|op_sai|Opérateur de saisie de la donnée|character varying(80)| |
+|observ|Observations diverses|character varying(500)| |
+|v_tampon|Valeur du tampon d'emprise du PAV TLC|integer| |
+|geom2|Champ contenant la géométrie du tampon d'emprise définit par v_tampon où modifier selon l'influence|USER-DEFINED| |
+|date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone|now()|
+
+`geo_dec_secteur_enc` : table géographique des secteurs de ramassage des encombrants.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---| 
+|gid|Identifiant interne|integer|nextval('m_dechet.geo_dec_secteur_enc_seq'::regclass)|"
+|insee|Code Insee de la commune|character varying(5)| |
+|commune|Libellé de la commune|character varying(150)| |
+|op_sai|Opérateur de saisie|character varying(80)| |
+|observ|Observation(s)|character varying(254)| |
+|src_geom|Référentiel de saisie|character varying(2)| |
+|date_sai|Date de saisie|timestamp without time zone| |
+|date_maj|Date de mise à jour|timestamp without time zone| |
+|adresse|Adresse concernées par un ramassage des encombrants à jour fixe|character varying(254)| |
+|l_secteur|Libellé du secteur par rapport au ramssage (fixe ou sur rendez-vous)|character varying(25)| |
+|l_message1|Message diffusé sur l'application Grand Public pour les encombrants à jour fixe|character varying(500)| |
+|l_message2|Message diffusé sur l'application Grand Public pour les encombrants sur rendez-vous|character varying(500)| |
+|geom|Géométrie des points d'adresse à jour fixe|USER-DEFINED| |
+|geom1|Géométrie des zones issus des adresses et par défaut les autres (1 seul polygone) sur rendez-vous. Sert dans GEO appli Gd public pour la recherche par adresse|USER-DEFINED| |
+
+`geo_dec_secteur_om` : table géographique des secteurs de ramassage des ordures ménagères.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---| 
+|gid|Identifiant unique interne|integer|nextval('m_dechet.geo_dec_secteur_om_seq'::regclass)|"
+|l_zone|Nom du secteur de ramassage des ordures ménagères|character varying(150)| |
+|insee|Code insee de la Commune|character varying(25)| |
+|commune|Libellé de la commune|character varying(150)| |
+|op_sai|Opérateur de saisie|character varying(80)| |
 |observ|Observations|character varying(254)| |
-|photo_url|Lien vers une photo du PEI|character varying(254)| |
-|src_pei|Organisme source de l'information PEI|character varying(254)| |
-|x_l93|Coordonnée X en mètre|numeric| |
-|y_l93|Coordonnée Y en mètre|numeric| |
-|src_geom|Référentiel de saisie|character varying(2)|'00'::bpchar|
-|src_date|Année du millésime du référentiel de saisie|character varying(4)|'0000'::bpchar|
-|prec|Précision cartographique exprimée en cm|character varying(5)| |
-|ope_sai|Opérateur de la dernière saisie en base de l'objet|character varying(254)| |
-|date_sai|Horodatage de l'intégration en base de l'objet|timestamp without time zone|now()|
-|date_maj|Horodatage de la mise à jour en base de l'objet|timestamp without time zone| |
-|geom|Géomètrie ponctuelle de l'objet|geometry(Point,2154)| |
-|geom1|Géomètrie de la zone de defense incendie de l'objet PEI|geometry(Polygon,2154)| |
+|src_geom|Code de la valeur du référentiel de saisie (lien vers la liste de valeur r_objet.lt_src_geom|character varying(2)|'00'::character varying|
+|date_sai|Date de saisie des informations|timestamp without time zone| |
+|date_maj|Date de mise à jour des informations|timestamp without time zone| |
+|l_fichier|Libellé du fichier avec son extension pour le document lié, ici le calendrier de collecte|character varying(100)| |
+|l_message1|Espace pour rédiger un message qui sera intégré dans l'application grand public (plusieurs lignes possibles dans les champs l_message n|character varying(255)| |
+|l_message2|2ème ligne du message|character varying(255)| |
+|l_message3|3ème ligne du message|character varying(255)| |
+|l_message4|4ème ligne du message|character varying(255)| |
+|l_message5|5ème ligne du message|character varying(255)| |
+|l_message6|6ème ligne du message|character varying(255)| |
+|l_message7|7ème ligne du message|character varying(255)| |
 
-### Classe d'objet des mesures et contrôles
 
-`an_pei_ctr` : table des attributs des mesures et contrôles techniques des PEI.
+### Classe d'objet attributaire et patrimoniale
+
+`an_dec_pav_doc_media` : table attributaire des photos.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
-|id_pei|Identifiant unique du PEI|bigint| |
-|id_sdis|Identifiant unique du PEI du SDIS|character varying(254)| |
-|id_contrat|Référence du contrat de prestation pour le contrôle technique du PEI|character varying(254)| |
-|press_stat|Pression statique en bar à un débit de 0 m3/h|real| |
-|press_dyn|Pression dynamique résiduelle en bar au débit nominal|real| |
-|debit|Valeur de débit mesuré exprimé en m3/h sous une pression de 1 bar|real| |
-|debit_max|Valeur de débit maximal à gueule bée mesuré exprimé en m3/h|real| |
-|debit_r_ci|Valeur de débit de remplissage pour les CI en m3/h|real| |
-|etat_anom|Etat d'anomalies du PEI|character varying(1)| |
-|lt_anom|Liste des anomalies du PEI|character varying(254)| |
-|etat_acces|Etat de l'accessibilité du PEI|character varying(1)| |
-|etat_sign|Etat de la signalisation du PEI|character varying(1)| |
-|etat_conf|Etat de la conformité technique du PEI|character varying(1)| |
-|date_mes|Date de mise en service du PEI|date| |
-|date_ct|Date du dernier contrôle|date| |
-|ope_ct|Opérateur du dernier contrôle|character varying(254)| |
-|presta_ct|Prestataire du dernier contrôle|character varying(254)| |
-|date_co|Date de la dernière reconnaissance opérationnelle|date| |
+|id|Identifiant du PAV|integer| |
+|media|Champ Média de GEO|text| |
+|miniature|Champ miniature de GEO|bytea| |
+|n_fichier|Nom du fichier|text| |
+|t_fichier|Type de média dans GEO|text| |
+|op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
+|date_sai|Date d'intégration du document|timestamp without time zone| |
+|d_photo|Date de la prise de vue|timestamp without time zone| |
+|l_prec|Précision sur le document|character varying(1000)| |
 
----
 
-`m_defense_incendie.geo_v_pei_ctr` : Vue éditable de gestion interne au service IG permettant la visualisation des données et son édition
+`log_dec_pav` : table attributaire des logd.
 
-* 2 triggers :
-  * `t_t1_geo_v_pei_ctr` : trigger de mise à jour des données PEI
-  * `t_t2_log_pei` : trigger intégrant de valeurs dans la table de log 
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|  
+|gid|identifiant unique|integer| |
+|objet|Type de modification (update, delete, insert)|character varying(10)| |
+|d_maj|Date de l'exécution de la modification|timestamp without time zone| |
+|user|Utilisateur ayant exécuté l'exécution|character varying(50)| |
+|relid|ID d'objet de la table qui a causé le déclenchement.|character varying(255)| |
+|l_schema|Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée|character varying(30)| |
+|l_table|Libellé de la table exécutée|character varying(30)| |
+|idgeo|Identifiant unique de l'objet de la table correspondante|character varying(100)| |
+|geom|Champ contenant la géométrie des objets polygones modifiés ou supprimés|USER-DEFINED| |
 
-`m_defense_incendie.geo_v_pei_zonedefense` : Vue simple permettant de visualiser les périmètres de 200m autour des PEI uniquement sur la DECI est vrai
+
+
+### classes d'objets applicatives de gestion :
+
+Sans objet
 
 ---
 
 ### classes d'objets applicatives métiers sont classés dans le schéma x_apps :
  
-`x_apps.xapps_geo_v_pei_ctr` : Vue éditable depuis l'application permettant la saisie ou la mise à jour des données des PEI
-
-  * `t_t1_geo_v_pei_ctr` :trigger gérant la saisie ou la mise à jour des données PEI, intégrant les contrôles de saisies et la génération des messages d'erreur
-  * `t_t2_log_pei` : intégration de valeurs dans la table de log 
+`x_apps.xapps_geo_v_pav_orient` : Vue géométrique des liens entre PAV supprimer, déplacer et le nouvel emplacement
   
-`x_apps.xapps_geo_v_pei_zonedefense` : Vue applicative affichant les périmètres de 200 mètres autour des PEI pour ceux ayant une DECI disponible
+`x_apps.xapps_geo_v_pav_verre_inactif` : Vue géographique permettant de visualiser les conteneurs PAV Verre inactifs (dans la cartothèque de l'application GEO sur le tri)
 
 ### classes d'objets applicatives grands publics sont classés dans le schéma x_apps_public :
 
-En cours de traitement
+`x_apps_public.xappspublic_geo_v_dec_pav_tampon` : Vue géométrique contenant les tampons d''emprise des conteneurs Verre pour EXPORT FME et recherche des adresse dans ses tampons pour remonter le PAV VERRE
+
+`x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon` : Vue géométrique contenant les tampons d''emprise des conteneurs TLC pour EXPORT FME et recherche des adresse dans ses tampons pour remonter le PAV VERRE
+
+`x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur` : Vue géométrique contenant les secteurs de rammassage des encombrants pour export dans GEO APPLI GD PUBLIC
 
 ### classes d'objets opendata sont classés dans le schéma x_opendata :
 
-En cours de traitement
+Sans objet
 
 ## Liste de valeurs
 
