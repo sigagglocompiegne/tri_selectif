@@ -701,14 +701,15 @@ Source : `geo_dec_pav_tlc`
 
 |Groupe|Sous-groupe|Visible dans la légende|Visible au démarrage|Détails visibles|Déplié par défaut|Geotable|Renommée|Issue d'une autre carte|Visible dans la légende|Visible au démarrage|Déplié par défaut|Couche sélectionnable|Couche accrochable|Catégorisation|Seuil de visibilité|Symbologie|Autres|
 |:---|:---|:-:|:-:|:-:|:-:|:---|:---|:-:|:-:|:-:|:-:|:-:|:---|:---|:---|:---|:---|
-|Défense incendie||x|x|x|x|xapps_geo_v_pei_ctr|Point d'Eau Incendie|||x||||style|1/120000-1/140000|pei_picto_[].svg selon la catégorie,taille 16|Interactivité avec le champ calculé affiche_info_bulle|
-|||||||xapps_geo_v_pei_ctr|Point d'Eau Incendie||x|x|x|||style|0-1/20000|pei_picto_[].svg selon la catégorie,taille 35|Interactivité avec le champ calculé affiche_info_bulle|
-|||||||xapps_geo_v_pei_zonedefense|Zone de défense publique||x|x|||x||0-1/25000|Fond #BBBBBB 5% d'opacité et contour #343434 4ème symbole de tiret épaisseur 1||
-|||||||xapps_geo_zone_gestion|Zone de gestion||x||x|||gest||Fond #6699BB 25% opaque et coutour noir pour ARC, Fond #FFFABB 25% opaque et coutour noir pour Compiègne|Interactivité avec le champ calculé affiche_info_bulle|
-|Foncier||x||x||geo_v_fon_proprio_pu_arc|Propriétés institutionnelles|x|x||x||x|||Cf carte CADASTRE||
-|Limites administratives||x|x|x||geo_v_osm_commune_apc|Limites communales|x|x|x|||x|||Cf Navigateur cartographique (sauf épaisseur contour à 2||
-|||||||geo_adm_quartier|Quartiers de Compiègne|x|x|x|||x||0 - 1/70000|Cf Navigateur cartographique (sauf épaisseur contour à 2||
-|Cadastre|||x|||Parcelle (V3)|Parcelles V3|||||||||Cf carte CADASTRE||
+|||||||xapps_geo_vmr_adresse|Adresse|x||x|||||1/0-1/2000||Interactivité avec le champ calculé infobulle (0-2000è)|
+|Points d'apport volontaire||x|x|x|x|xapps_geo_v_pav_verre_inactif|Conteneur à verre inactif||x|x||||||croie rouge de taille 25||
+|||||||geo_dec_pav_verre|Conteneur à verre||x|x||||||picto_appli_PAV_verre.svg de taille 25|Intéractivité avec info_bulle|
+|||||||geo_dec_pav_tlc|Conteneur textile||x|x||||||picto_appli_PAV_textile.svg de taille 25|Intéractivité avec info_bulle|
+|||||||xapps_geo_v_pav_orient|Suivi des emplacements||x|x||||||Trait dee petit tiret taille 1 rouge||
+|Foncier||x||x||geo_v_fon_proprio_pu_arc|Propriétés institutionnelles|x|x|x||||||||
+|Limites administratives||x|x|x||geo_v_osm_commune_arcba|Limites communales|x|x|x||||||||
+|||||||geo_adm_quartier|Quartier de Compiègne|x|||||||0-70000è|||
+|Cadastre|||x|||Parcelle (V3)|Parcelle (V3)||x||x|||||||
 
 # L'application
 
