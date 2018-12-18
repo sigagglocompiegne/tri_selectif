@@ -5,9 +5,9 @@
 
 * Statut
   - [ ] à rédiger
-  - [x] en cours de rédaction
+  - [ ] en cours de rédaction
   - [ ] relecture
-  - [ ] finaliser
+  - [x] finaliser
   - [ ] révision
 
 ## Principes
