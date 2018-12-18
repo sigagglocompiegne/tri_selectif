@@ -15,15 +15,14 @@
 
 |Date | Auteur | Description
 |:---|:---|:---|
-|29/03/2018|Florent VANHOUTTE|version initiale|
-|15/11/2018|Grégory Bodet|version initiale remaniée dans le modèle des autres documentations|
+|18/12/2018|Grégory Bodet|version initiale|
 
 
 # Généralité
 
 |Représentation| Nom de l'application |Résumé|
 |:---|:---|:---|
-|![picto](/doc/img/pei_bleu.png)|Défense Extérieure Contre l'Incendie (DECI)|Cette application est dédiée à la gestion et la consultation des PEI (Points d'Eau Incendie) déterminant leur niveau de DECI.|
+|![picto](/doc/img/tri_selectif_bleu.png)|Défense Extérieure Contre l'Incendie (DECI)|Cette application est dédiée à la gestion et la consultation des PEI (Points d'Eau Incendie) déterminant leur niveau de DECI.|
 
 # Accès
 
