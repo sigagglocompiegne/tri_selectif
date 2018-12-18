@@ -62,7 +62,6 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |:---|:-:|:-:|:---|:---|:---|:---|
 |affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur à verre n° {id_contver}|
 |info_bulle  |x|x||Composition de l'info bulle affiché au passage sur le PAV|Cartographie|{affiche_result} {adresse}|
-
 |ame_acces  |||Accessibilité à revoir|Booléen oui/non|Fiche d'information Conteneur à Verre||
 |cont_mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur à Verre||
 |cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Conteneur à Verre||
