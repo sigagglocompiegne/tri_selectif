@@ -8,8 +8,8 @@
   - [ ] à rédiger
   - [ ] en cours de rédaction
   - [ ] relecture
-  - [ ] finaliser
-  - [x] révision
+  - [x] finaliser
+  - [ ] révision
 
 * Historique des versions
 
@@ -118,6 +118,10 @@ Sans objet
 |:---|:---|:---|
 | an_dec_pav_doc_media |id| 0..n (égal) |
 
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+| à partir de Géotable xapps_geo_vmr_adresse sur geo_dec_pav_verre |geom à geom2| 1..n (intersection) |
+
    * particularité(s) : aucune
 
 ## GeoTable : `geo_dec_pav_tlc`
@@ -155,7 +159,6 @@ Sans objet
 |url_photo                         |||Lien vers la photo| |Inutilisé (photo dans la table des médias)||  
 
 
-
    * filtres :
 
 |Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
@@ -165,11 +168,13 @@ Sans objet
 
    * relations : 
  
-==> revoir ces relations en remplacement des listes de domaines (qui posaient problème dans les 1er versions de GEO
-
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
 | an_dec_pav_doc_media |id| 0..n (égal) |
+
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+| à partir de Géotable xapps_geo_vmr_adresse sur geo_dec_pav_tlc |geom à geom2| 1..n (intersection) |
 
    * particularité(s) : aucune
    
@@ -181,7 +186,6 @@ Sans objet
 
 Sans objet
 
-
    * filtres : aucun
    * relations : aucune
    * particularité(s) : aucune
@@ -192,7 +196,6 @@ Sans objet
 |:---|:-:|:-:|:---|:---|:---|:---|
 
 Sans objet
-
 
    * filtres : aucun
    * relations : aucune
@@ -414,13 +417,11 @@ Source : `geo_dec_pav_verre`
 
 ## Recherche : `PAV VERRE à moins de 300 mètres`
 
-==> à remplacer par la recherche sur la BAL
-
 Cette recherche permet à l'utilisateur de faire une recherche d'un PAV Verre à moins de 300 mètres d'une adresse.
 
   * Configuration :
 
-Source : `geo_ban_arcba`
+Source : `xapps_geo_vmr_adresse`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -430,11 +431,20 @@ Source : `geo_ban_arcba`
 
 
  * Filtres :
+ 
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
 
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Commune|x|commune|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la commune|
+|Voie|x|libvoie_c|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la voie|
+|Numéro||numero_complet|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez le n° dans la voie|
 
 (1) si liste de domaine
 
- * Fiches d'information active : Résultat PAV VERRE à moins de 300 mètres
+ * Fiches d'information active : PAV VERRE à moins de 300 mètres
 
 # Recherche : `PAV VERRE par nature du problème`
 
@@ -442,7 +452,7 @@ Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PA
 
   * Configuration :
 
-Source : `geo_dec_pav_verre`
+Source : `xapps_geo_vmr_adresse`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -456,14 +466,20 @@ Source : `geo_dec_pav_verre`
  * Filtres :
 
 
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
+
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PAV nature du problème|x|nat_pb|Est égale à une valeur de liste de choix |Liste de domaine valeur_pav_natpb|nat_pb_lib|nat_pb|nat_pb||Titre : Nature|
+|Commune|x|commune|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la commune|
+|Voie|x|libvoie_c|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la voie|
+|Numéro||numero_complet|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez le n° dans la voie|
 
 
 (1) si liste de domaine
 
- * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+ * Fiches d'information active : PAV TLC à moins de 500 mètres
 
 ## Recherche : `TLC par référence`
 
@@ -528,7 +544,6 @@ Source : `geo_dec_pav_tlc`
 
 ## Recherche : `PAV TLC à moins de 500 mètres`
 
-==> à remplacer par la recherche sur la BAL
 
 Cette recherche permet à l'utilisateur de faire une recherche d'un PAV TLC à moins de 500 mètres d'une adresse.
 
