@@ -1254,7 +1254,7 @@ CREATE TRIGGER t_t1_geo_dec_pav_verre_datemaj
   BEFORE INSERT OR UPDATE
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_maj();
+  EXECUTE PROCEDURE public.ft_r_timestamp_maj();
 
 -- Trigger: t_t2_geo_dec_pav_verre_datesai on m_dechet.geo_dec_pav_verre
 
@@ -1264,7 +1264,7 @@ CREATE TRIGGER t_t2_geo_dec_pav_verre_datesai
   BEFORE INSERT
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_sai();
+  EXECUTE PROCEDURE public.ft_r_timestamp_sai();
 
 -- Trigger: t_t3_geo_dec_pav_verre_insee on m_dechet.geo_dec_pav_verre
 
@@ -1274,7 +1274,7 @@ CREATE TRIGGER t_t3_geo_dec_pav_verre_insee
   BEFORE INSERT OR UPDATE OF geom
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_commune_pl();
+  EXECUTE PROCEDURE public.ft_r_commune_pl();
 
 -- Trigger: t_t4_geo_dec_pav_verre_quartier on m_dechet.geo_dec_pav_verre
 
@@ -1284,7 +1284,7 @@ CREATE TRIGGER t_t4_geo_dec_pav_verre_quartier
   BEFORE INSERT OR UPDATE OF geom
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_quartier();
+  EXECUTE PROCEDURE public.ft_r_quartier();
 
 -- Trigger: t_t5_geo_dec_pav_verre_xy on m_dechet.geo_dec_pav_verre
 
@@ -1294,15 +1294,17 @@ CREATE TRIGGER t_t5_geo_dec_pav_verre_xy
   BEFORE INSERT OR UPDATE OF geom
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_xy_l93();
+  EXECUTE PROCEDURE public.ft_r_xy_l93();
 
--- Function: m_dechet.m_tampon_nav()
+-- Function: m_dechet.ft_m_tampon_nav()
 
--- DROP FUNCTION m_dechet.m_tampon_nav();
+-- DROP FUNCTION m_dechet.ft_m_tampon_nav();
 
-CREATE OR REPLACE FUNCTION m_dechet.m_tampon_nav()
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_tampon_nav()
   RETURNS trigger AS
 $BODY$
+
+
 
 BEGIN
 
@@ -1314,8 +1316,10 @@ END;
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
+ALTER FUNCTION m_dechet.ft_m_tampon_nav()
+  OWNER TO sig_create;
 
-COMMENT ON FUNCTION m_dechet.m_tampon_nav() IS 'Fonction trigger pour mise à jour du tampon d''emprise du PAV VERRE si v_tampon est modifiée';
+COMMENT ON FUNCTION m_dechet.ft_m_tampon_nav() IS 'Fonction trigger pour mise à jour du tampon d''emprise du PAV VERRE si v_tampon est modifiée';
 
 -- Trigger: t_t6_geo_dec_pav_verre_tampon on m_dechet.geo_dec_pav_verre
 
@@ -1325,14 +1329,14 @@ CREATE TRIGGER t_t6_geo_dec_pav_verre_tampon
   AFTER UPDATE OF geom, v_tampon
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE m_dechet.m_tampon_nav();
+  EXECUTE PROCEDURE m_dechet.ft_m_tampon_nav();
 
 
--- Function: m_dechet.m_log_dec_pav()
+-- Function: m_dechet.ft_m_log_dec_pav()
 
--- DROP FUNCTION m_dechet.m_log_dec_pav();
+-- DROP FUNCTION m_dechet.ft_m_log_dec_pav();
 
-CREATE OR REPLACE FUNCTION m_dechet.m_log_dec_pav()
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_log_dec_pav()
   RETURNS trigger AS
 $BODY$
 begin
@@ -1441,6 +1445,8 @@ begin
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
+ALTER FUNCTION m_dechet.ft_m_log_dec_pav()
+  OWNER TO sig_create;
 
 
 
@@ -1452,7 +1458,7 @@ CREATE TRIGGER t_t7_geo_dec_pav_verre_log
   AFTER INSERT OR UPDATE OR DELETE
   ON m_dechet.geo_dec_pav_verre
   FOR EACH ROW
-  EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
+  EXECUTE PROCEDURE m_dechet.ft_m_log_dec_pav();
   
 
 
@@ -1464,7 +1470,7 @@ CREATE TRIGGER t_t1_geo_dec_pav_tlc_datemaj
   BEFORE INSERT
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_maj();
+  EXECUTE PROCEDURE public.ft_r_timestamp_maj();
 
 -- Trigger: t_t2_geo_dec_pav_tlc_datesai on m_dechet.geo_dec_pav_tlc
 
@@ -1474,7 +1480,7 @@ CREATE TRIGGER t_t2_geo_dec_pav_tlc_datesai
   BEFORE INSERT
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_sai();
+  EXECUTE PROCEDURE public.ft_r_timestamp_sai();
 
 -- Trigger: t_t3_geo_dec_pav_tlc_insee on m_dechet.geo_dec_pav_tlc
 
@@ -1484,7 +1490,7 @@ CREATE TRIGGER t_t3_geo_dec_pav_tlc_insee
   BEFORE INSERT OR UPDATE OF geom
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_commune_pl();
+  EXECUTE PROCEDURE public.ft_r_commune_pl();
 
 -- Trigger: t_t4_geo_dec_pav_tlc_quartier on m_dechet.geo_dec_pav_tlc
 
@@ -1494,7 +1500,7 @@ CREATE TRIGGER t_t4_geo_dec_pav_tlc_quartier
   BEFORE INSERT OR UPDATE OF geom
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_quartier();
+  EXECUTE PROCEDURE public.ft_r_quartier();
 
 -- Trigger: t_t5_geo_dec_pav_tlc_xy on m_dechet.geo_dec_pav_tlc
 
@@ -1504,122 +1510,7 @@ CREATE TRIGGER t_t5_geo_dec_pav_tlc_xy
   BEFORE INSERT OR UPDATE OF geom
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_xy_l93();
-
--- Function: m_dechet.m_log_dec_pav()
-
--- DROP FUNCTION m_dechet.m_log_dec_pav();
-
-CREATE OR REPLACE FUNCTION m_dechet.m_log_dec_pav()
-  RETURNS trigger AS
-$BODY$
-begin
-		--ajoute une ligne dans la table suivi des modifications pour refléter l'operation réalisée sur les tables
-		--utilise la variable spéciale TG_OP pour cette opération
-		--
-		      
-		IF (TG_OP='INSERT') then			
-			if (TG_TABLE_NAME='geo_dec_pav_verre') then
-				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass), 'INSERT',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,new.id_contver;
-			end if;
-
-			if (TG_TABLE_NAME='geo_dec_pav_tlc') then
-				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass), 'INSERT',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,new.id_cont_tl;
-			end if;
-                 elsif (TG_OP='UPDATE') then
-			if (TG_TABLE_NAME='geo_dec_pav_verre') then
-				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'UPDATE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_contver;
- 				
-			END IF;
-			if (TG_TABLE_NAME='geo_dec_pav_tlc') then
-				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'UPDATE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_cont_tl;
- 				
-			END IF;
-			
-                elsif (TG_OP='DELETE') then
-	      
-                        if (TG_TABLE_NAME='geo_dec_pav_verre') then
-				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'DELETE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_contver,
-				CASE WHEN old.commune is null THEN '' ELSE 'commune:' || old.commune END || ';' || 
-				CASE WHEN old.insee is null THEN '' ELSE 'insee:' || old.insee END || ';' || 
-				CASE WHEN old.quartier is null THEN '' ELSE 'quartier:' || old.quartier END || ';' || 
-				CASE WHEN old.adresse is null THEN '' ELSE 'adresse:' || old.adresse END || ';' || 
-				CASE WHEN old.cont_nbr is null THEN '' ELSE 'cont_nbr:' || old.cont_nbr END || ';' ||
-				CASE WHEN old.cont_mat is null THEN '' ELSE 'cont_mat:' || old.cont_mat END || ';' || 
-				CASE WHEN old.cont_pos is null THEN '' ELSE 'cont_pos:' || old.cont_pos END || ';' || 
-				CASE WHEN old.date_pos is null THEN '' ELSE 'date_pos:' || old.date_pos END || ';' || 
-				CASE WHEN old.date_net is null THEN '' ELSE 'date_net:' || old.date_net END || ';' || 
-				CASE WHEN old.photo is null THEN '' ELSE 'photo:' || old.photo END || ';' ||
-				CASE WHEN old.url_photo is null THEN '' ELSE 'url_photo:' || old.url_photo END|| ';' || 
-				CASE WHEN old.volume is null THEN '' ELSE 'volume:' || old.volume END || ';' || 
-				CASE WHEN old.env_type is null THEN '' ELSE 'env_type:' || old.env_type END || ';' || 
-				CASE WHEN old.env_implan is null THEN '' ELSE 'env_implan:' || old.env_implan END || ';' || 
-				CASE WHEN old.env_situ is null THEN '' ELSE 'env_situ:' || old.env_situ END || ';' ||
-				CASE WHEN old.mode_preh is null THEN '' ELSE 'mode_preh:' || old.mode_preh END || ';' || 
-				CASE WHEN old.crochet is null THEN '' ELSE 'crochet:' || old.crochet END || ';' || 
-				CASE WHEN old.opercules is null THEN '' ELSE 'opercules:' || old.opercules END || ';' || 
-				CASE WHEN old.tags is null THEN '' ELSE 'tags:' || old.tags END || ';' || 
-				CASE WHEN old.peinture is null THEN '' ELSE 'peinture:' || old.peinture END || ';' ||
-				CASE WHEN old.prox_corb is null THEN '' ELSE 'prox_corb:' || old.prox_corb END || ';' || 
-				CASE WHEN old.type_sol is null THEN '' ELSE 'type_sol:' || old.type_sol END || ';' || 
-				CASE WHEN old.trp_rest is null THEN '' ELSE 'trp_rest:' || old.trp_rest END || ';' || 
-				CASE WHEN old.etat_sign is null THEN '' ELSE 'etat_sign:' || old.etat_sign END || ';' || 
-				CASE WHEN old.type_sign is null THEN '' ELSE 'type_sign:' || old.type_sign END || ';' ||
-				CASE WHEN old.proprete is null THEN '' ELSE 'proprete:' || old.proprete END || ';' || 
-				CASE WHEN old.prop_abor is null THEN '' ELSE 'prop_abor:' || old.prop_abor END || ';' || 
-				CASE WHEN old.def_struc is null THEN '' ELSE 'def_struc:' || old.def_struc END || ';' || 
-				CASE WHEN old.hab_pav is null THEN '' ELSE 'hab_pav:' || old.hab_pav END || ';' || 
-				CASE WHEN old.opt_pav is null THEN '' ELSE 'opt_pav:' || old.opt_pav END || ';' ||
-				CASE WHEN old.ame_acces is null THEN '' ELSE 'ame_acces:' || old.ame_acces END || ';' || 
-				CASE WHEN old.nat_pb is null THEN '' ELSE 'nat_pb:' || old.nat_pb END || ';' || 
-				CASE WHEN old.nat_pb_99 is null THEN '' ELSE 'nat_pb_99:' || old.nat_pb_99 END || ';' || 
-				CASE WHEN old.op_sai is null THEN '' ELSE 'op_sai:' || old.op_sai END || ';' || 
-				CASE WHEN old.observ is null THEN '' ELSE 'observ:' || old.observ END || ';' ||
-				CASE WHEN old.pavorient is null THEN '' ELSE 'pavorient:' || old.pavorient END || ';' || 
-				CASE WHEN old.id_parent is null THEN '' ELSE 'id_parent:' || old.id_parent END || ';' || 
-				CASE WHEN old.statut is null THEN '' ELSE 'statut:' || old.statut END || ';' || 
-				CASE WHEN old.date_effet is null THEN '' ELSE 'date_effet:' || old.date_effet END
-				;
-				return old;
-			end if;
-
-			 if (TG_TABLE_NAME='geo_dec_pav_tlc') then
-				insert into m_dechet.log_dec_pav select nextval('m_dechet.log_dec_pav_gid_seq'::regclass),'DELETE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.id_cont_tl,
-				CASE WHEN old.commune is null THEN '' ELSE 'commune:' || old.commune END || ';' || 
-				CASE WHEN old.insee is null THEN '' ELSE 'insee:' || old.insee END || ';' || 
-				CASE WHEN old.quartier is null THEN '' ELSE 'quartier:' || old.quartier END || ';' || 
-				CASE WHEN old.adresse is null THEN '' ELSE 'adresse:' || old.adresse END || ';' || 
- 				CASE WHEN old.cont_nbr is null THEN '' ELSE 'cont_nbr:' || old.cont_nbr END || ';' ||
- 				CASE WHEN old.cont_mat is null THEN '' ELSE 'cont_mat:' || old.cont_mat END || ';' || 
-				CASE WHEN old.cont_pos is null THEN '' ELSE 'cont_pos:' || old.cont_pos END || ';' || 
-				CASE WHEN old.date_pose is null THEN '' ELSE 'date_pose:' || old.date_pose END || ';' || 
-				CASE WHEN old.date_netoy is null THEN '' ELSE 'date_netoy:' || old.date_netoy END || ';' || 
-				CASE WHEN old.photo is null THEN '' ELSE 'photo:' || old.photo END || ';' ||
-				CASE WHEN old.url_photo is null THEN '' ELSE 'url_photo:' || old.url_photo END || ';' || 
-				CASE WHEN old.nom_entrep is null THEN '' ELSE 'nom_entrep:' || old.nom_entrep END || ';' || 
-				CASE WHEN old.env_type is null THEN '' ELSE 'env_type:' || old.env_type END || ';' || 
-				CASE WHEN old.env_implan is null THEN '' ELSE 'env_implan:' || old.env_implan END || ';' || 
-				CASE WHEN old.env_situ is null THEN '' ELSE 'env_situ:' || old.env_situ END || ';' ||
-				CASE WHEN old.nom_entrep_99 is null THEN '' ELSE 'nom_entrep_99:' || old.nom_entrep_99 END || ';' || 
-				CASE WHEN old.tags is null THEN '' ELSE 'tags:' || old.tags END || ';' || 
-				CASE WHEN old.peinture is null THEN '' ELSE 'peinture:' || old.peinture END || ';' ||
-				CASE WHEN old.prox_corb is null THEN '' ELSE 'prox_corb:' || old.prox_corb END || ';' || 
-				CASE WHEN old.type_sol is null THEN '' ELSE 'type_sol:' || old.type_sol END || ';' || 
-				CASE WHEN old.type_sol_99 is null THEN '' ELSE 'type_sol_99:' || old.type_sol_99 END || ';' || 
-				CASE WHEN old.op_sai is null THEN '' ELSE 'op_sai:' || old.op_sai END || ';' || 
-				CASE WHEN old.observ is null THEN '' ELSE 'observ:' || old.observ END || ';' ||
-				CASE WHEN old.date_effet is null THEN '' ELSE 'date_effet:' || old.date_effet END
-				;
-				return old;
-			end if;
-		end if;
-
-		return null; -- le résultat est ignoré car il s'agit d'un déclencheur AFTER
-	end;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-
+  EXECUTE PROCEDURE public.ft_r_xy_l93();
 
 
 -- Trigger: t_t6_geo_dec_pav_tlc_log on m_dechet.geo_dec_pav_tlc
@@ -1630,8 +1521,44 @@ CREATE TRIGGER t_t6_geo_dec_pav_tlc_log
   AFTER INSERT OR UPDATE OR DELETE
   ON m_dechet.geo_dec_pav_tlc
   FOR EACH ROW
-  EXECUTE PROCEDURE m_dechet.m_log_dec_pav();
+  EXECUTE PROCEDURE m_dechet.ft_m_log_dec_pav();
   
+
+-- Function: m_dechet.ft_m_tampon_tlc_nav()
+
+-- DROP FUNCTION m_dechet.ft_m_tampon_tlc_nav();
+
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_tampon_tlc_nav()
+  RETURNS trigger AS
+$BODY$
+
+
+
+BEGIN
+
+update m_dechet.geo_dec_pav_tlc set geom2 = st_buffer(geom,500) where id_cont_tl=new.id_cont_tl;
+
+return new;
+
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION m_dechet.ft_m_tampon_tlc_nav()
+  OWNER TO sig_create;
+
+COMMENT ON FUNCTION m_dechet.ft_m_tampon_tlc_nav() IS 'Fonction trigger pour mise à jour du tampon d''emprise du PAV TLC à 500m';
+
+
+-- Trigger: t_t7_geo_dec_pav_tlc_tampon on m_dechet.geo_dec_pav_tlc
+
+-- DROP TRIGGER t_t7_geo_dec_pav_tlc_tampon ON m_dechet.geo_dec_pav_tlc;
+
+CREATE TRIGGER t_t7_geo_dec_pav_tlc_tampon
+  AFTER UPDATE OF geom
+  ON m_dechet.geo_dec_pav_tlc
+  FOR EACH ROW
+  EXECUTE PROCEDURE m_dechet.ft_m_tampon_tlc_nav();
   
 -- Trigger: t_t1_an_dec_pav_doc_media_date_sai on m_dechet.an_dec_pav_doc_media
 
@@ -1641,7 +1568,7 @@ CREATE TRIGGER t_t1_an_dec_pav_doc_media_date_sai
   BEFORE INSERT
   ON m_dechet.an_dec_pav_doc_media
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_sai();
+  EXECUTE PROCEDURE public.ft_r_timestamp_sai();
   
   
   -- Trigger: t_t1_geo_dec_secteur_enc_datemaj on m_dechet.geo_dec_secteur_enc
@@ -1652,7 +1579,7 @@ CREATE TRIGGER t_t1_geo_dec_secteur_enc_datemaj
   BEFORE INSERT OR UPDATE
   ON m_dechet.geo_dec_secteur_enc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_maj();
+  EXECUTE PROCEDURE public.ft_r_timestamp_maj();
 
 -- Trigger: t_t2_geo_dec_secteur_enc_datesai on m_dechet.geo_dec_secteur_enc
 
@@ -1662,7 +1589,7 @@ CREATE TRIGGER t_t2_geo_dec_secteur_enc_datesai
   BEFORE INSERT
   ON m_dechet.geo_dec_secteur_enc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_sai();
+  EXECUTE PROCEDURE public.ft_r_timestamp_sai();
 
 -- Trigger: t_t3_geo_dec_secteur_om_datemaj on m_dechet.geo_dec_secteur_enc
 
@@ -1672,7 +1599,7 @@ CREATE TRIGGER t_t3_geo_dec_secteur_om_datemaj
   BEFORE INSERT OR UPDATE
   ON m_dechet.geo_dec_secteur_enc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_maj();
+  EXECUTE PROCEDURE public.ft_r_timestamp_maj();
 
 -- Trigger: t_t4_geo_dec_secteur_om_datesai on m_dechet.geo_dec_secteur_enc
 
@@ -1682,7 +1609,7 @@ CREATE TRIGGER t_t4_geo_dec_secteur_om_datesai
   BEFORE INSERT
   ON m_dechet.geo_dec_secteur_enc
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_sai();
+  EXECUTE PROCEDURE public.ft_r_timestamp_sai();
 
 -- Trigger: t_t1_geo_dec_secteur_om_datemaj on m_dechet.geo_dec_secteur_om
 
@@ -1692,7 +1619,7 @@ CREATE TRIGGER t_t1_geo_dec_secteur_om_datemaj
   BEFORE INSERT OR UPDATE
   ON m_dechet.geo_dec_secteur_om
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_maj();
+  EXECUTE PROCEDURE public.ft_r_timestamp_maj();
 
 -- Trigger: t_t2_geo_dec_secteur_om_datesai on m_dechet.geo_dec_secteur_om
 
@@ -1702,4 +1629,4 @@ CREATE TRIGGER t_t2_geo_dec_secteur_om_datesai
   BEFORE INSERT
   ON m_dechet.geo_dec_secteur_om
   FOR EACH ROW
-  EXECUTE PROCEDURE public.r_timestamp_sai();
+  EXECUTE PROCEDURE public.ft_r_timestamp_sai();
