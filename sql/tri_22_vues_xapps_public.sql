@@ -7,7 +7,7 @@
 /* Auteur : Grégory Bodet */
 
 
-/* ******************************************* x_apps_public.xappspublic_geo_dec_pav_tlc ******************************************** */
+/* ******************************************* x_apps_public.xappspublic_geo_dec_pav_verre ******************************************** */
 
 -- View: x_apps_public.xappspublic_geo_dec_pav_verre
 
@@ -29,6 +29,8 @@ CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_verre
   GROUP BY l.idlieu, l.commune, l.quartier, l.adresse
   ORDER BY l.idlieu;
 
+  COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
+    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres';
 
 
 
@@ -54,7 +56,8 @@ CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
   GROUP BY l.idlieu, l.commune, l.quartier, l.adresse
   ORDER BY l.idlieu;
 
-  
+  COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
+    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs TLC';
   
 
 /* ******************************************* xappspublic_geo_v_dec_secteur_enc_secteur ******************************************** */
