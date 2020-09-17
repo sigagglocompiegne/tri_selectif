@@ -63,6 +63,31 @@ GRANT ALL ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO sig_create;
 GRANT ALL ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO create_sig;
 GRANT SELECT ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO read_sig;
 
+ALTER TABLE x_apps.xapps_an_dec_lieu_eve_tab
+    OWNER TO sig_create;
+
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps.xapps_an_dec_lieu_eve_tab TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_lieu_eve_tab TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_lieu_eve_tab TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_an_dec_lieu_eve_tab TO read_sig;
+
+ALTER TABLE x_apps.xapps_an_dec_pav_chiffre_cle_tab
+    OWNER TO sig_create;
+
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_tab TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_tab TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_tab TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_tab TO read_sig;
+
+ALTER TABLE x_apps.xapps_an_dec_pav_eve_tab
+    OWNER TO sig_create;
+
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps.xapps_an_dec_pav_eve_tab TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_eve_tab TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_eve_tab TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_an_dec_pav_eve_tab TO read_sig;
+                                                                  
+
 -- #################################################################### VUE GD PUBLIC  ####################################################################
 
 
