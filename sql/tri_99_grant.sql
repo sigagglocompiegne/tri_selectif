@@ -55,15 +55,20 @@ Sans objet
 
 -- #################################################################### VUE APPLICATIVE  ####################################################################
 
+ALTER TABLE x_apps.xapps_geo_v_pav_lieu_orient
+    OWNER TO sig_create;
 
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO read_sig;
 
 -- #################################################################### VUE GD PUBLIC  ####################################################################
 
 
 ALTER TABLE x_apps_public.xappspublic_geo_dec_pav_verre
     OWNER TO sig_create;
-COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
-    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres';
+
 
 GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO edit_sig;
 GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO sig_create;
@@ -73,8 +78,6 @@ GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO read_sig;
 
 ALTER TABLE x_apps_public.xappspublic_geo_dec_pav_tlc
     OWNER TO sig_create;
-COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
-    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs TLC';
 
 GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO edit_sig;
 GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO sig_create;
@@ -84,8 +87,7 @@ GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO read_sig;
 
 ALTER TABLE x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur
     OWNER TO sig_create;
-COMMENT ON VIEW x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur
-    IS 'Vue géométrique contenant les secteurs de rammassage des encombrants pour export dans GEO APPLI GD PUBLIC';
+
 
 GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur TO edit_sig;
 GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur TO sig_create;
