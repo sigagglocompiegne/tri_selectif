@@ -55,13 +55,13 @@ Sans objet
 
 -- #################################################################### VUE APPLICATIVE  ####################################################################
 
-ALTER TABLE x_apps.xapps_geo_v_pav_lieu_orient
+ALTER TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient
     OWNER TO sig_create;
 
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO edit_sig;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO sig_create;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO create_sig;
-GRANT SELECT ON TABLE x_apps.xapps_geo_v_pav_lieu_orient TO read_sig;
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO sig_create;
+GRANT ALL ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO create_sig;
+GRANT SELECT ON TABLE x_apps.xapps_geo_v_dec_pav_lieu_orient TO read_sig;
 
 -- #################################################################### VUE GD PUBLIC  ####################################################################
 
