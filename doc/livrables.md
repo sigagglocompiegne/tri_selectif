@@ -8,6 +8,10 @@
 
 # Livrables
 
+## Principe fonctionnel et modalités de mises à jour
+
+(à compléter cf annexe 2)
+
 ## Système de coordonnées
 
 Les coordonnées seront exprimées en mètre avec trois chiffres après la virgule dans le système national en vigueur.
