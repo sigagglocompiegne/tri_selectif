@@ -54,15 +54,6 @@ CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
   GROUP BY l.idlieu, l.commune, l.quartier, l.adresse
   ORDER BY l.idlieu;
 
-ALTER TABLE x_apps_public.xappspublic_geo_dec_pav_tlc
-    OWNER TO sig_create;
-COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
-    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs TLC';
-
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO edit_sig;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO create_sig;
-GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_dec_pav_tlc TO read_sig;
   
   
 
