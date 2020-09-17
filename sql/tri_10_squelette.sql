@@ -9,7 +9,7 @@
 
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
--- ###                                                                SCHEMA                                                           ###
+-- ###                                                                SCHEMA                                                                        ###
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
@@ -28,7 +28,7 @@ COMMENT ON SCHEMA m_dechet
 
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
--- ###                                                                SEQUENCE                                                           ###
+-- ###                                                                SEQUENCE                                                                      ###
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
@@ -180,9 +180,9 @@ INSERT INTO m_dechet.lt_pav_contmat(
 
 CREATE TABLE m_dechet.lt_pav_contpos
 (
-  cont_pos character varying(2) NOT NULL, -- code du type de position du conteneur
-  cont_pos_lib character varying(30), -- libellé du type de position du conteneur
-  CONSTRAINT lt_pav_contpos_pkkey PRIMARY KEY (cont_pos) -- Clé primaire de la table lt_pav_contpos
+  code character varying(2) NOT NULL, -- code du type de position du conteneur
+  valeur character varying(30), -- libellé du type de position du conteneur
+  CONSTRAINT lt_pav_contpos_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_contpos
 )
 WITH (
   OIDS=FALSE
@@ -190,13 +190,12 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_contpos
   IS 'Liste de valeurs des codes du type de position du conteneur';
-COMMENT ON COLUMN m_dechet.lt_pav_contpos.cont_pos IS 'code du type de position du conteneur';
-COMMENT ON COLUMN m_dechet.lt_pav_contpos.cont_pos_lib IS 'libellé du type de position du conteneur';
-
+COMMENT ON COLUMN m_dechet.lt_pav_contpos.code IS 'code du type de position du conteneur';
+COMMENT ON COLUMN m_dechet.lt_pav_contpos.valeur IS 'libellé du type de position du conteneur';
 COMMENT ON CONSTRAINT lt_pav_contpos_pkkey ON m_dechet.lt_pav_contpos IS 'Clé primaire de la table lt_pav_contpos';
 
 INSERT INTO m_dechet.lt_pav_contpos(
-            cont_pos, cont_pos_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Aérien'),
@@ -211,9 +210,9 @@ INSERT INTO m_dechet.lt_pav_contpos(
 
 CREATE TABLE m_dechet.lt_pav_crochet
 (
-  crochet character varying(2) NOT NULL, -- code de l'état du crochet
-  crochet_lib character varying(30), -- libellé de l'état du crochet
-  CONSTRAINT lt_pav_crochet_pkkey PRIMARY KEY (crochet) -- Clé primaire de la table lt_pav_crochet
+  code character varying(2) NOT NULL, -- code de l'état du crochet
+  valeur character varying(30), -- libellé de l'état du crochet
+  CONSTRAINT lt_pav_crochet_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_crochet
 )
 WITH (
   OIDS=FALSE
@@ -221,18 +220,23 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_crochet
   IS 'Liste de valeurs des codes de l''état du crochet ';
-COMMENT ON COLUMN m_dechet.lt_pav_crochet.crochet IS 'code de l''état du crochet ';
-COMMENT ON COLUMN m_dechet.lt_pav_crochet.crochet_lib IS 'libellé de l''état du crochet ';
+COMMENT ON COLUMN m_dechet.lt_pav_crochet.code IS 'code de l''état du crochet ';
+COMMENT ON COLUMN m_dechet.lt_pav_crochet.valeur IS 'libellé de l''état du crochet ';
 
 COMMENT ON CONSTRAINT lt_pav_crochet_pkkey ON m_dechet.lt_pav_crochet IS 'Clé primaire de la table lt_pav_crochet';
 
 INSERT INTO m_dechet.lt_pav_crochet(
-            crochet, crochet_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','RAS'),
     ('20','Tordu');
-    
+
+-- ################################################################# Domaine valeur - lt_pav_cttype  ###############################################
+
+
+
+
     
 -- ################################################################# Domaine valeur - lt_pav_envimplan  ###############################################
 
@@ -242,9 +246,9 @@ INSERT INTO m_dechet.lt_pav_crochet(
 
 CREATE TABLE m_dechet.lt_pav_envimplan
 (
-  env_implan character varying(2) NOT NULL, -- code du type d'espace urbain d'implantation
-  env_implan_lib character varying(30), -- libellé du type d'espace urbain d'implantation
-  CONSTRAINT lt_pav_envimplan_pkkey PRIMARY KEY (env_implan) -- Clé primaire de la table lt_pav_envimplan
+  code character varying(2) NOT NULL, -- code du type d'espace urbain d'implantation
+  valeur character varying(30), -- libellé du type d'espace urbain d'implantation
+  CONSTRAINT lt_pav_envimplan_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_envimplan
 )
 WITH (
   OIDS=FALSE
@@ -258,7 +262,7 @@ COMMENT ON COLUMN m_dechet.lt_pav_envimplan.env_implan_lib IS 'libellé du type 
 COMMENT ON CONSTRAINT lt_pav_envimplan_pkkey ON m_dechet.lt_pav_envimplan IS 'Clé primaire de la table lt_pav_envimplan';
 
 INSERT INTO m_dechet.lt_pav_envimplan(
-            env_implan, env_implan_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Pavillonnaire'),
@@ -274,9 +278,9 @@ INSERT INTO m_dechet.lt_pav_envimplan(
 
 CREATE TABLE m_dechet.lt_pav_envsitu
 (
-  env_situ character varying(2) NOT NULL, -- code de la situation domaniale
-  env_situ_lib character varying(30), -- libellé du type de la situation domaniale
-  CONSTRAINT lt_pav_envsitu_pkkey PRIMARY KEY (env_situ) -- Clé primaire de la table lt_pav_envsitu
+  code character varying(2) NOT NULL, -- code de la situation domaniale
+  valeur character varying(30), -- libellé du type de la situation domaniale
+  CONSTRAINT lt_pav_envsitu_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_envsitu
 )
 WITH (
   OIDS=FALSE
@@ -284,13 +288,13 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_envsitu
   IS 'Liste de valeurs des codes de la situation domaniale';
-COMMENT ON COLUMN m_dechet.lt_pav_envsitu.env_situ IS 'code de la situation domaniale';
-COMMENT ON COLUMN m_dechet.lt_pav_envsitu.env_situ_lib IS 'libellé du type de la situation domaniale';
+COMMENT ON COLUMN m_dechet.lt_pav_envsitu.code IS 'code de la situation domaniale';
+COMMENT ON COLUMN m_dechet.lt_pav_envsitu.valeur IS 'libellé du type de la situation domaniale';
 
 COMMENT ON CONSTRAINT lt_pav_envsitu_pkkey ON m_dechet.lt_pav_envsitu IS 'Clé primaire de la table lt_pav_envsitu';
 
 INSERT INTO m_dechet.lt_pav_envsitu(
-            env_situ, env_situ_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Terrain privé'),
@@ -304,9 +308,9 @@ INSERT INTO m_dechet.lt_pav_envsitu(
 
 CREATE TABLE m_dechet.lt_pav_envtype
 (
-  env_type character varying(2) NOT NULL, -- code du type d'espace géographique
-  env_type_lib character varying(30), -- libellé du type d'espace géographique
-  CONSTRAINT lt_pav_envtype_pkkey PRIMARY KEY (env_type) -- Clé primaire de la table lt_pav_envtype
+  code character varying(2) NOT NULL, -- code du type d'espace géographique
+  valeur character varying(30), -- libellé du type d'espace géographique
+  CONSTRAINT lt_pav_envtype_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_envtype
 )
 WITH (
   OIDS=FALSE
@@ -314,14 +318,14 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_envtype
   IS 'Liste de valeurs des codes du type d''espace géographique';
-COMMENT ON COLUMN m_dechet.lt_pav_envtype.env_type IS 'code du type d''espace géographique';
-COMMENT ON COLUMN m_dechet.lt_pav_envtype.env_type_lib IS 'libellé du type d''espace géographique';
+COMMENT ON COLUMN m_dechet.lt_pav_envtype.code IS 'code du type d''espace géographique';
+COMMENT ON COLUMN m_dechet.lt_pav_envtype.valeur IS 'libellé du type d''espace géographique';
 
 COMMENT ON CONSTRAINT lt_pav_envtype_pkkey ON m_dechet.lt_pav_envtype IS 'Clé primaire de la table lt_pav_envtype';
 
 
 INSERT INTO m_dechet.lt_pav_envtype(
-            env_type, env_type_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Urbain'),
@@ -336,9 +340,9 @@ INSERT INTO m_dechet.lt_pav_envtype(
 
 CREATE TABLE m_dechet.lt_pav_etatsign
 (
-  etat_sign character varying(2) NOT NULL, -- Code matériaux constituant le conteneur
-  etat_sign_lib character varying(30), -- Libellé des matériaux constituant le conteneur
-  CONSTRAINT lt_pav_etat_sign_pkkey PRIMARY KEY (etat_sign) -- Clé primaire de la table lt_pav_etat_sign
+  code character varying(2) NOT NULL, -- Code matériaux constituant le conteneur
+  valeur character varying(30), -- Libellé des matériaux constituant le conteneur
+  CONSTRAINT lt_pav_etat_sign_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_etat_sign
 )
 WITH (
   OIDS=FALSE
@@ -346,20 +350,26 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_etatsign
   IS 'Liste de valeurs de l''état de la signalitique';
-COMMENT ON COLUMN m_dechet.lt_pav_etatsign.etat_sign IS 'Code matériaux constituant le conteneur';
-COMMENT ON COLUMN m_dechet.lt_pav_etatsign.etat_sign_lib IS 'Libellé des matériaux constituant le conteneur';
+COMMENT ON COLUMN m_dechet.lt_pav_etatsign.code IS 'Code matériaux constituant le conteneur';
+COMMENT ON COLUMN m_dechet.lt_pav_etatsign.valeur IS 'Libellé des matériaux constituant le conteneur';
 
 COMMENT ON CONSTRAINT lt_pav_etat_sign_pkkey ON m_dechet.lt_pav_etatsign IS 'Clé primaire de la table lt_pav_etat_sign';
 
 
 INSERT INTO m_dechet.lt_pav_etatsign(
-            etat_sign, etat_sign_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Correct'),
     ('20','Moyen'), 
     ('30','Mauvais'),
     ('40','Incomplet'); 
+    
+-- ################################################################# Domaine valeur - lt_pav_eve  ###############################################
+
+
+
+
     
 -- ################################################################# Domaine valeur - lt_pav_gest  ###############################################
 
@@ -369,9 +379,9 @@ INSERT INTO m_dechet.lt_pav_etatsign(
 
 CREATE TABLE m_dechet.lt_pav_gest
 (
-  nom_entrep character varying(2) NOT NULL, -- code du gestionnaire du PAV TLC
-  nom_entrep_lib character varying(30), -- Libellé du code du gestionnaire du PAV TLC
-  CONSTRAINT lt_pav_gest_pkkey PRIMARY KEY (nom_entrep) -- Clé primaire de la table lt_pav_gest
+  code character varying(2) NOT NULL, -- code du gestionnaire du PAV TLC
+  valeur character varying(30), -- Libellé du code du gestionnaire du PAV TLC
+  CONSTRAINT lt_pav_gest_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_gest
 )
 WITH (
   OIDS=FALSE
@@ -379,19 +389,26 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_gest
   IS 'Liste de valeurs des codes des gestionnaire du PAV TLC';
-COMMENT ON COLUMN m_dechet.lt_pav_gest.nom_entrep IS 'code du gestionnaire du PAV TLC';
-COMMENT ON COLUMN m_dechet.lt_pav_gest.nom_entrep_lib IS 'Libellé du code du gestionnaire du PAV TLC';
+COMMENT ON COLUMN m_dechet.lt_pav_gest.code IS 'code du gestionnaire du PAV TLC';
+COMMENT ON COLUMN m_dechet.lt_pav_gest.valeur IS 'Libellé du code du gestionnaire du PAV TLC';
 
 COMMENT ON CONSTRAINT lt_pav_gest_pkkey ON m_dechet.lt_pav_gest IS 'Clé primaire de la table lt_pav_gest';
 
 
 INSERT INTO m_dechet.lt_pav_gest(
-            nom_entrep, nom_entrep_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Le Relais'),
     ('20','Eco Textile'), 
     ('99','Autre'); 
+    
+-- ################################################################# Domaine valeur - lt_pav_modele  #################################################
+
+
+
+
+
     
 -- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
 
@@ -401,9 +418,9 @@ INSERT INTO m_dechet.lt_pav_gest(
 
 CREATE TABLE m_dechet.lt_pav_modepreh
 (
-  mode_preh character varying(2) NOT NULL, -- code du mode de préhension
-  mode_preh_lib character varying(30), -- libellé du mode de préhension
-  CONSTRAINT lt_pav_modepreh_pkkey PRIMARY KEY (mode_preh) -- Clé primaire de la table lt_pav_modepreh
+  code character varying(2) NOT NULL, -- code du mode de préhension
+  valeur character varying(30), -- libellé du mode de préhension
+  CONSTRAINT lt_pav_modepreh_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_modepreh
 )
 WITH (
   OIDS=FALSE
@@ -411,14 +428,14 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_modepreh
   IS 'Liste de valeurs des codes du mode de préhension';
-COMMENT ON COLUMN m_dechet.lt_pav_modepreh.mode_preh IS 'code du mode de préhension';
-COMMENT ON COLUMN m_dechet.lt_pav_modepreh.mode_preh_lib IS 'libellé du mode de préhension';
+COMMENT ON COLUMN m_dechet.lt_pav_modepreh.code IS 'code du mode de préhension';
+COMMENT ON COLUMN m_dechet.lt_pav_modepreh.valeur IS 'libellé du mode de préhension';
 
 COMMENT ON CONSTRAINT lt_pav_modepreh_pkkey ON m_dechet.lt_pav_modepreh IS 'Clé primaire de la table lt_pav_modepreh';
 
 
 INSERT INTO m_dechet.lt_pav_modepreh(
-            mode_preh, mode_preh_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Crochet'),
@@ -433,9 +450,9 @@ INSERT INTO m_dechet.lt_pav_modepreh(
 
 CREATE TABLE m_dechet.lt_pav_natpb
 (
-  nat_pb character varying(2) NOT NULL, -- code de la nature du ou des problèmes
-  nat_pb_lib character varying(30), -- Libellé des codes de la nature du ou des problèmes
-  CONSTRAINT lt_pav_natpb_pkkey PRIMARY KEY (nat_pb) -- Clé primaire de la table lt_pav_natpb
+  code character varying(2) NOT NULL, -- code de la nature du ou des problèmes
+  valeur character varying(30), -- Libellé des codes de la nature du ou des problèmes
+  CONSTRAINT lt_pav_natpb_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_natpb
 )
 WITH (
   OIDS=FALSE
@@ -443,14 +460,14 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_natpb
   IS 'Liste de valeurs des codes de la nature du ou des problèmes';
-COMMENT ON COLUMN m_dechet.lt_pav_natpb.nat_pb IS 'code de la nature du ou des problèmes';
-COMMENT ON COLUMN m_dechet.lt_pav_natpb.nat_pb_lib IS 'Libellé des codes de la nature du ou des problèmes';
+COMMENT ON COLUMN m_dechet.lt_pav_natpb.code IS 'code de la nature du ou des problèmes';
+COMMENT ON COLUMN m_dechet.lt_pav_natpb.valeur IS 'Libellé des codes de la nature du ou des problèmes';
 
 COMMENT ON CONSTRAINT lt_pav_natpb_pkkey ON m_dechet.lt_pav_natpb IS 'Clé primaire de la table lt_pav_natpb';
 
 
 INSERT INTO m_dechet.lt_pav_natpb(
-            nat_pb, nat_pb_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('01','Accès restreint'),
@@ -473,9 +490,9 @@ INSERT INTO m_dechet.lt_pav_natpb(
 
 CREATE TABLE m_dechet.lt_pav_pavorient
 (
-  pavorient character varying(2) NOT NULL, -- code de l'orientation du PAV suite à l'état des lieux de l'été 2016
-  pavorient_lib character varying(30), -- Libellé de l'orientation du PAV suite à l'état des lieux de l'été 2016
-  CONSTRAINT lt_pav_pavorient_pkkey PRIMARY KEY (pavorient) -- Clé primaire de la table lt_pav_pavorient
+  code character varying(2) NOT NULL, -- code de l'orientation du PAV suite à l'état des lieux de l'été 2016
+  valeur character varying(30), -- Libellé de l'orientation du PAV suite à l'état des lieux de l'été 2016
+  CONSTRAINT lt_pav_pavorient_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_pavorient
 )
 WITH (
   OIDS=FALSE
@@ -483,13 +500,13 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_pavorient
   IS 'Liste de valeurs des orientations retenues';
-COMMENT ON COLUMN m_dechet.lt_pav_pavorient.pavorient IS 'code de l''orientation du PAV suite à l''état des lieux de l''été 2016';
-COMMENT ON COLUMN m_dechet.lt_pav_pavorient.pavorient_lib IS 'Libellé de l''orientation du PAV suite à l''état des lieux de l''été 2016';
+COMMENT ON COLUMN m_dechet.lt_pav_pavorient.code IS 'code de l''orientation du PAV suite à l''état des lieux de l''été 2016';
+COMMENT ON COLUMN m_dechet.lt_pav_pavorient.valeur IS 'Libellé de l''orientation du PAV suite à l''état des lieux de l''été 2016';
 
 COMMENT ON CONSTRAINT lt_pav_pavorient_pkkey ON m_dechet.lt_pav_pavorient IS 'Clé primaire de la table lt_pav_pavorient';
 
 INSERT INTO m_dechet.lt_pav_pavorient(
-            pavorient, pavorient_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','A conserver seul'),
@@ -506,9 +523,9 @@ INSERT INTO m_dechet.lt_pav_pavorient(
 
 CREATE TABLE m_dechet.lt_pav_peinture
 (
-  peinture character varying(2) NOT NULL, -- code de l'état de la peinture
-  peinture_lib character varying(30), -- Libellé de l'état de la peinture
-  CONSTRAINT lt_pav_peinture_pkkey PRIMARY KEY (peinture) -- Clé primaire de la table lt_pav_peinture
+  code character varying(2) NOT NULL, -- code de l'état de la peinture
+  valeur character varying(30), -- Libellé de l'état de la peinture
+  CONSTRAINT lt_pav_peinture_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_peinture
 )
 WITH (
   OIDS=FALSE
@@ -516,13 +533,13 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_peinture
   IS 'Liste de valeurs des code de l''état de la peinture';
-COMMENT ON COLUMN m_dechet.lt_pav_peinture.peinture IS 'code de l''état de la peinture';
-COMMENT ON COLUMN m_dechet.lt_pav_peinture.peinture_lib IS 'Libellé de l''état de la peinture';
+COMMENT ON COLUMN m_dechet.lt_pav_peinture.code IS 'code de l''état de la peinture';
+COMMENT ON COLUMN m_dechet.lt_pav_peinture.valeur IS 'Libellé de l''état de la peinture';
 
 COMMENT ON CONSTRAINT lt_pav_peinture_pkkey ON m_dechet.lt_pav_peinture IS 'Clé primaire de la table lt_pav_peinture';
 
 INSERT INTO m_dechet.lt_pav_peinture(
-            peinture, peinture_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','RAS'),
@@ -537,9 +554,9 @@ INSERT INTO m_dechet.lt_pav_peinture(
 
 CREATE TABLE m_dechet.lt_pav_proprete
 (
-  proprete character varying(2) NOT NULL, -- code de l'état de la propreté
-  proprete_lib character varying(30), -- Libellé code de l'état de la propreté
-  CONSTRAINT lt_pav_proprete_pkkey PRIMARY KEY (proprete) -- Clé primaire de la table lt_pav_proprete
+  code character varying(2) NOT NULL, -- code de l'état de la propreté
+  valeur character varying(30), -- Libellé code de l'état de la propreté
+  CONSTRAINT lt_pav_proprete_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_proprete
 )
 WITH (
   OIDS=FALSE
@@ -547,14 +564,14 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_proprete
   IS 'Liste de valeurs des codes de l''état de la propreté';
-COMMENT ON COLUMN m_dechet.lt_pav_proprete.proprete IS 'code de l''état de la propreté';
-COMMENT ON COLUMN m_dechet.lt_pav_proprete.proprete_lib IS 'Libellé code de l''état de la propreté';
+COMMENT ON COLUMN m_dechet.lt_pav_proprete.code IS 'code de l''état de la propreté';
+COMMENT ON COLUMN m_dechet.lt_pav_proprete.valeur IS 'Libellé code de l''état de la propreté';
 
 COMMENT ON CONSTRAINT lt_pav_proprete_pkkey ON m_dechet.lt_pav_proprete IS 'Clé primaire de la table lt_pav_proprete';
 
 
 INSERT INTO m_dechet.lt_pav_proprete(
-            proprete, proprete_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Propre'),
@@ -569,9 +586,9 @@ INSERT INTO m_dechet.lt_pav_proprete(
 
 CREATE TABLE m_dechet.lt_pav_statut
 (
-  statut character varying(2) NOT NULL, -- code du statut
-  statut_lib character varying(30), -- Libellé du statut
-  CONSTRAINT lt_pav_statut_pkkey PRIMARY KEY (statut) -- Clé primaire de la table lt_pav_statut
+  code character varying(2) NOT NULL, -- code du statut
+  valeur character varying(30), -- Libellé du statut
+  CONSTRAINT lt_pav_statut_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_statut
 )
 WITH (
   OIDS=FALSE
@@ -579,13 +596,13 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_statut
   IS 'Liste de valeurs des codes du statut du PAV';
-COMMENT ON COLUMN m_dechet.lt_pav_statut.statut IS 'code du statut';
-COMMENT ON COLUMN m_dechet.lt_pav_statut.statut_lib IS 'Libellé du statut';
+COMMENT ON COLUMN m_dechet.lt_pav_statut.code IS 'code du statut';
+COMMENT ON COLUMN m_dechet.lt_pav_statut.valeur IS 'Libellé du statut';
 
 COMMENT ON CONSTRAINT lt_pav_statut_pkkey ON m_dechet.lt_pav_statut IS 'Clé primaire de la table lt_pav_statut';
 
 INSERT INTO m_dechet.lt_pav_statut(
-            statut, statut_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Actif'),
@@ -599,9 +616,9 @@ INSERT INTO m_dechet.lt_pav_statut(
 
 CREATE TABLE m_dechet.lt_pav_typesign
 (
-  type_sign character varying(2) NOT NULL, -- code du type de signalétique
-  type_sign_lib character varying(30), -- Libellé du type de signalétique
-  CONSTRAINT lt_pav_typesign_pkkey PRIMARY KEY (type_sign) -- Clé primaire de la table lt_pav_typesign
+  code character varying(2) NOT NULL, -- code du type de signalétique
+  valeur character varying(30), -- Libellé du type de signalétique
+  CONSTRAINT lt_pav_typesign_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_typesign
 )
 WITH (
   OIDS=FALSE
@@ -609,13 +626,13 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_typesign
   IS 'Liste de valeurs des codes du type de signalétique';
-COMMENT ON COLUMN m_dechet.lt_pav_typesign.type_sign IS 'code du type de signalétique';
-COMMENT ON COLUMN m_dechet.lt_pav_typesign.type_sign_lib IS 'Libellé du type de signalétique';
+COMMENT ON COLUMN m_dechet.lt_pav_typesign.code IS 'code du type de signalétique';
+COMMENT ON COLUMN m_dechet.lt_pav_typesign.valeur IS 'Libellé du type de signalétique';
 
 COMMENT ON CONSTRAINT lt_pav_typesign_pkkey ON m_dechet.lt_pav_typesign IS 'Clé primaire de la table lt_pav_typesign';
 
 INSERT INTO m_dechet.lt_pav_typesign(
-            type_sign, type_sign_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Adhésif'),
@@ -631,9 +648,9 @@ INSERT INTO m_dechet.lt_pav_typesign(
 
 CREATE TABLE m_dechet.lt_pav_typesol
 (
-  type_sol character varying(2) NOT NULL, -- code du type de sol
-  type_sol_lib character varying(30), -- Libellé du type de sol
-  CONSTRAINT lt_pav_typesol_pkkey PRIMARY KEY (type_sol) -- Clé primaire de la table lt_pav_typesol
+  code character varying(2) NOT NULL, -- code du type de sol
+  valeur character varying(30), -- Libellé du type de sol
+  CONSTRAINT lt_pav_typesol_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_typesol
 )
 WITH (
   OIDS=FALSE
@@ -641,13 +658,13 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_typesol
   IS 'Liste de valeurs des types de sols';
-COMMENT ON COLUMN m_dechet.lt_pav_typesol.type_sol IS 'code du type de sol';
-COMMENT ON COLUMN m_dechet.lt_pav_typesol.type_sol_lib IS 'Libellé du type de sol';
+COMMENT ON COLUMN m_dechet.lt_pav_typesol.code IS 'code du type de sol';
+COMMENT ON COLUMN m_dechet.lt_pav_typesol.valeur IS 'Libellé du type de sol';
 
 COMMENT ON CONSTRAINT lt_pav_typesol_pkkey ON m_dechet.lt_pav_typesol IS 'Clé primaire de la table lt_pav_typesol';
 
 INSERT INTO m_dechet.lt_pav_typesol(
-            type_sol, type_sol_lib)
+            code, valeur)
     VALUES
     ('00','Non renseigné'),
     ('10','Dalle'),
