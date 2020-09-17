@@ -32,117 +32,91 @@ COMMENT ON SCHEMA m_dechet
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
-
+DROP SEQUENCE IF EXISTS m_dechet.geo_dec_pav_lieu_idlieu_seq;
+DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_cont_idcont_seq;
 DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_doc_media_gid_seq;
-DROP SEQUENCE IF EXISTS m_dechet.geo_dec_dechetterie_gid_seq;
-DROP SEQUENCE mIF EXISTS _dechet.geo_dec_pav_idconv_seq;
-DROP SEQUENCE IF EXISTS m_dechet.geo_dec_secteur_enc_seq;
-DROP SEQUENCE IF EXISTS m_dechet.geo_dec_secteur_om_seq;
-DROP SEQUENCE IF EXISTS m_dechet.log_dec_pav_gid_seq;
 
 -- ################################################################# Séquence sur TABLE  ###############################################
 
--- Sequence: m_dechet.an_dec_pav_doc_media_gid_seq
+-- SEQUENCE: m_dechet.geo_dec_pav_lieu_idlieu_seq
+
+-- DROP SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq;
+
+CREATE SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq
+    INCREMENT 1
+    START 424
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+COMMENT ON SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq
+    IS 'Séquence d''incrémentation d''un numéro automatique sur le champ idlieu de la table geo_dec_pav_lieu';
+    
+-- SEQUENCE: m_dechet.an_dec_pav_cont_idcont_seq
+
+-- DROP SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq;
+
+CREATE SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq
+    INCREMENT 1
+    START 362
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq
+    OWNER TO sig_create;
+
+-- SEQUENCE: m_dechet.an_dec_pav_doc_media_gid_seq
 
 -- DROP SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq;
 
 CREATE SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 331
-  CACHE 1;
-  
-  -- Sequence: m_dechet.geo_dec_dechetterie_gid_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
 
--- DROP SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq;
-
-CREATE SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 4
-  CACHE 1;
-  
-  -- Sequence: m_dechet.geo_dec_pav_idconv_seq
-
--- DROP SEQUENCE m_dechet.geo_dec_pav_idconv_seq;
-
-CREATE SEQUENCE m_dechet.geo_dec_pav_idconv_seq
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 415
-  CACHE 1;
-  
-  -- Sequence: m_dechet.geo_dec_secteur_enc_seq
-
--- DROP SEQUENCE m_dechet.geo_dec_secteur_enc_seq;
-
-CREATE SEQUENCE m_dechet.geo_dec_secteur_enc_seq
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 838
-  CACHE 1;
-  
-  
-  -- Sequence: m_dechet.geo_dec_secteur_om_seq
-
--- DROP SEQUENCE m_dechet.geo_dec_secteur_om_seq;
-
-CREATE SEQUENCE m_dechet.geo_dec_secteur_om_seq
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 23
-  CACHE 1;
-  
-  -- Sequence: m_dechet.log_dec_pav_gid_seq
-
--- DROP SEQUENCE m_dechet.log_dec_pav_gid_seq;
-
-CREATE SEQUENCE m_dechet.log_dec_pav_gid_seq
-  INCREMENT 1
-  MINVALUE 1
-  MAXVALUE 9223372036854775807
-  START 32
-  CACHE 1;
   
   
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
--- ###                                                                DOMAINE DE VALEURS                                                           ###
+-- ###                                                                DOMAINE DE VALEURS                                                            ###
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
 
 -- fkey
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_contmat_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_contpos_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_envimplan_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_envsitu_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_envtype_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_gest_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_peinture_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_srcgeom_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_tlc DROP CONSTRAINT IF EXISTS geo_dec_pav_tlc_typesol_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_contrat_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_cttype_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_envimplan_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_envsitu_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_envtype_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_model_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_natpb_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_orient_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_propabord_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_srcgeom_fkey;
+ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_statut_fkey;
 
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_contmat_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_contpos_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_crochet_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_envimplan_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_envsitu_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_envtype_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_etatsign_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_modepreh_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_peinture_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_propabord_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_proprete_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_srcgeom_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_statut_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_typesign_fkey;
-ALTER TABLE m_dechet.geo_dec_pav_verre DROP CONSTRAINT IF EXISTS geo_dec_pav_verre_typesol_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_crochet_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_etatsign_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_eve_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_mat_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_model_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_modepreh_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_peinture_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_pos_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_prop_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_typesign_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_typesol_fkey;
+
+ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_eve_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_gest_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_mat_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_model_fkey;
+ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_pos_fkey;
+
 
 -- domaine de valeur
 DROP TABLE IF EXISTS m_dechet.lt_pav_contmat;
@@ -161,7 +135,9 @@ DROP TABLE IF EXISTS m_dechet.lt_pav_proprete;
 DROP TABLE IF EXISTS m_dechet.lt_pav_statut;
 DROP TABLE IF EXISTS m_dechet.lt_pav_typesign;
 DROP TABLE IF EXISTS m_dechet.lt_pav_typesol;
-
+DROP TABLE IF EXISTS m_dechet.lt_pav_cttype;
+DROP TABLE IF EXISTS m_dechet.lt_pav_eve;
+DROP TABLE IF EXISTS m_dechet.lt_pav_modele;
 
 -- ################################################################# Domaine valeur - lt_pav_contmat  ###############################################
 
