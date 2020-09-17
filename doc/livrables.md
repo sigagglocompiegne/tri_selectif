@@ -15,6 +15,7 @@ Sur le territoire métropolitain s'applique le système géodésique français l
 
 ## Topologie
 
+- Tout objet est nécessairement inclu dans l'emprise des communes de l'Agglomération de la Région de Compiègne et ne peut être qu'inclus dans l'espace public sauf si il s'agit d'une parcelle cadastrale appartenant à une collectivité.
 
 ## Format des fichiers
 
