@@ -394,9 +394,43 @@ INSERT INTO m_dechet.lt_pav_etatsign(
     
 -- ################################################################# Domaine valeur - lt_pav_eve  ###############################################
 
+-- Table: m_dechet.lt_pav_eve
+
+-- DROP TABLE m_dechet.lt_pav_eve;
+
+CREATE TABLE m_dechet.lt_pav_eve
+(
+    code character varying(2) COLLATE pg_catalog."default" NOT NULL,
+    valeur character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT lt_pav_eve_pkkey PRIMARY KEY (code)
+)
+WITH (
+    OIDS = FALSE
+);
 
 
+COMMENT ON TABLE m_dechet.lt_pav_eve
+    IS 'Liste de valeurs des codes du type de signalétique';
 
+COMMENT ON COLUMN m_dechet.lt_pav_eve.code
+    IS 'code de l''évènement du conteneur';
+
+COMMENT ON COLUMN m_dechet.lt_pav_eve.valeur
+    IS 'Libellé de l''évènement';
+
+INSERT INTO m_dechet.lt_pav_eve(
+            code, valeur)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Ajout (initialisation de la base de donnée)'),
+    ('11','Ajout (nouveau lieu de collecte)'), 
+    ('12','Ajout (dû à un remplacement)'),
+    ('13','Ajout (pour un complément)'),
+    ('14','Ajout (dû à un déplacement du lieu de collecte)'),    
+    ('20','Déposé'),
+    ('21','Déposé (suppression du lieu de collecte)'),
+    ('30','Remplacé (à l''identique)'),
+    ('31','Remplacé (par un autre modèle)'); 
     
 -- ################################################################# Domaine valeur - lt_pav_gest  ###############################################
 
@@ -432,10 +466,48 @@ INSERT INTO m_dechet.lt_pav_gest(
     
 -- ################################################################# Domaine valeur - lt_pav_modele  #################################################
 
+-- Table: m_dechet.lt_pav_modele
+
+-- DROP TABLE m_dechet.lt_pav_modele;
+
+CREATE TABLE m_dechet.lt_pav_modele
+(
+    code character varying(2) COLLATE pg_catalog."default" NOT NULL,
+    valeur character varying(50) COLLATE pg_catalog."default",
+    nomfic character varying(254) COLLATE pg_catalog."default",
+    urlfic character varying(254) COLLATE pg_catalog."default",
+    CONSTRAINT lt_pav_modele_pkkey PRIMARY KEY (code)
+)
+WITH (
+    OIDS = FALSE
+);
+
+COMMENT ON TABLE m_dechet.lt_pav_modele
+    IS 'Liste de valeurs des modèles de conteneur';
+
+COMMENT ON COLUMN m_dechet.lt_pav_modele.code
+    IS 'code du modèle';
+
+COMMENT ON COLUMN m_dechet.lt_pav_modele.valeur
+    IS 'Libellé du conteneur';
+
+COMMENT ON COLUMN m_dechet.lt_pav_modele.nomfic
+    IS 'Nom du fichier contenant la photo du modèle';
+
+COMMENT ON COLUMN m_dechet.lt_pav_modele.urlfic
+    IS 'Lien vers la photographie du modèle';
 
 
-
-
+INSERT INTO m_dechet.lt_pav_modele(
+            code, valeur,nomfic,urlfic)
+    VALUES
+    ('00','Non renseigné','non_disponible.jpg','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg'),
+    ('01','TEMACO - MULTIPACK C600 4m3','tamaco6004.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png'),
+    ('02','COLLECTAL-VILLIGERS City Line 4m3','villigerscityline4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png'), 
+    ('03','TEMACO - PO MULTIPACK C600 4m3','tamacopo6003.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png'),
+    ('04','SULO-CITY BULLE 4m3','sulocitybulle4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png'),
+    ('05','UTPM 3m3','utpm3.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png'),
+    ('06','MULTIPACK ENTERRE PO - 4m3','tamacoenterrepo4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png'); 
     
 -- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
 
@@ -701,7 +773,7 @@ INSERT INTO m_dechet.lt_pav_typesol(
 
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
--- ###                                                                TABLE                                                           ###
+-- ###                                                                TABLE                                                           		    ###
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
