@@ -8,7 +8,9 @@ Ensemble des éléments constituant la mise en oeuvre de la base de données sur
 
 ## Changelog
 
-- 02/01/2021 : description initiale du gabarit de production de l'inventaire du réseau pluvial
+- 17/09/2020 : GB / Version 2 du modèle de données
+- 17/12/2018 : GB / ventilation du code SQL dans les fichiers d'initialisations SQL
+- 07/12/2018 : GB / Version 1 du modèle de données, initialisation du code SQL sur GitHub
 
 ## Scripts SQL 
 
