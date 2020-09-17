@@ -1,4 +1,9 @@
+![picto](/doc/img/geocompiegnois_2020_reduit_v2.png)
+
+# Standard local des Points d'Apport Volontaire Verre
+
 Ensemble des éléments constituant la mise en oeuvre de la base de données sur le tri sélectif ainsi que l'exploitation des données dans l'application dédiée :
+
 - Script d'initialisation de la base de données
   * [Suivi des modifications](sql/tri_00_trace.sql)
   * [Création de la structure initiale](sql/tri_10_squelette.sql)
