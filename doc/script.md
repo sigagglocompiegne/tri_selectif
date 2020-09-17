@@ -4,11 +4,14 @@
 
 Ensemble des éléments constituant la mise en oeuvre de la base de données sur le tri sélectif ainsi que l'exploitation des données dans l'application dédiée :
 
-# Changelog
+# Script d'initialisation de la base de données
+
+## Changelog
 
 - 02/01/2021 : description initiale du gabarit de production de l'inventaire du réseau pluvial
 
-# Script d'initialisation de la base de données
+## Scripts SQL 
+
   * [Création de la structure initiale](sql/tri_10_squelette.sql)
   * [Création des vues de gestion](sql/tri_20_vues_gestion.sql)
   * [Création des vues applicatives](sql/tri_21_vues_xapps.sql)
