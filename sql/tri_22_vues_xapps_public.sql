@@ -29,15 +29,7 @@ CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_verre
   GROUP BY l.idlieu, l.commune, l.quartier, l.adresse
   ORDER BY l.idlieu;
 
-ALTER TABLE x_apps_public.xappspublic_geo_dec_pav_verre
-    OWNER TO sig_create;
-COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
-    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres';
 
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO edit_sig;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO create_sig;
-GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO read_sig;
 
 
 /* ******************************************* x_apps_public.xappspublic_geo_dec_pav_tlc ******************************************** */
