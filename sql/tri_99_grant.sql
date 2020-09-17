@@ -38,211 +38,15 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA m_dechet
 
 -- #################################################################### DOMAINE DE VALEUR  ####################################################################
 
-ALTER TABLE m_dechet.lt_pav_contmat
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_contmat TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_contmat TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_contmat TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_contmat TO edit_sig;
 
-ALTER TABLE m_dechet.lt_pav_contpos
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_contpos TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_contpos TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_contpos TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_contpos TO edit_sig;
-
-
-ALTER TABLE m_dechet.lt_pav_crochet
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_crochet TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_crochet TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_crochet TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_crochet TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_envimplan
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_envimplan TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_envimplan TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_envimplan TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_envimplan TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_envsitu
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_envsitu TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_envsitu TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_envsitu TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_envsitu TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_envtype
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_envtype TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_envtype TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_envtype TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_envtype TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_etatsign
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_etatsign TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_etatsign TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_etatsign TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_etatsign TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_gest
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_gest TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_gest TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_gest TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_gest TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_modepreh
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_modepreh TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_modepreh TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_modepreh TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_modepreh TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_natpb
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_natpb TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_natpb TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_natpb TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_natpb TO edit_sig;
-
-
-ALTER TABLE m_dechet.lt_pav_pavorient
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_pavorient TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_pavorient TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_pavorient TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_pavorient TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_peinture
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_peinture TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_peinture TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_peinture TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_peinture TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_proprete
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_proprete TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_proprete TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_proprete TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_proprete TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_statut
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_statut TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_statut TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_statut TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_statut TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_typesign
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_typesign TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_typesign TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_typesign TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_typesign TO edit_sig;
-
-ALTER TABLE m_dechet.lt_pav_typesol
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_typesol TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_typesol TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_typesol TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.lt_pav_typesol TO edit_sig;
 
 -- #################################################################### SEQUENCE  ####################################################################
-
-ALTER TABLE m_dechet.an_dec_pav_doc_media_gid_seq
-  OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO create_sig;
-
-ALTER TABLE m_dechet.geo_dec_dechetterie_gid_seq
-  OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq TO create_sig;
-
-ALTER TABLE m_dechet.geo_dec_pav_idconv_seq
-  OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_pav_idconv_seq TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_pav_idconv_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_pav_idconv_seq TO create_sig;
-
-ALTER TABLE m_dechet.geo_dec_secteur_enc_seq
-  OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq TO create_sig;
-
-ALTER TABLE m_dechet.geo_dec_secteur_om_seq
-  OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_om_seq TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_om_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_om_seq TO create_sig;
-
-ALTER TABLE m_dechet.log_dec_pav_gid_seq
-  OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.log_dec_pav_gid_seq TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.log_dec_pav_gid_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.log_dec_pav_gid_seq TO create_sig;
-
 
 
 
 -- #################################################################### TABLE  ####################################################################
 
-ALTER TABLE m_dechet.geo_dec_pav_verre
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_pav_verre TO postgres;
-GRANT ALL ON TABLE m_dechet.geo_dec_pav_verre TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_pav_verre TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_pav_verre TO edit_sig;
 
-ALTER TABLE m_dechet.geo_dec_pav_tlc
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_pav_tlc TO postgres;
-GRANT ALL ON TABLE m_dechet.geo_dec_pav_tlc TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_pav_tlc TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_pav_tlc TO edit_sig;
-
-ALTER TABLE m_dechet.geo_dec_dechetterie
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_dechetterie TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_dechetterie TO edit_sig;
-
-ALTER TABLE m_dechet.an_dec_pav_doc_media
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.an_dec_pav_doc_media TO sig_create;
-GRANT ALL ON TABLE m_dechet.an_dec_pav_doc_media TO create_sig;
-GRANT SELECT ON TABLE m_dechet.an_dec_pav_doc_media TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.an_dec_pav_doc_media TO edit_sig;
-
-ALTER TABLE m_dechet.geo_dec_secteur_enc
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_enc TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_enc TO edit_sig;
-
-ALTER TABLE m_dechet.geo_dec_secteur_om
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_om TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_om TO edit_sig;
-
-ALTER TABLE m_dechet.log_dec_pav
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.log_dec_pav TO sig_create;
-GRANT ALL ON TABLE m_dechet.log_dec_pav TO create_sig;
-GRANT SELECT ON TABLE m_dechet.log_dec_pav TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.log_dec_pav TO edit_sig;
 
 -- #################################################################### VUE DE GESTION  ####################################################################
 
@@ -251,44 +55,20 @@ Sans objet
 
 -- #################################################################### VUE APPLICATIVE  ####################################################################
 
-ALTER TABLE x_apps.xapps_geo_v_pav_orient
-  OWNER TO sig_create;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_orient TO sig_create;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps.xapps_geo_v_pav_orient TO edit_sig;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_orient TO create_sig;
-GRANT SELECT ON TABLE x_apps.xapps_geo_v_pav_orient TO read_sig;
 
-ALTER TABLE x_apps.xapps_geo_v_pav_verre_inactif
-  OWNER TO sig_create;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO sig_create;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO edit_sig;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO create_sig;
-GRANT SELECT ON TABLE x_apps.xapps_geo_v_pav_verre_inactif TO read_sig;
 
 -- #################################################################### VUE GD PUBLIC  ####################################################################
 
 
-ALTER TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon
-  OWNER TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO create_sig;
-GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO edit_sig;
+ALTER TABLE x_apps_public.xappspublic_geo_dec_pav_verre
+    OWNER TO sig_create;
+COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
+    IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres';
 
-
-ALTER TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon
-  OWNER TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO create_sig;
-GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon TO edit_sig;
-
-ALTER TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon
-  OWNER TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO sig_create;
-GRANT ALL ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO create_sig;
-GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps_public.xappspublic_geo_v_dec_pav_tampon TO edit_sig;
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO edit_sig;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO sig_create;
+GRANT ALL ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO create_sig;
+GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_dec_pav_verre TO read_sig;
 
 
 -- #################################################################### VUE OPENDATA  ####################################################################
@@ -298,20 +78,4 @@ Sans objet
 
 -- #################################################################### FUNCTION TRIGGER  ####################################################################
 
-ALTER FUNCTION m_dechet.m_tampon_nav()
-  OWNER TO sig_create;
-GRANT EXECUTE ON FUNCTION m_dechet.m_tampon_nav() TO public;
-GRANT EXECUTE ON FUNCTION m_dechet.m_tampon_nav() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_dechet.m_tampon_nav() TO create_sig;
 
-ALTER FUNCTION m_dechet.m_log_dec_pav()
-  OWNER TO sig_create;
-GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO public;
-GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO create_sig;
-
-ALTER FUNCTION m_dechet.m_log_dec_pav()
-  OWNER TO sig_create;
-GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO public;
-GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_dechet.m_log_dec_pav() TO create_sig;
