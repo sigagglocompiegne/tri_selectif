@@ -4,4 +4,6 @@
 
 ## Changelog
 
-- 04/10/2019 : description initiale du gabarit de production de l'inventaire du réseau pluvial
+- 2.0.1 (2021-01-01) : Description initiale du gabarit de production
+- 2.0.0 (2021-01-01) : Refonte du modèle autour de la notion de lieu de collecte
+- 1.0.0 (2018-12-17) : Initialisation du modèle de données autour des PAV seuls
