@@ -23,3 +23,158 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_dec_pav_lieu_orient
   COMMENT ON VIEW x_apps.xapps_geo_v_dec_pav_lieu_orient
     IS 'Vue géométrique des liens entre PAV supprimer, déplacer et le nouvel emplacement (en pré-production)';
 
+/* -------------------------------------------------------- xapps_an_dec_lieu_eve_tab ------------------------------------------- */
+
+-- View: x_apps.xapps_an_dec_lieu_eve_tab
+
+-- DROP VIEW x_apps.xapps_an_dec_lieu_eve_tab;
+
+CREATE OR REPLACE VIEW x_apps.xapps_an_dec_lieu_eve_tab
+ AS
+ SELECT ( SELECT l2.idlieu
+           FROM m_dechet.geo_dec_pav_lieu l2
+          WHERE l2.idparent = l.idlieu) AS idlieu_new,
+    l.idlieu AS idlieu_old,
+    'Lieu de collecte (verre) déplacé'::text AS eve,
+    max(c.date_eve) AS date_eve,
+    max(to_char(c.date_eve, 'YYYY'::text)) AS annee_eve,
+    l.date_maj,
+    l.date_sai,
+    (
+        CASE
+            WHEN l.adresse IS NULL THEN ''::character varying
+            ELSE l.adresse
+        END::text ||
+        CASE
+            WHEN l.localisation IS NULL THEN ''::character varying
+            ELSE l.localisation
+        END::text) ||
+        CASE
+            WHEN l.commune IS NULL THEN ''::text
+            ELSE ' à '::text || l.commune::text
+        END AS lieu_old,
+    ( SELECT (
+                CASE
+                    WHEN l2.adresse IS NULL THEN ''::character varying
+                    ELSE l2.adresse
+                END::text ||
+                CASE
+                    WHEN l2.localisation IS NULL THEN ''::character varying
+                    ELSE l2.localisation
+                END::text) ||
+                CASE
+                    WHEN l2.commune IS NULL THEN ''::text
+                    ELSE ' à '::text || l2.commune::text
+                END
+           FROM m_dechet.geo_dec_pav_lieu l2
+          WHERE l2.idparent = l.idlieu) AS lieu_new
+   FROM m_dechet.geo_dec_pav_lieu l,
+    m_dechet.an_dec_pav_cont c
+  WHERE l.idlieu = c.idlieu AND l.statut::text = '20'::text AND c.eve::text <> '10'::text AND (l.idlieu IN ( SELECT l1.idparent
+           FROM m_dechet.geo_dec_pav_lieu l1
+          WHERE l1.idparent IS NOT NULL))
+  GROUP BY l.idlieu
+UNION ALL
+ SELECT ( SELECT l2.idlieu
+           FROM m_dechet.geo_dec_pav_lieu l2
+          WHERE l2.idparent = l.idlieu) AS idlieu_new,
+    l.idlieu AS idlieu_old,
+    'Lieu de collecte (verre) supprimé'::text AS eve,
+    max(c.date_eve) AS date_eve,
+    max(to_char(c.date_eve, 'YYYY'::text)) AS annee_eve,
+    l.date_maj,
+    l.date_sai,
+    (
+        CASE
+            WHEN l.adresse IS NULL THEN ''::character varying
+            ELSE l.adresse
+        END::text ||
+        CASE
+            WHEN l.localisation IS NULL THEN ''::character varying
+            ELSE l.localisation
+        END::text) ||
+        CASE
+            WHEN l.commune IS NULL THEN ''::text
+            ELSE ' à '::text || l.commune::text
+        END AS lieu_old,
+    ''::text AS lieu_new
+   FROM m_dechet.geo_dec_pav_lieu l,
+    m_dechet.an_dec_pav_cont c
+  WHERE l.idlieu = c.idlieu AND l.statut::text = '20'::text AND c.eve::text <> '10'::text AND NOT (l.idlieu IN ( SELECT l1.idparent
+           FROM m_dechet.geo_dec_pav_lieu l1
+          WHERE l1.idparent IS NOT NULL))
+  GROUP BY l.idlieu;
+
+COMMENT ON VIEW x_apps.xapps_an_dec_lieu_eve_tab
+    IS 'Vue alphanumérique présentant les évènements par année des mouvements des lieux de collecte disposant de PAV Verre';
+
+
+
+/* -------------------------------------------------------- xapps_an_dec_pav_chiffre_cle_tab ------------------------------------------- */
+
+-- View: x_apps.xapps_an_dec_pav_chiffre_cle_tab
+
+-- DROP VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab;
+
+CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab
+ AS
+ WITH req_nbpav AS (
+         SELECT 1 AS id,
+            count(*) AS nb_pav_verre
+           FROM m_dechet.an_dec_pav_cont
+          WHERE an_dec_pav_cont.eve::text = ANY (ARRAY['10'::character varying, '11'::character varying, '12'::character varying, '13'::character varying, '14'::character varying, '00'::character varying]::text[])
+        ), req_nblieu AS (
+         SELECT 1 AS id,
+            count(*) AS nb_lieu_verre
+           FROM m_dechet.geo_dec_pav_lieu
+          WHERE geo_dec_pav_lieu.statut::text = '10'::text AND (geo_dec_pav_lieu.idlieu IN ( SELECT an_dec_pav_cont.idlieu
+                   FROM m_dechet.an_dec_pav_cont
+                  WHERE an_dec_pav_cont.eve::text = ANY (ARRAY['10'::character varying, '11'::character varying, '12'::character varying, '13'::character varying, '14'::character varying, '00'::character varying]::text[])))
+        )
+ SELECT req_nbpav.id,
+    req_nbpav.nb_pav_verre,
+    req_nblieu.nb_lieu_verre
+   FROM req_nbpav,
+    req_nblieu
+  WHERE req_nbpav.id = req_nblieu.id;
+
+COMMENT ON VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab
+    IS 'Vue alphanumérique présentant les chiffrss clés sur les PAV Verre';
+
+
+/* -------------------------------------------------------- xapps_an_dec_pav_eve_tab ------------------------------------------- */
+                                                                                               
+ -- View: x_apps.xapps_an_dec_pav_eve_tab
+
+-- DROP VIEW x_apps.xapps_an_dec_pav_eve_tab;
+
+CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_eve_tab
+ AS
+ SELECT c.idcont,
+    c.idlieu,
+    c.eve,
+    e.valeur AS nom_eve,
+    c.date_eve,
+    to_char(c.date_eve, 'YYYY'::text)::integer AS annee_eve,
+    c.obs_eve,
+    (
+        CASE
+            WHEN l.adresse IS NULL THEN ''::character varying
+            ELSE l.adresse
+        END::text ||
+        CASE
+            WHEN l.localisation IS NULL THEN ''::character varying::text
+            ELSE ' '::text || l.localisation::text
+        END) ||
+        CASE
+            WHEN l.commune IS NULL THEN ''::text
+            ELSE ' à '::text || l.commune::text
+        END AS lieu
+   FROM m_dechet.an_dec_pav_cont c,
+    m_dechet.lt_pav_eve e,
+    m_dechet.geo_dec_pav_lieu l
+  WHERE c.eve::text = e.code::text AND l.idlieu = c.idlieu AND c.eve::text <> '10'::text;
+
+COMMENT ON VIEW x_apps.xapps_an_dec_pav_eve_tab
+    IS 'Vue alphanumérique présentant les évènements par année des mouvements de PAV Verre';
+                                                                                                               
