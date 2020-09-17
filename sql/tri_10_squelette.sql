@@ -234,8 +234,35 @@ INSERT INTO m_dechet.lt_pav_crochet(
 
 -- ################################################################# Domaine valeur - lt_pav_cttype  ###############################################
 
+-- Table: m_dechet.lt_pav_cttype
 
+-- DROP TABLE m_dechet.lt_pav_cttype;
 
+CREATE TABLE m_dechet.lt_pav_cttype
+(
+    code character varying(2) COLLATE pg_catalog."default" NOT NULL,
+    valeur character varying(30) COLLATE pg_catalog."default",
+    CONSTRAINT lt_pav_cttype_pkkey PRIMARY KEY (code)
+)
+WITH (
+    OIDS = FALSE
+);
+
+COMMENT ON TABLE m_dechet.lt_pav_cttype
+    IS 'Liste de valeurs des codes du type de signalétique';
+COMMENT ON COLUMN m_dechet.lt_pav_cttype.code
+    IS 'code du type de conteneur';
+COMMENT ON COLUMN m_dechet.lt_pav_cttype.valeur
+    IS 'Libellé du type de conteneur';
+
+INSERT INTO m_dechet.lt_pav_cttype(
+            code, valeur)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Verre'),
+    ('20','TLC'),
+    ('30','Verre et TLC'),
+    ('40','Aucun');
 
     
 -- ################################################################# Domaine valeur - lt_pav_envimplan  ###############################################
