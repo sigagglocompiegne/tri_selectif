@@ -42,6 +42,26 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA m_dechet
 
 -- #################################################################### SEQUENCE  ####################################################################
 
+ALTER SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq
+    OWNER TO sig_create;
+
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_pav_lieu_idlieu_seq TO sig_create;
+
+ALTER SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq
+    OWNER TO sig_create;
+   
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_idcont_seq TO sig_create;
+
+ALTER SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq
+    OWNER TO sig_create;
+
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO sig_create;
 
 
 -- #################################################################### TABLE  ####################################################################
