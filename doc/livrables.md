@@ -95,7 +95,7 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
 |env_implant|type d'espace urbain d'implantation|character varying(2)|lt_pav_envimplan|valeur vide interdite|
 |env_situ|situation domaniale|character varying(2)|lt_pav_envsitu|valeur vide interdite|
-|prox_corb|présence d''une corbeille à proximité|booléen||false par défaut|
+|prox_corb|présence d''une corbeille à proximité|booléan||false par défaut|
 |x_l93|Coordonnée X en Lambert 93|Double précision||valeur vide interdite|
 |y_l93|Coordonnée Y en Lambert 93|Double précision||valeur vide interdite|
 |src_geom|Référentiel spatial de saisie utilisé|character varying(2)|lt_src_geom|valeur vide interdite|
@@ -107,6 +107,31 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 
 |Nom attribut|Définition|Type|Valeurs|Contraintes|
 |:---|:---|:---|:---|:---|
+|idcont|Identifiant unique du conteneur|character varying(8)||Valeur vide interdite|
+|idlieu|Identifiant unique du positionnement|character varying(8)||Valeur vide interdite|
+|idpresta|Identifiant du conteneur du prestataire|character varying(100)||Valeur vide interdite|
+|maj_aaaa|Evolution par rapport au dernier recensement|character varying(8)|lt_pav_maj|valeur vide interdite|
+|model|Modèle du conteneur|character varying(2)|lt_pav_modele|valeur vide interdite|
+|model_a|Autre modèle|character varying(100)||uniquement à remplir si valeur 99 (autre) indiqué dans l’attribut model|
+|mat|Matériel constituant le conteneur|character varying(2)|lt_pav_contmat|valeur vide interdite|
+|pos|Type de positionnement|character varying(2)|lt_pav_contpos|valeur vide interdite|
+|date_sai|Date de saisie|date||valeur vide interdite|
+|date_maj|Date de mise à jour|date|||
+|date_pose|Date de pose|date|||
+|date_net|Date du dernier nettoyage|date|||
+|volume|Volume en m3|integer||valeur vide interdite|
+|mode_preh|Mode de préhension|character varying(2)|lt_pav_modepreh|valeur vide interdite|
+|crochet|Etat du crochet|character varying(2)|lt_pav_crochet|valeur vide interdite|
+|opercules|Bavettes sur opercules disponibles|booléan||false par défaut|
+|tags|Présence de tags|booléan||false par défaut|
+|peinture|Etat de la peinture|character varying(2)|lt_pav_peinture|valeur vide interdite|
+|type_sol|Type de sol|character varying(2)|lt_pav_typesol|valeur vide interdite|
+|trp_rest|Présence d'une trappe pour restaurateur|booléan||false par défaut|
+|etat_sign|Etat de la signalétique|character varying(2)|lt_pav_etatsign|valeur vide interdite|
+|type_sign|Type de signalétique|character varying(2)|lt_pav_typesign|valeur vide interdite|
+|proprete|Etat de la propreté|character varying(2)|lt_pav_proprete|valeur vide interdite|
+
+
 
 ### Liste de valeurs
 
