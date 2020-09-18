@@ -777,8 +777,585 @@ INSERT INTO m_dechet.lt_pav_typesol(
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
+-- Table: m_dechet.geo_dec_pav_lieu
+
+-- DROP TABLE m_dechet.geo_dec_pav_lieu;
+
+CREATE TABLE m_dechet.geo_dec_pav_lieu
+(
+    idlieu integer NOT NULL DEFAULT nextval('m_dechet.geo_dec_pav_lieu_idlieu_seq'::regclass),
+    statut character varying(2) COLLATE pg_catalog."default",
+    cttype character varying(2) COLLATE pg_catalog."default",
+    insee character varying(5) COLLATE pg_catalog."default",
+    commune character varying(50) COLLATE pg_catalog."default",
+    quartier character varying(50) COLLATE pg_catalog."default",
+    adresse character varying(80) COLLATE pg_catalog."default",
+    localisation character varying(254) COLLATE pg_catalog."default",
+    nb_cont integer,
+    prop_abor character varying(2) COLLATE pg_catalog."default",
+    env_type character varying(2) COLLATE pg_catalog."default",
+    env_implan character varying(2) COLLATE pg_catalog."default",
+    env_situ character varying(2) COLLATE pg_catalog."default",
+    prox_corb boolean,
+    opt_pav integer,
+    ame_acces boolean,
+    nat_pb character varying(2) COLLATE pg_catalog."default",
+    nat_pb_99 character varying(254) COLLATE pg_catalog."default",
+    pavorient character varying(2) COLLATE pg_catalog."default",
+    idparent integer,
+    v_tampon integer,
+    x_l93 double precision,
+    y_l93 double precision,
+    src_geom character(2) COLLATE pg_catalog."default",
+    src_date integer,
+    date_sai timestamp without time zone,
+    date_maj timestamp without time zone,
+    op_sai character varying(80) COLLATE pg_catalog."default",
+    observ character varying(500) COLLATE pg_catalog."default",
+    geom geometry(Point,2154),
+    hab_pav integer,
+    idcontrat character varying(2) COLLATE pg_catalog."default",
+    CONSTRAINT geo_dec_pav_lieu_pkey PRIMARY KEY (idlieu),
+    CONSTRAINT geo_dec_pav_lieu_contrat_fkey FOREIGN KEY (idcontrat)
+        REFERENCES r_objet.lt_contrat (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_cttype_fkey FOREIGN KEY (cttype)
+        REFERENCES m_dechet.lt_pav_cttype (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_envimplan_fkey FOREIGN KEY (env_implan)
+        REFERENCES m_dechet.lt_pav_envimplan (env_implan) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_envsitu_fkey FOREIGN KEY (env_situ)
+        REFERENCES m_dechet.lt_pav_envsitu (env_situ) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_envtype_fkey FOREIGN KEY (env_type)
+        REFERENCES m_dechet.lt_pav_envtype (env_type) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_model_fkey FOREIGN KEY (cttype)
+        REFERENCES m_dechet.lt_pav_cttype (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_natpb_fkey FOREIGN KEY (nat_pb)
+        REFERENCES m_dechet.lt_pav_natpb (nat_pb) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_orient_fkey FOREIGN KEY (pavorient)
+        REFERENCES m_dechet.lt_pav_pavorient (pavorient) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_propabord_fkey FOREIGN KEY (prop_abor)
+        REFERENCES m_dechet.lt_pav_proprete (proprete) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_srcgeom_fkey FOREIGN KEY (src_geom)
+        REFERENCES r_objet.lt_src_geom (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT geo_dec_pav_lieu_statut_fkey FOREIGN KEY (statut)
+        REFERENCES m_dechet.lt_pav_statut (statut) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
 
 
+COMMENT ON TABLE m_dechet.geo_dec_pav_lieu
+    IS 'Table géographique contenant les lieux de collecte du Verre et/ou TLC
+(en pré-production)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.idlieu
+    IS 'Identifiant unique du lieu de collecte';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.statut
+    IS 'Statut du lieu du collecte (liste de valeurs lt_pav_statut)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.cttype
+    IS 'Type de conteneur (liste de valeurs lt_pav_cctype). Attribut automatisé en fonction des conteneurs présents au lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.insee
+    IS 'Code insee de la commune d''implantation du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.commune
+    IS 'Libellé de la commune d''implantation du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.quartier
+    IS 'Libellé du quartier d''implantation du lieu (ville de Compiègne uniquement)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.adresse
+    IS 'Libellé de l''adresse proche du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.localisation
+    IS 'Information complémentaire à l''adresse pour mieux appréhender la localisation du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.nb_cont
+    IS 'Nombre de conteneurs Verre présent au lieu. Cet attribut est calculé automatiquement à la mise à jour des conteneurs';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.prop_abor
+    IS 'Propreté aux abords du lieu (liste de valeurs lt_pav_proprete)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.env_type
+    IS 'Type d''environnement autour du lieu (liste de valeurs lt_pav_envtype)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.env_implan
+    IS 'Environnement d''implantation du lieu (liste de valeurs lt_pav_envimplan)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.env_situ
+    IS 'Situation du lieu (liste de valeurs lt_pav_envsitu)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.prox_corb
+    IS 'Présence d''une corbeille à proximité du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.opt_pav
+    IS 'nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.ame_acces
+    IS 'Accéssibilité à revoir';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.nat_pb
+    IS 'Nature des problèmes identifiés au lieu (liste de valeurs lt_pav_natpb)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.nat_pb_99
+    IS 'Autre type de problème identifié au lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.pavorient
+    IS 'Préconisations pour l''amélioration des emplacements des lieux (suite à l''état des lieux de l''été 2016) (liste de valeurs lt_pav_pavorient)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.idparent
+    IS 'Identifient du lieu parent';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.v_tampon
+    IS 'Valeur en mètre de l''aire de chalandise du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.x_l93
+    IS 'Coordonnée X en Lambert 93 du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.y_l93
+    IS 'Coordonnée Y en Lambert 93 du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.src_geom
+    IS 'Référentiel de saisie utilisé pour saisir le lieu (liste de valeurs r_objet.lt_src_geom)';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.src_date
+    IS 'Année du référentiel de saisi pour la saisie des lieux';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.date_sai
+    IS 'Date de saisie initiale du lieu';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.date_maj
+    IS 'Date de mise à jour de la donnée';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.op_sai
+    IS 'Opérateur de saisie';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.observ
+    IS 'Observations diverses';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.geom
+    IS 'Attribut de géométrie';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.hab_pav
+    IS 'Tonnage par gisement d''''habitants';
+
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.idcontrat
+    IS 'Identifiant du contrat de gestion du ramassage des conteneurs Verre (liste de valeurs r_objet.lt_contrat)';
+
+-- Trigger: t_t1_geo_dec_pav_lieu_datemaj
+
+-- DROP TRIGGER t_t1_geo_dec_pav_lieu_datemaj ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t1_geo_dec_pav_lieu_datemaj
+    BEFORE INSERT OR UPDATE 
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_maj();
+
+-- Trigger: t_t2_geo_dec_pav_lieu_datesai
+
+-- DROP TRIGGER t_t2_geo_dec_pav_lieu_datesai ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t2_geo_dec_pav_lieu_datesai
+    BEFORE INSERT
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_sai();
+
+-- Trigger: t_t3_geo_dec_pav_lieu_insee
+
+-- DROP TRIGGER t_t3_geo_dec_pav_lieu_insee ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t3_geo_dec_pav_lieu_insee
+    BEFORE INSERT OR UPDATE OF geom
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_commune_pl();
+
+-- Trigger: t_t4_geo_dec_pav_lieu_quartier
+
+-- DROP TRIGGER t_t4_geo_dec_pav_lieu_quartier ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t4_geo_dec_pav_lieu_quartier
+    BEFORE INSERT OR UPDATE OF geom
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_quartier();
+
+-- Trigger: t_t5_geo_dec_pav_lieu_xy
+
+-- DROP TRIGGER t_t5_geo_dec_pav_lieu_xy ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t5_geo_dec_pav_lieu_xy
+    BEFORE INSERT OR UPDATE OF geom
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_xy_l93();
+
+-- Trigger: t_t6_geo_dec_pav_lieu_tampon
+
+-- DROP TRIGGER t_t6_geo_dec_pav_lieu_tampon ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t6_geo_dec_pav_lieu_tampon
+    AFTER UPDATE OF v_tampon, geom
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_tampon_lieu_nav();
+
+-- Trigger: t_t7_geo_dec_pav_lieu_delete
+
+-- DROP TRIGGER t_t7_geo_dec_pav_lieu_delete ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t7_geo_dec_pav_lieu_delete
+    AFTER UPDATE OF statut
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_tampon_lieu_delete();
+
+-- Table: m_dechet.an_dec_pav_cont
+
+-- DROP TABLE m_dechet.an_dec_pav_cont;
+
+CREATE TABLE m_dechet.an_dec_pav_cont
+(
+    idcont integer NOT NULL DEFAULT nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass),
+    idlieu integer,
+    idpresta character varying(10) COLLATE pg_catalog."default",
+    eve character varying(2) COLLATE pg_catalog."default",
+    model character varying(2) COLLATE pg_catalog."default",
+    mat character varying(2) COLLATE pg_catalog."default",
+    pos character varying(2) COLLATE pg_catalog."default",
+    date_sai timestamp without time zone,
+    date_maj timestamp without time zone,
+    date_pos timestamp without time zone,
+    date_net timestamp without time zone,
+    date_effet timestamp without time zone,
+    volume integer,
+    mode_preh character varying(2) COLLATE pg_catalog."default",
+    crochet character varying(2) COLLATE pg_catalog."default",
+    opercules boolean,
+    tags boolean,
+    peinture character varying(2) COLLATE pg_catalog."default",
+    type_sol character varying(2) COLLATE pg_catalog."default",
+    trp_rest boolean,
+    etat_sign character varying(2) COLLATE pg_catalog."default",
+    type_sign character varying(2) COLLATE pg_catalog."default",
+    proprete character varying(2) COLLATE pg_catalog."default",
+    def_struc boolean,
+    op_sai character varying(80) COLLATE pg_catalog."default",
+    observ character varying(500) COLLATE pg_catalog."default",
+    date_eve timestamp without time zone,
+    obs_eve character varying(500) COLLATE pg_catalog."default",
+    CONSTRAINT an_dec_pav_cont_pkey PRIMARY KEY (idcont),
+    CONSTRAINT an_dec_pav_cont_crochet_fkey FOREIGN KEY (crochet)
+        REFERENCES m_dechet.lt_pav_crochet (crochet) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_etatsign_fkey FOREIGN KEY (etat_sign)
+        REFERENCES m_dechet.lt_pav_etatsign (etat_sign) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_eve_fkey FOREIGN KEY (eve)
+        REFERENCES m_dechet.lt_pav_eve (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_mat_fkey FOREIGN KEY (mat)
+        REFERENCES m_dechet.lt_pav_contmat (cont_mat) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_model_fkey FOREIGN KEY (model)
+        REFERENCES m_dechet.lt_pav_modele (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_modepreh_fkey FOREIGN KEY (mode_preh)
+        REFERENCES m_dechet.lt_pav_modepreh (mode_preh) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_peinture_fkey FOREIGN KEY (peinture)
+        REFERENCES m_dechet.lt_pav_peinture (peinture) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_pos_fkey FOREIGN KEY (pos)
+        REFERENCES m_dechet.lt_pav_contpos (cont_pos) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_prop_fkey FOREIGN KEY (proprete)
+        REFERENCES m_dechet.lt_pav_proprete (proprete) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_typesign_fkey FOREIGN KEY (type_sign)
+        REFERENCES m_dechet.lt_pav_typesign (type_sign) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_typesol_fkey FOREIGN KEY (type_sol)
+        REFERENCES m_dechet.lt_pav_typesol (type_sol) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
+
+COMMENT ON TABLE m_dechet.an_dec_pav_cont
+    IS 'Table alphanumérique des attributs métiers correspondant au conteneur Verre
+(en pré-production)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.idcont
+    IS 'Identifiant unique du conteneur Verre
+( valeur par défaut de la clé à restaurer après migration finale des données, (nextval(''m_dechet.an_dec_pav_cont_idcont_seq''::regclass)) )';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.idlieu
+    IS 'Identifiant du lieu de collecte';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.idpresta
+    IS 'Identifiant du conteneur du prestataire';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.eve
+    IS 'Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.model
+    IS 'Modèle du conteneur Verre (liste de valeurs lt_pav_modele)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.mat
+    IS 'Matériau constituant le conteneur Verre (liste de valeurs lt_pav_mat)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.pos
+    IS 'Position du conteneur Verre (liste de valeurs lt_pav_pos)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_sai
+    IS 'Date de saisie de la donnée';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_maj
+    IS 'Date de mise à jour de la donnée';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_pos
+    IS 'Date de pose';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_net
+    IS 'Date du dernier nettoyage';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_effet
+    IS 'Date de prise en compte des données dans le plan interactif Grand Public';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.volume
+    IS 'Volume en m3 du conteneur à Verre';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.mode_preh
+    IS 'Mode de préhension du conteneur Verre';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.crochet
+    IS 'Présence d''un crochet sur le conteneur Verre';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.opercules
+    IS 'Présence d''opercules sur le conteneur Verre';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.tags
+    IS 'Présence de tags sur le conteneur';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.peinture
+    IS 'Etat de la peinture du conteneur Verre (liste de valeurs lt_pav_peinture)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.type_sol
+    IS 'Type de sol sur lequel est posé le conteneur Verre (liste de valeurs lt_pav_typesol)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.trp_rest
+    IS 'Présence d''une trappe pour restaurateur';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.etat_sign
+    IS 'Etat de la signalétique sur le conteneur Verre (liste de valeurs lt_pav_etatsign)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.type_sign
+    IS 'Type de signalétique présente sur le conteneur Verre (liste de valeurs lt_pav_typesign)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.proprete
+    IS 'Etat de propreté du conteneur Verre (liste de valeurs lt_pav_proprete)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.def_struc
+    IS 'Présence de défaut de structure';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.op_sai
+    IS 'Opérateur de saisie initial du conteneur';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.observ
+    IS 'Observations diverses';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_eve
+    IS 'Date du dernier évènement intervenu sur le conteneur Verre';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont.obs_eve
+    IS 'Observations liées à l''évènement';
+
+-- Trigger: t_t1_an_dec_pav_cont_lieu
+
+-- DROP TRIGGER t_t1_an_dec_pav_cont_lieu ON m_dechet.an_dec_pav_cont;
+
+CREATE TRIGGER t_t1_an_dec_pav_cont_lieu
+    AFTER INSERT OR UPDATE 
+    ON m_dechet.an_dec_pav_cont
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_dec_pav_lieu();
+
+-- Trigger: t_t2_an_dec_pav_cont_datemaj
+
+-- DROP TRIGGER t_t2_an_dec_pav_cont_datemaj ON m_dechet.an_dec_pav_cont;
+
+CREATE TRIGGER t_t2_an_dec_pav_cont_datemaj
+    BEFORE INSERT OR UPDATE 
+    ON m_dechet.an_dec_pav_cont
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_maj();
+
+-- Trigger: t_t3_an_dec_pav_cont_datesai
+
+-- DROP TRIGGER t_t3_an_dec_pav_cont_datesai ON m_dechet.an_dec_pav_cont;
+
+CREATE TRIGGER t_t3_an_dec_pav_cont_datesai
+    BEFORE INSERT
+    ON m_dechet.an_dec_pav_cont
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_sai();
+
+
+-- Table: m_dechet.an_dec_pav_cont_tlc
+
+-- DROP TABLE m_dechet.an_dec_pav_cont_tlc;
+
+CREATE TABLE m_dechet.an_dec_pav_cont_tlc
+(
+    idcont integer DEFAULT nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass),
+    idlieu integer,
+    eve character varying(2) COLLATE pg_catalog."default",
+    model character varying(2) COLLATE pg_catalog."default",
+    nom_entrep character varying(2) COLLATE pg_catalog."default",
+    nom_entrep_99 character varying(80) COLLATE pg_catalog."default",
+    mat character varying(2) COLLATE pg_catalog."default",
+    pos character varying(2) COLLATE pg_catalog."default",
+    date_sai timestamp without time zone,
+    date_maj timestamp without time zone,
+    date_pos timestamp without time zone,
+    date_effet timestamp without time zone,
+    op_sai character varying(80) COLLATE pg_catalog."default",
+    observ character varying(500) COLLATE pg_catalog."default",
+    date_eve timestamp without time zone,
+    obs_eve character varying(500) COLLATE pg_catalog."default",
+    CONSTRAINT an_dec_pav_cont_tlc_eve_fkey FOREIGN KEY (eve)
+        REFERENCES m_dechet.lt_pav_eve (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_tlc_gest_fkey FOREIGN KEY (nom_entrep)
+        REFERENCES m_dechet.lt_pav_gest (nom_entrep) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_tlc_mat_fkey FOREIGN KEY (mat)
+        REFERENCES m_dechet.lt_pav_contmat (cont_mat) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_tlc_model_fkey FOREIGN KEY (model)
+        REFERENCES m_dechet.lt_pav_modele (code) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT an_dec_pav_cont_tlc_pos_fkey FOREIGN KEY (pos)
+        REFERENCES m_dechet.lt_pav_contpos (cont_pos) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
+
+COMMENT ON TABLE m_dechet.an_dec_pav_cont_tlc
+    IS 'Table alphanumérique des attributs métiers correspondant au conteneur Textile-Linge-Chaussure (en pré-production)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.idcont
+    IS 'Identifiant unique du conteneur TLC
+(nextval(''m_dechet.an_dec_pav_cont_idcont_seq''::regclass) )';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.idlieu
+    IS 'Identifiant du lieu de collecte';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.eve
+    IS 'Evènement intervenu sur le conteneur TLC (liste de valeurs lt_pav_eve)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.model
+    IS 'Modèle du conteneur (liste de valeurs lt_pav_modele)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.nom_entrep
+    IS 'Nom de l''entreprise gestionnaire du conteneur (liste de valeurs lt_pav_gest)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.nom_entrep_99
+    IS 'Autre entreprise gestionnaire si non présente das nom_entrep';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.mat
+    IS 'Matériau composant le conteneur TLC (liste de valeurs lt_pav_mat)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.pos
+    IS 'Position du conteneur TLC (liste de valeurs lt_pav_pos)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.date_sai
+    IS 'Date de saisie initiale';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.date_maj
+    IS 'Date de mise à jour de la donnée';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.date_pos
+    IS 'Date de pose du conteneur TLC';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.date_effet
+    IS 'Date de prise en compte dans l''application Grand Public Plan Interactif ';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.op_sai
+    IS 'Opérateur de saisie initiale de la donnée';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.observ
+    IS 'Observations diverses';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.date_eve
+    IS 'Date du dernier évènement intervenu sur le conteneur TLC';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.obs_eve
+    IS 'Observations liées à l''évènement';
+-- Index: fki_an_dec_pav_cont_tlc_eve_fkey
+
+-- DROP INDEX m_dechet.fki_an_dec_pav_cont_tlc_eve_fkey;
+
+CREATE INDEX fki_an_dec_pav_cont_tlc_eve_fkey
+    ON m_dechet.an_dec_pav_cont_tlc USING btree
+    (idcont ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+-- Trigger: t_t1_an_dec_pav_cont_lieu
+
+-- DROP TRIGGER t_t1_an_dec_pav_cont_lieu ON m_dechet.an_dec_pav_cont_tlc;
+
+CREATE TRIGGER t_t1_an_dec_pav_cont_lieu
+    AFTER INSERT OR UPDATE 
+    ON m_dechet.an_dec_pav_cont_tlc
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_dec_pav_lieu();
 
 -- Table: m_dechet.an_dec_pav_doc_media
 
