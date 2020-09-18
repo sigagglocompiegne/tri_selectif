@@ -8,6 +8,13 @@
 
 # Livrables
 
+
+## Gabarits
+
+- Fichier gabarit des lieux de collecte et des conteneurs à télécharger au format csv (non géographique)
+- Fichier gabarit à télécharger des lieux de collecte au format shape (géographique)
+- Fichier gabarit Qgis complet à télécharger
+
 ## Principe fonctionnel et modalités de mises à jour
 
 Le principe de fonctionnement de la base de données des Points d'Apport Volontaire Verre s'appuie sur le lieu de collecte. Ce lieu est un point unique disposant de n conteneurs, qu'ils soient à usage Verre ou TLC. 
@@ -56,9 +63,3 @@ L'encodage des caractères est en UTF8.
 ## Description des classes d'objets
 
 
-
-# Gabarits
-
-- Fichier gabarit des lieux de collecte et des conteneurs à télécharger au format csv (non géographique)
-- Fichier gabarit à télécharger des lieux de collecte au format shape (géographique)
-- Fichier gabarit Qgis complet à télécharger
