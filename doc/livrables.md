@@ -1,6 +1,7 @@
 ![picto](/doc/img/geocompiegnois_2020_reduit_v2.png)
 
-# Standard local des Points d'Apport Volontaire Verre (documentation du standard)
+# Standard local des Points d'Apport Volontaire Verre
+(documentation du standard)
 
 # Changelog
 
