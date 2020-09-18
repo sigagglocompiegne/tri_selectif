@@ -27,21 +27,24 @@ Pour rappel des grands principes :
 
 #####	Le service des déchets peut :
 
-*	Voir, consulter et rechercher les informations des PAV sur les communes de l’ARC
-*	Peut modifier les données sur les PAV Verre et TLC
-*	Peut créer un nouveau PAV ou modifier sa localisation
+*	Voir, consulter et rechercher les informations des lieux de collecte et des Points d'Apport Volontaire (PAV)
+*	Peut modifier les données sur les lieux de collecte et sur les PAV (verre et TLC)
+*	Peut créer un nouveau lieu et y affecter de nouveaux PAV
+* Peut modifier l'emplacement d'un lieui de collecte
+* Peut rendre inactif un lieu (pas le supprimer réellement) et le lié à un autre si il est déplacé
+* Peut gérer l'affectation des PAV au lieu
 
 #####	Un autre service peut :
 
-*	Voir, consulter et rechercher les informations d’un PAV sans pouvoir les modifier
+*	Voir, consulter et rechercher les informations d’un lieu et des PAV affectés sans pouvoir les modifier
 
 ###	Les contrôles de saisie
 
-Aucun contrôle de saisies n'a été mis en place. Le service gère sa donnée. Certains champs sont guidés par des listes de valeurs.
+Les contrôles de saisies sont effectués directement dans l'outil WEB. Seules des contraintes fonctionnelles sont intégrées (impossible de supprimer ou vérification que l'identifiant de l'ancien lieu est bien saisie dans le nouveau lieu si celui-ci a fait l'objet d'un déplacement pour l'optimiser). Le service gère sa donnée en propre et seuls certains attributs sont guidés par des listes de valeurs.
 
 ## Dépendances
 
-La base de données PEI s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentation de la base PEI.
+La base de données des dédchets s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentation de la base PEI.
 
 |schéma | table | description | usage |
 |:---|:---|:---|:---|   
@@ -52,62 +55,15 @@ La base de données PEI s'appuie sur des référentiels préexistants constituan
 
 ## Classes d'objets
 
-L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_defense_incendie, celles dérivées et applicatives dans le schéma x_apps, celles dérivées pour les exports opendata dans le schéma x_opendata.
+L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_dechet, celles dérivées et applicatives dans le schéma `x_apps`, celles dérivées pour les exports opendata dans le schéma `x_opendata` et celles dérivées pour l'exploitation dans l'application Grand Public Plan Interactif dansle schéma `x_apps_public`.
 
 ### Classe d'objet géographique et patrimoniale
 
-`geo_dec_pav_verre` : table géographique des attributs des PAV Verre.
+`geo_dec_pav_lieu` : table géographique des lieux de collecte.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
-|id_contver|Identifiant unique géographique|integer|nextval('m_dechet.geo_dec_pav_idconv_seq'::regclass)|"
-|commune|libellé de la commune|character varying(30)| |
-|insee|numéro insee de la commune|character(5)| |
-|quartier|libellé du quartier|character varying(50)| |
-|adresse|adresse d'implantation|character varying(80)| |
-|x_l93|coordonnée x en lambert 93|double precision| |
-|y_l93|coordonnée y en lambert 93|double precision| |
-|cont_nbr|nombre de conteneurs|integer| |
-|cont_mat|code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)|character varying(2)|'10'::character varying|
-|cont_pos|code du type de position du conteneur (liste de choix lt_pav_contpos)|character varying(2)|'10'::character varying|
-|date_sai|date de saisie de l'information|timestamp without time zone| |
-|date_pos|date de pose|timestamp without time zone| |
-|date_net|date de nettoyage|timestamp without time zone| |
-|date_maj|date de mise à jour des informations|timestamp without time zone| |
-|photo|Nom du fichier de la photo avant la mise à jour de juillet 2016 par le BE RETIF|character varying(254)| |
-|url_photo|Lien url vers la photo avant la mise à jour de juillet 2016 par le BE RETIF|character varying(254)| |
-|src_geom|code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_src_geom)|character(2)|'00'::bpchar|
-|volume|volume en m3 (par défaut 4)|double precision| |
-|env_type|code du type d'espace géographique (liste de choix lt_pav_envtype)|character varying(2)|'00'::character varying|
-|env_implan|code du type d'espace urbain d'implantation (liste de choix lt_pav_envimplan)|character varying(2)|'00'::character varying|
-|env_situ|code de la situation domaniale (liste de choix lt_pav_envsitu)|character varying(2)|'00'::character varying|
-|mode_preh|code du mode de préhension (liste de choix lt_pav_modepreh)|character varying(2)|'10'::character varying|
-|crochet|code de l'état du crochet (liste de choix lt_pav_crochet)|character varying(2)|'00'::character varying|
-|opercules|Bavettes sur opercules disponibles|boolean| |
-|tags|présence de tags|boolean| |
-|peinture|code de l'état de la peinture (liste de choix lt_pav_peinture)|character varying(2)|'00'::character varying|
-|prox_corb|présence d'une corbeille à proximité|boolean| |
-|type_sol|code du type de sol (liste de choix (lt_pav_typesol)|character varying(2)|'00'::character varying|
-|trp_rest|présence d'une trappe pour restaurateur|boolean| |
-|etat_sign|état de la signalétique (création d'une liste de valeur en fonction de l'état des lieux)|character varying(30)| |
-|type_sign|code du type de signalétique (liste de choix lt_pav_typesign)|character varying(2)|'00'::character varying|
-|proprete|code de l'état de la propreté (liste de choix lt_pav_proprete)|character varying(2)|'00'::character varying|
-|prop_abor|code de l'état de la propreté des abords (liste de choix lt_pav_propabor)|character varying(2)|'00'::character varying|
-|def_struc|défaut de structure visible|character varying(30)| |
-|hab_pav|Tonnage par gisement d'habitants|integer| |
-|opt_pav|nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages|integer| |
-|ame_acces|accéssibilité à revoir|boolean| |
-|nat_pb|code de la nature du ou des problèmes (liste de choix lt_pav_natpb)|character varying(2)|'00'::character varying|
-|nat_pb_99|précision sur la nature du problème|character varying(500)| |
-|geom|champ contenant la géométrie de l'objet|USER-DEFINED| |
-|op_sai|Opérateur de saisie de la donnée|character varying(80)| |
-|observ|Observations diverses|character varying(500)| |
-|pavorient|code des préconisations pour l'amélioration dee emplacements des PAV Verre (suite à l'état des lieux de l'été 2016|character varying(2)| |
-|id_parent|identifiant du PAV Verre parent selon les préconisations|integer| |
-|statut|code du statut du PAV (actif ou inactif)|character varying(2)| |
-|v_tampon|Valeur du tampon correspondant à l'aire de captation du point de ramassage|integer| |
-|geom2|Champ contenant la géométrie du tampon d'emprise définit par v_tampon où modifier selon l'influence|USER-DEFINED| |
-|date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone|now()|
+
 
 
   * `t_t1_geo_dec_pav_verre_datemaj` : intégration de la date de mise à jour
@@ -118,50 +74,7 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_defen
   * `t_t6_geo_dec_pav_verre_tampon` : mise à jour du tampon autour du PAV en fonction de la valeur de l'attribut v_tampon   
   * `t_t7_geo_dec_pav_verre_log` : intégration des modifications dans la table des logs 
   
-`geo_dec_pav_tlc` : table géographique des attributs des PAV TLC.
 
-|Nom attribut | Définition | Type  | Valeurs par défaut |
-|:---|:---|:---|:---|  
-|id_cont_tl|identifiant géographique unique|integer|nextval('m_dechet.geo_dec_pav_idconv_seq'::regclass)|"
-|commune|libellé de la commune|character varying(50)| |
-|insee|code insee de la commune|character(5)| |
-|quartier|libellé du quartier|character varying(50)| |
-|adresse|adresse|character varying(80)| |
-|x_l93|coordonnée x en lambert 93|double precision| |
-|y_l93|coordonnée y en lambert 93|double precision| |
-|cont_nbr|nombre de conteneurs|integer| |
-|cont_mat|code du matériaux constituant le conteneur (liste de choix lt_pav_contmat)|character varying(2)|'10'::character varying|
-|cont_pos|code du type de position du conteneur (liste de choix lt_pav_contpos)|character varying(2)|'10'::character varying|
-|date_sai|date de la saisie des informations|timestamp without time zone| |
-|date_pose|date de pose|timestamp without time zone| |
-|date_netoy|date de nettoyage|timestamp without time zone| |
-|date_maj|date de mise à jour des informations|timestamp without time zone| |
-|nom_entrep|code de l'entreprise gestionnaire du pav (liste de choix lt_pav_gest)|character varying(2)| |
-|nom_entrep_99|autre gestionnaire si 99 saisie dans le champ nom_entrep|character varying(30)| |
-|photo|libellé du fichier de la photo|character varying(254)| |
-|url_photo|lien url de la photo|character varying(254)| |
-|src_geom|code du référentiel spatial de saisie utilisé (liste de choix r_objet.lt_scr_geom)|character(2)|'00'::bpchar|
-|env_type|code du type d'espace géographique (liste de choix lt_pav_envtype)|character varying(2)|'00'::character varying|
-|env_implan|code du type d'espace urbain d'implantation (liste de choix lt_pav_envimplan)|character varying(2)|'00'::character varying|
-|env_situ|code de la situation domaniale (liste de choix lt_pav_envsitu)|character varying(2)|'00'::character varying|
-|tags|présence de tags|boolean|false|
-|peinture|code de l'état de la peinture (liste de choix lt_pav_peinture)|character varying(2)|'00'::character varying|
-|prox_corb|présence d'une corbeille à proximité|boolean|false|
-|type_sol|code du type de sol (liste de choix (lt_pav_typesol)|character varying(2)|'00'::character varying|
-|type_sol_99|autre type de sol si 99 saisie dans le champ type_sol|character varying(30)| |
-|geom|champ contenant la géométrie de l'objet|USER-DEFINED| |
-|op_sai|Opérateur de saisie de la donnée|character varying(80)| |
-|observ|Observations diverses|character varying(500)| |
-|v_tampon|Valeur du tampon d'emprise du PAV TLC|integer| |
-|geom2|Champ contenant la géométrie du tampon d'emprise définit par v_tampon où modifier selon l'influence|USER-DEFINED| |
-|date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone|now()|
-
-  * `t_t1_geo_dec_pav_tlc_datemaj` : intégration de la date de mise à jour
-  * `t_t2_geo_dec_pav_tlc_datesai` : intégration de la date de saisie
-  * `t_t3_geo_dec_pav_tlc_insee` : intégration du code insee et du nom de la commune 
-  * `t_t4_geo_dec_pav_tlc_quartier` : intégration du nom du quartier
-  * `t_t5_geo_dec_pav_tlc_xy` : intégration des valeurs x et y en lambert 93   
-  * `t_t6_geo_dec_pav_tlc_log` : intégration des modifications dans la table des logs 
 
 `geo_dec_secteur_enc` : table géographique des secteurs de ramassage des encombrants.
 
@@ -207,19 +120,15 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_defen
 
 ### Classe d'objet attributaire et patrimoniale
 
-`an_dec_pav_doc_media` : table attributaire des photos.
+`an_dec_pav_cont` : table attributaire des Points d'Apport Volontaire Verre.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
-|id|Identifiant du PAV|integer| |
-|media|Champ Média de GEO|text| |
-|miniature|Champ miniature de GEO|bytea| |
-|n_fichier|Nom du fichier|text| |
-|t_fichier|Type de média dans GEO|text| |
-|op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
-|date_sai|Date d'intégration du document|timestamp without time zone| |
-|d_photo|Date de la prise de vue|timestamp without time zone| |
-|l_prec|Précision sur le document|character varying(1000)| |
+
+`an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---| 
 
 
 ### classes d'objets applicatives de gestion :
@@ -230,21 +139,21 @@ Sans objet
 
 ### classes d'objets applicatives métiers sont classés dans le schéma x_apps :
  
-`x_apps.xapps_geo_v_pav_orient` : Vue géométrique des liens entre PAV supprimer, déplacer et le nouvel emplacement
-  
-`x_apps.xapps_geo_v_pav_verre_inactif` : Vue géographique permettant de visualiser les conteneurs PAV Verre inactifs (dans la cartothèque de l'application GEO sur le tri)
+`x_apps.xapps_geo_v_dec_pav_lieu_orient` : Vue géométrique des liens entre les lieux de collecte supprimés, déplacés (nouvel emplacement)
+`x_apps.xapps_an_dec_lieu_eve_tab` : Vue alphanumérique présentant les évènements par année des mouvements des lieux de collecte disposant de PAV Verre 
+`x_apps.xapps_an_dec_pav_chiffre_cle_tab` : Vue alphanumérique présentant les chiffrss clés sur les PAV Verre
+`x_apps.xapps_an_dec_pav_eve_tab` : Vue alphanumérique présentant les évènements par année des mouvements de PAV Verre
+
 
 ### classes d'objets applicatives grands publics sont classés dans le schéma x_apps_public :
 
-`x_apps_public.xappspublic_geo_v_dec_pav_tampon` : Vue géométrique contenant les tampons d''emprise des conteneurs Verre pour EXPORT FME et recherche des adresse dans ses tampons pour remonter le PAV VERRE
-
-`x_apps_public.xappspublic_geo_v_dec_pav_tlc_tampon` : Vue géométrique contenant les tampons d''emprise des conteneurs TLC pour EXPORT FME et recherche des adresse dans ses tampons pour remonter le PAV VERRE
-
+`x_apps_public.xappspublic_geo_dec_pav_verre` : Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres 
+`x_apps_public.xappspublic_geo_dec_pav_tlc` : Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs TLC
 `x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur` : Vue géométrique contenant les secteurs de rammassage des encombrants pour export dans GEO APPLI GD PUBLIC
 
 ### classes d'objets opendata sont classés dans le schéma x_opendata :
 
-Sans objet
+(à produire)
 
 ## Liste de valeurs
 
