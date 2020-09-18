@@ -68,7 +68,7 @@ L'encodage des caractères est en UTF8.
 
 ## Description des classes d'objets
 
-https://docs.geoserver.org/stable/en/user/styling/index.html#styling|Nom fichier|Définition|Catégorie|Géométrie|
+|Nom fichier|Définition|Catégorie|Géométrie|
 |:---|:---|:---|:---|
 |geo_dec_pav_lieu|Localisation des lieux de collecte des conteneurs à verre|Patrimoine|Ponctuel|
 |an_dec_pav_cont|Conteneurs à verre rattachés au lieu de collecte|Patrimoine|sans objet|
