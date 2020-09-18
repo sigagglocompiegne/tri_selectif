@@ -1,6 +1,6 @@
 ![GeoCompiegnois](img/Logo_web-GeoCompiegnois.png)
 
-# Documentation utilisateur de l'application PEI
+# Documentation utilisateur de l'application TRI SELECTIF
 
   
 **Pour les utilisateurs** :
