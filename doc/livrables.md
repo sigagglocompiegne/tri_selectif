@@ -45,6 +45,8 @@ Comme pour les lieux de collecte, cette mise à jour devra préciser dans l'attr
 -	l'entreprise gestionnaire veillera à bien indiquer le lieu de collecte d'appartenance de chaque nouveau conteneur par un identifiant unique de sa convenance différent de ceux déjà utilisés par la collectivité et qui sera également indiqué pour chaque nouveau lieu de collecte.
 -	l'attribut [idpresta], dans le fichier des conteneurs et pour chaque conteneur Verre, doit contenir l'identifiant de l'entreprise gestionnaire. Cet attribut sera utilisé par la suite pour les échanges de données.
 
+Un gabarit de saisi, sous le logiciel SIG QGIS 3.x, est disponible et permet de disposer des fonds de plan géographiques nécessaires à la localisation des lieux de collecte actuelle.
+
 
 ## Système de coordonnées
 
