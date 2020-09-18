@@ -324,4 +324,59 @@ Sans objet
 
 -- #################################################################### FUNCTION TRIGGER  ####################################################################
 
+ALTER FUNCTION m_dechet.ft_m_dec_lieu_delete()
+    OWNER TO sig_create;
 
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_lieu_delete() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_lieu_delete() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_lieu_delete() TO PUBLIC;
+
+ALTER FUNCTION m_dechet.ft_m_dec_pav_lieu()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_pav_lieu() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_pav_lieu() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_pav_lieu() TO PUBLIC;
+
+ALTER FUNCTION m_dechet.ft_m_tampon_lieu_nav()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_tampon_lieu_nav() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_tampon_lieu_nav() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_tampon_lieu_nav() TO PUBLIC;
+
+ALTER FUNCTION public.ft_r_timestamp_maj()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION public.ft_r_timestamp_maj() TO sig_create;
+GRANT EXECUTE ON FUNCTION public.ft_r_timestamp_maj() TO create_sig;
+GRANT EXECUTE ON FUNCTION public.ft_r_timestamp_maj() TO PUBLIC;
+
+ALTER FUNCTION public.ft_r_timestamp_sai()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION public.ft_r_timestamp_sai() TO sig_create;
+GRANT EXECUTE ON FUNCTION public.ft_r_timestamp_sai() TO create_sig;
+GRANT EXECUTE ON FUNCTION public.ft_r_timestamp_sai() TO PUBLIC;
+
+
+ALTER FUNCTION public.ft_r_commune_pl()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION public.ft_r_commune_pl() TO sig_create;
+GRANT EXECUTE ON FUNCTION public.ft_r_commune_pl() TO create_sig;
+GRANT EXECUTE ON FUNCTION public.ft_r_commune_pl() TO PUBLIC;
+
+ALTER FUNCTION public.ft_r_quartier()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION public.ft_r_quartier() TO sig_create;
+GRANT EXECUTE ON FUNCTION public.ft_r_quartier() TO create_sig;
+GRANT EXECUTE ON FUNCTION public.ft_r_quartier() TO PUBLIC;
+
+ALTER FUNCTION public.ft_r_xy_l93()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION public.ft_r_xy_l93() TO sig_create;
+GRANT EXECUTE ON FUNCTION public.ft_r_xy_l93() TO create_sig;
+GRANT EXECUTE ON FUNCTION public.ft_r_xy_l93() TO PUBLIC;
