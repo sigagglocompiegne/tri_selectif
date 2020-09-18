@@ -20,7 +20,7 @@ Pour rappel des grands principes :
 
 ## Schéma fonctionnel
 
-![schema_fonctionnel](img/schema_fonctionnel_tri.png)
+![schema_fonctionnel](img/schema_fonctionnel_tri_v2.png) ==> en cours de réalisation
 
 
 ## Les droits
