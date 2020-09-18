@@ -96,17 +96,16 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |hab_pav|Tonnage par gisement d''habitants|integer| |
 |idcontrat|Identifiant du contrat de gestion du ramassage des conteneurs Verre (liste de valeurs r_objet.lt_contrat)|character varying(2)| |
 
+* triggers :
 
-  * `t_t1_geo_dec_pav_verre_datemaj` : intégration de la date de mise à jour
-  * `t_t2_geo_dec_pav_verre_datesai` : intégration de la date de saisie
-  * `t_t3_geo_dec_pav_verre_insee` : intégration du code insee et du nom de la commune 
-  * `t_t4_geo_dec_pav_verre_quartier` : intégration du nom du quartier
-  * `t_t5_geo_dec_pav_verre_xy` : intégration des valeurs x et y en lambert 93 
-  * `t_t6_geo_dec_pav_verre_tampon` : mise à jour du tampon autour du PAV en fonction de la valeur de l'attribut v_tampon   
-  * `t_t7_geo_dec_pav_verre_log` : intégration des modifications dans la table des logs 
+  * `t_t1_geo_dec_pav_lieu_datemaj` : intégration de la date de mise à jour
+  * `t_t2_geo_dec_pav_lieu_datesai` : intégration de la date de saisie
+  * `t_t3_geo_dec_pav_lieu_insee` : intégration du code insee et du nom de la commune 
+  * `t_t4_geo_dec_pav_lieu_quartier` : intégration du nom du quartier
+  * `t_t5_geo_dec_pav_lieu_xy` : intégration des valeurs x et y en lambert 93 
+  * `t_t6_geo_dec_pav_lieu_tampon` : Fonction trigger pour mise à jour du tampon d''emprise du lieu de collecte si v_tampon est modifiée 
+  * `t_t7_geo_dec_pav_lieu_delete` : Fonction trigger pour automatiser la dépose de tous les conteneurs lorsque le lieu de collecte devient inactif
   
-
-
 `geo_dec_secteur_enc` : table géographique des secteurs de ramassage des encombrants.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
@@ -155,6 +154,35 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
+|idcont|Identifiant unique du conteneur Verre
+( valeur par défaut de la clé à restaurer après migration finale des données, (nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)) )|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
+|idlieu|Identifiant du lieu de collecte|integer| |
+|idpresta|Identifiant du conteneur du prestataire|character varying(10)| |
+|eve|Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)|character varying(2)| |
+|model|Modèle du conteneur Verre (liste de valeurs lt_pav_modele)|character varying(2)| |
+|mat|Matériau constituant le conteneur Verre (liste de valeurs lt_pav_mat)|character varying(2)| |
+|pos|Position du conteneur Verre (liste de valeurs lt_pav_pos)|character varying(2)| |
+|date_sai|Date de saisie de la donnée|timestamp without time zone| |
+|date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
+|date_pos|Date de pose|timestamp without time zone| |
+|date_net|Date du dernier nettoyage|timestamp without time zone| |
+|date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone| |
+|volume|Volume en m3 du conteneur à Verre|integer| |
+|mode_preh|Mode de préhension du conteneur Verre|character varying(2)| |
+|crochet|Présence d'un crochet sur le conteneur Verre|character varying(2)| |
+|opercules|Présence d'opercules sur le conteneur Verre|boolean| |
+|tags|Présence de tags sur le conteneur|boolean| |
+|peinture|Etat de la peinture du conteneur Verre (liste de valeurs lt_pav_peinture)|character varying(2)| |
+|type_sol|Type de sol sur lequel est posé le conteneur Verre (liste de valeurs lt_pav_typesol)|character varying(2)| |
+|trp_rest|Présence d'une trappe pour restaurateur|boolean| |
+|etat_sign|Etat de la signalétique sur le conteneur Verre (liste de valeurs lt_pav_etatsign)|character varying(2)| |
+|type_sign|Type de signalétique présente sur le conteneur Verre (liste de valeurs lt_pav_typesign)|character varying(2)| |
+|proprete|Etat de propreté du conteneur Verre (liste de valeurs lt_pav_proprete)|character varying(2)| |
+|def_struc|Présence de défaut de structure|boolean| |
+|op_sai|Opérateur de saisie initial du conteneur|character varying(80)| |
+|observ|Observations diverses|character varying(500)| |
+|date_eve|Date du dernier évènement intervenu sur le conteneur Verre|timestamp without time zone| |
+|obs_eve|Observations liées à l'évènement|character varying(500)| |
 
 `an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
 
