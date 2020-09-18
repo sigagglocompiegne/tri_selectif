@@ -64,4 +64,18 @@ L'encodage des caractères est en UTF8.
 
 ## Description des classes d'objets
 
+|Nom fichier|Définition|Catégorie|Géométrie|
+|:---|:---|:---|:---|
+|geo_dec_pav_lieu|Localisation des lieux de collecte des conteneurs à verre|Patrimoine|Ponctuel|
+|an_dec_pav_cont|Conteneurs à verre rattachés au lieu de collecte|Patrimoine|sans objet|
 
+## Implémentation informatique
+
+### Patrimoine
+
+Ensemble des données décrivant les objets composant le réseau de gestion des Points d'Apport Volontaire Verre
+
+`geo_dec_pav_lieu` : lieu de collecte
+
+|Nom attribut|Définition|Type|Valeurs|Contraintes|
+|:---|:---|:---|:---|:---|
