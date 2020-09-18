@@ -50,6 +50,7 @@ La base de données des dédchets s'appuie sur des référentiels préexistants 
 |:---|:---|:---|:---|   
 |r_objet|lt_src_geom|domaine de valeur générique d'une table géographique|source du positionnement du PEI|
 |x_apps|geo_vmr_adresse|BAL|Assise des secteurs de ramassage des encombrants|
+|r_objet|lt_contrat|liste et caractéristiques des contrats de délégation|Gestion des différents données de réseau ou s'apparentant un contrat|
 
 ---
 
@@ -740,6 +741,6 @@ Sans objet
 
 ## Schéma fonctionnel
 
-### Modèle conceptuel simplifié
+### Modèle conceptuel simplifié des lieux de collecte des Points d'Apport Volontaire
 
 ![mcd](img/pav_mcd2.png)
