@@ -5,10 +5,10 @@
 
 * Statut
   - [ ] à rédiger
-  - [x] en cours de rédaction
+  - [ ] en cours de rédaction
   - [ ] relecture
   - [ ] finaliser
-  - [ ] révision
+  - [x] en cours de révision
 
 ## Principes
  ### Généralité
