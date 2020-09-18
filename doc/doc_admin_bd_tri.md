@@ -184,12 +184,60 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |date_eve|Date du dernier évènement intervenu sur le conteneur Verre|timestamp without time zone| |
 |obs_eve|Observations liées à l'évènement|character varying(500)| |
 
+
+* triggers :
+
+  * `t_t1_an_dec_pav_cont_lieu` : Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)
+  * `t_t2_an_dec_pav_cont_datemaj` : intégration de la date de mise à jour
+  * `t_t3_an_dec_pav_cont_datesai` : intégration de la date de saisie
+
 `an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---| 
+|idcont|Identifiant unique du conteneur TLC
+(nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass) )|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
+|idlieu|Identifiant du lieu de collecte|integer| |
+|eve|Evènement intervenu sur le conteneur TLC (liste de valeurs lt_pav_eve)|character varying(2)| |
+|model|Modèle du conteneur (liste de valeurs lt_pav_modele)|character varying(2)| |
+|nom_entrep|Nom de l'entreprise gestionnaire du conteneur (liste de valeurs lt_pav_gest)|character varying(2)| |
+|nom_entrep_99|Autre entreprise gestionnaire si non présente das nom_entrep|character varying(80)| |
+|mat|Matériau composant le conteneur TLC (liste de valeurs lt_pav_mat)|character varying(2)| |
+|pos|Position du conteneur TLC (liste de valeurs lt_pav_pos)|character varying(2)| |
+|date_sai|Date de saisie initiale|timestamp without time zone| |
+|date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
+|date_pos|Date de pose du conteneur TLC|timestamp without time zone| |
+|date_effet|Date de prise en compte dans l'application Grand Public Plan Interactif |timestamp without time zone| |
+|op_sai|Opérateur de saisie initiale de la donnée|character varying(80)| |
+|observ|Observations diverses|character varying(500)| |
+|date_eve|Date du dernier évènement intervenu sur le conteneur TLC|timestamp without time zone| |
+|obs_eve|Observations liées à l'évènement|character varying(500)| |
 
+* triggers :
 
+  * `t_t1_an_dec_pav_cont_lieu` : Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)
+  * `t_t2_an_dec_pav_cont_datemaj` : intégration de la date de mise à jour
+  * `t_t3_an_dec_pav_cont_datesai` : intégration de la date de saisie
+  
+`an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---| 
+|id|Identifiant du PAV|integer| |
+|media|Champ Média de GEO|text| |
+|miniature|Champ miniature de GEO|bytea| |
+|n_fichier|Nom du fichier|text| |
+|t_fichier|Type de média dans GEO|text| |
+|op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
+|date_sai|Date d'intégration du document|timestamp without time zone| |
+|d_photo|Date de la prise de vue|timestamp without time zone| |
+|l_prec|Précision sur le document|character varying(1000)| |
+|t_doc|Type de document|character varying(2)|0|
+
+* triggers :
+
+  * `t_t1_an_dec_pav_doc_media_date_sai` : Intégration de la date d'intégration du document
+  
 ### classes d'objets applicatives de gestion :
 
 Sans objet
