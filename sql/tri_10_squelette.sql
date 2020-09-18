@@ -249,11 +249,11 @@ WITH (
 );
 
 COMMENT ON TABLE m_dechet.lt_pav_cttype
-    IS 'Liste de valeurs des codes du type de signalétique';
+    IS 'Liste de valeurs des codes du type de lieux de collecte';
 COMMENT ON COLUMN m_dechet.lt_pav_cttype.code
-    IS 'code du type de conteneur';
+    IS 'code du type de lieu';
 COMMENT ON COLUMN m_dechet.lt_pav_cttype.valeur
-    IS 'Libellé du type de conteneur';
+    IS 'Libellé du type de lieu';
 
 INSERT INTO m_dechet.lt_pav_cttype(
             code, valeur)
@@ -377,8 +377,8 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_etatsign
   IS 'Liste de valeurs de l''état de la signalitique';
-COMMENT ON COLUMN m_dechet.lt_pav_etatsign.code IS 'Code matériaux constituant le conteneur';
-COMMENT ON COLUMN m_dechet.lt_pav_etatsign.valeur IS 'Libellé des matériaux constituant le conteneur';
+COMMENT ON COLUMN m_dechet.lt_pav_etatsign.code IS 'Code des états de la signalétique';
+COMMENT ON COLUMN m_dechet.lt_pav_etatsign.valeur IS 'Libellé des états de la signalétique';
 
 COMMENT ON CONSTRAINT lt_pav_etat_sign_pkkey ON m_dechet.lt_pav_etatsign IS 'Clé primaire de la table lt_pav_etat_sign';
 
@@ -410,7 +410,7 @@ WITH (
 
 
 COMMENT ON TABLE m_dechet.lt_pav_eve
-    IS 'Liste de valeurs des codes du type de signalétique';
+    IS 'Liste de valeurs des codes des évènements';
 
 COMMENT ON COLUMN m_dechet.lt_pav_eve.code
     IS 'code de l''évènement du conteneur';
