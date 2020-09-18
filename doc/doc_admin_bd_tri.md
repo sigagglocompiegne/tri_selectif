@@ -63,7 +63,38 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
-
+|idlieu|Identifiant unique du lieu de collecte|integer|nextval('m_dechet.geo_dec_pav_lieu_idlieu_seq'::regclass)|
+|statut|Statut du lieu du collecte (liste de valeurs lt_pav_statut)|character varying(2)| |
+|cttype|Type de conteneur (liste de valeurs lt_pav_cctype). Attribut automatisé en fonction des conteneurs présents au lieu|character varying(2)| |
+|insee|Code insee de la commune d'implantation du lieu|character varying(5)| |
+|commune|Libellé de la commune d'implantation du lieu|character varying(50)| |
+|quartier|Libellé du quartier d'implantation du lieu (ville de Compiègne uniquement)|character varying(50)| |
+|adresse|Libellé de l'adresse proche du lieu|character varying(80)| |
+|localisation|Information complémentaire à l'adresse pour mieux appréhender la localisation du lieu|character varying(254)| |
+|nb_cont|Nombre de conteneurs Verre présent au lieu. Cet attribut est calculé automatiquement à la mise à jour des conteneurs|integer| |
+|prop_abor|Propreté aux abords du lieu (liste de valeurs lt_pav_proprete)|character varying(2)| |
+|env_type|Type d'environnement autour du lieu (liste de valeurs lt_pav_envtype)|character varying(2)| |
+|env_implan|Environnement d'implantation du lieu (liste de valeurs lt_pav_envimplan)|character varying(2)| |
+|env_situ|Situation du lieu (liste de valeurs lt_pav_envsitu)|character varying(2)| |
+|prox_corb|Présence d'une corbeille à proximité du lieu|boolean| |
+|opt_pav|nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages|integer| |
+|ame_acces|Accéssibilité à revoir|boolean| |
+|nat_pb|Nature des problèmes identifiés au lieu (liste de valeurs lt_pav_natpb)|character varying(2)| |
+|nat_pb_99|Autre type de problème identifié au lieu|character varying(254)| |
+|pavorient|Préconisations pour l'amélioration des emplacements des lieux (suite à l'état des lieux de l'été 2016) (liste de valeurs lt_pav_pavorient)|character varying(2)| |
+|idparent|Identifient du lieu parent|integer| |
+|v_tampon|Valeur en mètre de l'aire de chalandise du lieu|integer| |
+|x_l93|Coordonnée X en Lambert 93 du lieu|double precision| |
+|y_l93|Coordonnée Y en Lambert 93 du lieu|double precision| |
+|src_geom|Référentiel de saisie utilisé pour saisir le lieu (liste de valeurs r_objet.lt_src_geom)|character(2)| |
+|src_date|Année du référentiel de saisi pour la saisie des lieux|integer| |
+|date_sai|Date de saisie initiale du lieu|timestamp without time zone| |
+|date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
+|op_sai|Opérateur de saisie|character varying(80)| |
+|observ|Observations diverses|character varying(500)| |
+|geom|Attribut de géométrie|USER-DEFINED| |
+|hab_pav|Tonnage par gisement d''habitants|integer| |
+|idcontrat|Identifiant du contrat de gestion du ramassage des conteneurs Verre (liste de valeurs r_objet.lt_contrat)|character varying(2)| |
 
 
   * `t_t1_geo_dec_pav_verre_datemaj` : intégration de la date de mise à jour
