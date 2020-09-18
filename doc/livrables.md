@@ -20,6 +20,25 @@ Schéma 1 : principe fonctionnel du lieu de collecte, ici 1 lieu de collecte com
 
 Schéma 2 : restitution conceptuelle dans la base de données
 
+La mise à jour repose à la fois sur les lieux de collecte Verre et les conteneurs Verre qui y sont affectés.
+Elle doit permettre de vérifier le bon emplacement des lieux de collecte fournit par la collectivité et l'affectation des bons conteneurs. 
+Le fichier de mise à jour restitué devra préciser pour chaque lieu dans l'attribut [maj_2021] :
+- inchangé (si le lieu de collecte est toujours présent),
+- nouveau (dans ce cas, le prestataire devra ajouter ce nouveau point de collecte dans le fichier SIG ou dans le fichier Excel en précisant l'ensemble des autres attributs précisés dans l'annexe 3,
+- supprimé (dans ce cas, le prestataire devra uniquement spécifier cette mention dans l'attribut concerné et non supprimer le point de collecte dans les fichiers fournis).
+
+Dans le cas d’un nouveau lieu identifié, le point de localisation doit représenter le lieu exact d'implantation de celui-ci au mètre près.
+Pour chaque lieu de collecte, la bonne attribution des conteneurs Verre uniquement devra être réalisée. Le fichier csv fournit dans le gabarait présente la liste de l'ensemble des conteneurs Verre présent pour chaque lieu de collecte. L'attribut [idcont] permet de faire le lien avec le fichier des lieux de collecte. 
+Comme pour les lieux de collecte, cette mise à jour devra préciser dans l'attribut [maj_2021] : 
+- inchangé (si le conteneur est toujours présent),
+- nouveau (dans ce cas, le prestataire devra ajouter une nouvelle ligne d'enregistrement dans le fichier Excel en précisant à quel lieu de collecte il est affecté et en complétant l'ensemble des autres attributs précisés dans l'annexe 3),
+- supprimé (dans ce cas, le prestataire devra uniquement spécifier cette mention dans l'attribut concerné et non supprimer le conteneur dans les fichiers fournis).
+
+*Important :*
+-	l'entreprise gestionnaire veillera à bien indiquer le lieu de collecte d'appartenance de chaque nouveau conteneur par un identifiant unique de sa convenance différent de ceux déjà utilisés par la collectivité et qui sera également indiqué pour chaque nouveau lieu de collecte.
+-	l'attribut [idpresta], dans le fichier des conteneurs et pour chaque conteneur Verre, doit contenir l'identifiant de l'entreprise gestionnaire. Cet attribut sera utilisé par la suite pour les échanges de données.
+
+
 ## Système de coordonnées
 
 Les coordonnées seront exprimées en mètre avec trois chiffres après la virgule dans le système national en vigueur.
