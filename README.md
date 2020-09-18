@@ -2,7 +2,7 @@
 
 # Standard local des Points d'Apport Volontaire Verre
 
-[ ] à rédiger [ ] en cours de rédaction [ ] relecture [ ] finaliser [x] en cours de révision
+[ ] à rédiger [x] en cours de rédaction [ ] finaliser
 
 Spécification du fichier d’échange relatif aux données concernant la  localisation géographique des lieux de collecte et les caractéristiques patrimoniales des Points d'Apport Volontaire Verre sur le territoire de l'Agglomération de la Région de Compiègne. La localisation et les caractéristiques patrimoniales des Points d'Apport Volontaire TLC (textile-linge-chaussure) ne sont pas considérés comme partis prenante du standard même si ils sont renseignés Indépendamment, le service n'en assure pas la gestion.
 
