@@ -1,6 +1,6 @@
 ![picto](/doc/img/geocompiegnois_2020_reduit_v2.png)
 
-# Documentation d'administration de la base #
+# Documentation d'administration de la base de données des déchets #
 
 
 * Statut
