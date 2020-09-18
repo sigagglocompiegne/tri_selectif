@@ -59,5 +59,6 @@ L'encodage des caractères est en UTF8.
 
 # Gabarits
 
-- Fichier gabarit à télécharger au format csv (non géographique)
+- Fichier gabarit des lieux de collecte et des conteneurs à télécharger au format csv (non géographique)
+- Fichier gabarit à télécharger des lieux de collecte au format shape (géographique)
 - Fichier gabarit Qgis complet à télécharger
