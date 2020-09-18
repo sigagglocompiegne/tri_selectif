@@ -99,11 +99,17 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 * triggers :
 
   * `t_t1_geo_dec_pav_lieu_datemaj` : intégration de la date de mise à jour
+  
   * `t_t2_geo_dec_pav_lieu_datesai` : intégration de la date de saisie
+  
   * `t_t3_geo_dec_pav_lieu_insee` : intégration du code insee et du nom de la commune 
+  
   * `t_t4_geo_dec_pav_lieu_quartier` : intégration du nom du quartier
+  
   * `t_t5_geo_dec_pav_lieu_xy` : intégration des valeurs x et y en lambert 93 
+  
   * `t_t6_geo_dec_pav_lieu_tampon` : Fonction trigger pour mise à jour du tampon d''emprise du lieu de collecte si v_tampon est modifiée 
+  
   * `t_t7_geo_dec_pav_lieu_delete` : Fonction trigger pour automatiser la dépose de tous les conteneurs lorsque le lieu de collecte devient inactif
   
 `geo_dec_secteur_enc` : table géographique des secteurs de ramassage des encombrants.
@@ -188,7 +194,9 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 * triggers :
 
   * `t_t1_an_dec_pav_cont_lieu` : Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)
+  
   * `t_t2_an_dec_pav_cont_datemaj` : intégration de la date de mise à jour
+  
   * `t_t3_an_dec_pav_cont_datesai` : intégration de la date de saisie
 
 `an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
@@ -216,10 +224,12 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 * triggers :
 
   * `t_t1_an_dec_pav_cont_lieu` : Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)
+  
   * `t_t2_an_dec_pav_cont_datemaj` : intégration de la date de mise à jour
+  
   * `t_t3_an_dec_pav_cont_datesai` : intégration de la date de saisie
   
-`an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
+`an_dec_pav_doc_media` : table attributaire gérant les documents joints au lieu de collecte.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---| 
