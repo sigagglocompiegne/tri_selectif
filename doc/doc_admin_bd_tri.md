@@ -435,8 +435,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|code|Code matériaux constituant le conteneur|character varying(2)| |
-|valeur|Libellé des matériaux constituant le conteneur|character varying(30)| |
+|code|Code des états de la signalétique|character varying(2)| |
+|valeur|Libellé des états de la signalétique|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
