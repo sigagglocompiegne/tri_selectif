@@ -1034,7 +1034,7 @@ CREATE TRIGGER t_t7_geo_dec_pav_lieu_delete
     AFTER UPDATE OF statut
     ON m_dechet.geo_dec_pav_lieu
     FOR EACH ROW
-    EXECUTE PROCEDURE m_dechet.ft_m_tampon_lieu_delete();
+    EXECUTE PROCEDURE m_dechet.ft_m_dec_lieu_delete();
 
 -- Table: m_dechet.an_dec_pav_cont
 
@@ -1539,4 +1539,217 @@ COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message7 IS '7ème ligne du mess
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
-à revoir
+
+-- FUNCTION: m_dechet.ft_m_dec_lieu_delete()
+
+-- DROP FUNCTION m_dechet.ft_m_dec_lieu_delete();
+
+CREATE FUNCTION m_dechet.ft_m_dec_lieu_delete()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+
+BEGIN
+
+IF (old.statut = '10' or old.statut ='00') AND new.statut = '20' THEN
+UPDATE m_dechet.an_dec_pav_cont SET eve = '21', date_eve = now() WHERE idlieu = old.idlieu;
+UPDATE m_dechet.an_dec_pav_cont_tlc SET eve = '21', date_eve = now() WHERE idlieu = old.idlieu;
+END IF;
+
+return new;
+
+END;
+$BODY$;
+
+COMMENT ON FUNCTION m_dechet.ft_m_dec_lieu_delete()
+    IS 'Fonction trigger pour automatiser la dépose de tous les conteneurs lorsque le lieu de collecte devient inactif';
+
+
+-- FUNCTION: m_dechet.ft_m_dec_pav_lieu()
+
+-- DROP FUNCTION m_dechet.ft_m_dec_pav_lieu();
+
+CREATE FUNCTION m_dechet.ft_m_dec_pav_lieu()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+
+BEGIN
+
+-- après l'insertion d'un conteneur ou mise à jour, je mets à jour le nombre de conteneurs verre dans les lieux de collecte
+update m_dechet.geo_dec_pav_lieu set nb_cont = (SELECT count(*) from m_dechet.an_dec_pav_cont where eve IN ('10','11','12','13','14') AND idlieu=new.idlieu);
+
+-- après l'insertion d'un conteneur ou mise à jour, je mets à jour le type de lieu
+update m_dechet.geo_dec_pav_lieu set cttype = b.cttype from (
+WITH
+req_tot as 
+(
+WITH 
+req_verre as
+(
+SELECT 
+	l.idlieu,
+	count(*) as nb_verre
+FROM 
+	m_dechet.geo_dec_pav_lieu l 
+LEFT JOIN m_dechet.an_dec_pav_cont a ON l.idlieu=a.idlieu 
+WHERE a.eve like '1%' 
+GROUP BY l.idlieu
+),
+req_tlc as
+(
+SELECT 
+	l.idlieu,
+	count(*) as nb_tlc
+FROM 
+	m_dechet.geo_dec_pav_lieu l 
+LEFT JOIN m_dechet.an_dec_pav_cont_tlc a ON l.idlieu=a.idlieu 
+WHERE a.eve like '1%' 
+GROUP BY l.idlieu
+)
+
+SELECT
+l.idlieu,
+CASE WHEN v.nb_verre > 0 THEN v.nb_verre ELSE 0 END as nb_verre,
+CASE WHEN t.nb_tlc > 0 THEN t.nb_tlc ELSE 0 END as nb_tlc
+FROM
+m_dechet.geo_dec_pav_lieu l 
+LEFT JOIN req_verre v ON l.idlieu = v.idlieu
+LEFT JOIN req_tlc t ON l.idlieu = t.idlieu
+)
+SELECT
+idlieu,
+CASE 
+WHEN nb_verre > 0 AND nb_tlc = 0 THEN '10'
+WHEN nb_verre = 0 AND nb_tlc > 0 THEN '20'
+WHEN nb_verre > 0 AND nb_tlc > 0 THEN '30'
+WHEN nb_verre = 0 AND nb_tlc = 0 THEN '40'
+END AS cttype
+FROM
+req_tot WHERE idlieu = new.idlieu
+	) b WHERE geo_dec_pav_lieu.idlieu = b.idlieu;
+
+return new;
+
+END;
+$BODY$;
+
+COMMENT ON FUNCTION m_dechet.ft_m_dec_pav_lieu()
+    IS 'Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)';
+
+-- FUNCTION: m_dechet.ft_m_tampon_lieu_nav()
+
+-- DROP FUNCTION m_dechet.ft_m_tampon_lieu_nav();
+
+CREATE FUNCTION m_dechet.ft_m_tampon_lieu_nav()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+
+BEGIN
+
+update m_dechet.geo_dec_pav_lieu set geom2 = st_buffer(geom,new.v_tampon) where idlieu=new.idlieu;
+
+return new;
+
+END;
+$BODY$;
+
+COMMENT ON FUNCTION m_dechet.ft_m_tampon_lieu_nav()
+    IS 'Fonction trigger pour mise à jour du tampon d''emprise du lieu de collecte si v_tampon est modifiée';
+
+-- FUNCTION: public.ft_r_timestamp_maj()
+
+-- DROP FUNCTION public.ft_r_timestamp_maj();
+
+CREATE FUNCTION public.ft_r_timestamp_maj()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+new.date_maj=current_timestamp;
+return new;
+END$BODY$;
+
+COMMENT ON FUNCTION public.ft_r_timestamp_maj()
+    IS 'Fonction dont l''objet est de mettre à jour la date et l''heure locale de mise à jour (géométrie et/ou attribut) de la donnée (champ date_maj).';
+
+
+-- FUNCTION: public.ft_r_timestamp_sai()
+
+-- DROP FUNCTION public.ft_r_timestamp_sai();
+
+CREATE FUNCTION public.ft_r_timestamp_sai()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+new.date_sai=current_timestamp;
+return new;
+END$BODY$;
+
+COMMENT ON FUNCTION public.ft_r_timestamp_sai()
+    IS 'Fonction dont l''objet est d''insérer la date et l''heure locale de saisie (géométrie et/ou attribut) de la donnée (champ date_sai).';
+
+
+-- FUNCTION: public.ft_r_commune_pl()
+
+-- DROP FUNCTION public.ft_r_commune_pl();
+
+CREATE FUNCTION public.ft_r_commune_pl()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+select into new.insee string_agg(insee, ', ') from r_osm.geo_osm_commune where st_intersects(new.geom,geom);
+select into new.commune string_agg(commune, ', ') from r_osm.geo_osm_commune where st_intersects(new.geom,geom);
+return new;
+END$BODY$;
+
+COMMENT ON FUNCTION public.ft_r_commune_pl()
+    IS 'Fonction dont l''objet est de recupérer par croisement géographique, le nom et le code insee de la commune à partir de la vue de référence r_osm.geo_v_osm_commune
+Fonction réservée au géométrie de type point et ligne';
+
+-- FUNCTION: public.ft_r_quartier()
+
+-- DROP FUNCTION public.ft_r_quartier();
+
+CREATE FUNCTION public.ft_r_quartier()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+select into new.quartier string_agg(nom, ', ') from r_administratif.geo_adm_quartier where st_intersects(new.geom,geom);
+return new;
+END$BODY$;
+
+COMMENT ON FUNCTION public.ft_r_quartier()
+    IS 'Fonction dont l''objet est de recupérer par croisement géographique, le nom du quartier de la commune à partir de la table geo_adm_quartier';
+
+-- FUNCTION: public.ft_r_xy_l93()
+
+-- DROP FUNCTION public.ft_r_xy_l93();
+
+CREATE FUNCTION public.ft_r_xy_l93()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+new.x_l93=ST_X(new.geom);
+new.y_l93=ST_Y(new.geom);
+return new;
+END$BODY$;
+
+COMMENT ON FUNCTION public.ft_r_xy_l93()
+    IS 'Fonction dont l''objet est de récupérer les coordonnées X et Y en Lambert 93 (epsg:2154)';
