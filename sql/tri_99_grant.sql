@@ -221,7 +221,29 @@ GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO sig_create;
 
 -- #################################################################### TABLE  ####################################################################
 
+ALTER TABLE m_dechet.geo_dec_pav_lieu
+    OWNER to sig_create;
 
+GRANT ALL ON TABLE m_dechet.geo_dec_pav_lieu TO create_sig;
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE m_dechet.geo_dec_pav_lieu TO edit_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_pav_lieu TO read_sig;
+GRANT ALL ON TABLE m_dechet.geo_dec_pav_lieu TO sig_create;
+
+ALTER TABLE m_dechet.an_dec_pav_cont
+    OWNER to sig_create;
+
+GRANT ALL ON TABLE m_dechet.an_dec_pav_cont TO create_sig;
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE m_dechet.an_dec_pav_cont TO edit_sig;
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_cont TO read_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_cont TO sig_create;
+
+ALTER TABLE m_dechet.an_dec_pav_cont_tlc
+    OWNER to sig_create;
+
+GRANT ALL ON TABLE m_dechet.an_dec_pav_cont_tlc TO create_sig;
+GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE m_dechet.an_dec_pav_cont_tlc TO edit_sig;
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_cont_tlc TO read_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_cont_tlc TO sig_create;
 
 -- #################################################################### VUE DE GESTION  ####################################################################
 
