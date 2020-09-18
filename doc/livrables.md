@@ -10,7 +10,7 @@
 
 ## Principe fonctionnel et modalités de mises à jour
 
-(à compléter cf annexe 2)
+Le principe de fonctionnement de la base de données des Points d'Apport Volontaire Verre s'appuie sur le lieu de collecte. Ce lieu est un point unique disposant de n conteneurs, qu'ils soient à usage Verre ou TLC. 
 
 ## Système de coordonnées
 
