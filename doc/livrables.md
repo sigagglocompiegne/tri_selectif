@@ -1,6 +1,6 @@
 ![picto](/doc/img/geocompiegnois_2020_reduit_v2.png)
 
-# Standard local des Points d'Apport Volontaire Verre
+# Standard local des Points d'Apport Volontaire Verre (documentation du standard)
 
 # Changelog
 
@@ -88,6 +88,7 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |loca|Libellé de la commune|character varying(30)||valeur vide interdite|
 |nb_cont|Nombre de conteneurs Verre|integer||valeur vide interdite|
 |prop_abor|état de la propreté des abords|character varying(2)|lt_pav_proprete|valeur vide interdite|
+|env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
 |env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
 
 ### Liste de valeurs
