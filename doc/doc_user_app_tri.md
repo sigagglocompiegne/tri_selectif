@@ -1,4 +1,4 @@
-![GeoCompiegnois](img/Logo_web-GeoCompiegnois.png)
+![GeoCompiegnois](img/geocompiegnois_2020_reduit_v2.png)
 
 # Documentation utilisateur de l'application TRI SELECTIF
 
