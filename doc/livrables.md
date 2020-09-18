@@ -4,7 +4,7 @@
 
 # Changelog
 
-- 02/01/2021 : description initiale du gabarit de production de l'inventaire du réseau pluvial
+- 02/01/2021 : description initiale du gabarit de production et de mise à jour des lieux de collecte des Points d'Apport Volontaire Verre
 
 # Livrables
 
