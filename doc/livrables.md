@@ -54,3 +54,10 @@ Les fichiers sont disponibles au format ESRI Shape (.SHP) contenant la géométr
 L'encodage des caractères est en UTF8.
 
 ## Description des classes d'objets
+
+
+
+# Gabarits
+
+- Fichier gabarit à télécharger au format csv (non géographique)
+- Fichier gabarit Qgis complet à télécharger
