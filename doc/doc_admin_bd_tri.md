@@ -257,15 +257,20 @@ Sans objet
 ### classes d'objets applicatives métiers sont classés dans le schéma x_apps :
  
 `x_apps.xapps_geo_v_dec_pav_lieu_orient` : Vue géométrique des liens entre les lieux de collecte supprimés, déplacés (nouvel emplacement)
+
 `x_apps.xapps_an_dec_lieu_eve_tab` : Vue alphanumérique présentant les évènements par année des mouvements des lieux de collecte disposant de PAV Verre 
+
 `x_apps.xapps_an_dec_pav_chiffre_cle_tab` : Vue alphanumérique présentant les chiffrss clés sur les PAV Verre
+
 `x_apps.xapps_an_dec_pav_eve_tab` : Vue alphanumérique présentant les évènements par année des mouvements de PAV Verre
 
 
 ### classes d'objets applicatives grands publics sont classés dans le schéma x_apps_public :
 
 `x_apps_public.xappspublic_geo_dec_pav_verre` : Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres 
+
 `x_apps_public.xappspublic_geo_dec_pav_tlc` : Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs TLC
+
 `x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur` : Vue géométrique contenant les secteurs de rammassage des encombrants pour export dans GEO APPLI GD PUBLIC
 
 ### classes d'objets opendata sont classés dans le schéma x_opendata :
@@ -279,8 +284,8 @@ Sans objet
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|cont_mat|Code matériaux constituant le conteneur|character varying(2)| |
-|cont_mat_lib|Libellé des matériaux constituant le conteneur|character varying(30)| |
+|code|Code matériaux constituant le conteneur|character varying(2)| |
+|valeur|Libellé des matériaux constituant le conteneur|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -303,8 +308,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|cont_pos|code du type de position du conteneur|character varying(2)| |
-|cont_pos_lib|libellé du type de position du conteneur|character varying(30)| |
+|code|code du type de position du conteneur|character varying(2)| |
+|valeur|libellé du type de position du conteneur|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -325,8 +330,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|crochet|code de l'état du crochet |character varying(2)| |
-|crochet_lib|libellé de l'état du crochet |character varying(30)| |
+|code|code de l'état du crochet |character varying(2)| |
+|valeur|libellé de l'état du crochet |character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -339,6 +344,27 @@ Valeurs possibles :
 |20|Tordu|
 |00|Non renseigné|
 
+---
+
+`lt_pav_cttype` : Liste de valeurs des codes du type de lieux de collecte
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|    
+|code|code du type de lieu|character varying(2)| |
+|valeur|Libellé du type de lieu|character varying(30)| |
+
+
+Particularité(s) à noter : aucune
+
+Valeurs possibles :
+
+|code | valeur | code_open |
+|:---|:---|:---|   
+|00|Non renseigné|
+|10|Verre|
+|20|TLC|
+|30|Verre et TLC|
+|40|Aucun|
 
 ---
 
@@ -346,8 +372,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|env_implan|code du type d'espace urbain d'implantation|character varying(2)| |
-|env_implan_lib|libellé du type d'espace urbain d'implantation|character varying(30)| |
+|code|code du type d'espace urbain d'implantation|character varying(2)| |
+|valeur|libellé du type d'espace urbain d'implantation|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -369,8 +395,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|env_situ|code de la situation domaniale|character varying(2)| |
-|env_situ_lib|libellé du type de la situation domaniale|character varying(30)| |
+|code|code de la situation domaniale|character varying(2)| |
+|valeur|libellé du type de la situation domaniale|character varying(30)| |
 
 
 Valeurs possibles :
@@ -388,8 +414,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|env_type|code du type d'espace géographique|character varying(2)| |
-|env_type_lib|libellé du type d'espace géographique|character varying(30)| |
+|code|code du type d'espace géographique|character varying(2)| |
+|valeur|libellé du type d'espace géographique|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -408,8 +434,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|etat_sign|Code matériaux constituant le conteneur|character varying(2)| |
-|etat_sign_lib|Libellé des matériaux constituant le conteneur|character varying(30)| |
+|code|Code matériaux constituant le conteneur|character varying(2)| |
+|valeur|Libellé des matériaux constituant le conteneur|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -426,12 +452,39 @@ Valeurs possibles :
 
 ---
 
+`lt_pav_eve` : Liste de valeurs des évènements
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|    
+|code|code de l'évènement du conteneur|character varying(2)| |
+|valeur|Libellé de l'évènement|character varying(50)| |
+
+
+Particularité(s) à noter : aucune
+
+Valeurs possibles :
+
+|code | valeur |
+|:---|:---|  
+|00|Non renseigné|
+|10|Ajout (initialisation de la base de donnée)|
+|11|Ajout (nouveau lieu de collecte)|
+|13|Ajout (pour un complément)|
+|20|Déposé|
+|30|Remplacé (à l'identique)|
+|31|Remplacé (par un autre modèle)|
+|12|Ajout (dû à un remplacement)|
+|21|Déposé (suppression du lieu de collecte)|
+|14|Ajout (dû à un déplacement du lieu de collecte)|
+
+---
+
 `lt_pav_gest` : Liste permettant de décrire les festionnaires des PAV TLC
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|nom_entrep|code du gestionnaire du PAV TLC|character varying(2)| |
-|nom_entrep_lib|Libellé du code du gestionnaire du PAV TLC|character varying(30)| |
+|code|code du gestionnaire du PAV TLC|character varying(2)| |
+|valeur|Libellé du code du gestionnaire du PAV TLC|character varying(30)| |
 
 
 Particularité(s) à noter : aucune
@@ -445,6 +498,31 @@ Valeurs possibles :
 |99|Autre|
 |00|Non renseigné|
 
+---
+
+`lt_pav_modele` : Liste de valeurs des modèles de conteneur
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|    
+|code|code du modèle|character varying(2)| |
+|valeur|Libellé du conteneur|character varying(50)| |
+|nomfic|Nom du fichier contenant la photo du modèle|character varying(254)| |
+|urlfic|Lien vers la photographie du modèle|character varying(254)| |
+
+
+Particularité(s) à noter : aucune
+
+Valeurs possibles :
+
+|code | valeur | nomfic | urlfic |
+|:---|:---|:---|:---|
+|01|TEMACO - MULTIPACK C600 4m3|tamaco6004.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png|
+|02|COLLECTAL-VILLIGERS City Line 4m3|villigerscityline4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png|
+|05|UTPM 3m3|utpm3.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png|
+|06|MULTIPACK ENTERRE PO - 4m3|tamacoenterrepo4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png|
+|04|SULO-CITY BULLE 4m3|sulocitybulle4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png|
+|00|Non renseigné|non_disponible.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg|
+|03|TEMACO - PO MULTIPACK C600 4m3|tamacopo6003.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png|
 
 ---
 
@@ -452,8 +530,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|mode_preh|code du mode de préhension|character varying(2)| |
-|mode_preh_lib|libellé du mode de préhension|character varying(30)| |
+|code|code du mode de préhension|character varying(2)| |
+|valeur|libellé du mode de préhension|character varying(30)| |
 
 Valeurs possibles :
 
@@ -469,8 +547,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|nat_pb|code de la nature du ou des problèmes|character varying(2)| |
-|nat_pb_lib|Libellé des codes de la nature du ou des problèmes|character varying(30)| |
+|code|code de la nature du ou des problèmes|character varying(2)| |
+|valeur|Libellé des codes de la nature du ou des problèmes|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -498,8 +576,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|pavorient|code de l'orientation du PAV suite à l'état des lieux de l'été 2016|character varying(2)| |
-|pavorient_lib|Libellé de l'orientation du PAV suite à l'état des lieux de l'été 2016|character varying(30)| |
+|code|code de l'orientation du PAV suite à l'état des lieux de l'été 2016|character varying(2)| |
+|valeur|Libellé de l'orientation du PAV suite à l'état des lieux de l'été 2016|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -521,8 +599,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|peinture|code de l'état de la peinture|character varying(2)| |
-|peinture_lib|Libellé de l'état de la peinture|character varying(30)| |
+|code|code de l'état de la peinture|character varying(2)| |
+|valeur|Libellé de l'état de la peinture|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -542,8 +620,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|proprete|code de l'état de la propreté|character varying(2)| |
-|proprete_lib|Libellé code de l'état de la propreté|character varying(30)| |
+|code|code de l'état de la propreté|character varying(2)| |
+|valeur|Libellé code de l'état de la propreté|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -563,8 +641,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|statut|code du statut|character varying(2)| |
-|statut_lib|Libellé du statut|character varying(30)| |
+|code|code du statut|character varying(2)| |
+|valeur|Libellé du statut|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -583,8 +661,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|type_sign|code du type de signalétique|character varying(2)| |
-|type_sign_lib|Libellé du type de signalétique|character varying(30)| |
+|code|code du type de signalétique|character varying(2)| |
+|valeur|Libellé du type de signalétique|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -605,8 +683,8 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|
-|type_sol|code du type de sol|character varying(2)| |
-|type_sol_lib|Libellé du type de sol|character varying(30)| |
+|code|code du type de sol|character varying(2)| |
+|valeur|Libellé du type de sol|character varying(30)| |
 
 
 Particularité(s) à noter : Aucune
@@ -626,21 +704,7 @@ Valeurs possibles :
 
 ## Log
 
-`log_dec_pav` : table attributaire des logs.
-
-|Nom attribut | Définition | Type  | Valeurs par défaut |
-|:---|:---|:---|:---|  
-|gid|identifiant unique|integer| |
-|objet|Type de modification (update, delete, insert)|character varying(10)| |
-|d_maj|Date de l'exécution de la modification|timestamp without time zone| |
-|user|Utilisateur ayant exécuté l'exécution|character varying(50)| |
-|relid|ID d'objet de la table qui a causé le déclenchement.|character varying(255)| |
-|l_schema|Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée|character varying(30)| |
-|l_table|Libellé de la table exécutée|character varying(30)| |
-|idgeo|Identifiant unique de l'objet de la table correspondante|character varying(100)| |
-|geom|Champ contenant la géométrie des objets polygones modifiés ou supprimés|USER-DEFINED| |
-
-Particularité(s) à noter : Aucune
+(à revoir)
 
 ## Erreur
 
@@ -650,7 +714,7 @@ Sans objet
 
 ## Projet QGIS pour la gestion
 
-Sans objet
+Sans objet (uniquement un projet QGis pour le gabarit de mise à jour)
 
 ## Traitement automatisé mis en place (Workflow de l'ETL FME)
 
@@ -661,7 +725,7 @@ Sans objet
 
 ### Mise à jour des données
 
-Sans objet
+(à produire pour une mise à jour ponctuelle d'un producteur à travers le gabarit)
 
 ## Export Grand Public
 
@@ -671,7 +735,6 @@ Y:\Ressources\4-Partage\3-Procedures\FME\prod\APPS_GB_PUBLIC\PLAN_INTERACTIF.fmw
 ## Export Open Data
 
 Sans objet
-
 
 ---
 
