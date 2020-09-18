@@ -2,14 +2,6 @@
 
 # Documentation d'administration de la base de données des déchets #
 
-
-* Statut
-  - [ ] à rédiger
-  - [ ] en cours de rédaction
-  - [ ] relecture
-  - [ ] finaliser
-  - [x] en cours de révision
-
 ## Principes
  ### Généralité
  
