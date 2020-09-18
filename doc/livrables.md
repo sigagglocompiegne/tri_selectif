@@ -46,8 +46,10 @@ Comme pour les lieux de collecte, cette mise à jour devra préciser dans l'attr
 *Important :*
 -	l'entreprise gestionnaire veillera à bien indiquer le lieu de collecte d'appartenance de chaque nouveau conteneur par un identifiant unique de sa convenance différent de ceux déjà utilisés par la collectivité et qui sera également indiqué pour chaque nouveau lieu de collecte.
 -	l'attribut [idpresta], dans le fichier des conteneurs et pour chaque conteneur Verre, doit contenir l'identifiant de l'entreprise gestionnaire. Cet attribut sera utilisé par la suite pour les échanges de données.
+- L'attribut `date_sai` doit être renseigné uniquement lors d'un nouveau lieu de collecte identifié. L'attribut `date_maj`, quant à lui est à renseigner si il s'agit d'une mise à jour d'un lieu existant. Dans ce dernier cas, l'attribut `date_sai` reste inchangé dans le cadre d'une mise à jour.
 
 Un gabarit de saisi, sous le logiciel SIG QGIS 3.x, est disponible et permet de disposer des fonds de plan géographiques nécessaires à la localisation des lieux de collecte actuelle.
+
 
 
 ## Système de coordonnées
@@ -91,7 +93,20 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |nb_cont|Nombre de conteneurs Verre|integer||valeur vide interdite|
 |prop_abor|état de la propreté des abords|character varying(2)|lt_pav_proprete|valeur vide interdite|
 |env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
-|env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
+|env_implant|type d'espace urbain d'implantation|character varying(2)|lt_pav_envimplan|valeur vide interdite|
+|env_situ|situation domaniale|character varying(2)|lt_pav_envsitu|valeur vide interdite|
+|prox_corb|présence d''une corbeille à proximité|booléen||false par défaut|
+|x_l93|Coordonnée X en Lambert 93|Double précision||valeur vide interdite|
+|y_l93|Coordonnée Y en Lambert 93|Double précision||valeur vide interdite|
+|src_geom|Référentiel spatial de saisie utilisé|character varying(2)|lt_src_geom|valeur vide interdite|
+|src_date|Année du référentiel spatial utilisé|integer|||
+|date_sai|Date de saisie|date||valeur vide interdite|
+|date_maj|Date de mise à jour|date|||
+
+`an_dec_pav_cont` : Points d'Apport Volontaire Verre
+
+|Nom attribut|Définition|Type|Valeurs|Contraintes|
+|:---|:---|:---|:---|:---|
 
 ### Liste de valeurs
 
