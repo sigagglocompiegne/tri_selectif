@@ -64,7 +64,7 @@ L'encodage des caractères est en UTF8.
 
 ## Description des classes d'objets
 
-|Nom fichier|Définition|Catégorie|Géométrie|
+https://docs.geoserver.org/stable/en/user/styling/index.html#styling|Nom fichier|Définition|Catégorie|Géométrie|
 |:---|:---|:---|:---|
 |geo_dec_pav_lieu|Localisation des lieux de collecte des conteneurs à verre|Patrimoine|Ponctuel|
 |an_dec_pav_cont|Conteneurs à verre rattachés au lieu de collecte|Patrimoine|sans objet|
@@ -79,3 +79,17 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 
 |Nom attribut|Définition|Type|Valeurs|Contraintes|
 |:---|:---|:---|:---|:---|
+|idlieu|Identifiant unique du positionnement|character varying(8)||valeur vide interdite|
+|maj_aaaa|Evolution par rapport au dernier recensement|character varying(8)|lt_pav_maj|valeur vide interdite|
+|insee|Code insee de la commune|character varying(5)||valeur vide interdite|
+|commune|Libellé de la commune|character varying(30)||valeur vide interdite|
+|quartier|Libellé du quartier|character varying(50)||uniquement pour le commune de Compiègne|
+|adresse|Adresse du lieu de collecte|character varying(80)||nom de la rue ou n° d'adresse le plus proche|
+|loca|Libellé de la commune|character varying(30)||valeur vide interdite|
+|nb_cont|Nombre de conteneurs Verre|integer||valeur vide interdite|
+|prop_abor|état de la propreté des abords|character varying(2)|lt_pav_proprete|valeur vide interdite|
+|env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
+
+### Liste de valeurs
+
+Le contenu des listes de valeurs est disponible dans la documentation complète de la base de données en cliquant [ici](/doc/doc_admin_bd_tri.md) dans la rubrique `Liste de valeurs`.
