@@ -1412,7 +1412,7 @@ Liste des recherches : Parcelle sélectionnée (ignorer la visibilité), Lieu de
 * Tableau de bord
 
 |Nom|Contenu|Type|Données|Style|Paramètres|
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|
 |PAV Verre|||||
 ||Chiffres clés (PAV Verre)|Statistique de type texte|nb_pav_verre et nb_lieu_verre (couleur #054a91, taille 50)|<b>{text1}</b> conteneurs verres, <b>{text2}</b> lieux de collecte (couleur #79c24d)||
 ||Mouvement enregistré sur les PAV Verre|Recherche|||Afficher le titre|
