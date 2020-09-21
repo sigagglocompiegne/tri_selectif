@@ -45,9 +45,26 @@ Sans objet
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |Toutes|x||L'ensemble des fonctionnalités (recherches, cartographie, fiches d'informations, ...) sont accessibles par tous les utilisateurs connectés.|
-|Conteneur à verre ou tlc (édition)|x|x|Peut modifier les données des PAV.|
-|Conteneur à verre ou tlc |x||Fiche d'information tous utilisateurs en consultation.|
-|Modification géométrique - Conteneur Verre ou textile|x||Cette fonctionnalité est uniquement visible par les utilisateurs inclus dans les groupes PAV_EDIT.|
+|Rechercher un conteneur Verre (par référence, lieu de collecte...|x|x|Peut modifier les données des lieux et des PAV Verre.|
+|Rechercher un conteneur TLS (par référence, lieu de collecte...|x|x|Peut modifier les données des lieux et des PAV TLC.|
+|Gestion des lieux de collecte|x|x|Cette fonctionnalité est uniquement visible par les utilisateurs inclus dans les groupes PAV_EDIT. Permet la création, modificaiton ou la désactivation d'un lieu de collecte|
+
+* Le service des déchets peut :
+
+- Voir, consulter et rechercher les informations des lieux de collecte et des Points d'Apport Volontaire (PAV)
+- Peut modifier les données sur les lieux de collecte et sur les PAV (verre et TLC)
+- Peut créer un nouveau lieu et y affecter de nouveaux PAV
+- Peut modifier l'emplacement d'un lieu de collecte
+- Peut rendre inactif un lieu (pas le supprimer réellement) et le lié à un autre si il est déplacé
+- Peut gérer l'affectation des PAV au lieu
+
+*	Un autre service peut :
+
+-	Voir, consulter et rechercher les informations d’un lieu et des PAV affectés sans pouvoir les modifier
+
+*	Les contrôles de saisie
+
+Les contrôles de saisies sont effectués directement dans l'outil WEB. Seules des contraintes fonctionnelles sont intégrées (impossible de supprimer ou vérification que l'identifiant de l'ancien lieu est bien saisie dans le nouveau lieu si celui-ci a fait l'objet d'un déplacement pour l'optimiser). Le service gère sa donnée en propre et seuls certains attributs sont guidés par des listes de valeurs.
 
 * **Autres profils**
 
