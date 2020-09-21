@@ -89,7 +89,7 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |commune|Libellé de la commune|character varying(50)||valeur vide interdite|
 |quartier|Libellé du quartier|character varying(50)||uniquement pour le commune de Compiègne|
 |adresse|Adresse du lieu de collecte|character varying(80)||nom de la rue ou n° d'adresse le plus proche|
-|loca|Libellé de la commune|character varying(254)||valeur vide interdite|
+|loca|Précision de localisation par rapport à l'adresse|character varying(254)||valeur vide interdite|
 |nb_cont|Nombre de conteneurs Verre|integer||valeur vide interdite|
 |prop_abor|état de la propreté des abords|character varying(2)|lt_pav_proprete|valeur vide interdite|
 |env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
