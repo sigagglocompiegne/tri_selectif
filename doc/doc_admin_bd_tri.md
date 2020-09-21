@@ -23,25 +23,6 @@ Pour rappel des grands principes :
 ![schema_fonctionnel](img/schema_fonctionnel_lieu_pav.png)
 
 
-## Les droits
-
-#####	Le service des déchets peut :
-
-*	Voir, consulter et rechercher les informations des lieux de collecte et des Points d'Apport Volontaire (PAV)
-*	Peut modifier les données sur les lieux de collecte et sur les PAV (verre et TLC)
-*	Peut créer un nouveau lieu et y affecter de nouveaux PAV
-* Peut modifier l'emplacement d'un lieu de collecte
-* Peut rendre inactif un lieu (pas le supprimer réellement) et le lié à un autre si il est déplacé
-* Peut gérer l'affectation des PAV au lieu
-
-#####	Un autre service peut :
-
-*	Voir, consulter et rechercher les informations d’un lieu et des PAV affectés sans pouvoir les modifier
-
-###	Les contrôles de saisie
-
-Les contrôles de saisies sont effectués directement dans l'outil WEB. Seules des contraintes fonctionnelles sont intégrées (impossible de supprimer ou vérification que l'identifiant de l'ancien lieu est bien saisie dans le nouveau lieu si celui-ci a fait l'objet d'un déplacement pour l'optimiser). Le service gère sa donnée en propre et seuls certains attributs sont guidés par des listes de valeurs.
-
 ## Dépendances
 
 La base de données des dédchets s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentation de la base PEI.
