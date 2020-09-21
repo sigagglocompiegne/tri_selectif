@@ -30,7 +30,7 @@ Pour rappel des grands principes :
 *	Voir, consulter et rechercher les informations des lieux de collecte et des Points d'Apport Volontaire (PAV)
 *	Peut modifier les données sur les lieux de collecte et sur les PAV (verre et TLC)
 *	Peut créer un nouveau lieu et y affecter de nouveaux PAV
-* Peut modifier l'emplacement d'un lieui de collecte
+* Peut modifier l'emplacement d'un lieu de collecte
 * Peut rendre inactif un lieu (pas le supprimer réellement) et le lié à un autre si il est déplacé
 * Peut gérer l'affectation des PAV au lieu
 
