@@ -426,7 +426,9 @@ Cette recherche est détaillée dans le répertoire GitHub `docurba`.
 
 # Recherche PAV
 
-## Recherche : `PAV par référence`
+## Rechercher un conteneur Verre
+
+### Recherche : `PAV par référence`
 
 Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après sa référence.
 
@@ -456,7 +458,7 @@ Source : `an_dec_pav_cont (actif)`
  
  * Particularité(s) : la geom est celle des lieux de collecte
  
-## Recherche : `Lieu de collecte par localisation`
+### Recherche : `Lieu de collecte par localisation`
 
 Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte sa commune et/ou son adresse de localisation.
 
@@ -491,7 +493,7 @@ Source : `geo_dec_pav_lieu`
 
  * Fiches d'information active : Lieu de collecte
 
-## Recherche : `Lieu de collecte par implantation`
+### Recherche : `Lieu de collecte par implantation`
 
 Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte d'après son lieu d'implantation.
 
@@ -524,7 +526,7 @@ Source : `geo_dec_pav_lieu`
 
  * Fiches d'information active : Lieu de collecte
 
-## Recherche : `Lieu de collecte par nature du problème`
+### Recherche : `Lieu de collecte par nature du problème`
 
 Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte d'après son lieu d'implantation.
 
@@ -557,7 +559,7 @@ Source : `geo_dec_pav_lieu`
 
  * Fiches d'information active : Lieu de collecte
 
-## Recherche : `Lieu de collecte à moins de 300 mètres` (en cours de réalisation)
+### Recherche : `Lieu de collecte à moins de 300 mètres` (en cours de réalisation)
 
 Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte à moins de 300 mètres d'une adresse.
 
@@ -583,9 +585,12 @@ Source : `xapps_geo_vmr_adresse`
  * Fiches d'information active : Lieu de collecte
 
 
- 
+## Rechercher un conteneur TLC
 
-## Recherche : `Toutes les recherches avancées d'une adresse ou d'une voie`
+
+
+
+# Recherche : `Toutes les recherches avancées d'une adresse ou d'une voie`
 
 L'ensemble des recherches d'adresse ou de voies ont été formatées pour l'application de gestion des Voies et des Adresses.
 
