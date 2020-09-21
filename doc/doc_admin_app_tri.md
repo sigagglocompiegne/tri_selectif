@@ -330,6 +330,24 @@ Sans objet
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
+|date_eve |||Date||Recherche Mouvement enregistré sur les PAV Verre||
+|lieu |||Lieu||Recherche Mouvement enregistré sur les PAV Verre||
+|nom_eve |||Evènement||Recherche Mouvement enregistré sur les PAV Verre||
+|obs_eve |||Commentaire(s)||Recherche Mouvement enregistré sur les PAV Verre||
+
+   * filtres : aucun
+   * relations :
+
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|geo_dec_pav_lieu |idlieu| 0..1 (égal) |
+   
+   * particularité(s) : aucune
+   
+## Table : `an_dec_pav_doc_media`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
 |d_photo |||Date de la prise de vue||Fiche d'information Conteneur à verre ou textile||
 |date_sai  |||Date d'intégration du document||Fiche d'information Conteneur à verre ou textile||
 |id  |||Identifiant du PAV||Fiche d'information Conteneur à verre ou textile||
@@ -344,6 +362,50 @@ Sans objet
    * filtres : aucun
    * relations : aucune
    * particularité(s) : aucune
+   
+## Table : `xapps_an_dec_pav_eve_tab`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|date_eve |||Date||Recherche Mouvement enregistré sur les PAV Verre||
+|lieu |||Lieu||Recherche Mouvement enregistré sur les PAV Verre||
+|nom_eve |||Evènement||Recherche Mouvement enregistré sur les PAV Verre||
+|obs_eve |||Commentaire(s)||Recherche Mouvement enregistré sur les PAV Verre||
+
+   * filtres : aucun
+   * relations :
+   
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|geo_dec_pav_lieu |idlieu| 0..1 (égal) |   
+
+   * particularité(s) : table générant un pré-traitement afin d'afficher les évènements passés des PAV Verre par année (utilisé pour les tableaux de bord)
+
+## Table : `xapps_an_dec_lieu_eve_tab`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|date_eve |||Date||Mouvement enregistré sur les lieux de collecte (Verre)||
+|lieu |||Lieu||Mouvement enregistré sur les lieux de collecte (Verre)||
+|lieu_old |||Ancien lieu||Mouvement enregistré sur les lieux de collecte (Verre)||
+|lieu_new |||Nouveau lieu||Mouvement enregistré sur les lieux de collecte (Verre)||
+
+   * filtres : aucun
+   * relations :
+   
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|geo_dec_pav_lieu |idlieu| 0..1 (égal) |   
+
+   * particularité(s) : table générant un pré-traitement afin d'afficher les évènements passés des lieux de collecte par année (utilisé pour les tableaux de bord)
+   
+
+## Table : `xapps_an_dec_pav_chiffre_cle_tab`
+
+   * champs : aucun attribut formaté dans GEO 
+   * filtres : aucun
+   * relations : aucune
+   * particularité(s) : table générant un pré-traitement afin d'afficher les chiffres clés des PAV Verre (utilisé pour les tableaux de bord)
 
 
 # Les fonctionnalités
@@ -1347,4 +1409,11 @@ Liste des recherches : Parcelle sélectionnée (ignorer la visibilité), Lieu de
 ||Recherche avancée d'une voie|
 
 
+* Tableau de bord
 
+|Nom|Contenu|Type|Données|Style|Paramètres|
+|:---|:---|:---|:---|:---|
+|PAV Verre|||||
+||Chiffres clés (PAV Verre)|Statistique de type texte|nb_pav_verre et nb_lieu_verre (couleur #054a91, taille 50)|<b>{text1}</b> conteneurs verres, <b>{text2}</b> lieux de collecte (couleur #79c24d)||
+||Mouvement enregistré sur les PAV Verre|Recherche|||Afficher le titre|
+||Mouvement enregistré sur les lieux de collecte (Verre)|Recherche|||Afficher le titre|
