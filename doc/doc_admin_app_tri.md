@@ -116,10 +116,15 @@ Sans objet
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
 | an_dec_pav_doc_media |id| 0..n (égal) |
+| an_dec_pav_cont (actif) |idlieu| 0..n (égal) |
+| lt_contrat_pav |code| 0..1 (égal) |
+| an_dec_pav_cont (inactif) |idlieu| 0..n (égal) |
+| an_dec_pav_cont_tlc (actif) |idlieu| 0..n (égal) |
+| an_dec_pav_cont_tlc (inactif) |idlieu| 0..n (égal) |
 
-|Géotables ou Tables| Champs de jointure | Type |
-|:---|:---|:---|
-| à partir de Géotable xapps_geo_vmr_adresse sur geo_dec_pav_verre |geom à geom2| 1..n (intersection) |
+   * déclencheurs :
+   
+   
 
    * particularité(s) : aucune
 
