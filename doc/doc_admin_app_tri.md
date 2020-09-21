@@ -6,15 +6,16 @@
 
 * Statut
   - [ ] à rédiger
-  - [ ] en cours de rédaction
+  - [x] en cours de rédaction
   - [ ] relecture
-  - [x] finaliser
+  - [ ] finaliser
   - [ ] révision
 
 * Historique des versions
 
 |Date | Auteur | Description
 |:---|:---|:---|
+|21/09/2020|Grégory Bodet|version 2|
 |18/12/2018|Grégory Bodet|version initiale|
 
 
