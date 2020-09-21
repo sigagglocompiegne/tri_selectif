@@ -450,7 +450,7 @@ Source : `an_dec_pav_cont (actif)`
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|Identifiant PAV Verre|x|idcont|Est égale à une valeur saisie||||||N° de PAV :|
+|Identifiant PAV Verre|x|idcont|Est égale à une valeur saisie||||||Titre : N° de PAV :|
 
 (1) si liste de domaine
 
@@ -460,7 +460,7 @@ Source : `an_dec_pav_cont (actif)`
  
 ### Recherche : `Lieu de collecte par localisation`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte sa commune et/ou son adresse de localisation.
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte disposant de PAV Verre sur sa commune et/ou son adresse de localisation.
 
   * Configuration :
 
@@ -561,7 +561,7 @@ Source : `geo_dec_pav_lieu`
 
 ### Recherche : `Lieu de collecte à moins de 300 mètres` (en cours de réalisation)
 
-Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte à moins de 300 mètres d'une adresse.
+Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte disposant d'un PAV Verre à moins de 300 mètres d'une adresse.
 
   * Configuration :
 
@@ -582,13 +582,286 @@ Source : `xapps_geo_vmr_adresse`
 
 (1) si liste de domaine
 
- * Fiches d'information active : Lieu de collecte
+ * Fiches d'information active : -
 
 
 ## Rechercher un conteneur TLC
 
+### Recherche : `TLC par référence`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV TLC d'après sa référence.
+
+  * Configuration :
+
+Source : `an_dec_pav_cont_tlc (actif)`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_résult|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+|Localisation|x|||||
 
 
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Identifiant PAV TLC|x|idcont|Est égale à une valeur saisie||||||Titre : N° de TLC :|
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Fiche conteneur TLC
+ 
+ * Particularité(s) : la geom est celle des lieux de collecte
+
+### Recherche : `TLC par gestionnaire`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV TLC d'après l'entreprise qui en a la gestion.
+
+  * Configuration :
+
+Source : `an_dec_pav_cont_tlc (actif)`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_résult|x|||||
+|Gestionnaire|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+|Localisation|x|||||
+
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|TLC|x|cttype|Est égal à des valeurs par défaut |20,30||||||
+|gestionnaire|x|nom_entrep|Prédéfinis Filtre à liste de choix||||||Titre : Gestionnaire : |
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Fiche conteneur TLC
+ 
+ * Particularité(s) : la geom est celle des lieux de collecte
+ 
+### Recherche : `Lieu de collecte par localisation`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte disposant de PAV TLC.
+
+  * Configuration :
+
+Source : `geo_dec_pav_lieu`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Commune|x|||||
+|Adresse|x|||||
+|Localisation|x|||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|TLC|x|cttype|Est égal à des valeurs par défaut |20,30||||||
+|Commune||commune|Est égal à une valeur de liste de choix |Commune (lieu de collecte)|commune|commune|commune|non|Titre : Commune|
+|Adresse||commune|Est égal à une valeur de liste de choix |Adresse (lieu de collecte)|adresse|adresse|adresse|non|Titre : Adresse|
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Lieu de collecte
+ 
+ * Particularité(s) : la geom est celle des lieux de collecte
+ 
+ 
+### Recherche : `Lieu de collecte à moins de 500 mètres` (en cours de réalisation)
+
+Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte disposant d'un PAV TCL à moins de 500 mètres d'une adresse.
+
+  * Configuration :
+
+Source : `xapps_geo_vmr_adresse`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+
+ * Filtres :
+ 
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : -
+
+## Export des données
+
+### Recherche : `Export PAV Verre`
+
+Cette recherche permet à l'utilisateur de faire une recherche sur tous les lieux de collecte actif disposant d'un PAV Verre pour les exporter.
+
+  * Configuration :
+
+Source : `geo_dec_pav_lieu`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Identifiant du lieu de collecte|x|||||
+|Identifiant du conteneur|x|||||
+|Type|x|||||
+|Commune|x|||||
+|Quartier|x|||||
+|Adresse|x|||||
+|Localisation|x|||||
+|Posé le|x|||||
+|Modèle|x|||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|Verre|x|cttype|Est égal à des valeurs par défaut |10,30||||||
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : aucune
+ 
+ * Particularité(s) : aucune
+ 
+### Recherche : `Export PAV TLC`
+
+Cette recherche permet à l'utilisateur de faire une recherche sur tous les lieux de collecte actif disposant d'un PAV TLC pour les exporter.
+
+  * Configuration :
+
+Source : `geo_dec_pav_lieu`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Identifiant du lieu de collecte|x|||||
+|Identifiant du conteneur|x|||||
+|Type|x|||||
+|Commune|x|||||
+|Adresse|x|||||
+|Localisation|x|||||
+|Gestionnaire|x|||||
+|Autre gestionnaire|x|||||
+|Posé le|x|||||
+|Modèle|x|||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|tlc|x|cttype|Est égal à des valeurs par défaut |20,30||||||
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : aucune
+ 
+ * Particularité(s) : aucune
+
+### Recherche : `Mouvement enregistré sur les PAV Verre`
+
+Cette recherche permet à l'utilisateur d'optenir une liste des évènements intervenus pour une année n dans le tableau de bord de l'application pour les points d'apport volontaire Verre.
+
+  * Configuration :
+
+Source : `xapps_an_dec_pav_eve_tab`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Date|x|||||
+|Evènement|x|||||
+|Lieu|x|||||
+|Commentaire(s)|x|||||
+
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Année||annee_eve|Est égal à une valeur de liste de choix |lt_pav_annee_eve|annee_eve|annee_eve|annee_eve|||
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : aucune
+ 
+ * Particularité(s) : aucune
+ 
+### Recherche : `Mouvement enregistré sur les lieux de collecte (Verre)`
+
+Cette recherche permet à l'utilisateur d'optenir une liste des évènements intervenus pour une année n dans le tableau de bord de l'application pour les lieux de collecte.
+
+  * Configuration :
+
+Source : `xapps_an_dec_lieu_eve_tab`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Date|x|||||
+|Evènement|x|||||
+|Ancien lieu|x|||||
+|Nouveau lieu|x|||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Année||annee_eve|Est égal à une valeur de liste de choix (par défaut 2020)|lt_pav_annee_eve|annee_eve|annee_eve|annee_eve|||
+
+
+(1) si liste de domaine
+
+ * Fiches d'information active : aucune
+ 
+ * Particularité(s) : aucune
 
 # Recherche : `Toutes les recherches avancées d'une adresse ou d'une voie`
 
@@ -596,10 +869,17 @@ L'ensemble des recherches d'adresse ou de voies ont été formatées pour l'appl
 
 Cette recherche est détaillée dans le répertoire GitHub `RVA`.
 
+# Gestion des lieux de collecte
 
-## Fiche d'information : `Conteneur à verre (édition)`
+## Recherche : `Insérer ou déplacer mon lieu de collecte`
 
-Source : `geo_dec_pav_verre`
+Cette fonctionnalité (modification géométriques) permet à l'utilisateur de faire de saisir ou de déplacer le point correspondant au lieu de collecte.
+Se reporter à la partie Modification Géométrique plus bas pour la configuration de cette fonction.
+
+
+## Fiche d'information : `Lieu de collecte`
+
+Source : `geo_dec_pav_lieu`
 
 * Statistique : aucune
  
@@ -607,24 +887,79 @@ Source : `geo_dec_pav_verre`
  
 |Mode d'ouverture|Taille|Agencement des sections|
 |:---|:---|:---|
-|dans le gabarit|530x650|Accordéon|
+|dans le gabarit|1100x700|Onglets|
 
 |Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Photographies|Commune,Adresse,Lien vers la photo|par défaut|Vertical||||
-
-|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Fiche détaillée|Identifiant(id_contver),Prise en compte dans le plan interactif(date_effet),Commune(commune),Code Insee(insee),Quartier(quartier),Adresse(adresse),Statut(statut),X L93(x_l93),Y L93(y_l93), Nombre de conteneur(s)(cont_nb),Matériau(cont_mat),Position(cont_pos),Date de saisie(date_sai),Date de pose(date_pos),Date de nettoyage(date_net),Date de mise à jour(dat_maj),volume(volume),type d'environnement(env_type),type d'espace urbain d'implantation(env_implan),situation domaniale(env_situ),mode de préhension(mode_preh),Etat du corchet(crochet),Opercules(opercules),Présente de tags(tags),Etat de la peinture(peinture), Présence d'une corbeille à proximité(prox_corb),Type de sol(type_sol),Présence d'une trappe pour restaurateur(trp_rest),Type de signalétique(type_sign),Etat de propriété(proprete),Etat de propreté des abords(prop_abor),Défaut de structure visible(def_struc),Tonnage par gisement d'habitants(hab_pav),Manque de PAV(opt_pav),Accessibilité à revoir(ame_access),Nature du problème(nat_pb), Référentiel spatial(src_geom),Opérateur de saisie(op_sai),Observation(s)(observ)|masqué|Vertical||||
+|Lieu de collecte|||||||
 
 |Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Orientation retenue|Orientation retenue(pavorient),Identifiant du PAV d'origine (si PAV créé issu d'un PAV déplacé)(id_parent)|Par défaut|Vertical||||
+|Caractéristiques|||||||
+
+Cette section est agencée verticalement.
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|||Onglets||||
+
+|Nom de la sous-sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Localisation|Commune(commune), Adresse(adresse), Quartier(quartier), Localisation (localisation), Nombre de conteneur(s) Verre (nb_cont)|par défaut|Vertical|||
+|Descriptif|Statut(statut), Type(cttype), Tonnage par gisement dhabitants(hab_pav), Corbeille à proximité (prox_corb), Type d'environnement (env_type), Type d'espace urbain d'implantation (env_implan), Situation domaniale (env_situ)|par défaut|Vertical||||
+|Etat|Etat de propreté des abords (prop_abor), Accessibilité à revoir (ame_access), Nature du problème (nat_pb), Autre problème (nat_pb_99)|par défaut|Vertical||||
+|Préconisation|Nb de conteneurs manquant ou excédents par rapport aux préconisations éco-emballages (opt_pav), Orientation retenue (pavorient), Identifiant du lieu précédent (idparent)|par défaut|Vertical||||
+|Médiathèque|Champ miniature de GEO (miniature)|par défaut|Vertical||Média - PAV (photo)||
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|||Vertical||||
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Liste des conteneurs(s) Verre|Identifiant du conteneur (idcont), Ref Prestataire (idpresta), Modèle (model), Photo (modèle) (affiche_lodel), Evènement (eve), Date de l'évènement (dat_eve)|par défaut|Vertical|Fiche conteneur Verre|x|
+|Liste des conteneurs(s) TLC|Identifiant du conteneur (idcont_1), Gestionnaire (nom_entrep), Modèle (model_1), Modèle (photo) (affiche_model_1), Evènement (eve_1)|par défaut|Vertical|Fiche conteneur TLC|x|
 
 |Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Gestion des photographies|Champ de miniature de GEO(miniature)|par défaut|Vertical||||
+|Signalements/Interventions|||||||
 
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|affiche_message_media|Masqué|Vertical||||
+
+Cette sous-sous-section sera effective à l'intégration des fonctionnalités de signalements et d'interventions en 2021 ou 2022.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Contrat|Contrat (valeur), Prestataire (presta), Début du contrat (ddebut), Fin du contrat (dfin), Définition (definition)|Par défaut|Vertical||||
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Statistiques|||||||
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|affiche_message_signalement|Masqué|Vertical||||
+
+Cette sous-sous-section sera effective à l'intégration des statistiques en 2021 ou 2022.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Evènements|||||||
+
+Cette sous-section a un agencement des onglets vertical.
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Sur les conteneurs Verre|Identifiant du conteneur (idcont_2), Ref prestataire (idpresta_1), Modèle (model_2), Photo (modèle) (affiche_model_2), Evènement (eve_2), Date de l'évènement (date_eve_2)|Par défaut|Vertical||Fiche conteneur Verre (historique)||
+|Sur les conteneurs TLC|Identifiant du conteneur (idcont_3), Evènement (eve_3), Gestionnaire (nom_entrep_1), Modèle (model_3), Modèle (photo) (affiche_model_3)|Par défaut|Vertical||Fiche conteneur TLC (historique)||
+
+Ces 2 sous-sous-ection affichent les données des tables conteneurs (inactif).
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Méradonnées|Identifiant du lieu de collecte (idlieu), Coordonnées Lambert93-X (x_l93), Coordonnées Lambert93-Y (y_l93), Référentiel spatial (src_geom), Année du référentiel (src_date), Saisi le (date_sai), Mise à jour le (date_maj), Opérateur de saisie (op_sai), Observations (observ)|par défaut|vertical||||
 
 * Saisie :
 
@@ -632,51 +967,38 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 
 |Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
 |:---|:---|:---|:---|:---|
-|Adresse|||||
-|Nombre de conteneur(s) |||||
-|Matériau  |||valeur_pav_contmat||
-|Position  |||valeur_pav_contpos||
-|Date de pose |||||
-|Date de nettoyage  |||||
-|Volume |||||
-|Type d'environnement |||valeur_pav_envtype||
-|Type d'espace urbain d'implantation |||valeur_pav_envimplan||
-|Situation domaniale|||valeur_pav_envsitu||
-|Mode de préhension |||valeur_pav_modepreh||
-|Etat du crochet  |||valeur_pav_crochet ||
-|Opercules  |||Oui / Non (char)|Bourons radios|
-|Présence de tags |||Oui / Non (char)|Bourons radios|
-|Etat de la peinture |||valeur_pav_peinture||
-|Présence d'une corbeille à proximité  |||Oui / Non (char)|Boutons radios|
-|Type de sol |||valeur_pav_typesol||
-|Présence d'une trappe pour restaurateur |||Oui / Non (char)|Boutons radios|
-|Etat de la signalétique|||Valeur PAV Etat signalétique||
-|Type de signalétique |||valeur_pav_typesign||
-|Etat de propreté  |||valeur_pav_proprete||
-|Etat de propreté des abords    |||valeur_pav_proprete_abor||
-|Défaut de structure visible    |||||
-|Tonnage par gisement d'habitants |||||
-|Manque de PAV    |||||
-|Accessibilté à revoir     |||Oui / Non (char)|Boutons radios|
-|Nature du problème     |||valeur_pav_natpb||
-|Autre problème     |||||
-|Référentiel spatial     |||valeur_src_geom||
-|Opérateur de saisie     ||%USER_LOGIN%||| 
-|Orientation retenue      |||Valeur PAV Orientation|Cases à cocher multiples| 
-|Identifiant du PAV d'origine (si PAV créé issu d'un PAV déplacé)  |||||
-|Statut    |||Valeur PAV Statut||
-|Etat de la signalétique |||Valeur PAV Etat signalétique||
-|Observation(s)  ||||Champ texte à plusieurs lignes|
-|Prise en compte dans le plan interactif  |||||
+|Statut ||10|Valeur PAV Statut|par défaut|
+|Type  ||00|lt_pav_cttype|par défaut|
+|Adresse  ||||par défaut|
+|Localisation ||||par défaut|
+|Etat de propreté des abords    ||00|valeur_pav_proprete_abor|par défaut|
+|Type d'environnement ||00|valeur_pav_envtype|par défaut|
+|Type d'espace urbain d'implantation ||00|valeur_pav_envimplan|par défaut|
+|Situation domaniale||00|valeur_pav_envsitu|par défaut|
+|Corbeille à proximité  ||false|cases à cocher|
+|Accessibilté à revoir     |||false|cases à cocher|
+|Nature du problème     ||00|valeur_pav_natpb|par défaut|
+|Autre problème     ||||par défaut|
+|Orientation retenue     ||00|Valeur PAV Orientation|par défaut|
+|Identifiant du lieu précédent     ||||par défaut|
+|V Tampon (non éditable)     |||300|par défaut|
+|Référentiel spatial     ||00|lt_src_geom|par défaut|
+|Année du référentiel   ||||par défaut|
+|Opérateur de saisie (non éditable)     |||%USER_LOGIN%|par défaut|
+|Observation(s)   ||||par défaut|
+|Tonnage par gisement d'habitants ||||par défaut|
+
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
 
 
 **IMPORTANT** : L'édition des données jointes est désactivée.
 
  * Modèle d'impression : sans objet
 
-## Fiche d'information : `Conteneur à verre`
+## Fiche d'information : `Fiche conteneur Verre`
 
-Source : `geo_dec_pav_verre`
+Source : `an_dec_pav_cont (actif)`
 
 * Statistique : aucune
  
@@ -684,24 +1006,232 @@ Source : `geo_dec_pav_verre`
  
 |Mode d'ouverture|Taille|Agencement des sections|
 |:---|:---|:---|
-|dans le gabarit|530x650|Accordéon|
+|dans le gabarit|850x650|Onglets|
 
 |Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Photographies|Commune,Adresse,Lien vers la photo|par défaut|Vertical||||
+|Conteneur Verre|||||||
 
-|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
-|:---|:---|:---|:---|:---|:---|:---|
-|Fiche détaillée|Identifiant(id_contver),Commune(commune),Code Insee(insee),Quartier(quartier),Adresse(adresse),X L93(x_l93),Y L93(y_l93), Nombre de conteneur(s)(cont_nb),Date de saisie(date_sai),Date de pose(date_pos),Date de nettoyage(date_net),Date de mise à jour(dat_maj),volume(volume),Opercules(opercules),Présente de tags(tags), Présence d'une corbeille à proximité(prox_corb),Présence d'une trappe pour restaurateur(trp_rest),Défaut de structure visible(def_struc),Tonnage par gisement d'habitants(hab_pav),Manque de PAV(opt_pav),Accessibilité à revoir(ame_access),Autre problème(nat_pb_99), Opérateur de saisie(op_sai),Observation(s)(observ)|masqué|Vertical||||
+Cette section est agencée par onglets.
 
 |Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Préconisation|Orientation retenue(pavorient),Identifiant du PAV d'origine (si PAV créé issu d'un PAV déplacé)(id_parent)|Par défaut|Vertical||||
+|Caractéristiques|||||||
+
+Cette sous-section est agencée par onglets.
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Descriptifs|Position (pos), Modèle (model), Photo (modèle) (affiche_model), Mode de préhension (mode_preh), Matériau (mat), Volume (volume), Présence d'une trappe pour restaurateur (trp_rest), Opercules (opercules), Crochet (crochet), Type de sol (type_sol)|Par défaut|Vertical||||
+|Etat|Etat de propreté (proprete), Défaut de structure visible (def_struc), Peinture (peinture), Présence de tags (tags)|Par défaut|Vertical||||
+|Signalétique|Type (type_sign), Etat (etat_sign)|Par défaut|Vertical||||
+|Evènement|Evènement (eve), Date de l'évènement (date_eve), Commentaire(s) (obs_eve)|Par défaut|Vertical||||
 
 |Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
-|Gestion des photographies|Champ de miniature de GEO(miniature)|par défaut|Vertical||||
+|Statistiques|||||||
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|affiche_message_stat|Masqué|Vertical||||
+
+Cette sous-sous-section sera effective à l'intégration des statistiques en 2021 ou 2022.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Métadonnées|Identifiant du conteneur (idcont), Identifiant du lieu de collecte (idlieu), Prise en compte dans le plan interactif (date_effet), Saisi par (op_sai), Observation(s) (observ), Saisi le (date_sai), Posé le (date_pos), Nettoyé le  (date_net), Mis à jour le (date_maj)|Par défaut|Vertical||||
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Evènement ||00|lt_pav_eve|par défaut|
+|Modèle ||00|lt_pav_model|par défaut|
+|Matériau ||00|valeur_pav_contmat|par défaut|
+|Position ||00|valeur_pav_contpos|par défaut|
+|Posé le ||||par défaut|
+|Nettoyé le ||||par défaut|
+|Prise en compte dans le plan interactif ||||par défaut|
+|Volume ||||par défaut|
+|Mode de préhension ||00|valeur_pav_modepreh|par défaut|
+|Crochet ||00|valeur_pav_crochet|par défaut|
+|Opercules ||false||cases à cocher|
+|Présence de tags ||false||cases à cocher|
+|Peinture||00|valeur_pav_peinture|par défaut|
+|Type de sol ||00|valeur_pav_typesol|par défaut|
+|Présence d'une trappe pour restaurateur||false||cases à cocher|
+|Etat||00|valeur PAV Etat signalétique|par défaut|
+|Type de signalétique||00|valeur_pav_typesign|par défaut|
+|Etat de propreté||00|valeur PAV Etat signalétique|par défaut|
+|Défaut de structure visible||false||cases à cocher|
+|Saisi par (non éditable)||%USER_LOGIN%||par défaut|
+|Observation(s)||||champ texte à plusieurs lignes|
+|Date de l'évènement||||par défaut|
+|Commentaire(s)||||Champ texte à plusieurs lignes|
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
+  
+## Fiche d'information : `Fiche conteneur Verre (historique)`
+
+Source : `an_dec_pav_cont (inactif)`
+
+* Statistique : aucune
  
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|850x650|Onglets|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Conteneur Verre|||||||
+
+Cette section est agencée par onglets.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Caractéristiques|||||||
+
+Cette sous-section est agencée par onglets.
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Descriptifs|Position (pos), Modèle (model), Photo (modèle) (affiche_model), Mode de préhension (mode_preh), Matériau (mat), Volume (volume), Présence d'une trappe pour restaurateur (trp_rest), Opercules (opercules), Crochet (crochet), Type de sol (type_sol)|Par défaut|Vertical||||
+|Etat|Etat de propreté (proprete), Défaut de structure visible (def_struc), Peinture (peinture), Présence de tags (tags)|Par défaut|Vertical||||
+|Signalétique|Type (type_sign), Etat (etat_sign)|Par défaut|Vertical||||
+|Evènement|Evènement (eve), Date de l'évènement (date_eve), Commentaire(s) (obs_eve)|Par défaut|Vertical||||
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Statistiques|||||||
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|affiche_message_stat|Masqué|Vertical||||
+
+Cette sous-sous-section sera effective à l'intégration des statistiques en 2021 ou 2022.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Métadonnées|Identifiant du conteneur (idcont), Identifiant du lieu de collecte (idlieu), Prise en compte dans le plan interactif (date_effet), Saisi par (op_sai), Observation(s) (observ), Saisi le (date_sai), Posé le (date_pos), Nettoyé le  (date_net), Mis à jour le (date_maj)|Par défaut|Vertical||||
+
+  * Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Evènement ||00|lt_pav_eve|par défaut|
+|Date de l'évènement||||par défaut|
+|Commentaire(s)||||Champ texte à plusieurs lignes|
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
+
+## Fiche d'information : `Fiche conteneur TLC`
+
+Source : `an_dec_pav_cont_tlc  (actif)`
+
+* Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|850x650|Onglets|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Conteneur Textile-Linge-Chaussure (TLC)|||||||
+
+Cette section est agencée par onglets.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Caractéristiques|||||||
+
+Cette sous-section est agencée par onglets.
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Descriptifs|Position (pos), Modèle (model), Modèle (photo) (affiche_model), Matériau (mat)|Par défaut|Vertical||||
+|Evènement|Evènement (eve), Date de l'évènement (date_eve), Commentaire(s) (obs_eve)|Par défaut|Vertical||||
+
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Métadonnées|Identifiant du conteneur (idcont), Identifiant du lieu de collecte (idlieu), Prise en compte dans le plan interactif (date_effet), Saisi par (op_sai), Observation(s) (observ), Saisi le (date_sai), Posé le (date_pos), Mis à jour le (date_maj)|Par défaut|Vertical||||
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Evènement ||00|lt_pav_eve|par défaut|
+|Modèle ||00|lt_pav_model|par défaut|
+|Matériau ||00|valeur_pav_contmat|par défaut|
+|Position ||00|valeur_pav_contpos|par défaut|
+|Posé le ||||par défaut|
+|Prise en compte dans le plan interactif ||||par défaut|
+|Saisi par (non éditable)||%USER_LOGIN%||par défaut|
+|Volume ||||par défaut|
+|Observation(s)||||champ texte à plusieurs lignes|
+|Date de l'évènement||||par défaut|
+|Commentaire(s)||||Champ texte à plusieurs lignes|
+|Gestionnaire||00|valeur_pv_gest|par défaut|
+|Autre gestionnaire||||par défaut|
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
+  
+## Fiche d'information : `Fiche conteneur TLC (historique)`
+
+Source : `an_dec_pav_cont_tlc  (inactif)`
+
+* Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|850x650|Onglets|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Conteneur Textile-Linge-Chaussure (TLC)|||||||
+
+Cette section est agencée par onglets.
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Caractéristiques|||||||
+
+Cette sous-section est agencée par onglets.
+
+|Nom de la sous-sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Descriptifs|Position (pos), Modèle (model), Modèle (photo) (affiche_model), Matériau (mat)|Par défaut|Vertical||||
+|Evènement|Evènement (eve), Date de l'évènement (date_eve), Commentaire(s) (obs_eve)|Par défaut|Vertical||||
+
+
+|Nom de la sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Métadonnées|Identifiant du conteneur (idcont), Identifiant du lieu de collecte (idlieu), Prise en compte dans le plan interactif (date_effet), Saisi par (op_sai), Observation(s) (observ), Saisi le (date_sai), Posé le (date_pos), Mis à jour le (date_maj)|Par défaut|Vertical||||
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Evènement ||00|lt_pav_eve|par défaut|
+|Date de l'évènement||||par défaut|
+|Commentaire(s)||||Champ texte à plusieurs lignes|
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
+
 ## Analyse :
 
 Aucune
@@ -710,45 +1240,31 @@ Aucune
 
 Aucune
 
-## Modification géométrique : `Conteneur à verre`
+## Modification géométrique : `Insérer ou déplacer mon lieu de collecte`
 
-Cette recherche permet à l'utilisateur de saisir ou modifier l'emplacement d'un PAV Verre.
+Cette recherche permet à l'utilisateur de saisir ou modifier l'emplacement d'un lieu de collecte. A partir de cette fonctionnalité, l'utilisateur peut gérer l'affectactiion des différents PAV au lieu.
 
   * Configuration :
   
-Source : `geo_dec_pav_verre`
+Source : `geo_dec_pav_lieu`
 
+ * Type de saisie : saisie simple, point
  * Filtres : aucun
  * Accrochage : aucun
- * Fiches d'information active : Conteneur à verre (insertion)
+ * Fiches d'information active : Lieu de collecte
  * Topologie : aucune 
  
- ## Modification géométrique : `Conteneur textile`
-
-Cette recherche permet à l'utilisateur de saisir ou modifier l'emplacement d'un PAV Textile.
-
-  * Configuration :
-  
-Source : `geo_dec_pav_tlc`
-
- * Filtres : aucun
- * Accrochage : aucun
- * Fiches d'information active : Conteneur textile (insertion)
- * Topologie : aucune 
  
  # La cartothèque
 
 |Groupe|Sous-groupe|Visible dans la légende|Visible au démarrage|Détails visibles|Déplié par défaut|Geotable|Renommée|Issue d'une autre carte|Visible dans la légende|Visible au démarrage|Déplié par défaut|Couche sélectionnable|Couche accrochable|Catégorisation|Seuil de visibilité|Symbologie|Autres|
 |:---|:---|:-:|:-:|:-:|:-:|:---|:---|:-:|:-:|:-:|:-:|:-:|:---|:---|:---|:---|:---|
 |||||||xapps_geo_vmr_adresse|Adresse|x||x|||||1/0-1/2000||Interactivité avec le champ calculé infobulle (0-2000è)|
-|Points d'apport volontaire||x|x|x|x|xapps_geo_v_pav_verre_inactif|Conteneur à verre inactif||x|x||||||croie rouge de taille 25||
-|||||||geo_dec_pav_verre|Conteneur à verre||x|x||||||picto_appli_PAV_verre.svg de taille 25|Intéractivité avec info_bulle|
-|||||||geo_dec_pav_tlc|Conteneur textile||x|x||||||picto_appli_PAV_textile.svg de taille 25|Intéractivité avec info_bulle|
-|||||||xapps_geo_v_pav_orient|Suivi des emplacements||x|x||||||Trait dee petit tiret taille 1 rouge||
+|Points d'apport volontaire||x|x|x|x|geo_dec_pav_lieu|Par type||x|x||||cttype||symbole GeoCompiegnois taille 50 ||
+|||||||xapps_geo_v_pav_lieu_orient|Suivi des emplacements||x|x||||||Trait de petit tiret taille 1 rouge||
 |Foncier||x||x||geo_v_fon_proprio_pu_arc|Propriétés institutionnelles|x|x|x||||||||
 |Limites administratives||x|x|x||geo_v_osm_commune_arcba|Limites communales|x|x|x||||||||
 |||||||geo_adm_quartier|Quartier de Compiègne|x|||||||0-70000è|||
-|Cadastre|||x|||Parcelle (V3)|Parcelle (V3)||x||x|||||||
 
 # L'application
 
@@ -756,29 +1272,37 @@ Source : `geo_dec_pav_tlc`
 
 |Gabarit|Thème|Modules spé|Impression|Résultats|
 |:---|:---|:---|:---|:---|
-|Pro|Thème GeoCompiegnois 1.0.7|Partage de lien, Introduction, StreetView, GeoCadastre (V3),Google Analytics,Page de connexion perso, Bandeau HTML, Multimedia (Média - Déchet PAV),Javascript|A4 et A3 Paysage, A4 et A3 Portrait, A4 et A3 Portait + légende et A4 et A3 Paysage + légende||
+|Pro|Thème GeoCompiegnois 1.0.7|Partage de lien, Introduction, StreetView, GeoCadastre (GeoCadastre 2020),Page de connexion perso (tri), Bandeau HTML, Multimedia (Média - Déchet PAV),Javascript, Zoom, Export de fonctionnalités (tri 2020)|A4 et A3 Paysage, A4 et A3 Portrait, A4 et A3 Portait + légende et A4 et A3 Paysage + légende||
 
 * Particularité de certains modules :
 
-  * Module Javascript : ouverture par défaut du menu Introductif
-  `var injector = angular.element('body').injector();
-var acfApplicationService = injector.get('acfApplicationService');
-acfApplicationService.whenLoaded(setTimeout(function(){
-$(".sidepanel-item.launcher-application").click();
-}, 100));`
-  * Module Google Analytics : le n° ID est disponible sur le site de Google Analytics
+  * Module Javascript : recherche au clic par défaut et sélection par défaut au clic
+  `// recherche au clic
+acfApplicationService.addConfiguration({
+  '@type': 'com.bg.functionality.application.SimpleConfigurationValue',
+  key: 'pro1.mapfeatureidentifier.defaulttool',
+  value: 'point'
+});`
+`// sélection
+acfApplicationService.addConfiguration({
+  '@type': 'com.bg.functionality.application.SimpleConfigurationValue',
+  key: 'pro1.layerquery.defaulttool',
+  value: 'point'
+});`
+  
+  * Export de fonctionnalité : Recherche Export PAV Verre et TLC, Mouvement enregistré sur les PAV Verre, Mouvement enregistré sur les lieux de collecte (Verre)
 
 
 * Recherche globale :
 
 |Noms|Tri|Nb de sugggestion|Texte d'invite|
 |:---|:---|:---|:---|
-|Recherche dans la Base Adresse Locale,Recherche dans la Base de Voie Locale,localiser une commune de l'ARC, Localiser un équipement|alpha|20|Rechercher une adresse, une voie, une commune ou un équipement|
+|Parcelle sélectionnée, Recherche dans la Base Adresse Locale,Recherche dans la Base de Voie Locale,localiser une commune de l'ARC, Localiser un équipement|alpha|100|Tapez un n° de parcelle (AL17), une adresse, une commune, un équipement, ...|
 
-* Carte : `Le tri`
+* Carte : `Les déchets`
 
 Comportement au clic : (dés)active uniquement l'item cliqué
-Liste des recherches : Conteneur à verre, Conteneur textile, Parcelle(s) sélectionnée(s)
+Liste des recherches : Parcelle sélectionnée (ignorer la visibilité), Lieu de collecte (au démarrage)
 
 * Fonds de plan :
 
@@ -787,12 +1311,30 @@ Liste des recherches : Conteneur à verre, Conteneur textile, Parcelle(s) sélec
 |Cadastre||100%|
 |Plan de ville|x|100%|
 |Carte IGN 25000||100%|
-|Photographie aérienne 2013||70%|
+|Photographie aérienne 2018||80%|
+|Photographie aérienne 2013||75%|
 
 * Fonctionnalités
 
 |Groupe|Nom|
 |:---|:---|
+|PAV||
+|Rechercher un conteneur Verre||
+||PAV par référence|
+||Lieu de collecte par localisation|
+||Lieu de collecte par implantation|
+||Lieu de collecte par nature du problème|
+||Lieu de collecte à moins de 300 mètres|
+|Rechercher un conteneur TLC||
+||TLC par référence|
+||TLC par gestionnaire|
+||Lieu de collecte par localisation (TLC)|
+||Lieu de collecte à moins de 500 mètres|
+|Export des données||
+||Export PAV Verre|
+||Export PAV TLC|
+|Gestion des lieux de collecte||
+||Insérer ou déplacer mon lieu de collecte|
 |Recherche cadastrale||
 ||Parcelles par référence|
 ||Parcelles par adresse fiscale|
@@ -800,20 +1342,9 @@ Liste des recherches : Conteneur à verre, Conteneur textile, Parcelle(s) sélec
 ||Parcelles multicritères|
 ||Parcelles par nom du propriétaire d'un local|
 ||Parcelles par surface|
-|Recherche un conteneur VERRE||
-||PAV par référence|
-||PAV VERRE par localisation|
-||PAV VERRE par lieu d'implantation|
-||PAV VERRE par nature du problème|
-|Recherche un conteneur TEXTILE||
-||TLC par référence|
-||PAV TLC par localisation|
-||PAV TLC par gestionnaire|
 |Recherche avancée d'une voie ou d'une adresse||
 ||Recherche avancée d'une adresse|
 ||Recherche avancée d'une voie|
-|Modifier un objet||
-||Conteneur à verre|
-||Conteneur textile|
+
 
 
