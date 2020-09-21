@@ -86,10 +86,10 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |idlieu|Identifiant unique du positionnement|character varying(8)||valeur vide interdite|
 |maj_aaaa|Evolution par rapport au dernier recensement|character varying(8)|lt_pav_maj|valeur vide interdite|
 |insee|Code insee de la commune|character varying(5)||valeur vide interdite|
-|commune|Libellé de la commune|character varying(30)||valeur vide interdite|
+|commune|Libellé de la commune|character varying(50)||valeur vide interdite|
 |quartier|Libellé du quartier|character varying(50)||uniquement pour le commune de Compiègne|
 |adresse|Adresse du lieu de collecte|character varying(80)||nom de la rue ou n° d'adresse le plus proche|
-|loca|Libellé de la commune|character varying(30)||valeur vide interdite|
+|loca|Libellé de la commune|character varying(254)||valeur vide interdite|
 |nb_cont|Nombre de conteneurs Verre|integer||valeur vide interdite|
 |prop_abor|état de la propreté des abords|character varying(2)|lt_pav_proprete|valeur vide interdite|
 |env_type|type d'espace géographique|character varying(2)|lt_pav_envtype|valeur vide interdite|
