@@ -124,7 +124,9 @@ Sans objet
 
    * déclencheurs :
    
-   
+|Non|Opérations|Conditions|Type|Actions|
+|:---|:---|:---|:---|:---|
+|Erreur idparent|update|new.Statut = 20 et old.idparent <> new.idparent|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
 
    * particularité(s) : aucune
 
