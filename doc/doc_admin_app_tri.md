@@ -78,7 +78,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_message_eve  |x|x||Formate le contenu affiché dans le fiche d'information du lieu dans l'onglet Evènement|Résultat de recherche|CASE WHEN 
+|affiche_message_eve  |x|x||Formate le contenu affiché dans le fiche d'information du lieu dans l'onglet Evènement|Résultat de recherche|`CASE WHEN 
 (SELECT count(*)
 FROM m_dechet.an_dec_pav_cont
 WHERE idlieu = {idlieu} AND eve IN ('20','30','31')) > 0
@@ -87,7 +87,7 @@ THEN
 ''
 ELSE
 '<font size=3><b>Pas d''évènements de conteneurs enregistrés sur ce lieu de collecte</b></font>'
-END|
+END`|
 |ame_acces  |||Accessibilité à revoir|Booléen oui/non|Fiche d'information Lieu de collecte||
 |cttype   |||Type de lieu|Liste de domaine  valeur_pav_contmat|Fiche d'information Lieu de collecte||
 |cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Lieu de collecte||
