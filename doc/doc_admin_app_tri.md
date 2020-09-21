@@ -23,7 +23,7 @@
 
 |Représentation| Nom de l'application |Résumé|
 |:---|:---|:---|
-|![picto](/doc/img/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des PAV (Points dd'apport volontaire Verre et TLC).|
+|![picto](/doc/img/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des données sur les déchets, et notamment les lieux de collecte des PAV (Points dd'apport volontaire Verre et TLC).|
 
 # Accès
 
@@ -74,53 +74,43 @@ Sans objet
 
 Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les besoins de l'application. Les autres données servant d'habillage (pour la cartographie ou les recherches) sont listées dans les autres parties ci-après. Le tableau ci-dessous présente uniquement les changements (type de champ, formatage du résultat, ...) ou les ajouts (champs calculés, filtre, ...) non présents dans la donnée source. 
 
-## GeoTable : `geo_dec_pav_verre`
+## GeoTable : `geo_dec_pav_lieu`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur à verre n° {id_contver}|
-|info_bulle  |x|x||Composition de l'info bulle affiché au passage sur le PAV|Cartographie|{affiche_result} {adresse}|
-|ame_acces  |||Accessibilité à revoir|Booléen oui/non|Fiche d'information Conteneur à Verre||
-|cont_mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur à Verre||
-|cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Conteneur à Verre||
-|cont_pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur à Verre||
-|crochet      |||Etat du crochet|Liste de domaine  valeur_pav_crochet|Fiche d'information Conteneur à Verre||
-|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur à Verre||
-|date_maj   |||Date de mise à jour||Fiche d'information Conteneur à Verre||
-|date_net    |||Date de nettoyage||Fiche d'information Conteneur à Verre||
-|date_pos     |||Date de pose||Fiche d'information Conteneur à Verre||
-|date_sai     |||Date de saisie||Fiche d'information Conteneur à Verre||
-|def_struc      |||Défaut de structure visible||Fiche d'information Conteneur à Verre||
-|env_implan       |||Type d'espace urbain d'implantation|Liste de domaine  valeur_pav_envimplan|Fiche d'information Conteneur à Verre||
-|env_situ       |||Situation domaniale|Liste de domaine  valeur_pav_envsitu|Fiche d'information Conteneur à Verre||
-|env_type       |||Type d'environnement|Liste de domaine  valeur_pav_envtype|Fiche d'information Conteneur à Verre||
-|etat_sign      |||Etat de la signalétique|Liste de domaine   Valeur PAV Etat signalétique|Fiche d'information Conteneur à Verre||
-|hab_pav       |||Tonnage par gisement d'habitants||Fiche d'information Conteneur à Verre||
-|id_contver        |||Identifiant||Fiche d'information Conteneur à Verre||
-|insee         |||Code Insee||Fiche d'information Conteneur à Verre||
-|mode_preh          |||Mode de préhension|Liste de domaine   valeur_pav_modepreh|Fiche d'information Conteneur à Verre||
-|nat_pb           |||Nature du problème|Liste de domaine   valeur_pav_natpb|Fiche d'information Conteneur à Verre||
-|nat_pb_99            |||Autre problème||Fiche d'information Conteneur à Verre||
-|observ             |||Observation(s)||Fiche d'information Conteneur à Verre||
-|op_sai             |||Opérateur de saisie||Fiche d'information Conteneur à Verre||
-|opercules              |||Opercules||Fiche d'information Conteneur à Verre||
-|opt_pav               |||Manque de PAV||Fiche d'information Conteneur à Verre|| 
-|pavorient                ||||Liste de domaine Valeur PAV Orientation|Fiche d'information Conteneur à Verre|| 
-|peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur à Verre|| 
-|photo                  |||Nom du fichier photo||Inutilisé (photo dans la table des médias)|| 
-|prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Conteneur à Verre|| 
-|proprete                    |||Etat de propreté|Liste de domaine   valeur_pav_proprete|Fiche d'information Conteneur à Verre|| 
-|prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Conteneur à Verre|| 
-|src_geom                     |||Référentiel spatial||Fiche d'information Conteneur à Verre|| 
-|statut                     ||||Liste de domaine    Valeur PAV Statut |Fiche d'information Conteneur à Verre||  
-|tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur à Verre||  
-|trp_rest                      |||Présence d'une trappe pour restaurateur|Booléen oui/non |Fiche d'information Conteneur à Verre||  
-|type_sign                       |||Type de signalétique|Liste de domaine    Valeur PAV Etat signalétique
- |Fiche d'information Conteneur à Verre||  
-|type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol
- |Fiche d'information Conteneur à Verre||  
-|url_photo                         |||Lien vers la photo| |Inutilisé (photo dans la table des médias)||  
-|v_tampon                         |||Valeur du tampon correspondant à l'aire de captation du point de ramassage |Fiche d'information Conteneur à Verre||  
+|affiche_message_eve  |x|x||Formate le contenu affiché dans le fiche d'information du lieu dans l'onglet Evènement|Résultat de recherche|CASE WHEN 
+(SELECT count(*)
+FROM m_dechet.an_dec_pav_cont
+WHERE idlieu = {idlieu} AND eve IN ('20','30','31')) > 0
+
+THEN
+''
+ELSE
+'<font size=3><b>Pas d''évènements de conteneurs enregistrés sur ce lieu de collecte</b></font>'
+END|
+|ame_acces  |||Accessibilité à revoir|Booléen oui/non|Fiche d'information Lieu de collecte||
+|cttype   |||Type de lieu|Liste de domaine  valeur_pav_contmat|Fiche d'information Lieu de collecte||
+|cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Lieu de collecte||
+|date_maj   |||Date de mise à jour||Fiche d'information Lieu de collecte||
+|date_net    |||Date de nettoyage||Fiche d'information Lieu de collecte||
+|date_sai     |||Date de saisie||Fiche d'information Lieu de collecte||
+|env_implan       |||Type d'espace urbain d'implantation|Liste de domaine  valeur_pav_envimplan|Fiche d'information Lieu de collecte||
+|env_situ       |||Situation domaniale|Liste de domaine  valeur_pav_envsitu|Fiche d'information Lieu de collecte||
+|env_type       |||Type d'environnement|Liste de domaine  valeur_pav_envtype|Fiche d'information Lieu de collecte||
+|hab_pav       |||Tonnage par gisement d'habitants||Fiche d'information Lieu de collecte||
+|id_lieu       |||Identifiant||Fiche d'information Lieu de collecte||
+|insee         |||Code Insee||Fiche d'information Lieu de collecte||
+|nat_pb           |||Nature du problème|Liste de domaine   valeur_pav_natpb|Fiche d'information Lieu de collecte||
+|nat_pb_99            |||Autre problème||Fiche d'information Lieu de collecte||
+|observ             |||Observation(s)||Fiche d'information Lieu de collecte||
+|op_sai             |||Opérateur de saisie||Fiche d'information Lieu de collecte||
+|opt_pav               |||Manque de PAV||Fiche d'information Lieu de collecte|| 
+|pavorient                ||||Liste de domaine Valeur PAV Orientation|Fiche d'information Lieu de collecte|| 
+|prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Lieu de collecte|| 
+|prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Lieu de collecte|| 
+|src_geom                     |||Référentiel spatial||Fiche d'information Lieu de collecte|| 
+|statut                     ||||Liste de domaine    Valeur PAV Statut |Fiche d'information Lieu de collecte||  
+|v_tampon                         |||Valeur du tampon correspondant à l'aire de captation du point de ramassage |Fiche d'information Lieu de collecte||  
 
 
    * filtres :
