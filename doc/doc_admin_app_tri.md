@@ -78,8 +78,10 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
+|adresse  |||Adresse||Fiche d'information Lieu de collecte + recherche au clic||
 |affiche_message_eve  |x|x||Formate le contenu affiché dans le fiche d'information du lieu dans l'onglet Evènement|Résultat de recherche|`CASE WHEN (SELECT count(*) FROM m_dechet.an_dec_pav_cont WHERE idlieu = {idlieu} AND eve IN ('20','30','31')) > 0 THEN '' ELSE '<font size=3><b>Pas d''évènements de conteneurs enregistrés sur ce lieu de collecte</b></font>' END`|
 |ame_acces  |||Accessibilité à revoir|Booléen oui/non|Fiche d'information Lieu de collecte||
+|commune  |||Commune||Fiche d'information Lieu de collecte + recherche au clic||
 |cttype   |||Type de lieu|Liste de domaine  valeur_pav_contmat|Fiche d'information Lieu de collecte||
 |cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Lieu de collecte||
 |date_maj   |||Date de mise à jour||Fiche d'information Lieu de collecte||
@@ -91,6 +93,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |hab_pav       |||Tonnage par gisement d'habitants||Fiche d'information Lieu de collecte||
 |id_lieu       |||Identifiant||Fiche d'information Lieu de collecte||
 |insee         |||Code Insee||Fiche d'information Lieu de collecte||
+|Localisation         |||Localisation||Fiche d'information Lieu de collecte + recherche au clic||
 |nat_pb           |||Nature du problème|Liste de domaine   valeur_pav_natpb|Fiche d'information Lieu de collecte||
 |nat_pb_99            |||Autre problème||Fiche d'information Lieu de collecte||
 |observ             |||Observation(s)||Fiche d'information Lieu de collecte||
@@ -99,6 +102,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |pavorient                ||||Liste de domaine Valeur PAV Orientation|Fiche d'information Lieu de collecte|| 
 |prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Lieu de collecte|| 
 |prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Lieu de collecte|| 
+|quartier  |||Quartier||Fiche d'information Lieu de collecte||
 |src_geom                     |||Référentiel spatial||Fiche d'information Lieu de collecte|| 
 |statut                     ||||Liste de domaine    Valeur PAV Statut |Fiche d'information Lieu de collecte||  
 |v_tampon                         |||Valeur du tampon correspondant à l'aire de captation du point de ramassage |Fiche d'information Lieu de collecte||  
@@ -127,76 +131,190 @@ Sans objet
 |Non|Opérations|Conditions|Type|Actions|
 |:---|:---|:---|:---|:---|
 |Erreur idparent|update|new.Statut = 20 et old.idparent <> new.idparent|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
+|Erreur idparent (2)|update|old.Statut = 20 et old.idparent <> new.idparent|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
+|Pas de suppression possible|delete||Annule la saisie|Boîte de dialogue : Vous ne pouvez pas supprimer de lieux de collecte. Si celui-ci n'existe plus, vous devez le rendre inactif dans l'attribut état. Si il est déplacé, vous devez le rendre inactif et créer un nouveau lieu en indiquant l'identifiant de l'ancien lieu dans la partie préconisation.| 
 
    * particularité(s) : aucune
 
-## GeoTable : `geo_dec_pav_tlc`
+## Table : `an_dec_pav_cont (actif)`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur textile n° {id_cont_tl}|
-|info_bulle  |x|x||Composition de l'info bulle affiché au passage sur le PAV|Cartographie|Identifiant : {id_cont_tl}|
-|cont_mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Textile||
-|cont_nbr    |||Nombre de conteneur(s)||Fiche d'information Conteneur Textile||
-|cont_pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Textile||
-|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Textile||
-|date_maj   |||Date de mise à jour||Fiche d'information Conteneur Textile||
-|date_netoy    |||Date de nettoyage||Fiche d'information Conteneur Textile||
-|date_pose     |||Date de pose||Fiche d'information Conteneur Textile||
-|date_sai     |||Date de saisie||Fiche d'information Conteneur Textile||
-|env_implan       |||Type d'espace urbain d'implantation|Liste de domaine  valeur_pav_envimplan|Fiche d'information Conteneur Textile||
-|env_situ       |||Situation domaniale|Liste de domaine  valeur_pav_envsitu|Fiche d'information Conteneur Textile||
-|env_type       |||Type d'environnement|Liste de domaine  valeur_pav_envtype|Fiche d'information Conteneur Textile||
-|id_cont_tl         |||Identifiant||Fiche d'information Conteneur Textile||
-|insee         |||Code Insee||Fiche d'information Conteneur Textile||
-|nom_entrep          |||Entreprise gestionnaire|Liste de domaine   valeur_pav_gest|Fiche d'information Conteneur Textile||
-|nom_entrep_99            |||Autre entreprise gestionnaire||Fiche d'information Conteneur Textile||
-|nat_pb_99            |||Autre problème||Fiche d'information Conteneur à Verre||
-|observ             |||Observation(s)||Fiche d'information Conteneur Textile||
-|op_sai             |||Opérateur de saisie||Fiche d'information Conteneur Textile||
-|peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur Textile|| 
-|photo                  |||Nom du fichier photo||Inutilisé (photo dans la table des médias)|| 
-|prop_abor                   |||Etat de propreté des abords|Liste de domaine   valeur_pav_proprete_abor|Fiche d'information Conteneur Textile|| 
-|prox_corb                     |||Présence d'une corbeille à proximité|Booléen oui/non|Fiche d'information Conteneur Textile|| 
-|src_geom                     |||Référentiel spatial||Fiche d'information Conteneur Textile|| 
-|tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur Textile||  
-|type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol
- |Fiche d'information Conteneur Textile||  
-|url_photo                         |||Lien vers la photo| |Inutilisé (photo dans la table des médias)||  
-
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+| affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur à verre n° {idcont}|
+|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
+|pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Verre||
+|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Verre||
+|date_maj   |||Mis à jour le||Fiche d'information Conteneur Verre||
+|date_net    |||Nettoyé le||Fiche d'information Conteneur Verre||
+|date_pos     |||Posé le||Fiche d'information Conteneur Verre||
+|date_sai     |||Saisie le||Fiche d'information Conteneur Verre||
+|def_struc         |||Défaut de structure visible||Fiche d'information Conteneur Verre||
+|etat_sign         |||Etat||Fiche d'information Conteneur Verre||
+|eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur Verre||
+|idcont         |||Identifiant du conteneur||Fiche d'information Conteneur Verre||
+|idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur Verre||
+|idpresta         |||Ref prestataire||Fiche d'information Conteneur Verre||
+|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
+|mode_preh         |||Mode de préhension|Liste de domaine  valeur_pav_modepreh|Fiche d'information Conteneur Verre||
+|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur Verre||
+|obs_eve         |||Commentaire(s)||Fiche d'information Conteneur Verre||
+|observ   |||Observation(s)||Fiche d'information Conteneur Verre||
+|op_sai             |||Saisi par||Fiche d'information Conteneur Verre||
+|opercules             |||Opercules|Booléen (oui/non)|Fiche d'information Conteneur Verre||
+|peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur Verre|| 
+|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur Verre||
+|proprete                   |||Etat de Propreté|Liste de domaine   valeur_pav_proprete|Fiche d'information Conteneur Verre|| 
+|tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur Verre||  
+|trp_rest                     |||Présence d'une trappe pour restaurateur|Booléen oui/non |Fiche d'information Conteneur Verre||
+|type_sign                        |||Type de signalétique|Liste de domaine    valeur_pav_typesign |Fiche d'information Conteneur Verre||  
+|type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol |Fiche d'information Conteneur Verre||  
+|volume                        |||Volume||Fiche d'information Conteneur Verre||  
+ 
 
    * filtres :
 
 |Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
-|:---|:---|:-:|:---:|:---:|:---|:---|
+|:---|:---|:---:|:---:|:---:|:---|:---|
+|Actif|eve|x|alphanumérique|est égale à des valeurs par défaut|10,11,12,13,14,00|Permet d'afficher uniquement les PAV présents au lieu de collecte dans l'onglet Caractéristique|
 
-Sans objet
 
    * relations : 
  
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
-| an_dec_pav_doc_media |id| 0..n (égal) |
+|geo_dec_pav_lieu |idlieu| 1 (égal) |
 
-|Géotables ou Tables| Champs de jointure | Type |
-|:---|:---|:---|
-| à partir de Géotable xapps_geo_vmr_adresse sur geo_dec_pav_tlc |geom à geom2| 1..n (intersection) |
+
+   * particularité(s) : aucune
+
+## Table : `an_dec_pav_cont (inactif)`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
+|pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Verre||
+|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Verre||
+|date_maj   |||Mis à jour le||Fiche d'information Conteneur Verre||
+|date_net    |||Nettoyé le||Fiche d'information Conteneur Verre||
+|date_pos     |||Posé le||Fiche d'information Conteneur Verre||
+|date_sai     |||Saisie le||Fiche d'information Conteneur Verre||
+|def_struc         |||Défaut de structure visible||Fiche d'information Conteneur Verre||
+|etat_sign         |||Etat||Fiche d'information Conteneur Verre||
+|eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur Verre||
+|idcont         |||Identifiant du conteneur||Fiche d'information Conteneur Verre||
+|idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur Verre||
+|idpresta         |||Ref prestataire||Fiche d'information Conteneur Verre||
+|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
+|mode_preh         |||Mode de préhension|Liste de domaine  valeur_pav_modepreh|Fiche d'information Conteneur Verre||
+|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur Verre||
+|obs_eve         |||Commentaire(s)||Fiche d'information Conteneur Verre||
+|observ   |||Observation(s)||Fiche d'information Conteneur Verre||
+|op_sai             |||Saisi par||Fiche d'information Conteneur Verre||
+|opercules             |||Opercules|Booléen (oui/non)|Fiche d'information Conteneur Verre||
+|peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur Verre|| 
+|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur Verre||
+|proprete                   |||Etat de Propreté|Liste de domaine   valeur_pav_proprete|Fiche d'information Conteneur Verre|| 
+|tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur Verre||  
+|trp_rest                     |||Présence d'une trappe pour restaurateur|Booléen oui/non |Fiche d'information Conteneur Verre||
+|type_sign                        |||Type de signalétique|Liste de domaine    valeur_pav_typesign |Fiche d'information Conteneur Verre||  
+|type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol |Fiche d'information Conteneur Verre||  
+|volume                        |||Volume||Fiche d'information Conteneur Verre||  
+ 
+
+   * filtres :
+
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:---:|:---:|:---:|:---|:---|
+|Inactif|eve|x|alphanumérique|est égale à des valeurs par défaut|20,21,30,31|Permet d'afficher uniquement les PAV "supprimés" au lieu de collecte dans l'onglet Evènements|
+
+   * relations : 
+ 
+Sans objet
 
    * particularité(s) : aucune
    
-  
-## GeoTable : `xapps_geo_v_pav_orient`
+## Table : `an_dec_pav_cont_tlc (actif)`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+| affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur  n° {idcont}|
+|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
+|pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur TLC||
+|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur TLC||
+|date_maj   |||Mis à jour le||Fiche d'information Conteneur TLC||
+|date_pos     |||Posé le||Fiche d'information Conteneur TLC||
+|date_sai     |||Saisie le||Fiche d'information Conteneur TLC||
+|eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur TLC||
+|idcont         |||Identifiant du conteneur||Fiche d'information Conteneur TLC||
+|idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur VerTLCre||
+|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
+|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur TLC||
+|nom_entrep         |||Gestionnaire|Liste de domaine  valeur_pav_gest|Fiche d'information Conteneur TLC||
+|nom_entrep_99         |||Autre gestionnaire||Fiche d'information Conteneur TLC||
+|obs_eve         |||Commentaire(s)||Fiche d'information Conteneur TLC||
+|observ   |||Observation(s)||Fiche d'information Conteneur TLC||
+|op_sai             |||Saisi par||Fiche d'information Conteneur TLC||
+|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur TLC||
 
-Sans objet
+   * filtres :
 
-   * filtres : aucun
-   * relations : aucune
-   * particularité(s) : aucune
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:---:|:---:|:---:|:---|:---|
+|TLC Actif|eve|x|alphanumérique|est égale à des valeurs par défaut|10,11,12,13,14,00|Permet d'afficher uniquement les PAV présents au lieu de collecte dans l'onglet Caractéristique|
+
+
+   * relations : 
  
- ## GeoTable : `xapps_geo_v_pav_verre_inactif`
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|geo_dec_pav_lieu |idlieu| 1 (égal) |
+
+
+   * particularité(s) : aucune
+   
+## Table : `an_dec_pav_cont_tlc (inactif)`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
+|pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur TLC||
+|date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur TLC||
+|date_maj   |||Mis à jour le||Fiche d'information Conteneur TLC||
+|date_pos     |||Posé le||Fiche d'information Conteneur TLC||
+|date_sai     |||Saisie le||Fiche d'information Conteneur TLC||
+|eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur TLC||
+|idcont         |||Identifiant du conteneur||Fiche d'information Conteneur TLC||
+|idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur VerTLCre||
+|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
+|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur TLC||
+|nom_entrep         |||Gestionnaire|Liste de domaine  valeur_pav_gest|Fiche d'information Conteneur TLC||
+|nom_entrep_99         |||Autre gestionnaire||Fiche d'information Conteneur TLC||
+|obs_eve         |||Commentaire(s)||Fiche d'information Conteneur TLC||
+|observ   |||Observation(s)||Fiche d'information Conteneur TLC||
+|op_sai             |||Saisi par||Fiche d'information Conteneur TLC||
+|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur TLC||
+
+   * filtres :
+
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:---:|:---:|:---:|:---|:---|
+|TLC Inactif|eve|x|alphanumérique|est égale à des valeurs par défaut|20,21,30,31|Permet d'afficher uniquement les PAV présents au lieu de collecte dans l'onglet Evènement|
+
+
+   * relations : 
+ 
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|geo_dec_pav_lieu |idlieu| 1 (égal) |
+
+
+   * particularité(s) : aucune
+  
+## GeoTable : `xapps_geo_v_pav_lieu_orient`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
@@ -205,7 +323,8 @@ Sans objet
 
    * filtres : aucun
    * relations : aucune
-   * particularité(s) : aucune
+   * particularité(s) : vue géographique générant le trait sur la carte entre un lieu supprimé et déplacé
+ 
    
 ## Table : `an_dec_pav_doc_media`
 
@@ -231,6 +350,11 @@ Sans objet
 
 Sont présentées ici uniquement les fonctionnalités spécifiques à l'application.
 
+
+## Recherche globale : `Parcelle sélectionnée`
+
+Cette recherche permet à l'utilisateur de faire une recherche libre sur une référence de parcelle identique à celle de l'application Grand Publique (ex : AB292).
+
 ## Recherche globale : `Recherche dans la Base Adresse Locale`
 
 Cette recherche permet à l'utilisateur de faire une recherche libre sur une adresse.
@@ -255,19 +379,19 @@ Cette recherche permet à l'utilisateur de faire une recherche libre sur le nom 
 
 Cette recherche a été créée pour l'application Cadastre-Urbanisme. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
 
-## Recherche (clic sur la carte) : `Conteneur à verre`
+## Recherche (clic sur la carte) : `Lieu de collecte`
 
-Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations du PAV.
+Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations du lieu de collecte.
 
   * Configuration :
 
-Source : `xapps_geo_v_pei_ctr`
+Source : `geo_dec_pav_lieu`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
 |Commune|x|||||
 |Adresse|x|||||
+|Localisation|x|||||
 
 (la détection des doublons n'est pas activée ici)
 
@@ -277,52 +401,22 @@ Sans objet
 
 (1) si liste de domaine
 
- * Fiches d'information active : Conteneur à verre, Conteneur à verre (édition)
+ * Fiches d'information active : Lieu de collecte
+ 
+ * Particularité(s) : lancer au Démarrage dans la liste des recherches
  
  
- ## Recherche (clic sur la carte) : `Conteneur textile`
+## Recherche (clic sur la carte) : `Parcelle sélectionnée`
 
-Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations du PAV.
+Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations des parcelles et la note de renseignements d'urbanisme.
 
-  * Configuration :
+L'ensemble des recherches cadastrales ont été formatées et intégrées par l'éditeur via son module GeoCadastre.
+Seul le nom des certaines recherches a été modifié par l'ARC pour plus de compréhension des utilisateurs.
 
-Source : `geo_dec_pav_tlc`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
-|Commune|x|||||
-|Adresse|x|||||
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-Sans objet
-
-(1) si liste de domaine
-
- * Fiches d'information active : Conteneur textile, Conteneur textile (édition)
- 
- 
- |Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`OU`||
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PEI identifiant||id_pei|Prédéfinis - Filtre à valeur saisie||||||Titre : Numéro de PEI|
-|PEI identifiant||id_sdis|Prédéfinis - Filtre à valeur saisie||||||Titre : Référence SDIS|
- 
-## Recherche (clic sur la carte) : `Conteneur textile`
-
-Cette recherche permet à l'utilisateur de cliquer sur la carte et de remonter les informations de la parcelle.
-
-Cette recherche a été créée pour l'application Cadastre-Urbanisme. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
+Cette recherche est détaillée dans le répertoire GitHub `docurba`.  
 
  
- 
-## Recherche : `Toutes les recherches cadastrales`
+# Recherche : `Toutes les recherches cadastrales`
 
 L'ensemble des recherches cadastrales ont été formatées et intégrées par l'éditeur via son module GeoCadastre.
 Seul le nom des certaines recherches a été modifié par l'ARC pour plus de compréhension des utilisateurs.
@@ -330,19 +424,22 @@ Seul le nom des certaines recherches a été modifié par l'ARC pour plus de com
 Cette recherche est détaillée dans le répertoire GitHub `docurba`.
 
 
+# Recherche PAV
+
 ## Recherche : `PAV par référence`
 
 Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après sa référence.
 
   * Configuration :
 
-Source : `geo_dec_pav_verre`
+Source : `an_dec_pav_cont (actif)`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
+|affiche_résult|x|||||
 |Commune|x|||||
 |Adresse|x|||||
+|Localisation|x|||||
 
 
 (la détection des doublons n'est pas activée ici)
@@ -351,26 +448,27 @@ Source : `geo_dec_pav_verre`
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PAV Référence|x|id_contver|Est égale à une valeur saisie||||||Titre : N° PAV|
-
+|Identifiant PAV Verre|x|idcont|Est égale à une valeur saisie||||||N° de PAV :|
 
 (1) si liste de domaine
 
- * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+ * Fiches d'information active : Fiche conteneur à verre
  
-## Recherche : `PAV VERRE par localisation`
+ * Particularité(s) : la geom est celle des lieux de collecte
+ 
+## Recherche : `Lieu de collecte par localisation`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après sa commune et/ou son adresse de localisation.
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte sa commune et/ou son adresse de localisation.
 
   * Configuration :
 
-Source : `geo_dec_pav_verre`
+Source : `geo_dec_pav_lieu`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
 |Commune|x|||||
 |Adresse|x|||||
+|Localisation|x|||||
 
 
 (la détection des doublons n'est pas activée ici)
@@ -383,47 +481,85 @@ Source : `geo_dec_pav_verre`
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PAV Verre commune|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV Verre Commune|commune|commune|commune||Titre : Commune :|
-|PAV Verre adresse|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV Verre adresse|adresse|adresse|adresse||Titre : Adresse :|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|Verre|x|cttype|Est égal à des valeurs par défaut |10,30||||||
+|Commune||commune|Est égal à une valeur de liste de choix |Commune (lieu de collecte)|commune|commune|commune|non|Titre : Commune|
+|Adresse||commune|Est égal à une valeur de liste de choix |Adresse (lieu de collecte)|adresse|adresse|adresse|non|Titre : Adresse|
 
 
 (1) si liste de domaine
 
- * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+ * Fiches d'information active : Lieu de collecte
 
-## Recherche : `PAV VERRE par lieu d'implantation`
+## Recherche : `Lieu de collecte par implantation`
 
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après son lieu d'implantation.
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte d'après son lieu d'implantation.
 
   * Configuration :
 
-Source : `geo_dec_pav_verre`
+Source : `geo_dec_pav_lieu`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
 |Commune|x|||||
 |Adresse|x|||||
-
+|Localisation|x|||||
 
 (la détection des doublons n'est pas activée ici)
 
  * Filtres :
 
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PAV implantation|x|id_contver|Est égale à une valeur de liste de choix |Liste de domaine valeur_pav_envimplan|env_implan_lib|env_implan|env_implan||Titre : Implantation :|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|Verre|x|cttype|Est égal à des valeurs par défaut |10,30||||||
+|Implantation|x|env_implan|Est égal à une valeur de liste de choix |lt_pav_envimplan|env_implan_lib|env_implan|env_implan|non|Titre : Type d'espace urbain d'implantation|
 
 
 (1) si liste de domaine
 
- * Fiches d'information active : Conteneur à verre (édition), Conteneur à verre
+ * Fiches d'information active : Lieu de collecte
+
+## Recherche : `Lieu de collecte par nature du problème`
+
+Cette recherche permet à l'utilisateur de faire une recherche guidée sur un lieu de collecte d'après son lieu d'implantation.
+
+  * Configuration :
+
+Source : `geo_dec_pav_lieu`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Commune|x|||||
+|Adresse|x|||||
+|Localisation|x|||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Actif|x|statut|Est égal à des valeurs par défaut |10||||||
+|Verre|x|cttype|Est égal à des valeurs par défaut |10,30||||||
+|Nature du problème|x|env_implan|Est égal à une valeur de liste de choix |lt_pav_natpb|nat_pb_lib|nat_pb|nat_pb|non|Titre : Nature du problème|
 
 
-## Recherche : `PAV VERRE à moins de 300 mètres`
+(1) si liste de domaine
 
-Cette recherche permet à l'utilisateur de faire une recherche d'un PAV Verre à moins de 300 mètres d'une adresse.
+ * Fiches d'information active : Lieu de collecte
+
+## Recherche : `Lieu de collecte à moins de 300 mètres` (en cours de réalisation)
+
+Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte à moins de 300 mètres d'une adresse.
 
   * Configuration :
 
@@ -431,10 +567,6 @@ Source : `xapps_geo_vmr_adresse`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
-|Commune|x|||||
-|Adresse|x||x|||
-
 
  * Filtres :
  
@@ -444,132 +576,13 @@ Source : `xapps_geo_vmr_adresse`
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|Commune|x|commune|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la commune|
-|Voie|x|libvoie_c|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la voie|
-|Numéro||numero_complet|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez le n° dans la voie|
-
-(1) si liste de domaine
-
- * Fiches d'information active : PAV VERRE à moins de 300 mètres
-
-# Recherche : `PAV VERRE par nature du problème`
-
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV Verre d'après la nature du problème.
-
-  * Configuration :
-
-Source : `xapps_geo_vmr_adresse`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
-|Commune|x|||||
-|Adresse|x|||||
-
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|Commune|x|commune|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la commune|
-|Voie|x|libvoie_c|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez la voie|
-|Numéro||numero_complet|Prédéfinis avec une filtre à liste de choix||||||Titre : Sélectionnez le n° dans la voie|
 
 
 (1) si liste de domaine
 
- * Fiches d'information active : PAV TLC à moins de 500 mètres
-
-## Recherche : `TLC par référence`
-
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV TLC d'après sa référence.
-
-  * Configuration :
-
-Source : `geo_dec_pav_tlc`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
-|Commune|x|||||
-|Adresse|x|||||
+ * Fiches d'information active : Lieu de collecte
 
 
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|TLC Référence|x|id_cont_tl|Est égale à une valeur saisie||||||Titre : N° PAV|
-
-
-(1) si liste de domaine
-
- * Fiches d'information active : Conteneur textile (édition), Conteneur textile
- 
-## Recherche : `PAV TLC par localisation`
-
-Cette recherche permet à l'utilisateur de faire une recherche guidée sur un PAV TLC d'après sa commune et/ou son adresse de localisation.
-
-  * Configuration :
-
-Source : `geo_dec_pav_tlc`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
-|Commune|x|||||
-|Adresse|x|||||
-
-
-(la détection des doublons n'est pas activée ici)
-
- * Filtres :
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|PAV TLC commune|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV TLC Commune|commune|commune|commune||Titre : Commune :|
-|PAV TLC adresse|x|commune|Est égal à une valeur de liste de choix |Liste de domaine PAV TLC adresse|adresse|adresse|adresse||Titre : Adresse :|
-
-
-(1) si liste de domaine
-
- * Fiches d'information active : Conteneur textile (édition), Conteneur textile
-
-## Recherche : `PAV TLC à moins de 500 mètres`
-
-
-Cette recherche permet à l'utilisateur de faire une recherche d'un PAV TLC à moins de 500 mètres d'une adresse.
-
-  * Configuration :
-
-Source : `geo_ban_arcba`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-|Résultat(s)|x|||||
-|Commune|x|||||
-|Adresse|x||x|||
-
-
- * Filtres :
-
-
-(1) si liste de domaine
-
- * Fiches d'information active : Résultat PAV TLC à moins de 500 mètres
  
 
 ## Recherche : `Toutes les recherches avancées d'une adresse ou d'une voie`
