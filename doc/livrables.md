@@ -17,6 +17,16 @@
 - Fichier gabarit à télécharger des lieux de collecte au format shape (géographique)
 - Fichier gabarit Qgis complet à télécharger
 
+### Pré-requis pour l'utilisation du Gabarit sous QGis
+
+Afin de pouvoir utiliser les fonds de plan intégrés dans le gabarit QGis, vous devez préalablement installer le plugin Geo2France et paramétrer l'accès aux flux WMS du Pays Compiégnois.
+
+- installer le plugin Geo2France via le gestionnaire d'extension de QGIS
+  - Déclarer et activer le dépôt suivant : https://www.geo2france.fr/public/qgis3/plugins/plugins.xml
+  - Rechercher et charger l'extension intitulée "Geo2France"
+  
+- paramétrer 
+
 ## Principe fonctionnel et modalités de mises à jour
 
 Le principe de fonctionnement de la base de données des Points d'Apport Volontaire Verre s'appuie sur le lieu de collecte. Ce lieu est un point unique disposant de n conteneurs, qu'ils soient à usage Verre ou TLC. 
