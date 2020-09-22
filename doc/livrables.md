@@ -25,7 +25,10 @@ Afin de pouvoir utiliser les fonds de plan intégrés dans le gabarit QGis, vous
   - Déclarer et activer le dépôt suivant : https://www.geo2france.fr/public/qgis3/plugins/plugins.xml
   - Rechercher et charger l'extension intitulée "Geo2France"
   
-- paramétrer 
+- paramétrer l'accès aux flux du Pays Compiégnois dans le gestionnaire des sources de données WMS/WMTS en créant une nouvelle connexion 
+  - Déclarer le nom de la connexion suivante : Igeo_Compiegnois
+  - Déclarer l'URL suivante : http://geo.compiegnois.fr/geoserver/wms?
+  - Valider en cliquant sur Ok
 
 ## Principe fonctionnel et modalités de mises à jour
 
