@@ -505,6 +505,7 @@ Valeurs possibles :
 |04|SULO-CITY BULLE 4m3|sulocitybulle4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png|
 |00|Non renseigné|non_disponible.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg|
 |03|TEMACO - PO MULTIPACK C600 4m3|tamacopo6003.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png|
+|99|Autre|||
 
 ---
 
