@@ -132,6 +132,14 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |proprete|Etat de la propreté|character varying(2)|lt_pav_proprete|valeur vide interdite|
 
 
+### Les identifiants
+
+Pour des raisons propres à la production ou à la mise à jour des données par un prestataire, les identifiants des lieux et des conteneurs sont et devront être formatés ainsi :
+  - lieux (idlieu) : loc + n°
+  - conteneurs (idcont) : ct + n°
+  
+A l'intégration des données par la collectivité, ces identifiants seront transformés en identifiant non signifiant.
+
 
 ### Liste de valeurs
 
