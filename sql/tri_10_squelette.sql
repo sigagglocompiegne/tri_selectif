@@ -507,7 +507,8 @@ INSERT INTO m_dechet.lt_pav_modele(
     ('03','TEMACO - PO MULTIPACK C600 4m3','tamacopo6003.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png'),
     ('04','SULO-CITY BULLE 4m3','sulocitybulle4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png'),
     ('05','UTPM 3m3','utpm3.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png'),
-    ('06','MULTIPACK ENTERRE PO - 4m3','tamacoenterrepo4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png'); 
+    ('06','MULTIPACK ENTERRE PO - 4m3','tamacoenterrepo4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png'),
+    ('99','Autre','','');
     
 -- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
 
