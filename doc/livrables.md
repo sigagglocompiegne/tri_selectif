@@ -140,6 +140,7 @@ Pour des raisons propres à la production ou à la mise à jour des données par
   
 A l'intégration des données par la collectivité, ces identifiants seront transformés en identifiant non signifiant.
 
+L'identifiant du prestataire (idpresta) reste quant à lui propre au prestataire et ne sera pas modifié à l'intégration.
 
 ### Liste de valeurs
 
