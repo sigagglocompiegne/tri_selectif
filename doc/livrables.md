@@ -44,13 +44,11 @@ Comme pour les lieux de collecte, cette mise à jour devra préciser dans l'attr
 - supprimé (dans ce cas, le prestataire devra uniquement spécifier cette mention dans l'attribut concerné et non supprimer le conteneur dans les fichiers fournis).
 
 *Important :*
--	l'entreprise gestionnaire veillera à bien indiquer le lieu de collecte d'appartenance de chaque nouveau conteneur par un identifiant unique de sa convenance différent de ceux déjà utilisés par la collectivité et qui sera également indiqué pour chaque nouveau lieu de collecte.
+-	le gabarit Qgis proposé, intègre la gestion des identifiants. L'attribution des identifiants de lieux et des conteneurs ainsi que l'affectation des lieux aux conteneurs est automatique. Dans le cas d'un usage strict des fichiers en dehors du gabarit Qgis, les identifiants devront être saisis et respecter l'unicité de ceux-ci. L'affectation des lieux aux conteneurs reposera sur le même principe de saisie manuelle.
 -	l'attribut [idpresta], dans le fichier des conteneurs et pour chaque conteneur Verre, doit contenir l'identifiant de l'entreprise gestionnaire. Cet attribut sera utilisé par la suite pour les échanges de données.
 - L'attribut `date_sai` doit être renseigné uniquement lors d'un nouveau lieu de collecte identifié. L'attribut `date_maj`, quant à lui est à renseigner si il s'agit d'une mise à jour d'un lieu existant. Dans ce dernier cas, l'attribut `date_sai` reste inchangé dans le cadre d'une mise à jour.
 
 Un gabarit de saisi, sous le logiciel SIG QGIS 3.x, est disponible et permet de disposer des fonds de plan géographiques nécessaires à la localisation des lieux de collecte actuelle.
-
-
 
 ## Système de coordonnées
 
@@ -134,13 +132,7 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 
 ### Les identifiants
 
-Pour des raisons propres à la production ou à la mise à jour des données par un prestataire, les identifiants des lieux et des conteneurs sont et devront être formatés ainsi :
-  - lieux (idlieu) : loc + n°
-  - conteneurs (idcont) : ct + n°
-  
-A l'intégration des données par la collectivité, ces identifiants seront transformés en identifiant non signifiant.
-
-L'identifiant du prestataire (idpresta) reste quant à lui propre au prestataire et ne sera pas modifié à l'intégration.
+Les identifiants des lieux et des conteneurs sont des identifiants non signifiants (un simple numéro incrémenté de 1 à chaque insertion).
 
 ### Liste de valeurs
 
