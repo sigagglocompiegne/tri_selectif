@@ -274,8 +274,8 @@ Particularité(s) à noter : aucune
 
 Valeurs possibles :
 
-|code | valeur | affich
-|:---|:---|:---|     
+|code | valeur |
+|:---|:---|  
 |10|Métal|
 |20|Plastique|
 |00|Non renseigné|
