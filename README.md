@@ -26,6 +26,6 @@ L’ARC privilégie donc une organisation dans laquelle l’Interface Homme Mach
 
 ## Jeu de données consolidé
 
-Vous pouvez retrouver le jeu de données résultant de cette consolidation sur le catalogue GéoCompiégnois en cliquant [ici](https://geo.compiegnois.fr/geonetwork/srv/fre/catalog.search#/metadata/8a57fbfa-6ab3-41f4-b5cd-916554cbfd4f).
+Vous pouvez retrouver le jeu de données résultant de cette consolidation sur le catalogue GéoCompiégnois en cliquant [ici](https://geo.compiegnois.fr/).
 
 
