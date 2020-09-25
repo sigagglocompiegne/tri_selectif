@@ -45,6 +45,7 @@ Comme pour les lieux de collecte, cette mise à jour devra préciser dans l'attr
 
 *Important :*
 -	le gabarit Qgis proposé, intègre la gestion des identifiants. L'attribution des identifiants de lieux et des conteneurs ainsi que l'affectation des lieux aux conteneurs est automatique. Dans le cas d'un usage strict des fichiers en dehors du gabarit Qgis, les identifiants devront être saisis et respecter l'unicité de ceux-ci. L'affectation des lieux aux conteneurs reposera sur le même principe de saisie manuelle.
+- le gabarit permet de créer ou de déplacer un lieu et d'y affecter ou de modifier les informations des conteneurs. Il n'est pas possible de supprimer un conteneur, mais simplement de signaler dans l'attribut d'évolution, sa suppression.
 -	l'attribut [idpresta], dans le fichier des conteneurs et pour chaque conteneur Verre, doit contenir l'identifiant de l'entreprise gestionnaire. Cet attribut sera utilisé par la suite pour les échanges de données.
 - L'attribut `date_sai` doit être renseigné uniquement lors d'un nouveau lieu de collecte identifié. L'attribut `date_maj`, quant à lui est à renseigner si il s'agit d'une mise à jour d'un lieu existant. Dans ce dernier cas, l'attribut `date_sai` reste inchangé dans le cadre d'une mise à jour.
 
