@@ -179,6 +179,7 @@ Sans objet
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
 |geo_dec_pav_lieu |idlieu| 1 (égal) |
+|lt_pav_model |model| 0..1 (égal) |
 
 
    * particularité(s) : aucune
@@ -223,7 +224,9 @@ Sans objet
 
    * relations : 
  
-Sans objet
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|lt_pav_model |model| 0..1 (égal) |
 
    * particularité(s) : aucune
    
@@ -260,6 +263,7 @@ Sans objet
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
 |geo_dec_pav_lieu |idlieu| 1 (égal) |
+|lt_pav_model |model| 0..1 (égal) |
 
 
    * particularité(s) : aucune
@@ -295,7 +299,7 @@ Sans objet
  
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
-|geo_dec_pav_lieu |idlieu| 1 (égal) |
+|lt_pav_model |model| 0..1 (égal) |
 
 
    * particularité(s) : aucune
