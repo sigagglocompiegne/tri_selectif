@@ -75,7 +75,6 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |op_sai|Opérateur de saisie|character varying(80)| |
 |observ|Observations diverses|character varying(500)| |
 |geom|Attribut de géométrie|USER-DEFINED| |
-|hab_pav|Tonnage par gisement d''habitants|integer| |
 |idcontrat|Identifiant du contrat de gestion du ramassage des conteneurs Verre (liste de valeurs r_objet.lt_contrat)|character varying(2)| |
 
 * triggers :
@@ -148,16 +147,13 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |idpresta|Identifiant du conteneur du prestataire|character varying(10)| |
 |eve|Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)|character varying(2)| |
 |model|Modèle du conteneur Verre (liste de valeurs lt_pav_modele)|character varying(2)| |
-|mat|Matériau constituant le conteneur Verre (liste de valeurs lt_pav_mat)|character varying(2)| |
 |pos|Position du conteneur Verre (liste de valeurs lt_pav_pos)|character varying(2)| |
 |date_sai|Date de saisie de la donnée|timestamp without time zone| |
 |date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
 |date_pos|Date de pose|timestamp without time zone| |
 |date_net|Date du dernier nettoyage|timestamp without time zone| |
 |date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone| |
-|volume|Volume en m3 du conteneur à Verre|integer| |
 |mode_preh|Mode de préhension du conteneur Verre|character varying(2)| |
-|crochet|Présence d'un crochet sur le conteneur Verre|character varying(2)| |
 |opercules|Présence d'opercules sur le conteneur Verre|boolean| |
 |tags|Présence de tags sur le conteneur|boolean| |
 |peinture|Etat de la peinture du conteneur Verre (liste de valeurs lt_pav_peinture)|character varying(2)| |
@@ -192,7 +188,6 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |model|Modèle du conteneur (liste de valeurs lt_pav_modele)|character varying(2)| |
 |nom_entrep|Nom de l'entreprise gestionnaire du conteneur (liste de valeurs lt_pav_gest)|character varying(2)| |
 |nom_entrep_99|Autre entreprise gestionnaire si non présente das nom_entrep|character varying(80)| |
-|mat|Matériau composant le conteneur TLC (liste de valeurs lt_pav_mat)|character varying(2)| |
 |pos|Position du conteneur TLC (liste de valeurs lt_pav_pos)|character varying(2)| |
 |date_sai|Date de saisie initiale|timestamp without time zone| |
 |date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
@@ -262,30 +257,6 @@ Sans objet
 ## Liste de valeurs
 
 
-`lt_pav_contmat` : Liste des types des codes matériaux
-
-|Nom attribut | Définition | Type  | Valeurs par défaut |
-|:---|:---|:---|:---|    
-|code|Code matériaux constituant le conteneur|character varying(2)| |
-|valeur|Libellé des matériaux constituant le conteneur|character varying(30)| |
-
-
-Particularité(s) à noter : aucune
-
-Valeurs possibles :
-
-|code | valeur |
-|:---|:---|  
-|10|Métal|
-|20|Plastique|
-|00|Non renseigné|
-|21|Plastique + bois|
-|30|Résine|
-|40|Bois|
-
-
----
-
 `lt_pav_contpos` : Liste permettant de décrire les types de position du conteneur'
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
@@ -305,26 +276,6 @@ Valeurs possibles :
 |20|Enterré|
 |00|Non renseigné|
 |30|Semi-enterré|
-
----
-
-`lt_pav_crochet` : Liste permettant de décrire l'état du crochet
-
-|Nom attribut | Définition | Type  | Valeurs par défaut |
-|:---|:---|:---|:---|    
-|code|code de l'état du crochet |character varying(2)| |
-|valeur|libellé de l'état du crochet |character varying(30)| |
-
-
-Particularité(s) à noter : aucune
-
-Valeurs possibles :
-
-|code | valeur | code_open |
-|:---|:---|:---|   
-|10|RAS|
-|20|Tordu|
-|00|Non renseigné|
 
 ---
 
