@@ -90,7 +90,6 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |env_implan       |||Type d'espace urbain d'implantation|Liste de domaine  valeur_pav_envimplan|Fiche d'information Lieu de collecte||
 |env_situ       |||Situation domaniale|Liste de domaine  valeur_pav_envsitu|Fiche d'information Lieu de collecte||
 |env_type       |||Type d'environnement|Liste de domaine  valeur_pav_envtype|Fiche d'information Lieu de collecte||
-|hab_pav       |||Tonnage par gisement d'habitants||Fiche d'information Lieu de collecte||
 |id_lieu       |||Identifiant||Fiche d'information Lieu de collecte||
 |insee         |||Code Insee||Fiche d'information Lieu de collecte||
 |Localisation         |||Localisation||Fiche d'information Lieu de collecte + recherche au clic||
@@ -142,7 +141,6 @@ Sans objet
 |:---|:-:|:-:|:---|:---|:---|:---|
 | affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
 | affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur à verre n° {idcont}|
-|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Verre||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Verre||
 |date_maj   |||Mis à jour le||Fiche d'information Conteneur Verre||
@@ -155,7 +153,6 @@ Sans objet
 |idcont         |||Identifiant du conteneur||Fiche d'information Conteneur Verre||
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur Verre||
 |idpresta         |||Ref prestataire||Fiche d'information Conteneur Verre||
-|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
 |mode_preh         |||Mode de préhension|Liste de domaine  valeur_pav_modepreh|Fiche d'information Conteneur Verre||
 |model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur Verre||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur Verre||
@@ -163,13 +160,11 @@ Sans objet
 |op_sai             |||Saisi par||Fiche d'information Conteneur Verre||
 |opercules             |||Opercules|Booléen (oui/non)|Fiche d'information Conteneur Verre||
 |peinture                 |||Etat de la peinture|Liste de domaine valeur_pav_peinture|Fiche d'information Conteneur Verre|| 
-|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur Verre||
 |proprete                   |||Etat de Propreté|Liste de domaine   valeur_pav_proprete|Fiche d'information Conteneur Verre|| 
 |tags                     |||Présence de tags|Booléen oui/non |Fiche d'information Conteneur Verre||  
 |trp_rest                     |||Présence d'une trappe pour restaurateur|Booléen oui/non |Fiche d'information Conteneur Verre||
 |type_sign                        |||Type de signalétique|Liste de domaine    valeur_pav_typesign |Fiche d'information Conteneur Verre||  
 |type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol |Fiche d'information Conteneur Verre||  
-|volume                        |||Volume||Fiche d'information Conteneur Verre||  
  
 
    * filtres :
@@ -193,7 +188,6 @@ Sans objet
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
 | affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
-|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Verre||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Verre||
 |date_maj   |||Mis à jour le||Fiche d'information Conteneur Verre||
@@ -206,7 +200,6 @@ Sans objet
 |idcont         |||Identifiant du conteneur||Fiche d'information Conteneur Verre||
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur Verre||
 |idpresta         |||Ref prestataire||Fiche d'information Conteneur Verre||
-|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur Verre||
 |mode_preh         |||Mode de préhension|Liste de domaine  valeur_pav_modepreh|Fiche d'information Conteneur Verre||
 |model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur Verre||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur Verre||
@@ -220,8 +213,7 @@ Sans objet
 |trp_rest                     |||Présence d'une trappe pour restaurateur|Booléen oui/non |Fiche d'information Conteneur Verre||
 |type_sign                        |||Type de signalétique|Liste de domaine    valeur_pav_typesign |Fiche d'information Conteneur Verre||  
 |type_sol                        |||Type de sol|Liste de domaine    valeur_pav_typesol |Fiche d'information Conteneur Verre||  
-|volume                        |||Volume||Fiche d'information Conteneur Verre||  
- 
+
 
    * filtres :
 
@@ -241,7 +233,6 @@ Sans objet
 |:---|:-:|:-:|:---|:---|:---|:---|
 | affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
 | affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur  n° {idcont}|
-|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur TLC||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur TLC||
 |date_maj   |||Mis à jour le||Fiche d'information Conteneur TLC||
@@ -250,14 +241,12 @@ Sans objet
 |eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur TLC||
 |idcont         |||Identifiant du conteneur||Fiche d'information Conteneur TLC||
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur VerTLCre||
-|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
 |model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur TLC||
 |nom_entrep         |||Gestionnaire|Liste de domaine  valeur_pav_gest|Fiche d'information Conteneur TLC||
 |nom_entrep_99         |||Autre gestionnaire||Fiche d'information Conteneur TLC||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur TLC||
 |observ   |||Observation(s)||Fiche d'information Conteneur TLC||
 |op_sai             |||Saisi par||Fiche d'information Conteneur TLC||
-|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur TLC||
 
    * filtres :
 
@@ -280,7 +269,6 @@ Sans objet
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
 | affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
-|mat   |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur TLC||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur TLC||
 |date_maj   |||Mis à jour le||Fiche d'information Conteneur TLC||
@@ -289,14 +277,12 @@ Sans objet
 |eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur TLC||
 |idcont         |||Identifiant du conteneur||Fiche d'information Conteneur TLC||
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur VerTLCre||
-|mat         |||Matériau|Liste de domaine  valeur_pav_contmat|Fiche d'information Conteneur TLC||
 |model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur TLC||
 |nom_entrep         |||Gestionnaire|Liste de domaine  valeur_pav_gest|Fiche d'information Conteneur TLC||
 |nom_entrep_99         |||Autre gestionnaire||Fiche d'information Conteneur TLC||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur TLC||
 |observ   |||Observation(s)||Fiche d'information Conteneur TLC||
 |op_sai             |||Saisi par||Fiche d'information Conteneur TLC||
-|pos                 |||Position|Liste de domaine valeur_pav_contpos|Fiche d'information Conteneur TLC||
 
    * filtres :
 
