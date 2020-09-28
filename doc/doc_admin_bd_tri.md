@@ -684,4 +684,4 @@ Sans objet
 
 ### Modèle conceptuel simplifié des lieux de collecte des Points d'Apport Volontaire
 
-![mcd](img/pav_mcd2.png)
+![mcd](img/pav_mcd3.png)
