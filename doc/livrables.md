@@ -112,15 +112,12 @@ Ensemble des données décrivant les objets composant le réseau de gestion des 
 |maj_aaaa|Evolution par rapport au dernier recensement|character varying(8)|lt_pav_maj|valeur vide interdite|
 |model|Modèle du conteneur|character varying(2)|lt_pav_modele|valeur vide interdite|
 |model_a|Autre modèle|character varying(100)||uniquement à remplir si valeur 99 (autre) indiqué dans l’attribut model|
-|mat|Matériel constituant le conteneur|character varying(2)|lt_pav_contmat|valeur vide interdite|
 |pos|Type de positionnement|character varying(2)|lt_pav_contpos|valeur vide interdite|
 |date_sai|Date de saisie|date||valeur vide interdite|
 |date_maj|Date de mise à jour|date|||
 |date_pose|Date de pose|date|||
 |date_net|Date du dernier nettoyage|date|||
-|volume|Volume en m3|integer||valeur vide interdite|
 |mode_preh|Mode de préhension|character varying(2)|lt_pav_modepreh|valeur vide interdite|
-|crochet|Etat du crochet|character varying(2)|lt_pav_crochet|valeur vide interdite|
 |opercules|Bavettes sur opercules disponibles|booléan||false par défaut|
 |tags|Présence de tags|booléan||false par défaut|
 |peinture|Etat de la peinture|character varying(2)|lt_pav_peinture|valeur vide interdite|
