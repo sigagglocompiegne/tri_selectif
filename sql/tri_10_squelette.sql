@@ -35,6 +35,7 @@ COMMENT ON SCHEMA m_dechet
 DROP SEQUENCE IF EXISTS m_dechet.geo_dec_pav_lieu_idlieu_seq;
 DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_cont_idcont_seq;
 DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_doc_media_gid_seq;
+DROP SEQUENCE IF EXISTS m_dechet.lt_pav_model_code_seq;
 
 -- ################################################################# Séquence sur TABLE  ###############################################
 
@@ -76,14 +77,24 @@ CREATE SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
+    
+-- SEQUENCE: m_dechet.lt_pav_model_code_seq
+
+-- DROP SEQUENCE m_dechet.lt_pav_model_code_seq;
+
+CREATE SEQUENCE m_dechet.lt_pav_model_code_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
 
   
-  
--- ####################################################################################################################################################
+ -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
--- ###                                                                DOMAINE DE VALEURS                                                            ###
+-- ###                                                                REINITIALISATION DU MODELE                                                    ###
 -- ###                                                                                                                                              ###
--- ####################################################################################################################################################
+-- #################################################################################################################################################### 
 
 
 -- fkey
@@ -115,6 +126,7 @@ ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_co
 ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_pos_fkey;
 
 
+
 -- domaine de valeur
 DROP TABLE IF EXISTS m_dechet.lt_pav_contpos;
 DROP TABLE IF EXISTS m_dechet.lt_pav_envimplan;
@@ -134,7 +146,23 @@ DROP TABLE IF EXISTS m_dechet.lt_pav_cttype;
 DROP TABLE IF EXISTS m_dechet.lt_pav_eve;
 DROP TABLE IF EXISTS m_dechet.lt_pav_modele;
 
-    
+-- Table
+DROP TABLE IF EXISTS m_dechet.geo_dec_pav_lieu;
+DROP TABLE IF EXISTS m_dechet.an_dec_pav_cont;
+DROP TABLE IF EXISTS m_dechet.an_dec_pav_cont_tlc;
+DROP TABLE IF EXISTS m_dechet.an_dec_pav_doc_media;
+DROP TABLE IF EXISTS m_dechet.an_dec_pav_model_media;
+DROP TABLE IF EXISTS m_dechet.geo_dec_dechetterie;
+DROP TABLE IF EXISTS m_dechet.geo_dec_secteur_enc;
+DROP TABLE IF EXISTS m_dechet.geo_dec_secteur_om;
+
+
+-- ####################################################################################################################################################
+-- ###                                                                                                                                              ###
+-- ###                                                                DOMAINE DE VALEURS                                                            ###
+-- ###                                                                                                                                              ###
+-- ####################################################################################################################################################
+
     
 -- ################################################################# Domaine valeur - lt_pav_contpos  ###############################################
 
@@ -407,12 +435,10 @@ INSERT INTO m_dechet.lt_pav_gest(
 
 CREATE TABLE m_dechet.lt_pav_modele
 (
-    code character varying(2) COLLATE pg_catalog."default" NOT NULL,
+    code character varying(2) COLLATE pg_catalog."default" NOT NULL DEFAULT nextval('m_dechet.lt_pav_model_code_seq'::regclass),
     valeur character varying(50) COLLATE pg_catalog."default",
     volume integer,
-    materiau character varying(20),
-    nomfic character varying(254) COLLATE pg_catalog."default",
-    urlfic character varying(254) COLLATE pg_catalog."default",
+    materiau character varying(20),  
     CONSTRAINT lt_pav_modele_pkkey PRIMARY KEY (code)
 )
 WITH (
@@ -436,16 +462,16 @@ COMMENT ON COLUMN m_dechet.lt_pav_modele.urlfic
 
 
 INSERT INTO m_dechet.lt_pav_modele(
-            code, valeur,nomfic,urlfic)
+            code, valeur,volume,materiau)
     VALUES
-    ('00','Non renseigné',null,'','non_disponible.jpg','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg'),
-    ('01','TEMACO - MULTIPACK C600 4m3',4,'','tamaco6004.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png'),
-    ('02','COLLECTAL-VILLIGERS City Line 4m3',4,'','villigerscityline4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png'), 
-    ('03','TEMACO - PO MULTIPACK C600 4m3',4,'','tamacopo6003.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png'),
-    ('04','SULO-CITY BULLE 4m3',4,'','sulocitybulle4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png'),
-    ('05','UTPM 3m3',3,'','utpm3.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png'),
-    ('06','MULTIPACK ENTERRE PO - 4m3',4,'','tamacoenterrepo4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png'),
-    ('99','Autre',null,'','','');
+    ('00','Non renseigné',null,''),
+    ('01','TEMACO - MULTIPACK C600 4m3',4,''),
+    ('02','COLLECTAL-VILLIGERS City Line 4m3',4,''), 
+    ('03','TEMACO - PO MULTIPACK C600 4m3',4,''),
+    ('04','SULO-CITY BULLE 4m3',4,''),
+    ('05','UTPM 3m3',3,''),
+    ('06','MULTIPACK ENTERRE PO - 4m3',4,''),
+    ('99','Autre',null,'');
     
 -- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
 
@@ -986,7 +1012,7 @@ CREATE TABLE m_dechet.an_dec_pav_cont
     idlieu integer,
     idpresta character varying(10) COLLATE pg_catalog."default",
     eve character varying(2) COLLATE pg_catalog."default",
-    model character varying(2) COLLATE pg_catalog."default",
+    model integer COLLATE pg_catalog."default",
     pos character varying(2) COLLATE pg_catalog."default",
     date_sai timestamp without time zone,
     date_maj timestamp without time zone,
@@ -1169,7 +1195,7 @@ CREATE TABLE m_dechet.an_dec_pav_cont_tlc
     idcont integer DEFAULT nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass),
     idlieu integer,
     eve character varying(2) COLLATE pg_catalog."default",
-    model character varying(2) COLLATE pg_catalog."default",
+    model integer COLLATE pg_catalog."default",
     nom_entrep character varying(2) COLLATE pg_catalog."default",
     nom_entrep_99 character varying(80) COLLATE pg_catalog."default",
     pos character varying(2) COLLATE pg_catalog."default",
@@ -1305,6 +1331,71 @@ COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.op_sai IS 'Libellé de l''opéra
 COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.date_sai IS 'Date d''intégration du document';
 COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.d_photo IS 'Date de la prise de vue';
 COMMENT ON COLUMN m_dechet.an_dec_pav_doc_media.l_prec IS 'Précision sur le document';
+
+-- Table: m_dechet.an_dec_pav_model_media
+
+-- DROP TABLE m_dechet.an_dec_pav_model_media;
+
+CREATE TABLE m_dechet.an_dec_pav_model_media
+(
+    gid integer NOT NULL DEFAULT nextval('m_dechet.an_dec_pav_doc_media_gid_seq'::regclass),
+    id integer,
+    media text COLLATE pg_catalog."default",
+    miniature bytea,
+    n_fichier text COLLATE pg_catalog."default",
+    t_fichier text COLLATE pg_catalog."default",
+    op_sai character varying(100) COLLATE pg_catalog."default",
+    date_sai timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE m_dechet.an_dec_pav_model_media
+    OWNER to sig_create;
+
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_model_media TO read_sig;
+
+GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO sig_create;
+
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.an_dec_pav_model_media TO edit_sig;
+
+GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO create_sig;
+
+COMMENT ON TABLE m_dechet.an_dec_pav_model_media
+    IS 'Table gérant les photos des modèles de PAV Verre ou TLC';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.id
+    IS 'Identifiant du modèle';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.media
+    IS 'Champ Média de GEO';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.miniature
+    IS 'Champ miniature de GEO';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.n_fichier
+    IS 'Nom du fichier';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.t_fichier
+    IS 'Type de média dans GEO';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.op_sai
+    IS 'Libellé de l''opérateur ayant intégrer le modèle';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_model_media.date_sai
+    IS 'Date d''intégration du document';
+
+-- Trigger: t_t1_an_dec_pav_doc_media_date_sai
+
+-- DROP TRIGGER t_t1_an_dec_pav_doc_media_date_sai ON m_dechet.an_dec_pav_doc_media;
+
+CREATE TRIGGER t_t1_an_dec_pav_model_media_date_sai
+    BEFORE INSERT
+    ON m_dechet.an_dec_pav_model_media
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_sai();
 
 -- Table: m_dechet.geo_dec_dechetterie
 
@@ -1487,7 +1578,7 @@ COMMENT ON FUNCTION m_dechet.ft_m_dec_lieu_delete()
 
 -- DROP FUNCTION m_dechet.ft_m_dec_pav_lieu();
 
-CREATE FUNCTION m_dechet.ft_m_dec_pav_lieu()
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_dec_pav_lieu()
     RETURNS trigger
     LANGUAGE 'plpgsql'
     COST 100
@@ -1497,7 +1588,7 @@ AS $BODY$
 BEGIN
 
 -- après l'insertion d'un conteneur ou mise à jour, je mets à jour le nombre de conteneurs verre dans les lieux de collecte
-update m_dechet.geo_dec_pav_lieu set nb_cont = (SELECT count(*) from m_dechet.an_dec_pav_cont where eve IN ('10','11','12','13','14') AND idlieu=new.idlieu);
+update m_dechet.geo_dec_pav_lieu set nb_cont = (SELECT count(*) from m_dechet.an_dec_pav_cont where eve IN ('10','11','12','13','14') AND idlieu=geo_dec_pav_lieu.idlieu);
 
 -- après l'insertion d'un conteneur ou mise à jour, je mets à jour le type de lieu
 update m_dechet.geo_dec_pav_lieu set cttype = b.cttype from (
@@ -1546,7 +1637,7 @@ WHEN nb_verre > 0 AND nb_tlc > 0 THEN '30'
 WHEN nb_verre = 0 AND nb_tlc = 0 THEN '40'
 END AS cttype
 FROM
-req_tot WHERE idlieu = new.idlieu
+req_tot 
 	) b WHERE geo_dec_pav_lieu.idlieu = b.idlieu;
 
 return new;
@@ -1554,8 +1645,18 @@ return new;
 END;
 $BODY$;
 
+ALTER FUNCTION m_dechet.ft_m_dec_pav_lieu()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_pav_lieu() TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_pav_lieu() TO PUBLIC;
+
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_dec_pav_lieu() TO create_sig;
+
 COMMENT ON FUNCTION m_dechet.ft_m_dec_pav_lieu()
     IS 'Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)';
+
 
 -- FUNCTION: m_dechet.ft_m_tampon_lieu_nav()
 
