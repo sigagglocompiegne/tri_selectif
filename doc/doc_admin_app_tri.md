@@ -129,8 +129,7 @@ Sans objet
    
 |Non|Opérations|Conditions|Type|Actions|
 |:---|:---|:---|:---|:---|
-|Erreur idparent|update|new.Statut = 20 et old.idparent <> new.idparent|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
-|Erreur idparent (2)|update|old.Statut = 20 et old.idparent <> new.idparent|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
+|Erreur idparent|update|new.Statut = 20 et old.idparent >= 14 et new.statut <> old.statut|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
 |Pas de suppression possible|delete||Annule la saisie|Boîte de dialogue : Vous ne pouvez pas supprimer de lieux de collecte. Si celui-ci n'existe plus, vous devez le rendre inactif dans l'attribut état. Si il est déplacé, vous devez le rendre inactif et créer un nouveau lieu en indiquant l'identifiant de l'ancien lieu dans la partie préconisation.| 
 
    * particularité(s) : aucune
@@ -139,7 +138,7 @@ Sans objet
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' || (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {model} ) || '" alt="" width="70%">'`|
 | affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur à verre n° {idcont}|
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Verre||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Verre||
@@ -188,7 +187,7 @@ Sans objet
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Verre et lieu de collecte|`'<img src ="https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' || (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {model} ) || '" alt="" width="70%">'`| 
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur Verre||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur Verre||
 |date_maj   |||Mis à jour le||Fiche d'information Conteneur Verre||
@@ -234,7 +233,8 @@ Sans objet
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' || (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {model} ) || 
+'" alt="" width="70%">'`|
 | affiche_result |x|x||Formate le contenu affiché dans le menu Résultat|Résultat de recherche|Conteneur  n° {idcont}|
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur TLC||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur TLC||
@@ -272,7 +272,9 @@ Sans objet
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="' || (SELECT urlfic FROM m_dechet.lt_pav_modele m WHERE m.code = {model})|| '" alt="" width="50%">'`|
+| affiche_model |x|x|Photo (modèle)|Récupère la photo du modèle de conteneur|Fiche d'information Conteneur TLC et lieu de collecte|`'<img src ="https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' || (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {model} ) || 
+'" alt="" width="70%">'`|
+| affiche_result |x|x|||TLC par référence (2020), TLC par gestionnaire|Conteneur TLC n° {idcont}|
 |pos     |||Position|Liste de domaine  valeur_pav_contpos|Fiche d'information Conteneur TLC||
 |date_effet  |||Prise en compte dans le plan interactif||Fiche d'information Conteneur TLC||
 |date_maj   |||Mis à jour le||Fiche d'information Conteneur TLC||
@@ -316,28 +318,28 @@ Sans objet
    * particularité(s) : vue géographique générant le trait sur la carte entre un lieu supprimé et déplacé
  
    
-## Table : `an_dec_pav_doc_media`
+## Table : `an_dec_pav_model_media`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|date_eve |||Date||Recherche Mouvement enregistré sur les PAV Verre||
-|lieu |||Lieu||Recherche Mouvement enregistré sur les PAV Verre||
-|nom_eve |||Evènement||Recherche Mouvement enregistré sur les PAV Verre||
-|obs_eve |||Commentaire(s)||Recherche Mouvement enregistré sur les PAV Verre||
+|gid  |||Identifiant||||
+|date_sai  |||Date d'intégration du document||Fiche d'information Conteneur à verre ou textile||
+|id  |||Identifiant du PAV||Fiche d'information Conteneur à verre ou textile||
+|media    |||Champ Média de GEO||||
+|miniature    |||Champ miniature de GEO||Fiche d'information Conteneur à verre ou textile||
+|n_fichier     |||Nom du fichier||Fiche d'information Conteneur à verre ou textile||
+|op_sai      |||Libellé de l'opérateur ayant intégrer le document||Fiche d'information Conteneur à verre ou textile||
+|t_fichier       |||Type de média dans GEO||Fiche d'information Conteneur à verre ou textile||
 
    * filtres : aucun
-   * relations :
-
-|Géotables ou Tables| Champs de jointure | Type |
-|:---|:---|:---|
-|geo_dec_pav_lieu |idlieu| 0..1 (égal) |
-   
+   * relations : aucune
    * particularité(s) : aucune
    
 ## Table : `an_dec_pav_doc_media`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
+|gid  |||Identifiant||||
 |d_photo |||Date de la prise de vue||Fiche d'information Conteneur à verre ou textile||
 |date_sai  |||Date d'intégration du document||Fiche d'information Conteneur à verre ou textile||
 |id  |||Identifiant du PAV||Fiche d'information Conteneur à verre ou textile||
@@ -352,7 +354,25 @@ Sans objet
    * filtres : aucun
    * relations : aucune
    * particularité(s) : aucune
+
+## Table : `lt_pav_modele`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_blanc |x||||Résultat requête liste des modèles||
+|affiche_model |x|'<center><b>' || {valeur} || '</b><br>' CASE WHEN (SELECT COUNT(*) FROM  m_dechet.an_dec_pav_model_media WHERE id = {code}) = 0 THEN
+'Aucune photographie du modèle associé' ELSE '<img src="http://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {code}) '" alt ="">' END '</center>'|||Résultat requête liste des modèles||
+
+   * filtres : aucun
+   * relations :
    
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|an_dec_pav_model_media |code| 0..n (égal) |   
+
+   * particularité(s) : cette table de liste de valeurs a une jointure permettant de récupérer la photo du modèle. Cette liaison et la réalisation d'un média permet au service déchet d'être autonome pour la gestion de leur modèle de PAV
+   
+
 ## Table : `xapps_an_dec_pav_eve_tab`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
