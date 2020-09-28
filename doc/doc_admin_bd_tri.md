@@ -458,12 +458,12 @@ Valeurs possibles :
 |4|SULO-CITY BULLE 4m3|4|Plastique|sulocitybulle4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png|
 |5|UTPM 3m3|3|Plastique|utpm3.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png|
 |6|MULTIPACK ENTERRE PO - 4m3|4|Acier|tamacoenterrepo4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png|
-|7|EcoNox Classique (rouleau simple)|3|Acier|.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tlc_classique_rouleau_1.jpg|
-|8|EcoNox Classique (rouleau double)|6|Acier|.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tlc_classique_rouleau_2.jpg|
-|9|EcoNox Bunker (mini)|2|Acier|.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker_mini.jpg|
-|10|EcoNox Bunker (Demi)|4|Acier|.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker_demi.jpg|
-|11|EcoNox Bunker (Bunker)|8|Acier|.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker.png|
-|12|EcoNox Eco ZR|2,2|Acier|.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/eco_zr.jpg|
+|7|EcoNox Classique (rouleau simple)|3|Acier|tlc_classique_rouleau_1.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tlc_classique_rouleau_1.jpg|
+|8|EcoNox Classique (rouleau double)|6|Acier|tlc_classique_rouleau_2.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tlc_classique_rouleau_2.jpg|
+|9|EcoNox Bunker (mini)|2|Acier|bunker_mini.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker_mini.jpg|
+|10|EcoNox Bunker (Demi)|4|Acier|bunker_demi.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker_demi.jpg|
+|11|EcoNox Bunker (Bunker)|8|Acier|bunker.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker.png|
+|12|EcoNox Eco ZR|2,2|Acier|eco_zr.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/eco_zr.jpg|
 |99|Autre|||
 
 ---
