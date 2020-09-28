@@ -439,6 +439,8 @@ Valeurs possibles :
 |:---|:---|:---|:---|    
 |code|code du modèle|character varying(2)| |
 |valeur|Libellé du conteneur|character varying(50)| |
+|volume|Volume en mètre cube|integer| |
+|matériau|Matériau principal du conteneur|character varying(20)| |
 |nomfic|Nom du fichier contenant la photo du modèle|character varying(254)| |
 |urlfic|Lien vers la photographie du modèle|character varying(254)| |
 
@@ -447,15 +449,15 @@ Particularité(s) à noter : aucune
 
 Valeurs possibles :
 
-|code | valeur | nomfic | urlfic |
-|:---|:---|:---|:---|
-|00|Non renseigné|non_disponible.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg|
-|01|TEMACO - MULTIPACK C600 4m3|tamaco6004.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png|
-|02|COLLECTAL-VILLIGERS City Line 4m3|villigerscityline4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png|
-|03|TEMACO - PO MULTIPACK C600 4m3|tamacopo6003.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png|
-|04|SULO-CITY BULLE 4m3|sulocitybulle4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png|
-|05|UTPM 3m3|utpm3.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png|
-|06|MULTIPACK ENTERRE PO - 4m3|tamacoenterrepo4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png|
+|code | valeur | volume |matériau | nomfic | urlfic |
+|:---|:---|:---|:---|:---|:---|
+|00|Non renseigné|||non_disponible.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg|
+|01|TEMACO - MULTIPACK C600 4m3|4|Acier|tamaco6004.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png|
+|02|COLLECTAL-VILLIGERS City Line 4m3|4|Acier|villigerscityline4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png|
+|03|TEMACO - PO MULTIPACK C600 4m3|4|Acier|tamacopo6003.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png|
+|04|SULO-CITY BULLE 4m3|4|Plastique|sulocitybulle4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png|
+|05|UTPM 3m3|3|Plastique|utpm3.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png|
+|06|MULTIPACK ENTERRE PO - 4m3|4|Acier|tamacoenterrepo4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png|
 |99|Autre|||
 
 ---
