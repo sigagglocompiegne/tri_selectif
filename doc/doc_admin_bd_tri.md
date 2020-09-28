@@ -141,8 +141,7 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|  
-|idcont|Identifiant unique du conteneur Verre
-( valeur par défaut de la clé à restaurer après migration finale des données, (nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)) )|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
+|idcont|Identifiant unique du conteneur Verre (valeur par défaut de la clé à restaurer après migration finale des données, (nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)) )|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
 |idlieu|Identifiant du lieu de collecte|integer| |
 |idpresta|Identifiant du conteneur du prestataire|character varying(10)| |
 |eve|Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)|character varying(2)| |
