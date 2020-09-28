@@ -99,10 +99,8 @@ ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu
 ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_srcgeom_fkey;
 ALTER TABLE m_dechet.geo_dec_pav_lieu DROP CONSTRAINT IF EXISTS geo_dec_pav_lieu_statut_fkey;
 
-ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_crochet_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_etatsign_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_eve_fkey;
-ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_mat_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_model_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_modepreh_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_peinture_fkey;
@@ -113,15 +111,12 @@ ALTER TABLE m_dechet.an_dec_pav_cont DROP CONSTRAINT IF EXISTS an_dec_pav_cont_t
 
 ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_eve_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_gest_fkey;
-ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_mat_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_model_fkey;
 ALTER TABLE m_dechet.an_dec_pav_cont_tlc DROP CONSTRAINT IF EXISTS an_dec_pav_cont_tlc_pos_fkey;
 
 
 -- domaine de valeur
-DROP TABLE IF EXISTS m_dechet.lt_pav_contmat;
 DROP TABLE IF EXISTS m_dechet.lt_pav_contpos;
-DROP TABLE IF EXISTS m_dechet.lt_pav_crochet;
 DROP TABLE IF EXISTS m_dechet.lt_pav_envimplan;
 DROP TABLE IF EXISTS m_dechet.lt_pav_envsitu;
 DROP TABLE IF EXISTS m_dechet.lt_pav_envtype;
@@ -139,37 +134,6 @@ DROP TABLE IF EXISTS m_dechet.lt_pav_cttype;
 DROP TABLE IF EXISTS m_dechet.lt_pav_eve;
 DROP TABLE IF EXISTS m_dechet.lt_pav_modele;
 
--- ################################################################# Domaine valeur - lt_pav_contmat  ###############################################
-
--- Table: m_dechet.lt_pav_contmat
-
--- DROP TABLE m_dechet.lt_pav_contmat;
-
-CREATE TABLE m_dechet.lt_pav_contmat
-(
-  cont_mat character varying(2) NOT NULL, -- Code matériaux constituant le conteneur
-  cont_mat_lib character varying(30), -- Libellé des matériaux constituant le conteneur
-  CONSTRAINT lt_pav_contmat_pkkey PRIMARY KEY (cont_mat) -- Clé primaire de la table lt_pav_contmat
-)
-WITH (
-  OIDS=FALSE
-);
-COMMENT ON TABLE m_dechet.lt_pav_contmat
-  IS 'Liste de valeurs des codes matériaux constituant le conteneur';
-COMMENT ON COLUMN m_dechet.lt_pav_contmat.cont_mat IS 'Code matériaux constituant le conteneur';
-COMMENT ON COLUMN m_dechet.lt_pav_contmat.cont_mat_lib IS 'Libellé des matériaux constituant le conteneur';
-
-COMMENT ON CONSTRAINT lt_pav_contmat_pkkey ON m_dechet.lt_pav_contmat IS 'Clé primaire de la table lt_pav_contmat';
-
-INSERT INTO m_dechet.lt_pav_contmat(
-            cont_mat, cont_mat_lib)
-    VALUES
-    ('00','Non renseigné'),
-    ('10','Métal'),
-    ('20','Plastique'),
-    ('21','Plastique + bois'), 
-    ('30','Résine'), 
-    ('40','Bois');
     
     
 -- ################################################################# Domaine valeur - lt_pav_contpos  ###############################################
@@ -202,35 +166,6 @@ INSERT INTO m_dechet.lt_pav_contpos(
     ('20','Enterré'),
     ('30','Semi-enterré'); 
     
--- ################################################################# Domaine valeur - lt_pav_crochet  ###############################################
-
--- Table: m_dechet.lt_pav_crochet
-
--- DROP TABLE m_dechet.lt_pav_crochet;
-
-CREATE TABLE m_dechet.lt_pav_crochet
-(
-  code character varying(2) NOT NULL, -- code de l'état du crochet
-  valeur character varying(30), -- libellé de l'état du crochet
-  CONSTRAINT lt_pav_crochet_pkkey PRIMARY KEY (code) -- Clé primaire de la table lt_pav_crochet
-)
-WITH (
-  OIDS=FALSE
-);
-
-COMMENT ON TABLE m_dechet.lt_pav_crochet
-  IS 'Liste de valeurs des codes de l''état du crochet ';
-COMMENT ON COLUMN m_dechet.lt_pav_crochet.code IS 'code de l''état du crochet ';
-COMMENT ON COLUMN m_dechet.lt_pav_crochet.valeur IS 'libellé de l''état du crochet ';
-
-COMMENT ON CONSTRAINT lt_pav_crochet_pkkey ON m_dechet.lt_pav_crochet IS 'Clé primaire de la table lt_pav_crochet';
-
-INSERT INTO m_dechet.lt_pav_crochet(
-            code, valeur)
-    VALUES
-    ('00','Non renseigné'),
-    ('10','RAS'),
-    ('20','Tordu');
 
 -- ################################################################# Domaine valeur - lt_pav_cttype  ###############################################
 
@@ -474,6 +409,8 @@ CREATE TABLE m_dechet.lt_pav_modele
 (
     code character varying(2) COLLATE pg_catalog."default" NOT NULL,
     valeur character varying(50) COLLATE pg_catalog."default",
+    volume integer,
+    materiau character varying(20),
     nomfic character varying(254) COLLATE pg_catalog."default",
     urlfic character varying(254) COLLATE pg_catalog."default",
     CONSTRAINT lt_pav_modele_pkkey PRIMARY KEY (code)
@@ -501,14 +438,14 @@ COMMENT ON COLUMN m_dechet.lt_pav_modele.urlfic
 INSERT INTO m_dechet.lt_pav_modele(
             code, valeur,nomfic,urlfic)
     VALUES
-    ('00','Non renseigné','non_disponible.jpg','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg'),
-    ('01','TEMACO - MULTIPACK C600 4m3','tamaco6004.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png'),
-    ('02','COLLECTAL-VILLIGERS City Line 4m3','villigerscityline4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png'), 
-    ('03','TEMACO - PO MULTIPACK C600 4m3','tamacopo6003.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png'),
-    ('04','SULO-CITY BULLE 4m3','sulocitybulle4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png'),
-    ('05','UTPM 3m3','utpm3.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png'),
-    ('06','MULTIPACK ENTERRE PO - 4m3','tamacoenterrepo4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png'),
-    ('99','Autre','','');
+    ('00','Non renseigné',null,'','non_disponible.jpg','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg'),
+    ('01','TEMACO - MULTIPACK C600 4m3',4,'','tamaco6004.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png'),
+    ('02','COLLECTAL-VILLIGERS City Line 4m3',4,'','villigerscityline4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png'), 
+    ('03','TEMACO - PO MULTIPACK C600 4m3',4,'','tamacopo6003.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png'),
+    ('04','SULO-CITY BULLE 4m3',4,'','sulocitybulle4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png'),
+    ('05','UTPM 3m3',3,'','utpm3.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png'),
+    ('06','MULTIPACK ENTERRE PO - 4m3',4,'','tamacoenterrepo4.png','https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png'),
+    ('99','Autre',null,'','','');
     
 -- ################################################################# Domaine valeur - lt_pav_modepreh  ###############################################
 
@@ -798,7 +735,6 @@ CREATE TABLE m_dechet.geo_dec_pav_lieu
     env_implan character varying(2) COLLATE pg_catalog."default",
     env_situ character varying(2) COLLATE pg_catalog."default",
     prox_corb boolean,
-    opt_pav integer,
     ame_acces boolean,
     nat_pb character varying(2) COLLATE pg_catalog."default",
     nat_pb_99 character varying(254) COLLATE pg_catalog."default",
@@ -814,7 +750,6 @@ CREATE TABLE m_dechet.geo_dec_pav_lieu
     op_sai character varying(80) COLLATE pg_catalog."default",
     observ character varying(500) COLLATE pg_catalog."default",
     geom geometry(Point,2154),
-    hab_pav integer,
     idcontrat character varying(2) COLLATE pg_catalog."default",
     CONSTRAINT geo_dec_pav_lieu_pkey PRIMARY KEY (idlieu),
     CONSTRAINT geo_dec_pav_lieu_contrat_fkey FOREIGN KEY (idcontrat)
@@ -1048,16 +983,13 @@ CREATE TABLE m_dechet.an_dec_pav_cont
     idpresta character varying(10) COLLATE pg_catalog."default",
     eve character varying(2) COLLATE pg_catalog."default",
     model character varying(2) COLLATE pg_catalog."default",
-    mat character varying(2) COLLATE pg_catalog."default",
     pos character varying(2) COLLATE pg_catalog."default",
     date_sai timestamp without time zone,
     date_maj timestamp without time zone,
     date_pos timestamp without time zone,
     date_net timestamp without time zone,
     date_effet timestamp without time zone,
-    volume integer,
     mode_preh character varying(2) COLLATE pg_catalog."default",
-    crochet character varying(2) COLLATE pg_catalog."default",
     opercules boolean,
     tags boolean,
     peinture character varying(2) COLLATE pg_catalog."default",
@@ -1072,20 +1004,12 @@ CREATE TABLE m_dechet.an_dec_pav_cont
     date_eve timestamp without time zone,
     obs_eve character varying(500) COLLATE pg_catalog."default",
     CONSTRAINT an_dec_pav_cont_pkey PRIMARY KEY (idcont),
-    CONSTRAINT an_dec_pav_cont_crochet_fkey FOREIGN KEY (crochet)
-        REFERENCES m_dechet.lt_pav_crochet (crochet) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
     CONSTRAINT an_dec_pav_cont_etatsign_fkey FOREIGN KEY (etat_sign)
         REFERENCES m_dechet.lt_pav_etatsign (etat_sign) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT an_dec_pav_cont_eve_fkey FOREIGN KEY (eve)
         REFERENCES m_dechet.lt_pav_eve (code) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT an_dec_pav_cont_mat_fkey FOREIGN KEY (mat)
-        REFERENCES m_dechet.lt_pav_contmat (cont_mat) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT an_dec_pav_cont_model_fkey FOREIGN KEY (model)
@@ -1141,9 +1065,6 @@ COMMENT ON COLUMN m_dechet.an_dec_pav_cont.eve
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont.model
     IS 'Modèle du conteneur Verre (liste de valeurs lt_pav_modele)';
 
-COMMENT ON COLUMN m_dechet.an_dec_pav_cont.mat
-    IS 'Matériau constituant le conteneur Verre (liste de valeurs lt_pav_mat)';
-
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont.pos
     IS 'Position du conteneur Verre (liste de valeurs lt_pav_pos)';
 
@@ -1162,14 +1083,8 @@ COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_net
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont.date_effet
     IS 'Date de prise en compte des données dans le plan interactif Grand Public';
 
-COMMENT ON COLUMN m_dechet.an_dec_pav_cont.volume
-    IS 'Volume en m3 du conteneur à Verre';
-
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont.mode_preh
     IS 'Mode de préhension du conteneur Verre';
-
-COMMENT ON COLUMN m_dechet.an_dec_pav_cont.crochet
-    IS 'Présence d''un crochet sur le conteneur Verre';
 
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont.opercules
     IS 'Présence d''opercules sur le conteneur Verre';
@@ -1253,7 +1168,6 @@ CREATE TABLE m_dechet.an_dec_pav_cont_tlc
     model character varying(2) COLLATE pg_catalog."default",
     nom_entrep character varying(2) COLLATE pg_catalog."default",
     nom_entrep_99 character varying(80) COLLATE pg_catalog."default",
-    mat character varying(2) COLLATE pg_catalog."default",
     pos character varying(2) COLLATE pg_catalog."default",
     date_sai timestamp without time zone,
     date_maj timestamp without time zone,
@@ -1309,9 +1223,6 @@ COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.nom_entrep
 
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.nom_entrep_99
     IS 'Autre entreprise gestionnaire si non présente das nom_entrep';
-
-COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.mat
-    IS 'Matériau composant le conteneur TLC (liste de valeurs lt_pav_mat)';
 
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont_tlc.pos
     IS 'Position du conteneur TLC (liste de valeurs lt_pav_pos)';
