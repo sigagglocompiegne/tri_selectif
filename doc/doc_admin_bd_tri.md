@@ -180,8 +180,7 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---| 
-|idcont|Identifiant unique du conteneur TLC
-(nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass) )|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
+|idcont|Identifiant unique du conteneur TLC|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
 |idlieu|Identifiant du lieu de collecte|integer| |
 |eve|Evènement intervenu sur le conteneur TLC (liste de valeurs lt_pav_eve)|character varying(2)| |
 |model|Modèle du conteneur (liste de valeurs lt_pav_modele)|integer| |
