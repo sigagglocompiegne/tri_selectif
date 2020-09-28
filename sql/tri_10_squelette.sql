@@ -735,6 +735,7 @@ CREATE TABLE m_dechet.geo_dec_pav_lieu
     env_implan character varying(2) COLLATE pg_catalog."default",
     env_situ character varying(2) COLLATE pg_catalog."default",
     prox_corb boolean,
+    opt_pav integer,
     ame_acces boolean,
     nat_pb character varying(2) COLLATE pg_catalog."default",
     nat_pb_99 character varying(254) COLLATE pg_catalog."default",
@@ -835,6 +836,9 @@ COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.nb_cont
 
 COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.prop_abor
     IS 'Propreté aux abords du lieu (liste de valeurs lt_pav_proprete)';
+    
+COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.opt_pav
+    IS 'nombre de PAV manquant ou excédents par rapport aux préconisation éco-emballages';
 
 COMMENT ON COLUMN m_dechet.geo_dec_pav_lieu.env_type
     IS 'Type d''environnement autour du lieu (liste de valeurs lt_pav_envtype)';
