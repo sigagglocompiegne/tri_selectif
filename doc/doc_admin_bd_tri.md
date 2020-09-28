@@ -146,7 +146,7 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |idlieu|Identifiant du lieu de collecte|integer| |
 |idpresta|Identifiant du conteneur du prestataire|character varying(10)| |
 |eve|Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)|character varying(2)| |
-|model|Modèle du conteneur Verre (liste de valeurs lt_pav_modele)|character varying(2)| |
+|model|Modèle du conteneur Verre (liste de valeurs lt_pav_modele)|integer| |
 |pos|Position du conteneur Verre (liste de valeurs lt_pav_pos)|character varying(2)| |
 |date_sai|Date de saisie de la donnée|timestamp without time zone| |
 |date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
@@ -185,7 +185,7 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 (nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass) )|integer|nextval('m_dechet.an_dec_pav_cont_idcont_seq'::regclass)|
 |idlieu|Identifiant du lieu de collecte|integer| |
 |eve|Evènement intervenu sur le conteneur TLC (liste de valeurs lt_pav_eve)|character varying(2)| |
-|model|Modèle du conteneur (liste de valeurs lt_pav_modele)|character varying(2)| |
+|model|Modèle du conteneur (liste de valeurs lt_pav_modele)|integer| |
 |nom_entrep|Nom de l'entreprise gestionnaire du conteneur (liste de valeurs lt_pav_gest)|character varying(2)| |
 |nom_entrep_99|Autre entreprise gestionnaire si non présente das nom_entrep|character varying(80)| |
 |pos|Position du conteneur TLC (liste de valeurs lt_pav_pos)|character varying(2)| |
@@ -223,7 +223,23 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 
 * triggers :
 
-  * `t_t1_an_dec_pav_doc_media_date_sai` : Intégration de la date d'intégration du document
+* `t_t1_an_dec_pav_doc_media_date_sai` : Intégration de la date d'intégration du document
+  
+`an_dec_pav_model_media` : table attributaire gérant les photos des modèles de PAV Verre ou TLC.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---| 
+|id|Identifiant du PAV|integer| |
+|media|Champ Média de GEO|text| |
+|miniature|Champ miniature de GEO|bytea| |
+|n_fichier|Nom du fichier|text| |
+|t_fichier|Type de média dans GEO|text| |
+|op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
+|date_sai|Date d'intégration du document|timestamp without time zone| |
+
+* triggers :
+
+  * `t_t1_an_dec_pav_model_media_date_sai` : Intégration de la date d'intégration du document
   
 ### classes d'objets applicatives de gestion :
 
@@ -437,32 +453,30 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|    
-|code|code du modèle|integer| |
+|code|code du modèle|integer|nextval('m_dechet.lt_pav_model_code_seq'::regclass)|
 |valeur|Libellé du conteneur|character varying(50)| |
 |volume|Volume en mètre cube|integer| |
 |matériau|Matériau principal du conteneur|character varying(20)| |
-|nomfic|Nom du fichier contenant la photo du modèle|character varying(254)| |
-|urlfic|Lien vers la photographie du modèle|character varying(254)| |
 
 
 Particularité(s) à noter : aucune
 
 Valeurs possibles :
 
-|code | valeur | volume |matériau | nomfic | urlfic |
-|:---|:---|:---|:---|:---|:---|
-|0|Non renseigné|||non_disponible.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/non_disponible.jpg|
-|1|TEMACO - MULTIPACK C600 4m3|4|Acier|tamaco6004.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamaco6004.png|
-|2|COLLECTAL-VILLIGERS City Line 4m3|4|Acier|villigerscityline4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/villigerscityline4.png|
-|3|TEMACO - PO MULTIPACK C600 4m3|4|Acier|tamacopo6003.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacopo6003.png|
-|4|SULO-CITY BULLE 4m3|4|Plastique|sulocitybulle4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/sulocitybulle4.png|
-|5|UTPM 3m3|3|Plastique|utpm3.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/utpm3.png|
-|6|MULTIPACK ENTERRE PO - 4m3|4|Acier|tamacoenterrepo4.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tamacoenterrepo4.png|
-|7|EcoNox Classique (rouleau simple)|3|Acier|tlc_classique_rouleau_1.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tlc_classique_rouleau_1.jpg|
-|8|EcoNox Classique (rouleau double)|6|Acier|tlc_classique_rouleau_2.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/tlc_classique_rouleau_2.jpg|
-|9|EcoNox Bunker (mini)|2|Acier|bunker_mini.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker_mini.jpg|
-|10|EcoNox Bunker (Demi)|4|Acier|bunker_demi.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker_demi.jpg|
-|11|EcoNox Bunker (Bunker)|8|Acier|bunker.png|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/bunker.png|
+|code | valeur | volume |matériau |
+|:---|:---|:---|:---|
+|0|Non renseigné|||
+|1|TEMACO - MULTIPACK C600 4m3|4|Acier|
+|2|COLLECTAL-VILLIGERS City Line 4m3|4|Acier|
+|3|TEMACO - PO MULTIPACK C600 4m3|4|Acier|
+|4|SULO-CITY BULLE 4m3|4|Plastique|
+|5|UTPM 3m3|3|Plastique|
+|6|MULTIPACK ENTERRE PO - 4m3|4|Acier|
+|7|EcoNox Classique (rouleau simple)|3|Acier|
+|8|EcoNox Classique (rouleau double)|6|Acier|
+|9|EcoNox Bunker (mini)|2|Acier|
+|10|EcoNox Bunker (Demi)|4|Acier|
+|11|EcoNox Bunker (Bunker)|8|Acier|
 |12|EcoNox Eco ZR|2,2|Acier|eco_zr.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/eco_zr.jpg|
 |99|Autre|||
 
