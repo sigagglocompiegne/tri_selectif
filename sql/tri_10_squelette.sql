@@ -440,7 +440,12 @@ CREATE TABLE m_dechet.lt_pav_modele
     volume integer,
     materiau character varying(20),
     cttype character varying(2),
-    CONSTRAINT lt_pav_modele_pkkey PRIMARY KEY (code)
+    CONSTRAINT lt_pav_modele_pkkey PRIMARY KEY (code),
+    ALTER TABLE m_dechet.lt_pav_modele
+    ADD CONSTRAINT lt_pav_modele_cttype_fkey FOREIGN KEY (cttype)
+    REFERENCES m_dechet.lt_pav_cttype (code) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
