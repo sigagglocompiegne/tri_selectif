@@ -458,7 +458,7 @@ Valeurs possibles :
 |cttype|Type de conteneur|character varying(2)| |
 
 
-Particularité(s) à noter : aucune
+Particularité(s) à noter : Clé étrangère avec la table `lt_pav_cttype` sur l'atttribut `cttype`
 
 Valeurs possibles :
 
