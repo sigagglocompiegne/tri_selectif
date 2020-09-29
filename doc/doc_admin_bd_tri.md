@@ -450,33 +450,34 @@ Valeurs possibles :
 `lt_pav_modele` : Liste de valeurs des modèles de conteneur
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
-|:---|:---|:---|:---|    
+|:---|:---|:---|:---|
 |code|code du modèle|integer|nextval('m_dechet.lt_pav_model_code_seq'::regclass)|
 |valeur|Libellé du conteneur|character varying(50)| |
 |volume|Volume en mètre cube|integer| |
 |matériau|Matériau principal du conteneur|character varying(20)| |
+|cttype|Type de conteneur|character varying(2)| |
 
 
 Particularité(s) à noter : aucune
 
 Valeurs possibles :
 
-|code | valeur | volume |matériau |
-|:---|:---|:---|:---|
-|0|Non renseigné|||
-|1|TEMACO - MULTIPACK C600 4m3|4|Acier|
-|2|COLLECTAL-VILLIGERS City Line 4m3|4|Acier|
-|3|TEMACO - PO MULTIPACK C600 4m3|4|Acier|
-|4|SULO-CITY BULLE 4m3|4|Plastique|
-|5|UTPM 3m3|3|Plastique|
-|6|MULTIPACK ENTERRE PO - 4m3|4|Acier|
-|7|EcoNox Classique (rouleau simple)|3|Acier|
-|8|EcoNox Classique (rouleau double)|6|Acier|
-|9|EcoNox Bunker (mini)|2|Acier|
-|10|EcoNox Bunker (Demi)|4|Acier|
-|11|EcoNox Bunker (Bunker)|8|Acier|
-|12|EcoNox Eco ZR|2,2|Acier|eco_zr.jpg|https://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/eco_zr.jpg|
-|99|Autre|||
+|code | valeur | volume |matériau |Type |
+|:---|:---|:---|:---|:---|
+|0|Non renseigné|||00|
+|1|TEMACO - MULTIPACK C600 4m3|4|Acier|10|
+|2|COLLECTAL-VILLIGERS City Line 4m3|4|Acier|10|
+|3|TEMACO - PO MULTIPACK C600 4m3|4|Acier|10|
+|4|SULO-CITY BULLE 4m3|4|Plastique|10|
+|5|UTPM 3m3|3|Plastique|10|
+|6|MULTIPACK ENTERRE PO - 4m3|4|Acier|10|
+|7|EcoNox Classique (rouleau simple)|3|Acier|20|
+|8|EcoNox Classique (rouleau double)|6|Acier|20|
+|9|EcoNox Bunker (mini)|2|Acier|20|
+|10|EcoNox Bunker (Demi)|4|Acier|20|
+|11|EcoNox Bunker (Bunker)|8|Acier|20|
+|12|EcoNox Eco ZR|2,2|Acier|20|
+|99|Autre|||00|
 
 ---
 
