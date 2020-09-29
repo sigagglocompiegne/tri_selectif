@@ -132,6 +132,7 @@ Sans objet
 |:---|:---|:---|:---|:---|
 |Erreur idparent|update|new.Statut = 20 et old.idparent >= 14 et new.statut <> old.statut|Annule la saisie|Boîte de dialogue : L'identifiant du lieu précédent est à indiquer sur le nouveau lieu de collecte créé.| 
 |Pas de suppression possible|delete||Annule la saisie|Boîte de dialogue : Vous ne pouvez pas supprimer de lieux de collecte. Si celui-ci n'existe plus, vous devez le rendre inactif dans l'attribut état. Si il est déplacé, vous devez le rendre inactif et créer un nouveau lieu en indiquant l'identifiant de l'ancien lieu dans la partie préconisation.| 
+|Vérif Service SIG|insert, update|ID parent saisi|Envoi Email|Envoi un email au service SIG pour vérifier si la saisie de l'identifiant de l'ancien lieu de collecte est correct| 
 
    * particularité(s) : aucune
 
@@ -154,7 +155,7 @@ Sans objet
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur Verre||
 |idpresta         |||Ref prestataire||Fiche d'information Conteneur Verre||
 |mode_preh         |||Mode de préhension|Liste de domaine  valeur_pav_modepreh|Fiche d'information Conteneur Verre||
-|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur Verre||
+|model         |||Modèle|Liste de domaine  lt_pav_modele (Verre)|Fiche d'information Conteneur Verre||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur Verre||
 |observ   |||Observation(s)||Fiche d'information Conteneur Verre||
 |op_sai             |||Saisi par||Fiche d'information Conteneur Verre||
@@ -202,7 +203,7 @@ Sans objet
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur Verre||
 |idpresta         |||Ref prestataire||Fiche d'information Conteneur Verre||
 |mode_preh         |||Mode de préhension|Liste de domaine  valeur_pav_modepreh|Fiche d'information Conteneur Verre||
-|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur Verre||
+|model         |||Modèle|Liste de domaine  lt_pav_modele (Verre)|Fiche d'information Conteneur Verre||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur Verre||
 |observ   |||Observation(s)||Fiche d'information Conteneur Verre||
 |op_sai             |||Saisi par||Fiche d'information Conteneur Verre||
@@ -244,7 +245,7 @@ Sans objet
 |eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur TLC||
 |idcont         |||Identifiant du conteneur||Fiche d'information Conteneur TLC||
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur VerTLCre||
-|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur TLC||
+|model         |||Modèle|Liste de domaine  lt_pav_modele (TLC)|Fiche d'information Conteneur TLC||
 |nom_entrep         |||Gestionnaire|Liste de domaine  valeur_pav_gest|Fiche d'information Conteneur TLC||
 |nom_entrep_99         |||Autre gestionnaire||Fiche d'information Conteneur TLC||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur TLC||
@@ -282,7 +283,7 @@ Sans objet
 |eve         |||Evènement|Liste de domaine  lt_pav_eve|Fiche d'information Conteneur TLC||
 |idcont         |||Identifiant du conteneur||Fiche d'information Conteneur TLC||
 |idlieu         |||Identifiant du lieu de collecte||Fiche d'information Conteneur VerTLCre||
-|model         |||Modèle|Liste de domaine  lt_pav_modele|Fiche d'information Conteneur TLC||
+|model         |||Modèle|Liste de domaine  lt_pav_modele (TLC)|Fiche d'information Conteneur TLC||
 |nom_entrep         |||Gestionnaire|Liste de domaine  valeur_pav_gest|Fiche d'information Conteneur TLC||
 |nom_entrep_99         |||Autre gestionnaire||Fiche d'information Conteneur TLC||
 |obs_eve         |||Commentaire(s)||Fiche d'information Conteneur TLC||
@@ -369,8 +370,51 @@ Sans objet
 |:---|:---|:---|
 |an_dec_pav_model_media |code| 0..n (égal) |   
 
-   * particularité(s) : cette table de liste de valeurs a une jointure permettant de récupérer la photo du modèle. Cette liaison et la réalisation d'un média permet au service déchet d'être autonome pour la gestion de leur modèle de PAV
+   * particularité(s) : cette table de liste de valeurs a une jointure permettant de récupérer la photo du modèle. Cette liaison et la réalisation d'un média permet au service déchet d'être autonome pour la gestion de leur modèle de PAV. Cette table a été rechargée 2 fois pour gérer le filtrage des types Verre et TLV et permettre l'ajout de modèles par type (ci ci-après)
    
+## Table : `lt_pav_modele` (lt_pav_modele (verre))
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_blanc |x||||Résultat requête liste des modèles||
+|affiche_model |x|'<center><b>' || {valeur} || '</b><br>' CASE WHEN (SELECT COUNT(*) FROM  m_dechet.an_dec_pav_model_media WHERE id = {code}) = 0 THEN
+'Aucune photographie du modèle associé' ELSE '<img src="http://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {code}) '" alt ="">' END '</center>'|||Résultat requête liste des modèles||
+
+   * filtres : 
+
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:---:|:---:|:---:|:---|:---|
+|Modèle PAV Verre|cttype|x|alphanumérique|est égale à des valeurs par défaut|10,00|Permet d'afficher uniquement les modèles de PAV de type Verre|
+   
+   * relations :
+   
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|an_dec_pav_model_media |code| 0..n (égal) |   
+
+   * particularité(s) : un déclencheur par envoi d'email a été créé à l'ajout d'un modèle pour vérification apr le service SIG
+
+## Table : `lt_pav_modele` (lt_pav_modele (TLC))
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_blanc |x||||Résultat requête liste des modèles||
+|affiche_model |x|'<center><b>' || {valeur} || '</b><br>' CASE WHEN (SELECT COUNT(*) FROM  m_dechet.an_dec_pav_model_media WHERE id = {code}) = 0 THEN
+'Aucune photographie du modèle associé' ELSE '<img src="http://geo.compiegnois.fr/documents/metiers/env/dechet/model_pav/' (SELECT n_fichier FROM m_dechet.an_dec_pav_model_media WHERE id = {code}) '" alt ="">' END '</center>'|||Résultat requête liste des modèles||
+
+   * filtres : 
+
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:---:|:---:|:---:|:---|:---|
+|Modèle PAV TLV|cttype|x|alphanumérique|est égale à des valeurs par défaut|20,00|Permet d'afficher uniquement les modèles de PAV de type TLC|
+   
+   * relations :
+   
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|an_dec_pav_model_media |code| 0..n (égal) |   
+
+   * particularité(s) : un déclencheur par envoi d'email a été créé à l'ajout d'un modèle pour vérification apr le service SIG
 
 ## Table : `xapps_an_dec_pav_eve_tab`
 
@@ -630,31 +674,6 @@ Source : `geo_dec_pav_lieu`
 
  * Fiches d'information active : Lieu de collecte
 
-### Recherche : `Lieu de collecte à moins de 300 mètres` (en cours de réalisation)
-
-Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte disposant d'un PAV Verre à moins de 300 mètres d'une adresse.
-
-  * Configuration :
-
-Source : `xapps_geo_vmr_adresse`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-
- * Filtres :
- 
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-
-
-(1) si liste de domaine
-
- * Fiches d'information active : -
-
 
 ## Rechercher un conteneur TLC
 
@@ -757,30 +776,6 @@ Source : `geo_dec_pav_lieu`
  * Particularité(s) : la geom est celle des lieux de collecte
  
  
-### Recherche : `Lieu de collecte à moins de 500 mètres` (en cours de réalisation)
-
-Cette recherche permet à l'utilisateur de faire une recherche d'un lieu de collecte disposant d'un PAV TCL à moins de 500 mètres d'une adresse.
-
-  * Configuration :
-
-Source : `xapps_geo_vmr_adresse`
-
-|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
-|:---|:-:|:-:|:-:|:-:|:-:|
-
- * Filtres :
- 
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|Groupe de filtres par défaut|`ET`|x|
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-
-
-(1) si liste de domaine
-
- * Fiches d'information active : -
 
 ## Export des données
 
@@ -899,15 +894,15 @@ Source : `lt_pav_modele`
  
  * Particularité(s) : Tri des résultat par code
  
-### Recherche : `Nouveau modèle`
+### Recherche : `Liste des modèles`
 
-Permet à l'utilisateur d'afficher une fiche de modèle vierge permettant d'ajouter un modèle de PAV Verre ou TLC et d'y assoocier une photo.
+Permet à l'utilisateur d'afficher l'ensemble des modèles de PAV Verre ou TLC.
 
   * Configuration :
 
 Source : `lt_pav_modele`
 
- * Fiches d'information active : Modèle de PAV
+ * Fiches d'information active : Fiche du moèdle de PAV
  
  * Particularité(s) : sans objet
 
@@ -1343,6 +1338,68 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |Commentaire(s)||||Champ texte à plusieurs lignes|
 
   * Particularité : garde la fiche ouverte après la sauvegarde
+  
+## Fiche d'information : `Nouveau modèle PAV Verre`
+
+Source : `lt_pav_modele (verre)`
+
+* Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|530x650|Onglets|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Liste des modèles|Libellé du conteneur (valeur), Volume (en m3) (volume), Matériau (materiau), Type de PAV (Verre ou TLC) (cttype)|Par défaut|Vertical||||
+|Médiathèque|Photo (miniature)|Par défaut|Vertical||||
+
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Libellé du conteneur ||||par défaut|
+|Volume (en m3)||||par défaut|
+|Matériau||||par défaut|
+|Type de PAV (Verre ou TLC)||10||par défaut|
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
+  
+## Fiche d'information : `Nouveau modèle PAV Verre`
+
+Source : `lt_pav_modele (TLC)`
+
+* Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|530x650|Onglets|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Liste des modèles|Libellé du conteneur (valeur), Volume (en m3) (volume), Matériau (materiau), Type de PAV (Verre ou TLC) (cttype)|Par défaut|Vertical||||
+|Médiathèque|Photo (miniature)|Par défaut|Vertical||||
+
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Libellé du conteneur ||||par défaut|
+|Volume (en m3)||||par défaut|
+|Matériau||||par défaut|
+|Type de PAV (Verre ou TLC)||20||par défaut|
+
+  * Particularité : garde la fiche ouverte après la sauvegarde
 
 ## Analyse :
 
@@ -1449,7 +1506,8 @@ Liste des recherches : Parcelle sélectionnée (ignorer la visibilité), Lieu de
 ||Insérer ou déplacer mon lieu de collecte|
 |Gestion des modèles||
 ||Liste des modèles|
-||Nouveau modèle|
+||Nouveau modèle PAV Verre|
+||Nouveau modèle PAV TLC|
 |Recherche cadastrale||
 ||Parcelles par référence|
 ||Parcelles par adresse fiscale|
