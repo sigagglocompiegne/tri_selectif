@@ -8,6 +8,6 @@
 - Les recherches sur les PAV Verre et TLC ?
 
 **Pour les administrateurs** :
-- Comment gérer les lieux de collecte ?
+- Comment gérer les lieux de collecte et l'affectation des PAV ?
 - La gestion des modèles
 
