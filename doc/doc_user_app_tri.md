@@ -9,5 +9,5 @@
 
 **Pour les administrateurs** :
 - Comment gérer les lieux de collecte et l'affectation des PAV ?
-- La gestion des modèles
+- [La gestion des modèles](https://geo.compiegnois.fr/documents/cms/fiche_aide/dechet_gestion_modele_pav.pdf)
 
