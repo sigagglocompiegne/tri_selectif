@@ -1453,12 +1453,7 @@ WITH (
 );
 COMMENT ON TABLE m_dechet.geo_dec_secteur_enc
   IS 'Table contenant les objets sectorisant le ramassage des encombrants';
-ALTER TABLE m_dechet.geo_dec_secteur_enc
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_enc TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_enc TO edit_sig;
+
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.gid IS 'Identifiant interne';
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.insee IS 'Code Insee de la commune';
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_enc.commune IS 'Libellé de la commune';
@@ -1504,12 +1499,7 @@ CREATE TABLE m_dechet.geo_dec_secteur_om
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE m_dechet.geo_dec_secteur_om
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO sig_create;
-GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO create_sig;
-GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_om TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_dechet.geo_dec_secteur_om TO edit_sig;
+
 COMMENT ON TABLE m_dechet.geo_dec_secteur_om
   IS 'Secteur de collecte des ordures ménagères.';
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.gid IS 'Identifiant unique interne';
