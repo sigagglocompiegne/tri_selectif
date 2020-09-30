@@ -1357,23 +1357,13 @@ CREATE TABLE m_dechet.an_dec_pav_model_media
     n_fichier text COLLATE pg_catalog."default",
     t_fichier text COLLATE pg_catalog."default",
     op_sai character varying(100) COLLATE pg_catalog."default",
-    date_sai timestamp without time zone
+    date_sai timestamp without time zone,
+    CONSTRAINT an_dec_pav_model_media_pkey PRIMARY KEY (gid)
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
-
-ALTER TABLE m_dechet.an_dec_pav_model_media
-    OWNER to sig_create;
-
-GRANT SELECT ON TABLE m_dechet.an_dec_pav_model_media TO read_sig;
-
-GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO sig_create;
-
-GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.an_dec_pav_model_media TO edit_sig;
-
-GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO create_sig;
 
 COMMENT ON TABLE m_dechet.an_dec_pav_model_media
     IS 'Table gérant les photos des modèles de PAV Verre ou TLC';
