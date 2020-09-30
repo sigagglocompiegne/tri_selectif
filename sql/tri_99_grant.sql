@@ -38,6 +38,14 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA m_dechet
 
 -- #################################################################### DOMAINE DE VALEUR  ####################################################################
 
+ALTER TABLE m_dechet.lt_pav_modele
+    OWNER to sig_create;
+
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.lt_pav_modele TO edit_sig;
+GRANT ALL ON TABLE m_dechet.lt_pav_modele TO sig_create;
+GRANT ALL ON TABLE m_dechet.lt_pav_modele TO create_sig;
+GRANT SELECT ON TABLE m_dechet.lt_pav_modele TO read_sig;
+
 ALTER TABLE m_dechet.lt_pav_cttype
     OWNER to sig_create;
 
@@ -46,13 +54,6 @@ GRANT ALL ON TABLE m_dechet.lt_pav_cttype TO sig_create;
 GRANT ALL ON TABLE m_dechet.lt_pav_cttype TO create_sig;
 GRANT SELECT ON TABLE m_dechet.lt_pav_cttype TO read_sig;
 
-ALTER TABLE m_dechet.lt_pav_contmat
-    OWNER to sig_create;
-
-GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.lt_pav_contmat TO edit_sig;
-GRANT ALL ON TABLE m_dechet.lt_pav_contmat TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_contmat TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_contmat TO read_sig;
 
 ALTER TABLE m_dechet.lt_pav_contpos
     OWNER to sig_create;
@@ -61,14 +62,6 @@ GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.lt_pav_contpos TO edit_si
 GRANT ALL ON TABLE m_dechet.lt_pav_contpos TO sig_create;
 GRANT ALL ON TABLE m_dechet.lt_pav_contpos TO create_sig;
 GRANT SELECT ON TABLE m_dechet.lt_pav_contpos TO read_sig;
-
-ALTER TABLE m_dechet.lt_pav_crochet
-    OWNER to sig_create;
-
-GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.lt_pav_crochet TO edit_sig;
-GRANT ALL ON TABLE m_dechet.lt_pav_crochet TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_crochet TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_crochet TO read_sig;
 
 ALTER TABLE m_dechet.lt_pav_envimplan
     OWNER to sig_create;
@@ -121,15 +114,6 @@ GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.lt_pav_gest TO edit_sig;
 GRANT ALL ON TABLE m_dechet.lt_pav_gest TO sig_create;
 GRANT ALL ON TABLE m_dechet.lt_pav_gest TO create_sig;
 GRANT SELECT ON TABLE m_dechet.lt_pav_gest TO read_sig;
-
-ALTER TABLE m_dechet.lt_pav_modele
-    OWNER to sig_create;
-
-GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.lt_pav_modele TO edit_sig;
-GRANT ALL ON TABLE m_dechet.lt_pav_modele TO sig_create;
-GRANT ALL ON TABLE m_dechet.lt_pav_modele TO create_sig;
-GRANT SELECT ON TABLE m_dechet.lt_pav_modele TO read_sig;
-
 
 ALTER TABLE m_dechet.lt_pav_modepreh
     OWNER to sig_create;
@@ -218,6 +202,49 @@ GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO PUBLIC;
 GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO create_sig;
 GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO sig_create;
 
+ALTER SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq
+    OWNER TO sig_create;
+
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_doc_media_gid_seq TO sig_create;
+
+ALTER SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq
+    OWNER TO sig_create;
+
+COMMENT ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq
+    IS 'Séquence d''incrémentation d''un numéro automatique sur le champ gid de la table geo_dec_dechetterie';
+
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_dechetterie_gid_seq TO sig_create;
+
+ALTER SEQUENCE m_dechet.geo_dec_secteur_enc_seq
+    OWNER TO sig_create;
+
+COMMENT ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq
+    IS 'Séquence d''incrémentation d''un numéro automatique sur le champ gid de la table geo_dec_secteur_enc';
+
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_enc_seq TO sig_create;
+
+ALTER SEQUENCE m_dechet.geo_dec_secteur_om_seq
+    OWNER TO sig_create;
+
+COMMENT ON SEQUENCE m_dechet.geo_dec_secteur_om_seq
+    IS 'Séquence d''incrémentation d''un numéro automatique sur le champ gid de la table geo_dec_secteur_om';
+
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_om_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_om_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.geo_dec_secteur_om_seq TO sig_create;
+
+ALTER SEQUENCE m_dechet.lt_pav_model_code_seq
+    OWNER TO sig_create;
+        
+GRANT ALL ON SEQUENCE m_dechet.lt_pav_model_code_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.lt_pav_model_code_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.lt_pav_model_code_seq TO sig_create;
 
 -- #################################################################### TABLE  ####################################################################
 
@@ -260,6 +287,30 @@ GRANT SELECT ON TABLE m_dechet.an_dec_pav_model_media TO read_sig;
 GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO sig_create;
 GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.an_dec_pav_model_media TO edit_sig;
 GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO create_sig;
+
+ALTER TABLE m_dechet.geo_dec_secteur_enc
+    OWNER to sig_create;
+
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.geo_dec_secteur_enc TO edit_sig;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_enc TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_enc TO read_sig;
+
+ALTER TABLE m_dechet.geo_dec_secteur_om
+    OWNER to sig_create;
+
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.geo_dec_secteur_om TO edit_sig;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_secteur_om TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_secteur_om TO read_sig;
+
+ALTER TABLE m_dechet.geo_dec_dechetterie
+    OWNER to sig_create;
+
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.geo_dec_dechetterie TO edit_sig;
+GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO sig_create;
+GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO create_sig;
+GRANT SELECT ON TABLE m_dechet.geo_dec_dechetterie TO read_sig;
 
 -- #################################################################### VUE DE GESTION  ####################################################################
 
