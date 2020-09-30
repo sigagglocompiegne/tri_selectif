@@ -245,6 +245,22 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE m_dechet.an_dec_pav_cont_tlc TO ed
 GRANT SELECT ON TABLE m_dechet.an_dec_pav_cont_tlc TO read_sig;
 GRANT ALL ON TABLE m_dechet.an_dec_pav_cont_tlc TO sig_create;
 
+ALTER TABLE m_dechet.an_dec_pav_doc_media
+    OWNER to sig_create;
+
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_doc_media TO read_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_model_mean_dec_pav_doc_mediadia TO sig_create;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.an_dec_pav_doc_media TO edit_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_doc_media TO create_sig;
+
+ALTER TABLE m_dechet.an_dec_pav_model_media
+    OWNER to sig_create;
+
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_model_media TO read_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO sig_create;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.an_dec_pav_model_media TO edit_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_model_media TO create_sig;
+
 -- #################################################################### VUE DE GESTION  ####################################################################
 
 Sans objet
