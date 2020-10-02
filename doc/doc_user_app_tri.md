@@ -8,6 +8,6 @@
 - [Les recherches sur les PAV Verre et TLC ?](https://geo.compiegnois.fr/documents/cms/fiche_aide/dechet_recherche_pav.pdf)
 
 **Pour les administrateurs** :
-- Comment gérer les lieux de collecte et l'affectation des PAV ?
+- [Comment gérer les lieux de collecte et l'affectation des PAV ?](https://geo.compiegnois.fr/documents/cms/fiche_aide/dechet_gestion_lieu_pav.pdf)
 - [La gestion des modèles](https://geo.compiegnois.fr/documents/cms/fiche_aide/dechet_gestion_modele_pav.pdf)
 
