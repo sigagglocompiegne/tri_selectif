@@ -19,6 +19,10 @@ CREATE OR REPLACE VIEW x_opendata.xopendata_geo_dec_pav_verre
     l.adresse,
     l.localisation,
     count(*) AS cont_nbr,
+	l.date_sai as ldate_sai,
+	l.date_maj as ldate_maj,
+	max(c.date_sai) as cdate_sai,
+	max(c.date_maj) as cdate_maj,
     l.geom
    FROM m_dechet.geo_dec_pav_lieu l,
     m_dechet.an_dec_pav_cont c
@@ -30,6 +34,8 @@ CREATE OR REPLACE VIEW x_opendata.xopendata_geo_dec_pav_verre
 
 COMMENT ON VIEW x_opendata.xopendata_geo_dec_pav_verre
     IS 'Vue géographique présentant les données servant à l''export pour l''open data des lieux de collecte de PAV verres';
+
+
 
                                                        
 
