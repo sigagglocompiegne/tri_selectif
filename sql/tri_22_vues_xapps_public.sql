@@ -15,18 +15,19 @@
 
 CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_verre
  AS
- SELECT l.idlieu AS id_contver,
+SELECT l.idlieu AS id_contver,
     l.commune,
     l.quartier,
     l.adresse,
-    count(*) AS cont_nb,
+    count(*) AS cont_nbr,
+    c.date_effet,
     l.geom
    FROM m_dechet.geo_dec_pav_lieu l,
     m_dechet.an_dec_pav_cont c
-  WHERE l.statut::text = '10'::text AND l.idlieu = c.idlieu AND (l.idlieu IN ( SELECT an_dec_pav_cont.idlieu
+  WHERE l.statut::text = '10'::text AND l.env_implan::text <> '40'::text AND l.idlieu = c.idlieu AND (l.idlieu IN ( SELECT an_dec_pav_cont.idlieu
            FROM m_dechet.an_dec_pav_cont
           WHERE an_dec_pav_cont.eve::text = ANY (ARRAY['10'::character varying::text, '11'::character varying::text, '12'::character varying::text, '13'::character varying::text, '14'::character varying::text, '00'::character varying::text]))) AND c.date_effet <= now()
-  GROUP BY l.idlieu, l.commune, l.quartier, l.adresse
+  GROUP BY l.idlieu, l.commune, l.quartier, l.adresse, c.date_effet
   ORDER BY l.idlieu;
 
   COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
@@ -42,18 +43,19 @@ CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_verre
 
 CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
  AS
- SELECT l.idlieu AS id_cont_tl,
+SELECT l.idlieu AS id_cont_tl,
     l.commune,
     l.quartier,
     l.adresse,
-    count(*) AS cont_nb,
+    count(*) AS cont_nbr,
+    c.date_effet,
     l.geom
    FROM m_dechet.geo_dec_pav_lieu l,
     m_dechet.an_dec_pav_cont_tlc c
   WHERE l.statut::text = '10'::text AND l.idlieu = c.idlieu AND (l.idlieu IN ( SELECT an_dec_pav_cont_tlc.idlieu
            FROM m_dechet.an_dec_pav_cont_tlc
-          WHERE an_dec_pav_cont_tlc.eve::text = ANY (ARRAY['10'::character varying, '11'::character varying, '12'::character varying, '13'::character varying, '14'::character varying, '00'::character varying]::text[]))) AND c.date_effet <= now()
-  GROUP BY l.idlieu, l.commune, l.quartier, l.adresse
+          WHERE an_dec_pav_cont_tlc.eve::text = ANY (ARRAY['10'::character varying::text, '11'::character varying::text, '12'::character varying::text, '13'::character varying::text, '14'::character varying::text, '00'::character varying::text]))) AND c.date_effet <= now()
+  GROUP BY l.idlieu, l.commune, l.quartier, l.adresse, c.date_effet
   ORDER BY l.idlieu;
 
   COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_tlc
