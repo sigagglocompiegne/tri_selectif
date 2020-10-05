@@ -386,7 +386,13 @@ GRANT SELECT ON TABLE x_apps_public.xappspublic_geo_v_dec_secteur_enc_secteur TO
 
 -- #################################################################### VUE OPENDATA  ####################################################################
 
-Sans objet
+ALTER TABLE x_opendata.xopendata_geo_dec_pav_verre
+    OWNER TO sig_create;
+                                                       
+GRANT ALL ON TABLE x_opendata.xopendata_geo_dec_pav_verre TO sig_create;
+GRANT SELECT ON TABLE x_opendata.xopendata_geo_dec_pav_verre TO read_sig;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE x_opendata.xopendata_geo_dec_pav_verre TO edit_sig;
+GRANT ALL ON TABLE x_opendata.xopendata_geo_dec_pav_verre TO create_sig;
 
 
 -- #################################################################### FUNCTION TRIGGER  ####################################################################
