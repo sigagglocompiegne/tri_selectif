@@ -206,4 +206,4 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_dec_pav_verre
   ORDER BY l.idlieu;
 
 COMMENT ON VIEW x_apps.xapps_geo_dec_pav_verre
-    IS 'Vue géographique présentant les données des lieux de collecte (actif ou inactif) à usage de Verre (pour cartographie dans QGIS)';
+    IS 'Vue géographique présentant les données des lieux de collecte (actif) à usage de Verre (pour cartographie dans QGIS)';
