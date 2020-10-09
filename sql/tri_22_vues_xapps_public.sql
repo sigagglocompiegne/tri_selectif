@@ -15,10 +15,12 @@
 
 CREATE OR REPLACE VIEW x_apps_public.xappspublic_geo_dec_pav_verre
  AS
-SELECT l.idlieu AS id_contver,
+ SELECT l.idlieu AS id_contver,
     l.commune,
     l.quartier,
     l.adresse,
+	l.idlieu,
+	string_agg(c.idcont::text,', ' order by idcont) as idcont,
     count(*) AS cont_nbr,
     c.date_effet,
     l.geom
@@ -30,8 +32,9 @@ SELECT l.idlieu AS id_contver,
   GROUP BY l.idlieu, l.commune, l.quartier, l.adresse, c.date_effet
   ORDER BY l.idlieu;
 
-  COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
+COMMENT ON VIEW x_apps_public.xappspublic_geo_dec_pav_verre
     IS 'Vue géographique présentant les données servant à l''export pour l''appli Gd Public des conteneurs verres';
+
 
 
 
