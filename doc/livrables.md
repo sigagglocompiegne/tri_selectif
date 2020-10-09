@@ -63,7 +63,7 @@ Sur le territoire métropolitain s'applique le système géodésique français l
 ## Format des fichiers
 
 Les fichiers sont disponibles au format ESRI Shape (.SHP) contenant la géométrie mais également au format CSV contenant les coordonnées X et Y du point.
-L'encodage des caractères est en UTF8.
+L'encodage des caractères est en UTF8. Les différents supports sont téléchargeables dans la rubrique Gabarits.
 
 ## Description des classes d'objets
 
