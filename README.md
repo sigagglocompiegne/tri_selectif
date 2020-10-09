@@ -21,9 +21,7 @@ L’ARC privilégie donc une organisation dans laquelle l’Interface Homme Mach
 
 ## Voir aussi
 
-- [Fichier hors gabarit des lieux de collecte et des conteneurs Verre à télécharger au format csv (non géographique)](https://geo.compiegnois.fr/documents/metiers/env/dechet/lieu_pav.zip)
-- [Fichier hors gabarit des lieux de collecte à télécharger au format shape (géographique)](https://geo.compiegnois.fr/documents/metiers/env/dechet/lieu_de_collecte.zip)
-- [Fichier gabarit Qgis 3.x (vierge) complet à télécharger](https://geo.compiegnois.fr/documents/metiers/env/dechet/gabarit_qgis_pav.zip)
+- [Accès au téléchargement des gabarits]https://github.com/sigagglocompiegne/tri_selectif/blob/master/doc/livrables.md
 
 ## Jeu de données consolidé
 
