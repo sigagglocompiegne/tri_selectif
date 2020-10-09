@@ -352,6 +352,15 @@ GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_eve_tab TO create_sig;
 GRANT SELECT ON TABLE x_apps.xapps_an_dec_pav_eve_tab TO read_sig;
                                                                   
 
+ALTER TABLE x_apps.xapps_geo_dec_pav_verre
+    OWNER TO sig_create;
+
+
+GRANT ALL ON TABLE x_apps.xapps_geo_dec_pav_verre TO sig_create;
+GRANT SELECT ON TABLE x_apps.xapps_geo_dec_pav_verre TO read_sig;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE x_apps.xapps_geo_dec_pav_verre TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_geo_dec_pav_verre TO create_sig;
+
 -- #################################################################### VUE GD PUBLIC  ####################################################################
 
 
