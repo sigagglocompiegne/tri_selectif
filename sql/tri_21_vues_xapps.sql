@@ -177,4 +177,33 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_eve_tab
 
 COMMENT ON VIEW x_apps.xapps_an_dec_pav_eve_tab
     IS 'Vue alphanumérique présentant les évènements par année des mouvements de PAV Verre';
-                                                                                                               
+
+                                                                                            
+/* -------------------------------------------------------- xapps_geo_dec_pav_verre ------------------------------------------- */
+                                                                                            
+-- View: x_apps.xapps_geo_dec_pav_verre
+
+-- DROP VIEW x_apps.xapps_geo_dec_pav_verre;
+
+CREATE OR REPLACE VIEW x_apps.xapps_geo_dec_pav_verre
+ AS
+ SELECT l.idlieu AS id_contver,
+    l.commune,
+    l.quartier,
+    l.adresse,
+	l.idlieu,
+	l.statut,
+	string_agg(c.idcont::text,', ' order by idcont) as idcont,
+    count(*) AS cont_nbr,
+    c.date_effet,
+    l.geom
+   FROM m_dechet.geo_dec_pav_lieu l,
+    m_dechet.an_dec_pav_cont c
+  WHERE l.idlieu = c.idlieu AND (l.idlieu IN ( SELECT an_dec_pav_cont.idlieu
+           FROM m_dechet.an_dec_pav_cont
+          WHERE an_dec_pav_cont.eve::text = ANY (ARRAY['10'::character varying::text, '11'::character varying::text, '12'::character varying::text, '13'::character varying::text, '14'::character varying::text, '00'::character varying::text]))) AND c.date_effet <= now()
+  GROUP BY l.idlieu, l.commune, l.quartier, l.adresse, c.date_effet
+  ORDER BY l.idlieu;
+
+COMMENT ON VIEW x_apps.xapps_geo_dec_pav_verre
+    IS 'Vue géographique présentant les données des lieux de collecte (actif ou inactif) à usage de Verre (pour cartographie dans QGIS)';
