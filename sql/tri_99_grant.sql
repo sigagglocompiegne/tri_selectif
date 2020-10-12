@@ -351,6 +351,14 @@ GRANT SELECT ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab TO read_si
 GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab TO edit_sig;
 GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab TO create_sig;
 
+ALTER TABLE x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
+    OWNER TO sig_create;
+
+GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab TO sig_create;
+GRANT SELECT ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab TO read_sig;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab TO create_sig;
+
 ALTER TABLE x_apps.xapps_an_dec_pav_eve_tab
     OWNER TO sig_create;
 
