@@ -1526,5 +1526,7 @@ Liste des recherches : Parcelle sélectionnée (ignorer la visibilité), Lieu de
 |:---|:---|:---|:---|:---|:---|
 |PAV Verre|||||
 ||Chiffres clés (PAV Verre)|Statistique de type texte|nb_pav_verre et nb_lieu_verre (couleur #054a91, taille 50)|<b>{text1}</b> conteneurs verres, <b>{text2}</b> lieux de collecte (couleur #79c24d)||
+||Chiffres clés (PAV Verre)|Statistique de type texte|nb_pav_verre et nb_lieu_verre (couleur #054a91, taille 50)|<b>{text1}</b> conteneurs verres, <b>{text2}</b> lieux de collecte (couleur #79c24d)||
+||Chiffres clés (PAV Verre)|Statistique de type texte|nb_pav_verre et nb_lieu_verre (couleur #054a91, taille 50)|<b>{text1}</b> conteneurs verres, <b>{text2}</b> lieux de collecte (couleur #79c24d)||
 ||Mouvement enregistré sur les PAV Verre|Recherche|||Afficher le titre|
 ||Mouvement enregistré sur les lieux de collecte (Verre)|Recherche|||Afficher le titre|
