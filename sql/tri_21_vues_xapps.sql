@@ -181,7 +181,25 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab
 COMMENT ON VIEW x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab
     IS 'Vue alphanumérique présentant les chiffres clés sur les PAV Verre à la commune';
 
+/* -------------------------------------------------------- xapps_an_dec_pav_chiffre_cle_modele_tab ------------------------------------------- */
+-- View: x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
 
+-- DROP VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab;
+
+CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
+ AS
+ SELECT row_number() OVER () AS id,
+    m.valeur AS modele,
+    count(*) AS nb_pav_verre
+   FROM m_dechet.an_dec_pav_cont c,
+    m_dechet.geo_dec_pav_lieu l,
+    m_dechet.lt_pav_modele m
+  WHERE c.idlieu = l.idlieu AND c.model = m.code AND l.statut::text = '10'::text AND (c.eve::text = ANY (ARRAY['10'::character varying::text, '11'::character varying::text, '12'::character varying::text, '13'::character varying::text, '14'::character varying::text, '00'::character varying::text]))
+  GROUP BY m.valeur
+  ORDER BY (count(*)) DESC;
+
+COMMENT ON VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
+    IS 'Vue alphanumérique présentant les chiffres clés sur les PAV Verre par modèle de conteneurs Verre';
 											    
 											    
 /* -------------------------------------------------------- xapps_an_dec_pav_eve_tab ------------------------------------------- */
