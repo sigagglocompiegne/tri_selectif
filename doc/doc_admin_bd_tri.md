@@ -20,7 +20,7 @@ Pour rappel des grands principes :
 
 ## Schéma fonctionnel
 
-![schema_fonctionnel](img/schema_fonctionnel_lieu_pav_v3.png)
+![schema_fonctionnel](img/schema_fonctionnel_lieu_pav_v4.png)
 
 
 ## Dépendances
