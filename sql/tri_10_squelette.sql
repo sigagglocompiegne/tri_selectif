@@ -1580,7 +1580,8 @@ AS $BODY$
 BEGIN
 
 -- après l'insertion d'un conteneur ou mise à jour, je mets à jour le nombre de conteneurs verre dans les lieux de collecte
-update m_dechet.geo_dec_pav_lieu set nb_cont = (SELECT count(*) from m_dechet.an_dec_pav_cont where eve IN ('10','11','12','13','14') AND idlieu=geo_dec_pav_lieu.idlieu);
+update m_dechet.geo_dec_pav_lieu set nb_cont = (SELECT count(*) from m_dechet.an_dec_pav_cont where eve IN ('10','11','12','13','14') 
+AND idlieu=geo_dec_pav_lieu.idlieu);
 
 -- après l'insertion d'un conteneur ou mise à jour, je mets à jour le type de lieu
 update m_dechet.geo_dec_pav_lieu set cttype = b.cttype from (
