@@ -321,6 +321,15 @@ GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO sig_create;
 GRANT ALL ON TABLE m_dechet.geo_dec_dechetterie TO create_sig;
 GRANT SELECT ON TABLE m_dechet.geo_dec_dechetterie TO read_sig;
 
+
+ALTER TABLE m_dechet.an_dec_pav_log
+    OWNER to sig_create;
+
+GRANT SELECT ON TABLE m_dechet.an_dec_pav_log TO read_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_log TO sig_create;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE m_dechet.an_dec_pav_log TO edit_sig;
+GRANT ALL ON TABLE m_dechet.an_dec_pav_log TO create_sig;
+
 -- #################################################################### VUE DE GESTION  ####################################################################
 
 Sans objet
