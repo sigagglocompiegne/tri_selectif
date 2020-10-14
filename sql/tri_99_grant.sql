@@ -246,6 +246,15 @@ GRANT ALL ON SEQUENCE m_dechet.lt_pav_model_code_seq TO PUBLIC;
 GRANT ALL ON SEQUENCE m_dechet.lt_pav_model_code_seq TO create_sig;
 GRANT ALL ON SEQUENCE m_dechet.lt_pav_model_code_seq TO sig_create;
 
+
+ALTER SEQUENCE m_dechet.an_dec_pav_log_idlog_seq
+    OWNER TO sig_create;
+
+
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_log_idlog_seq TO PUBLIC;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_log_idlog_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_log_idlog_seq TO sig_create;
+
 -- #################################################################### TABLE  ####################################################################
 
 ALTER TABLE m_dechet.geo_dec_pav_lieu
