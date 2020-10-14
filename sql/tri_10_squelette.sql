@@ -170,6 +170,7 @@ DROP TABLE IF EXISTS m_dechet.an_dec_pav_model_media;
 DROP TABLE IF EXISTS m_dechet.geo_dec_dechetterie;
 DROP TABLE IF EXISTS m_dechet.geo_dec_secteur_enc;
 DROP TABLE IF EXISTS m_dechet.geo_dec_secteur_om;
+DROP TABLE IF EXISTS m_dechet.an_dec_pav_log;
 
 
 -- ####################################################################################################################################################
@@ -1536,8 +1537,52 @@ COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message6 IS '6ème ligne du mess
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message7 IS '7ème ligne du message';
 
 
+-- ####################################################################################################################################################
+-- ###                                                                                                                                              ###
+-- ###                                                                LOG                                                           		    ###
+-- ###                                                                                                                                              ###
+-- ####################################################################################################################################################
+
+-- Table: m_dechet.an_dec_pav_log
+
+-- DROP TABLE m_dechet.an_dec_pav_log;
+
+CREATE TABLE m_dechet.an_dec_pav_log
+(
+    idlog integer NOT NULL,
+    tablename character varying(80) COLLATE pg_catalog."default" NOT NULL,
+    type_ope text COLLATE pg_catalog."default" NOT NULL,
+    dataold character varying(10000) COLLATE pg_catalog."default",
+    datanew character varying(10000) COLLATE pg_catalog."default",
+    date_maj timestamp without time zone,
+    CONSTRAINT an_dec_pav_log_pkey PRIMARY KEY (idlog)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
 
+COMMENT ON TABLE m_dechet.an_dec_pav_log
+    IS 'Table des opérations sur la base de données des lieux de collecte et des conteneurs Verre ou TLC(PAV)';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_log.idlog
+    IS 'Identifiant unique de d''opération';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_log.tablename
+    IS 'Nom de la table concernée par l''opération sur l''entité';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_log.type_ope
+    IS 'Type l''opération sur l''entité';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_log.dataold
+    IS 'Valeur ancienne avant l''opération sur l''entité';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_log.datanew
+    IS 'Valeur nouvelle après l''opération sur l''entité';
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_log.date_maj
+    IS 'Horodatage de l''opération sur la base des lieux de collecte et des conteneurs Verre ou TLC (PAV)';
   
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
