@@ -36,6 +36,7 @@ DROP SEQUENCE IF EXISTS m_dechet.geo_dec_pav_lieu_idlieu_seq;
 DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_cont_idcont_seq;
 DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_doc_media_gid_seq;
 DROP SEQUENCE IF EXISTS m_dechet.lt_pav_model_code_seq;
+DROP SEQUENCE IF EXISTS m_dechet.an_dec_pav_log_idlog_seq;
 
 -- ################################################################# Séquence sur TABLE  ###############################################
 
@@ -89,7 +90,21 @@ CREATE SEQUENCE m_dechet.lt_pav_model_code_seq
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-  
+-- SEQUENCE: m_dechet.an_dec_pav_log_idlog_seq
+
+-- DROP SEQUENCE m_dechet.an_dec_pav_log_idlog_seq;
+
+CREATE SEQUENCE m_dechet.an_dec_pav_log_idlog_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+COMMENT ON SEQUENCE m_dechet.an_dec_pav_log_idlog_seq
+    IS 'Séquence unique pour les logs liées au lieu de collecte et aux conteneurs Verre et TLC (PAV)';
+    
+    
  -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                                REINITIALISATION DU MODELE                                                    ###
