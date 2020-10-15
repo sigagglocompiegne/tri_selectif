@@ -20,7 +20,7 @@ Pour rappel des grands principes :
 
 ## Schéma fonctionnel
 
-![schema_fonctionnel](bdd/schema_fonctionnel_lieu_pav_v4.png)
+![schema_fonctionnel](/bdd/schema_fonctionnel_lieu_pav_v4.png)
 
 
 ## Dépendances
@@ -701,4 +701,4 @@ Sans objet
 
 ### Modèle conceptuel simplifié des lieux de collecte des Points d'Apport Volontaire
 
-![mcd](bdd/pav_mcd4.png)
+![mcd](/bdd/pav_mcd4.png)
