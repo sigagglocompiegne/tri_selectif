@@ -23,7 +23,7 @@
 
 |Représentation| Nom de l'application |Résumé|
 |:---|:---|:---|
-|![picto](/img/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des données sur les déchets, et notamment les lieux de collecte des PAV (Points dd'apport volontaire Verre et TLC).|
+|![picto](/app/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des données sur les déchets, et notamment les lieux de collecte des PAV (Points dd'apport volontaire Verre et TLC).|
 
 # Accès
 
