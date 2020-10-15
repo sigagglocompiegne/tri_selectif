@@ -1940,5 +1940,105 @@ END IF;
 END;
 $BODY$;
 
+-- FUNCTION: m_dechet.ft_m_log_dec_lieu()
+
+-- DROP FUNCTION m_dechet.ft_m_log_dec_lieu();
+
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_log_dec_lieu()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+DECLARE v_idlog integer;
+DECLARE v_dataold character varying(5000);
+DECLARE v_datanew character varying(5000);
+DECLARE v_nnbcont integer;
+DECLARE v_onbcont integer;
+DECLARE v_ncttype character varying(2);
+DECLARE v_octtype character varying(2);
+DECLARE v_name_table character varying(254);
+BEGIN
+
+-- INSERT
+IF (TG_OP = 'INSERT') THEN
+
+  v_idlog := nextval('m_dechet.an_dec_pav_log_idlog_seq'::regclass); 
+  v_datanew := ROW(NEW.*); ------------------------------------ On concatène tous les attributs dans un seul
+
+  ---
+  INSERT INTO m_dechet.an_dec_pav_log (idlog, tablename, type_ope, dataold, datanew, date_maj)
+  SELECT
+  v_idlog,
+  TG_TABLE_NAME,
+  'INSERT',
+  NULL,
+  v_datanew,
+  now();
+
+  ---
+  
+  RETURN NEW;
+  
+
+-- UPDATE
+ELSIF (TG_OP = 'UPDATE') THEN 
+  ---
+  
+  v_idlog := nextval('m_dechet.an_dec_pav_log_idlog_seq'::regclass);
+  v_dataold := ROW(OLD.*);------------------------------------ On concatène tous les anciens attributs dans un seul
+  v_datanew := ROW(NEW.*);------------------------------------ On concatène tous les nouveaux attributs dans un seul	
+  v_name_table := TG_TABLE_NAME;
+  v_nnbcont := NEW.nb_cont;
+  v_onbcont := OLD.nb_cont;
+  v_ncttype := NEW.cttype;
+  v_octtype := OLD.cttype;
+  
+
+  INSERT INTO m_dechet.an_dec_pav_log (idlog, tablename,  type_ope, dataold, datanew, date_maj)
+  SELECT
+  v_idlog,
+  v_name_table,
+  'UPDATE',
+  v_dataold,
+  v_datanew,
+  now()
+  
+  -- afin d'éviter l'écriture multiple de lieux suite à la mise automatique du nb de conteneurs et du type via l'insertion ou la mise à jour d'un conteneur
+  -- filtre uniquement sur les attributs ayant changé
+  
+  WHERE 
+    new.statut <> old.statut OR
+	new.cttype <> old.cttype OR
+    new.quartier <> old.quartier OR
+    new.adresse <> old.adresse OR
+    new.localisation <> old.localisation OR
+    new.nb_cont <> old.nb_cont OR
+    new.prop_abor <> old. prop_abor OR
+    new.env_type <> old.env_type OR
+    new.env_implan <> old.env_implan OR
+    new.env_situ <> old.env_situ OR
+    new.prox_corb <> old.prox_corb OR
+    new.opt_pav <> old.opt_pav OR
+    new.ame_acces <> old.ame_acces OR
+	new.nat_pb <> old.nat_pb OR
+    new.nat_pb_99 <> old.nat_pb_99 OR
+    new.pavorient <> old.pavorient OR
+    new.idparent <> old.idparent OR
+    new.src_geom <> old.src_geom OR
+    new.src_date <> old.src_date OR
+    new.op_sai <> old.op_sai OR
+    new.observ <> old.observ
+  ;
+  
+ 
+RETURN NEW;
+
+END IF;
+
+END;
+$BODY$;
+
+
 
 
