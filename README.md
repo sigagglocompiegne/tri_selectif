@@ -1,6 +1,6 @@
 ![picto](https://github.com/sigagglocompiegne/orga_gest_igeo/blob/master/doc/img/geocompiegnois_2020_reduit_v2.png)
 
-# Prescriptions scpécifiques (locales) des Points d'Apport Volontaire Verre
+# Prescriptions spécifiques (locales) des Points d'Apport Volontaire Verre
 
 [ ] à rédiger [ ] en cours de rédaction [x] finaliser
 
