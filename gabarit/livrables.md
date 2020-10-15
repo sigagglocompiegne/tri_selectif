@@ -21,11 +21,11 @@
 
 Le principe de fonctionnement de la base de données des Points d'Apport Volontaire Verre s'appuie sur le lieu de collecte. Ce lieu est un point unique disposant de n conteneurs, qu'ils soient à usage Verre ou TLC. 
 
-![picto](/doc/img/principe_pav.png)
+![picto](/bdd/principe_pav.png)
 
 Schéma 1 : principe fonctionnel du lieu de collecte, ici 1 lieu de collecte comprend 2 conteneurs
 
-![picto](/doc/img/mcd_pav.png)
+![picto](/bdd/mcd_pav.png)
 
 Schéma 2 : restitution conceptuelle dans la base de données
 
