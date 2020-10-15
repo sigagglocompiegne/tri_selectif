@@ -1013,12 +1013,13 @@ CREATE TRIGGER t_t5_geo_dec_pav_lieu_xy
 -- Trigger: t_t6_geo_dec_pav_lieu_tampon
 
 -- DROP TRIGGER t_t6_geo_dec_pav_lieu_tampon ON m_dechet.geo_dec_pav_lieu;
-
+/*
 CREATE TRIGGER t_t6_geo_dec_pav_lieu_tampon
     AFTER UPDATE OF v_tampon, geom
     ON m_dechet.geo_dec_pav_lieu
     FOR EACH ROW
     EXECUTE PROCEDURE m_dechet.ft_m_tampon_lieu_nav();
+*/
 
 -- Trigger: t_t7_geo_dec_pav_lieu_delete
 
@@ -1029,6 +1030,16 @@ CREATE TRIGGER t_t7_geo_dec_pav_lieu_delete
     ON m_dechet.geo_dec_pav_lieu
     FOR EACH ROW
     EXECUTE PROCEDURE m_dechet.ft_m_dec_lieu_delete();
+
+-- Trigger: t_t8_log_lieu
+
+-- DROP TRIGGER t_t8_log_lieu ON m_dechet.geo_dec_pav_lieu;
+
+CREATE TRIGGER t_t8_log_lieu
+    AFTER INSERT OR DELETE OR UPDATE 
+    ON m_dechet.geo_dec_pav_lieu
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_log_dec_lieu();
 
 -- Table: m_dechet.an_dec_pav_cont
 
@@ -1213,6 +1224,15 @@ CREATE TRIGGER t_t3_an_dec_pav_cont_datesai
     FOR EACH ROW
     EXECUTE PROCEDURE public.ft_r_timestamp_sai();
 
+-- Trigger: t_t4_log_pav_verre
+
+-- DROP TRIGGER t_t4_log_pav_verre ON m_dechet.an_dec_pav_cont;
+
+CREATE TRIGGER t_t4_log_pav_verre
+    AFTER INSERT OR UPDATE 
+    ON m_dechet.an_dec_pav_cont
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_log_dec_pav();
 
 -- Table: m_dechet.an_dec_pav_cont_tlc
 
@@ -1326,6 +1346,37 @@ CREATE TRIGGER t_t1_an_dec_pav_cont_lieu
     ON m_dechet.an_dec_pav_cont_tlc
     FOR EACH ROW
     EXECUTE PROCEDURE m_dechet.ft_m_dec_pav_lieu();
+
+-- Trigger: t_t2_an_dec_pav_cont_datemaj
+
+-- DROP TRIGGER t_t2_an_dec_pav_cont_datemaj ON m_dechet.an_dec_pav_cont_tlc;
+
+CREATE TRIGGER t_t2_an_dec_pav_cont_datemaj
+    BEFORE INSERT OR UPDATE 
+    ON m_dechet.an_dec_pav_cont_tlc
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_maj();
+    
+
+-- Trigger: t_t3_an_dec_pav_cont_datesai
+
+-- DROP TRIGGER t_t3_an_dec_pav_cont_datesai ON m_dechet.an_dec_pav_cont_tlc;
+
+CREATE TRIGGER t_t3_an_dec_pav_cont_datesai
+    BEFORE INSERT
+    ON m_dechet.an_dec_pav_cont_tlc
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ft_r_timestamp_sai();
+    
+-- Trigger: t_t4_log_pav_tlc
+
+-- DROP TRIGGER t_t4_log_pav_tlc ON m_dechet.an_dec_pav_cont_tlc;
+
+CREATE TRIGGER t_t4_log_pav_tlc
+    AFTER INSERT OR UPDATE 
+    ON m_dechet.an_dec_pav_cont_tlc
+    FOR EACH ROW
+    EXECUTE PROCEDURE m_dechet.ft_m_log_dec_pav();    
 
 -- Table: m_dechet.an_dec_pav_doc_media
 
@@ -1823,3 +1874,71 @@ END$BODY$;
 
 COMMENT ON FUNCTION public.ft_r_xy_l93()
     IS 'Fonction dont l''objet est de récupérer les coordonnées X et Y en Lambert 93 (epsg:2154)';
+    
+    
+-- FUNCTION: m_dechet.ft_m_log_dec_pav()
+
+-- DROP FUNCTION m_dechet.ft_m_log_dec_pav();
+
+CREATE FUNCTION m_dechet.ft_m_log_dec_pav()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+DECLARE v_idlog integer;
+DECLARE v_dataold character varying(5000);
+DECLARE v_datanew character varying(5000);
+DECLARE v_name_table character varying(254);
+BEGIN
+
+-- INSERT
+IF (TG_OP = 'INSERT') THEN
+
+  v_idlog := nextval('m_dechet.an_dec_pav_log_idlog_seq'::regclass); 
+  v_datanew := ROW(NEW.*); ------------------------------------ On concatène tous les attributs dans un seul
+
+  ---
+  INSERT INTO m_dechet.an_dec_pav_log (idlog, tablename, type_ope, dataold, datanew, date_maj)
+  SELECT
+  v_idlog,
+  TG_TABLE_NAME,
+  'INSERT',
+  NULL,
+  v_datanew,
+  now();
+
+  ---
+  
+  RETURN NEW;
+  
+
+-- UPDATE
+ELSIF (TG_OP = 'UPDATE') THEN 
+  ---
+  
+  v_idlog := nextval('m_dechet.an_dec_pav_log_idlog_seq'::regclass);
+  v_dataold := ROW(OLD.*);------------------------------------ On concatène tous les anciens attributs dans un seul
+  v_datanew := ROW(NEW.*);------------------------------------ On concatène tous les nouveaux attributs dans un seul	
+  v_name_table := TG_TABLE_NAME;
+
+  ---
+  
+  INSERT INTO m_dechet.an_dec_pav_log (idlog, tablename,  type_ope, dataold, datanew, date_maj)
+  SELECT
+  v_idlog,
+  v_name_table,
+  'UPDATE',
+  v_dataold,
+  v_datanew,
+  now();
+  RETURN NEW;
+  
+
+END IF;
+
+END;
+$BODY$;
+
+
+
