@@ -134,4 +134,4 @@ Les identifiants des lieux et des conteneurs sont des identifiants non signifian
 
 ### Liste de valeurs
 
-Le contenu des listes de valeurs est disponible dans la documentation complète de la base de données en cliquant [ici](/doc/doc_admin_bd_tri.md) dans la rubrique `Liste de valeurs`.
+Le contenu des listes de valeurs est disponible dans la documentation complète de la base de données en cliquant [ici](/bdd/doc_admin_bd_tri.md) dans la rubrique `Liste de valeurs`.
