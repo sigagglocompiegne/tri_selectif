@@ -1,4 +1,4 @@
-![picto](/doc/img/geocompiegnois_2020_reduit_v2.png)
+![picto](https://github.com/sigagglocompiegne/orga_gest_igeo/blob/master/doc/img/geocompiegnois_2020_reduit_v2.png)
 
 # Documentation d'administration de l'application TRI SELECTIF #
 
@@ -23,7 +23,7 @@
 
 |Représentation| Nom de l'application |Résumé|
 |:---|:---|:---|
-|![picto](/doc/img/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des données sur les déchets, et notamment les lieux de collecte des PAV (Points dd'apport volontaire Verre et TLC).|
+|![picto](/img/tri_selectif_bleu.png)|Tri sélectif|Cette application est dédiée à la gestion et la consultation des données sur les déchets, et notamment les lieux de collecte des PAV (Points dd'apport volontaire Verre et TLC).|
 
 # Accès
 
