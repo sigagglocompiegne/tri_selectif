@@ -8,8 +8,8 @@ Spécification du fichier d’échange relatif aux données concernant la  local
 
 - [Lire la documentation du standard](gabarit/livrables.md)
 - [Documentation d'administration de la base sur les déchets](bdd/doc_admin_bd_tri.md)
-- [Documentation d'administration de l'application TRI SELECTIF](doc/doc_admin_app_tri.md)
-- [Documentation utilisateur de l'application](doc/doc_user_app_tri.md)
+- [Documentation d'administration de l'application TRI SELECTIF](app/doc_admin_app_tri.md)
+- [Documentation utilisateur de l'application](app/doc_user_app_tri.md)
 - [Script d'initialisation de la base de données](bdd/script.md)
 
 
