@@ -496,3 +496,17 @@ ALTER FUNCTION public.ft_r_xy_l93()
 GRANT EXECUTE ON FUNCTION public.ft_r_xy_l93() TO sig_create;
 GRANT EXECUTE ON FUNCTION public.ft_r_xy_l93() TO create_sig;
 GRANT EXECUTE ON FUNCTION public.ft_r_xy_l93() TO PUBLIC;
+
+ALTER FUNCTION m_dechet.ft_m_log_dec_pav()
+    OWNER TO sig_create;
+    
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_log_dec_pav() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_log_dec_pav() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_log_dec_pav() TO PUBLIC;
+
+ALTER FUNCTION m_dechet.ft_m_log_dec_lieu()
+    OWNER TO sig_create;
+    
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_log_dec_lieu() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_log_dec_lieu() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_dechet.ft_m_log_dec_lieu() TO PUBLIC;
