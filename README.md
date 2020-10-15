@@ -7,7 +7,7 @@
 Spécification du fichier d’échange relatif aux données concernant la  localisation géographique des lieux de collecte et les caractéristiques patrimoniales des Points d'Apport Volontaire Verre sur le territoire de l'Agglomération de la Région de Compiègne. La localisation et les caractéristiques patrimoniales des Points d'Apport Volontaire TLC (textile-linge-chaussure) ne sont pas considérés comme partis prenante du standard même si ils sont renseignés Indépendamment, le service n'en assure pas la gestion.
 
 - [Lire la documentation du standard](gabarit/livrables.md)
-- [Documentation d'administration de la base sur les déchets](doc/doc_admin_bd_tri.md)
+- [Documentation d'administration de la base sur les déchets](bdd/doc_admin_bd_tri.md)
 - [Documentation d'administration de l'application TRI SELECTIF](doc/doc_admin_app_tri.md)
 - [Documentation utilisateur de l'application](doc/doc_user_app_tri.md)
 - [Script d'initialisation de la base de données](bdd/script.md)
