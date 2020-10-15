@@ -25,6 +25,6 @@ L’ARC privilégie donc une organisation dans laquelle l’Interface Homme Mach
 
 ## Jeu de données consolidé
 
-Vous pouvez retrouver un jeu de données résultant de cette consolidation sur le catalogue GéoCompiégnois en cliquant [ici](https://geo.compiegnois.fr/geonetwork/srv/fre/catalog.search#/metadata/16f54ed4-d525-45c4-9050-45dac00a84d8).
+Vous pouvez retrouver un jeu de données résultant de cette consolidation sur le catalogue GéoCompiégnois en cliquant [ici](https://geo.compiegnois.fr/geonetwork/srv/fre/catalog.search#/metadata/16f54ed4-d525-45c4-9050-45dac00a84d8). Ce jeu de données est diffusé selon des modalités d'échanges de fichiers ne pouvant concerver le principe relationnel de la base de données. Il comprend donc 1 noeud par conteneur Verre.
 
 
