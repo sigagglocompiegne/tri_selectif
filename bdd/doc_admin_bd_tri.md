@@ -25,7 +25,7 @@ Pour rappel des grands principes :
 
 ## Dépendances
 
-La base de données des dédchets s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentation de la base PEI.
+La base de données des déchets s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentation de la base PEI.
 
 |schéma | table | description | usage |
 |:---|:---|:---|:---|   
