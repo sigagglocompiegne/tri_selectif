@@ -262,8 +262,8 @@ WITH (
 
 COMMENT ON TABLE m_dechet.lt_pav_envimplan
   IS 'Liste de valeurs des codes du type d''espace urbain d''implantation';
-COMMENT ON COLUMN m_dechet.lt_pav_envimplan.env_implan IS 'code du type d''espace urbain d''implantation';
-COMMENT ON COLUMN m_dechet.lt_pav_envimplan.env_implan_lib IS 'libellé du type d''espace urbain d''implantation';
+COMMENT ON COLUMN m_dechet.lt_pav_envimplan.code IS 'code du type d''espace urbain d''implantation';
+COMMENT ON COLUMN m_dechet.lt_pav_envimplan.valeur IS 'libellé du type d''espace urbain d''implantation';
 
 COMMENT ON CONSTRAINT lt_pav_envimplan_pkkey ON m_dechet.lt_pav_envimplan IS 'Clé primaire de la table lt_pav_envimplan';
 
