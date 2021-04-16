@@ -29,7 +29,7 @@ La base de données des déchets s'appuie sur des référentiels préexistants c
 
 |schéma | table | description | usage |
 |:---|:---|:---|:---|   
-|r_objet|lt_src_geom|domaine de valeur générique d'une table géographique|source du positionnement du PEI|
+|r_objet|lt_src_geom|domaine de valeur générique d'une table géographique|référentiel utilisé pour la saisie des données|
 |x_apps|geo_vmr_adresse|BAL|Assise des secteurs de ramassage des encombrants|
 |r_objet|lt_contrat|liste et caractéristiques des contrats de délégation|Gestion des différents données de réseau ou s'apparentant un contrat|
 
