@@ -103,8 +103,41 @@ UNION ALL
   WHERE l.idlieu = c.idlieu AND l.statut::text = '20'::text AND c.eve::text <> '10'::text AND NOT (l.idlieu IN ( SELECT l1.idparent
            FROM m_dechet.geo_dec_pav_lieu l1
           WHERE l1.idparent IS NOT NULL))
+  GROUP BY l.idlieu
+UNION ALL
+ SELECT ( SELECT l2.idlieu
+           FROM m_dechet.geo_dec_pav_lieu l2
+          WHERE l2.idparent = l.idlieu) AS idlieu_new,
+    l.idlieu AS idlieu_old,
+    'Lieu de collecte (verre) ajouté'::text AS eve,
+    max(c.date_eve) AS date_eve,
+    max(to_char(c.date_eve, 'YYYY'::text)) AS annee_eve,
+    l.date_maj,
+    l.date_sai,
+    (
+        CASE
+            WHEN l.adresse IS NULL THEN ''::character varying
+            ELSE l.adresse
+        END::text ||
+        CASE
+            WHEN l.localisation IS NULL THEN ''::character varying
+            ELSE l.localisation
+        END::text) ||
+        CASE
+            WHEN l.commune IS NULL THEN ''::text
+            ELSE ' à '::text || l.commune::text
+        END AS lieu_old,
+    ''::text AS lieu_new
+   FROM m_dechet.geo_dec_pav_lieu l,
+    m_dechet.an_dec_pav_cont c
+  WHERE l.idlieu = c.idlieu AND l.statut::text = '10'::text AND c.eve::text = '11'::text AND NOT (l.idlieu IN ( SELECT l1.idparent
+           FROM m_dechet.geo_dec_pav_lieu l1
+          WHERE l1.idparent IS NOT NULL))
   GROUP BY l.idlieu;
 
+ALTER TABLE x_apps.xapps_an_dec_lieu_eve_tab
+    OWNER TO create_sig;
+    
 COMMENT ON VIEW x_apps.xapps_an_dec_lieu_eve_tab
     IS 'Vue alphanumérique présentant les évènements par année des mouvements des lieux de collecte disposant de PAV Verre';
 
