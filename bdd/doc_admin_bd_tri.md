@@ -166,15 +166,53 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 |observ|Observations diverses|character varying(500)| |
 |date_eve|Date du dernier évènement intervenu sur le conteneur Verre|timestamp without time zone| |
 |obs_eve|Observations liées à l'évènement|character varying(500)| |
+|idcont_old|identifiant du conteneur à historiser (lien dynamique avec GEO) et la fonction de suivi des conteneurs|int4| |
 
 
 * triggers :
 
   * `t_t1_an_dec_pav_cont_lieu` : Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)
-  
   * `t_t2_an_dec_pav_cont_datemaj` : intégration de la date de mise à jour
-  
   * `t_t3_an_dec_pav_cont_datesai` : intégration de la date de saisie
+  * `t_t4_log_pav_verre` : gestion des logs
+  * `t_t5_an_dec_pav_cont_suivi` : gestion de suivi des conteneurs par lieu de collecte
+
+`an_dec_pav_cont_h` : table attributaire des Points d'Apport Volontaire Verre historisé lors d'un déplacement entre lieux de collecte.
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|  
+|idcont|Identifiant unique du conteneur Verre |integer||
+|idlieu|Identifiant du lieu de collecte|integer| |
+|idpresta|Identifiant du conteneur du prestataire|character varying(10)| |
+|eve|Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)|character varying(2)| |
+|model|Modèle du conteneur Verre (liste de valeurs lt_pav_modele)|integer| |
+|pos|Position du conteneur Verre (liste de valeurs lt_pav_pos)|character varying(2)| |
+|date_sai|Date de saisie de la donnée|timestamp without time zone| |
+|date_maj|Date de mise à jour de la donnée|timestamp without time zone| |
+|date_pos|Date de pose|timestamp without time zone| |
+|date_net|Date du dernier nettoyage|timestamp without time zone| |
+|date_effet|Date de prise en compte des données dans le plan interactif Grand Public|timestamp without time zone| |
+|mode_preh|Mode de préhension du conteneur Verre|character varying(2)| |
+|opercules|Présence d'opercules sur le conteneur Verre|boolean| |
+|tags|Présence de tags sur le conteneur|boolean| |
+|peinture|Etat de la peinture du conteneur Verre (liste de valeurs lt_pav_peinture)|character varying(2)| |
+|type_sol|Type de sol sur lequel est posé le conteneur Verre (liste de valeurs lt_pav_typesol)|character varying(2)| |
+|trp_rest|Présence d'une trappe pour restaurateur|boolean| |
+|etat_sign|Etat de la signalétique sur le conteneur Verre (liste de valeurs lt_pav_etatsign)|character varying(2)| |
+|type_sign|Type de signalétique présente sur le conteneur Verre (liste de valeurs lt_pav_typesign)|character varying(2)| |
+|proprete|Etat de propreté du conteneur Verre (liste de valeurs lt_pav_proprete)|character varying(2)| |
+|def_struc|Présence de défaut de structure|boolean| |
+|op_sai|Opérateur de saisie initial du conteneur|character varying(80)| |
+|observ|Observations diverses|character varying(500)| |
+|date_eve|Date du dernier évènement intervenu sur le conteneur Verre|timestamp without time zone| |
+|obs_eve|Observations liées à l'évènement|character varying(500)| |
+|gid|Identifiant|int4|nextval('m_dechet.an_dec_pav_cont_h_gid_seq'::regclass)|
+|eve_ori|Evènement d'origine du mouvement de la benne (valeur récupéré au nouveau lieu)|character varying(2)| |
+|idlieu_new|Nouveau lieu d'affectation de la benne lors d'un changement de lieu|int4| |
+
+
+* triggers :
+  * `t_t6_an_dec_pav_cont_suivi` : gestion de suivi des conteneurs par lieu de collecte
 
 `an_dec_pav_cont_tlc` : table attributaire des Points d'Apport Volontaire TLC.
 
@@ -199,11 +237,10 @@ L'ensemble des classes d'objets unitaires sont stockées dans le schéma m_deche
 * triggers :
 
   * `t_t1_an_dec_pav_cont_lieu` : Fonction trigger pour mise à jour lieu de collecte (nb de conteneur verre et type de lieu)
-  
   * `t_t2_an_dec_pav_cont_datemaj` : intégration de la date de mise à jour
-  
   * `t_t3_an_dec_pav_cont_datesai` : intégration de la date de saisie
-  
+  * `t_t4_log_pav_tlc` : gestion des logs
+    
 `an_dec_pav_doc_media` : table attributaire gérant les documents joints au lieu de collecte.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
