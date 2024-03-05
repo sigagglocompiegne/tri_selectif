@@ -8,6 +8,7 @@ Ensemble des éléments constituant la mise en oeuvre de la base de données sur
 
 ## Changelog
 
+- 05/03/2024 : GB / Adaptation du modèle pour conserver les n° de conteneurs d'un lieu de collecte à un autre
 - 16/10/2020 : GB / Version 2 du modèle de données
 - 17/12/2018 : GB / ventilation du code SQL dans les fichiers d'initialisations SQL
 - 07/12/2018 : GB / Version 1 du modèle de données, initialisation du code SQL sur GitHub
