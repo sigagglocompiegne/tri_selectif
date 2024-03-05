@@ -116,12 +116,6 @@ CREATE SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq
 	START 1
 	NO CYCLE;
 
--- Permissions
-
-ALTER SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq OWNER TO sig_create;
-GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq TO public;
-GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq TO create_sig;
-GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq TO sig_create;
     
  -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
@@ -182,6 +176,7 @@ DROP TABLE IF EXISTS m_dechet.lt_pav_modele;
 -- Table
 DROP TABLE IF EXISTS m_dechet.geo_dec_pav_lieu;
 DROP TABLE IF EXISTS m_dechet.an_dec_pav_cont;
+DROP TABLE IF EXISTS m_dechet.an_dec_pav_cont_h;
 DROP TABLE IF EXISTS m_dechet.an_dec_pav_cont_tlc;
 DROP TABLE IF EXISTS m_dechet.an_dec_pav_doc_media;
 DROP TABLE IF EXISTS m_dechet.an_dec_pav_model_media;
@@ -1604,6 +1599,78 @@ COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message4 IS '4ème ligne du mess
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message5 IS '5ème ligne du message';
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message6 IS '6ème ligne du message';
 COMMENT ON COLUMN m_dechet.geo_dec_secteur_om.l_message7 IS '7ème ligne du message';
+
+
+-- m_dechet.an_dec_pav_cont_h definition
+
+-- Drop table
+
+-- DROP TABLE m_dechet.an_dec_pav_cont_h;
+
+CREATE TABLE m_dechet.an_dec_pav_cont_h (
+	idcont int4 NOT NULL,
+	idlieu int4 NULL, -- Identifiant du lieu de collecte
+	idpresta varchar(10) NULL, -- Identifiant du conteneur du prestataire
+	eve varchar(2) NULL, -- Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)
+	model int4 NULL, -- Modèle du conteneur Verre (liste de valeurs lt_pav_modele)
+	pos varchar(2) NULL, -- Position du conteneur Verre (liste de valeurs lt_pav_contpos)
+	date_sai timestamp NULL, -- Date de saisie de la donnée
+	date_maj timestamp NULL, -- Date de mise à jour de la donnée
+	date_pos timestamp NULL, -- Date de pose
+	date_net timestamp NULL, -- Date du dernier nettoyage
+	date_effet timestamp NULL, -- Date de prise en compte des données dans le plan interactif Grand Public
+	mode_preh varchar(2) NULL, -- Mode de préhension du conteneur Verre
+	opercules bool NULL, -- Présence d'opercules sur le conteneur Verre
+	tags bool NULL, -- Présence de tags sur le conteneur
+	peinture varchar(2) NULL, -- Etat de la peinture du conteneur Verre (liste de valeurs lt_pav_peinture)
+	type_sol varchar(2) NULL, -- Type de sol sur lequel est posé le conteneur Verre (liste de valeurs lt_pav_typesol)
+	trp_rest bool NULL, -- Présence d'une trappe pour restaurateur
+	etat_sign varchar(2) NULL, -- Etat de la signalétique sur le conteneur Verre (liste de valeurs lt_pav_etatsign)
+	type_sign varchar(2) NULL, -- Type de signalétique présente sur le conteneur Verre (liste de valeurs lt_pav_typesign)
+	proprete varchar(2) NULL, -- Etat de propreté du conteneur Verre (liste de valeurs lt_pav_proprete)
+	def_struc bool NULL, -- Présence de défaut de structure
+	op_sai varchar(80) NULL, -- Opérateur de saisie initial du conteneur
+	observ varchar(500) NULL, -- Observations diverses
+	date_eve timestamp NULL, -- Date du dernier évènement intervenu sur le conteneur Verre
+	obs_eve varchar(500) NULL, -- Observations liées à l'évènement
+	gid serial4 NOT NULL, -- Identifiant unique d'insertion
+	eve_ori varchar(2) NULL, -- Evènement d'origine du mouvement de la benne (valeur récupéré au nouveau lieu)
+	idlieu_new int4 NULL, -- Nouveau lieu d'affectation de la benne lors d'un changement de lieu
+	CONSTRAINT an_dec_pav_cont_h_pkey UNIQUE (date_net, gid)
+);
+CREATE INDEX idx_7815_idlieu ON m_dechet.an_dec_pav_cont_h USING btree (idlieu);
+COMMENT ON TABLE m_dechet.an_dec_pav_cont_h IS 'Table alphanumérique des attributs métiers correspondant au conteneur Verre avec un évènement de dépose ou de remplacé (permet de garder la trace des mouvements des bennes). Cette table permet de conserver l''ancien lieu de collecte de chaque coneneur';
+
+-- Column comments
+
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.idlieu IS 'Identifiant du lieu de collecte';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.idpresta IS 'Identifiant du conteneur du prestataire';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.eve IS 'Evènement lié à la vie du conteneur (liste de valeurs lt_pav_eve)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.model IS 'Modèle du conteneur Verre (liste de valeurs lt_pav_modele)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.pos IS 'Position du conteneur Verre (liste de valeurs lt_pav_contpos)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.date_sai IS 'Date de saisie de la donnée';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.date_maj IS 'Date de mise à jour de la donnée';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.date_pos IS 'Date de pose';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.date_net IS 'Date du dernier nettoyage';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.date_effet IS 'Date de prise en compte des données dans le plan interactif Grand Public';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.mode_preh IS 'Mode de préhension du conteneur Verre';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.opercules IS 'Présence d''opercules sur le conteneur Verre';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.tags IS 'Présence de tags sur le conteneur';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.peinture IS 'Etat de la peinture du conteneur Verre (liste de valeurs lt_pav_peinture)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.type_sol IS 'Type de sol sur lequel est posé le conteneur Verre (liste de valeurs lt_pav_typesol)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.trp_rest IS 'Présence d''une trappe pour restaurateur';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.etat_sign IS 'Etat de la signalétique sur le conteneur Verre (liste de valeurs lt_pav_etatsign)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.type_sign IS 'Type de signalétique présente sur le conteneur Verre (liste de valeurs lt_pav_typesign)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.proprete IS 'Etat de propreté du conteneur Verre (liste de valeurs lt_pav_proprete)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.def_struc IS 'Présence de défaut de structure';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.op_sai IS 'Opérateur de saisie initial du conteneur';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.observ IS 'Observations diverses';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.date_eve IS 'Date du dernier évènement intervenu sur le conteneur Verre';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.obs_eve IS 'Observations liées à l''évènement';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.gid IS 'Identifiant unique d''insertion';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.eve_ori IS 'Evènement d''origine du mouvement de la benne (valeur récupéré au nouveau lieu)';
+COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.idlieu_new IS 'Nouveau lieu d''affectation de la benne lors d''un changement de lieu';
+
 
 
 -- ####################################################################################################################################################
