@@ -1247,6 +1247,12 @@ CREATE TRIGGER t_t4_log_pav_verre
     FOR EACH ROW
     EXECUTE PROCEDURE m_dechet.ft_m_log_dec_pav();
 
+create trigger t_t5_an_dec_pav_cont_suivi before
+insert
+    on
+    m_dechet.an_dec_pav_cont for each row execute procedure m_dechet.ft_m_dec_pav_suivi();
+
+
 -- Table: m_dechet.an_dec_pav_cont_tlc
 
 -- DROP TABLE m_dechet.an_dec_pav_cont_tlc;
@@ -1671,7 +1677,10 @@ COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.gid IS 'Identifiant unique d''inser
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.eve_ori IS 'Evènement d''origine du mouvement de la benne (valeur récupéré au nouveau lieu)';
 COMMENT ON COLUMN m_dechet.an_dec_pav_cont_h.idlieu_new IS 'Nouveau lieu d''affectation de la benne lors d''un changement de lieu';
 
-
+create trigger t_t6_an_dec_pav_cont_suivi after
+insert
+    on
+    m_dechet.an_dec_pav_cont_h for each row execute procedure m_dechet.ft_m_dec_pav_suivi_after();
 
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
@@ -1870,97 +1879,6 @@ $BODY$;
 COMMENT ON FUNCTION m_dechet.ft_m_tampon_lieu_nav()
     IS 'Fonction trigger pour mise à jour du tampon d''emprise du lieu de collecte si v_tampon est modifiée';
 
--- FUNCTION: public.ft_r_timestamp_maj()
-
--- DROP FUNCTION public.ft_r_timestamp_maj();
-
-CREATE FUNCTION public.ft_r_timestamp_maj()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
-AS $BODY$BEGIN
-new.date_maj=current_timestamp;
-return new;
-END$BODY$;
-
-COMMENT ON FUNCTION public.ft_r_timestamp_maj()
-    IS 'Fonction dont l''objet est de mettre à jour la date et l''heure locale de mise à jour (géométrie et/ou attribut) de la donnée (champ date_maj).';
-
-
--- FUNCTION: public.ft_r_timestamp_sai()
-
--- DROP FUNCTION public.ft_r_timestamp_sai();
-
-CREATE FUNCTION public.ft_r_timestamp_sai()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
-AS $BODY$BEGIN
-new.date_sai=current_timestamp;
-return new;
-END$BODY$;
-
-COMMENT ON FUNCTION public.ft_r_timestamp_sai()
-    IS 'Fonction dont l''objet est d''insérer la date et l''heure locale de saisie (géométrie et/ou attribut) de la donnée (champ date_sai).';
-
-
--- FUNCTION: public.ft_r_commune_pl()
-
--- DROP FUNCTION public.ft_r_commune_pl();
-
-CREATE FUNCTION public.ft_r_commune_pl()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
-AS $BODY$BEGIN
-select into new.insee string_agg(insee, ', ') from r_osm.geo_osm_commune where st_intersects(new.geom,geom);
-select into new.commune string_agg(commune, ', ') from r_osm.geo_osm_commune where st_intersects(new.geom,geom);
-return new;
-END$BODY$;
-
-COMMENT ON FUNCTION public.ft_r_commune_pl()
-    IS 'Fonction dont l''objet est de recupérer par croisement géographique, le nom et le code insee de la commune à partir de la vue de référence r_osm.geo_v_osm_commune
-Fonction réservée au géométrie de type point et ligne';
-
--- FUNCTION: public.ft_r_quartier()
-
--- DROP FUNCTION public.ft_r_quartier();
-
-CREATE FUNCTION public.ft_r_quartier()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
-AS $BODY$BEGIN
-select into new.quartier string_agg(nom, ', ') from r_administratif.geo_adm_quartier where st_intersects(new.geom,geom);
-return new;
-END$BODY$;
-
-COMMENT ON FUNCTION public.ft_r_quartier()
-    IS 'Fonction dont l''objet est de recupérer par croisement géographique, le nom du quartier de la commune à partir de la table geo_adm_quartier';
-
--- FUNCTION: public.ft_r_xy_l93()
-
--- DROP FUNCTION public.ft_r_xy_l93();
-
-CREATE FUNCTION public.ft_r_xy_l93()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
-AS $BODY$BEGIN
-new.x_l93=ST_X(new.geom);
-new.y_l93=ST_Y(new.geom);
-return new;
-END$BODY$;
-
-COMMENT ON FUNCTION public.ft_r_xy_l93()
-    IS 'Fonction dont l''objet est de récupérer les coordonnées X et Y en Lambert 93 (epsg:2154)';
-    
-    
 -- FUNCTION: m_dechet.ft_m_log_dec_pav()
 
 -- DROP FUNCTION m_dechet.ft_m_log_dec_pav();
@@ -2124,6 +2042,92 @@ END IF;
 END;
 $BODY$;
 
+-- DROP FUNCTION m_dechet.ft_m_dec_pav_suivi();
+
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_dec_pav_suivi()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+
+BEGIN
+
+-- mise en historique de la benne déplacée pour la réaffecter
+--raise exception 'Idocnt --> %', new.eve;	
+
+if new.eve in ('11','12','13','14') and new.idcont is not null  then
+
+-- contrôle de saisie si je dois indiquer un n° de conteneurs, il doit esixter
+if new.idcont not in (select idcont from m_dechet.an_dec_pav_cont) then	
+raise exception 'Vous devez indiquer une référence du conteneur existante';	
+end if;
+
+--raise exception 'idcont --> %',new.idcont_old;
+
+insert into m_dechet.an_dec_pav_cont_h (idcont, idlieu,idpresta,eve,model,pos,date_sai,date_maj,date_pos,
+	date_net,date_effet,mode_preh,opercules,tags,peinture,type_sol,trp_rest,etat_sign,type_sign,proprete,
+	def_struc,op_sai,observ,date_eve,obs_eve,eve_ori,idlieu_new)
+select new.idcont_old,idlieu,idpresta,
+case 
+	when new.eve = '11' then '20'
+	when new.eve = '12' then '30'
+	when new.eve = '13' then '20'
+    when new.eve = '14' then '21'
+else new.eve END
+,model,pos,date_sai,date_maj,date_pos,date_net,date_effet,mode_preh,opercules,tags,
+peinture,type_sol,trp_rest,etat_sign,type_sign,proprete,def_struc,op_sai,observ,date_eve,obs_eve,new.eve,new.idlieu
+from m_dechet.an_dec_pav_cont where idcont = new.idcont_old;
+
+
+return old;
+
+end if;
+
+return new;
+
+END;
+$function$
+;
+
+COMMENT ON FUNCTION m_dechet.ft_m_dec_pav_suivi() IS 'Fonction trigger permettant d''intégrer une benne à la table historique si déplacé';
+
+
+-- DROP FUNCTION m_dechet.ft_m_dec_pav_suivi_after();
+
+CREATE OR REPLACE FUNCTION m_dechet.ft_m_dec_pav_suivi_after()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+
+BEGIN
+
+-- mise à jour du nouveau lieu de collecte d'une benne historisée
+
+
+
+
+	update m_dechet.an_dec_pav_cont set idlieu = (select idlieu_new from m_dechet.an_dec_pav_cont_h 
+																	where gid = (select max(gid) from m_dechet.an_dec_pav_cont_h )) where 
+																	an_dec_pav_cont.idcont = 
+																	(select idcont from m_dechet.an_dec_pav_cont_h 
+																	where gid = (select max(gid) from m_dechet.an_dec_pav_cont_h ));
+    update m_dechet.an_dec_pav_cont set eve = (select eve_ori from m_dechet.an_dec_pav_cont_h 
+																	where gid = (select max(gid) from m_dechet.an_dec_pav_cont_h )) where 
+																	an_dec_pav_cont.idcont = 
+																	(select idcont from m_dechet.an_dec_pav_cont_h 
+																	where gid = (select max(gid) from m_dechet.an_dec_pav_cont_h ));
+return new;
+
+END;
+$function$
+;
+
+COMMENT ON FUNCTION m_dechet.ft_m_dec_pav_suivi_after() IS 'Fonction trigger permettant d''affecter un pav existant d''un lieu à un autre lieu';
+
+-- Permissions
+
+ALTER FUNCTION m_dechet.ft_m_dec_pav_suivi_after() OWNER TO create_sig;
+GRANT ALL ON FUNCTION m_dechet.ft_m_dec_pav_suivi_after() TO public;
+GRANT ALL ON FUNCTION m_dechet.ft_m_dec_pav_suivi_after() TO create_sig;
 
 
 
