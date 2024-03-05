@@ -103,7 +103,25 @@ CREATE SEQUENCE m_dechet.an_dec_pav_log_idlog_seq
 
 COMMENT ON SEQUENCE m_dechet.an_dec_pav_log_idlog_seq
     IS 'Séquence unique pour les logs liées au lieu de collecte et aux conteneurs Verre et TLC (PAV)';
-    
+
+
+-- m_dechet.an_dec_pav_cont_h_gid_seq definition
+
+-- DROP SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq;
+
+CREATE SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	NO CYCLE;
+
+-- Permissions
+
+ALTER SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq OWNER TO sig_create;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq TO public;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq TO create_sig;
+GRANT ALL ON SEQUENCE m_dechet.an_dec_pav_cont_h_gid_seq TO sig_create;
     
  -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
