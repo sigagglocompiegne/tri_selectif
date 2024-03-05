@@ -8,11 +8,11 @@
 
 /* -------------------------------------------------------- xapps_geo_v_dec_pav_lieu_orient ------------------------------------------- */
 
--- View: x_apps.xapps_geo_v_dec_pav_lieu_orient
+-- View: m_dechet.xapps_geo_v_dec_pav_lieu_orient
 
--- DROP VIEW x_apps.xapps_geo_v_dec_pav_lieu_orient;
+-- DROP VIEW m_dechet.xapps_geo_v_dec_pav_lieu_orient;
 
-CREATE OR REPLACE VIEW x_apps.xapps_geo_v_dec_pav_lieu_orient
+CREATE OR REPLACE VIEW m_dechet.xapps_geo_v_dec_pav_lieu_orient
  AS
  SELECT row_number() OVER () AS row_id,
     st_makeline(a.geom, b.geom)::geometry(LineString,2154) AS geom
@@ -20,16 +20,16 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_dec_pav_lieu_orient
     m_dechet.geo_dec_pav_lieu b
   WHERE a.idlieu = b.idparent;
   
-  COMMENT ON VIEW x_apps.xapps_geo_v_dec_pav_lieu_orient
+  COMMENT ON VIEW m_dechet.xapps_geo_v_dec_pav_lieu_orient
     IS 'Vue géométrique des liens entre PAV supprimer, déplacer et le nouvel emplacement (en pré-production)';
 
 /* -------------------------------------------------------- xapps_an_dec_lieu_eve_tab ------------------------------------------- */
 
--- View: x_apps.xapps_an_dec_lieu_eve_tab
+-- View: m_dechet.xapps_an_dec_lieu_eve_tab
 
--- DROP VIEW x_apps.xapps_an_dec_lieu_eve_tab;
+-- DROP VIEW m_dechet.xapps_an_dec_lieu_eve_tab;
 
-CREATE OR REPLACE VIEW x_apps.xapps_an_dec_lieu_eve_tab
+CREATE OR REPLACE VIEW m_dechet.xapps_an_dec_lieu_eve_tab
  AS
  SELECT ( SELECT l2.idlieu
            FROM m_dechet.geo_dec_pav_lieu l2
@@ -135,21 +135,21 @@ UNION ALL
           WHERE l1.idparent IS NOT NULL))
   GROUP BY l.idlieu;
 
-ALTER TABLE x_apps.xapps_an_dec_lieu_eve_tab
+ALTER TABLE m_dechet.xapps_an_dec_lieu_eve_tab
     OWNER TO create_sig;
     
-COMMENT ON VIEW x_apps.xapps_an_dec_lieu_eve_tab
+COMMENT ON VIEW m_dechet.xapps_an_dec_lieu_eve_tab
     IS 'Vue alphanumérique présentant les évènements par année des mouvements des lieux de collecte disposant de PAV Verre';
 
 
 
 /* -------------------------------------------------------- xapps_an_dec_pav_chiffre_cle_tab ------------------------------------------- */
 
--- View: x_apps.xapps_an_dec_pav_chiffre_cle_tab
+-- View: m_dechet.xapps_an_dec_pav_chiffre_cle_tab
 
--- DROP VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab;
+-- DROP VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_tab;
 
-CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab
+CREATE OR REPLACE VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_tab
  AS
  WITH req_nbpav AS (
          SELECT 1 AS id,
@@ -171,17 +171,17 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab
     req_nblieu
   WHERE req_nbpav.id = req_nblieu.id;
 
-COMMENT ON VIEW x_apps.xapps_an_dec_pav_chiffre_cle_tab
+COMMENT ON VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_tab
     IS 'Vue alphanumérique présentant les chiffrss clés sur les PAV Verre';
 
 											    
 /* -------------------------------------------------------- xapps_an_dec_pav_chiffre_cle_commune_tab ------------------------------------------- */
 											    
--- View: x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab
+-- View: m_dechet.xapps_an_dec_pav_chiffre_cle_commune_tab
 
--- DROP VIEW x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab;
+-- DROP VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_commune_tab;
 
-CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab
+CREATE OR REPLACE VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_commune_tab
  AS
  WITH req_nbpav AS (
          SELECT l.insee,
@@ -211,15 +211,15 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab
   WHERE g.epci::text = '200067965'::text
   ORDER BY g.insee;
 
-COMMENT ON VIEW x_apps.xapps_an_dec_pav_chiffre_cle_commune_tab
+COMMENT ON VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_commune_tab
     IS 'Vue alphanumérique présentant les chiffres clés sur les PAV Verre à la commune';
 
 /* -------------------------------------------------------- xapps_an_dec_pav_chiffre_cle_modele_tab ------------------------------------------- */
--- View: x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
+-- View: m_dechet.xapps_an_dec_pav_chiffre_cle_modele_tab
 
--- DROP VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab;
+-- DROP VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_modele_tab;
 
-CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
+CREATE OR REPLACE VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_modele_tab
  AS
  SELECT row_number() OVER () AS id,
     m.valeur AS modele,
@@ -231,17 +231,17 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
   GROUP BY m.valeur
   ORDER BY (count(*)) DESC;
 
-COMMENT ON VIEW x_apps.xapps_an_dec_pav_chiffre_cle_modele_tab
+COMMENT ON VIEW m_dechet.xapps_an_dec_pav_chiffre_cle_modele_tab
     IS 'Vue alphanumérique présentant les chiffres clés sur les PAV Verre par modèle de conteneurs Verre';
 											    
 											    
 /* -------------------------------------------------------- xapps_an_dec_pav_eve_tab ------------------------------------------- */
                                                                                                
- -- View: x_apps.xapps_an_dec_pav_eve_tab
+ -- View: m_dechet.xapps_an_dec_pav_eve_tab
 
--- DROP VIEW x_apps.xapps_an_dec_pav_eve_tab;
+-- DROP VIEW m_dechet.xapps_an_dec_pav_eve_tab;
 
-CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_eve_tab
+CREATE OR REPLACE VIEW m_dechet.xapps_an_dec_pav_eve_tab
  AS
  SELECT c.idcont,
     c.idlieu,
@@ -268,17 +268,17 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_dec_pav_eve_tab
     m_dechet.geo_dec_pav_lieu l
   WHERE c.eve::text = e.code::text AND l.idlieu = c.idlieu AND c.eve::text <> '10'::text;
 
-COMMENT ON VIEW x_apps.xapps_an_dec_pav_eve_tab
+COMMENT ON VIEW m_dechet.xapps_an_dec_pav_eve_tab
     IS 'Vue alphanumérique présentant les évènements par année des mouvements de PAV Verre';
 
                                                                                             
 /* -------------------------------------------------------- xapps_geo_dec_pav_verre ------------------------------------------- */
                                                                                             
--- View: x_apps.xapps_geo_dec_pav_verre
+-- View: m_dechet.xapps_geo_dec_pav_verre
 
--- DROP VIEW x_apps.xapps_geo_dec_pav_verre;
+-- DROP VIEW m_dechet.xapps_geo_dec_pav_verre;
 
-CREATE OR REPLACE VIEW x_apps.xapps_geo_dec_pav_verre
+CREATE OR REPLACE VIEW m_dechet.xapps_geo_dec_pav_verre
  AS
  SELECT l.idlieu AS id_contver,
     l.commune,
@@ -298,5 +298,5 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_dec_pav_verre
   GROUP BY l.idlieu, l.commune, l.quartier, l.adresse, c.date_effet
   ORDER BY l.idlieu;
 
-COMMENT ON VIEW x_apps.xapps_geo_dec_pav_verre
+COMMENT ON VIEW m_dechet.xapps_geo_dec_pav_verre
     IS 'Vue géographique présentant les données des lieux de collecte (actif) à usage de Verre (pour cartographie dans QGIS)';
